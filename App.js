@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("./assets/melbourne-bg.jpg")}
+        source={require("./assets/images/melbourne-bg.jpg")}
         style={styles.backgroundImage}
       >
         <Text style={styles.text}>Welcome to Melbourne Backpack 🎉 🎉</Text>
