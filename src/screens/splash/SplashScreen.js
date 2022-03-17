@@ -1,4 +1,10 @@
-import { Button, ImageBackground, Text, View } from "react-native";
+import {
+  Button,
+  ImageBackground,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import styles from "./styles";
 
 const SplashScreen = ({ navigation }) => {
@@ -8,11 +14,20 @@ const SplashScreen = ({ navigation }) => {
         source={require("../../../assets/images/melbourne-bg.jpg")}
         style={styles.backgroundImage}
       >
-        <Text style={styles.text}>Welcome to Melbourne Backpack 🎉 🎉</Text>
-        <Button title="Details" onPress={() => navigation.navigate("Home")} />
+        <Text style={styles.textTitle}>
+          Melbourne {"\n"} Backpack {"\n"}
+        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <View style={styles.viewButton}>
+            <Text style={styles.textButton}>Welcome</Text>
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.versionText}>Version 1.0</Text>
       </ImageBackground>
     </View>
   );
 };
 
 export default SplashScreen;
+
+//🇦🇺 🇦🇺

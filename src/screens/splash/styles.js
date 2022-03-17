@@ -15,8 +15,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  text: {
+  textTitle: {
     color: "#ffffff",
+    fontSize: 50,
+    fontWeight: "800",
+    marginTop: 100,
+  },
+  viewButton: {
+    backgroundColor: "#1c1c4d",
+    borderRadius: 15,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginTop: 50,
+  },
+  textButton: { color: "white", fontSize: 20, fontWeight: "800" },
+  versionText: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "400",
+    marginTop: 250,
   },
 });
 
