@@ -10,7 +10,7 @@ const CommunityScreen = () => {
       id: "1",
       name: "aaaaaa",
       campus: "sgs",
-      photo: "",
+      photo: "../../../assets/images/avatar-placeholder.jpg",
     },
     {
       id: "2",

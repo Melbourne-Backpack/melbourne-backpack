@@ -7,6 +7,18 @@ const styles = StyleSheet.create({
     height: 200,
     width: 160,
   },
+  userImg: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+  },
+  userContent: {
+    position: "relative",
+    top: 60,
+  },
+  detailBtn: {
+    textAlign: "right",
+  },
 });
 
 export default styles;
