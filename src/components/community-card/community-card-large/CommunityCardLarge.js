@@ -10,11 +10,16 @@ const CommunityCardLarge = (props) => {
         style={styles.userImg}
       >
         <View style={styles.userContent}>
-          <Text>{props.name}</Text>
-          <Text>{props.campus}</Text>
-          <TouchableOpacity style={styles.detailBtn}>
-            <Text>Details</Text>
-          </TouchableOpacity>
+          <View style={styles.userContentRow}>
+            <Text style={styles.userName}>{props.name}</Text>
+            <Text style={styles.userTopic}>IT</Text>
+          </View>
+          <View style={styles.userContentRow}>
+            <Text style={styles.userCampus}>{props.campus}</Text>
+            <TouchableOpacity style={styles.detailBtn}>
+              <Text style={styles.detailBtnText}>Details</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ImageBackground>
     </TouchableOpacity>

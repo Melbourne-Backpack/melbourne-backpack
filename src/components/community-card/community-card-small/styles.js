@@ -1,24 +1,31 @@
 import { StyleSheet } from "react-native";
+import { WHITE } from "../../../styles/colors";
 
 const styles = StyleSheet.create({
   card: {
-    display: "block",
-    margin: 10,
-    padding: 5,
+    borderRadius: 10,
     height: 86,
-    width: 63,
+    margin: 5,
     overflow: "hidden",
+    width: 63,
   },
+
   userImg: {
-    width: "100%",
     height: "100%",
     justifyContent: "center",
+    width: "100%",
   },
+
   userContent: {
-    position: "relative",
-    top: 30,
-    height: 20,
+    backgroundColor: WHITE,
+    borderRadius: 20,
+    height: 24,
+    marginLeft: 2,
+    marginRight: 5,
+    marginTop: 45,
     overflow: "hidden",
+    textAlign: "center",
+    width: 59,
   },
 });
 
