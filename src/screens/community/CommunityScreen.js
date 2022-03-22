@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import { useState } from "react";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import CommunityCardSmall from "../../components/community-card/community-card-small/CommunityCardSmall";
+import styles from "./styles";
 
 const CommunityScreen = () => {
   const [mostLikeYouArray, setMostLikeYouArray] = useState([
@@ -86,7 +87,7 @@ const CommunityScreen = () => {
     <View>
       <View>
         <Text>Most like you</Text>
-        <View>
+        <View style={styles.mostLikeYou}>
           {mostLikeYouArray.map((user) => {
             return (
               <CommunityCardLarge
@@ -100,9 +101,11 @@ const CommunityScreen = () => {
       </View>
       <View>
         <Text>Community</Text>
-        {others.map((user) => {
-          return <CommunityCardSmall id={user.id} name={user.name} />;
-        })}
+        <View style={styles.communityList}>
+          {others.map((user) => {
+            return <CommunityCardSmall id={user.id} name={user.name} />;
+          })}
+        </View>
       </View>
     </View>
   );
