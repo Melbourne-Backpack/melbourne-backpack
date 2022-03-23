@@ -16,16 +16,7 @@ const CommunityCardLarge = (props) => {
         style={styles.userImg}
       >
         <View style={styles.userContent}>
-          <Image
-            style={{
-              backgroundColor: "#ffffff",
-              position: "absolute",
-              borderRadius: 20,
-              opacity: 0.44,
-              width: 218,
-              height: 79,
-            }}
-          />
+          <Image style={styles.userContentBackground} />
           <View>
             <View style={styles.userContentRow}>
               <Text style={styles.userName}>{props.name}</Text>

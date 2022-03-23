@@ -44,6 +44,15 @@ const styles = StyleSheet.create({
     width: 210,
   },
 
+  userContentBackground: {
+    backgroundColor: WHITE,
+    position: "absolute",
+    borderRadius: 20,
+    opacity: 0.44,
+    width: 218,
+    height: 79,
+  },
+
   userContentRow: {
     flexWrap: "wrap",
     flexDirection: "row",
