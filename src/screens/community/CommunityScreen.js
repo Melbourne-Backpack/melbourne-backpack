@@ -2,6 +2,7 @@ import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { useState } from "react";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import CommunityCardSmall from "../../components/community-card/community-card-small/CommunityCardSmall";
+import CommunityFilter from "../../components/community-card/community-filter/CommunityFilter";
 import styles from "./styles";
 
 const CommunityScreen = () => {
@@ -83,6 +84,8 @@ const CommunityScreen = () => {
     },
   ]);
 
+  const [show, setShow] = useState();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.mostLikeYouContainer}>
@@ -105,6 +108,13 @@ const CommunityScreen = () => {
       </View>
       <View style={styles.communityListContainer}>
         <Text style={styles.communityListText}>Community</Text>
+        <TouchableOpacity
+          style={styles.filterBtn}
+          onPress={() => setShow(!show)}
+        >
+          <Text style={{ color: "#ffffff" }}>Filter</Text>
+        </TouchableOpacity>
+        {show ? <CommunityFilter /> : null}
         <View style={styles.communityList}>
           {others.map((user) => {
             return <CommunityCardSmall id={user.id} name={user.name} />;

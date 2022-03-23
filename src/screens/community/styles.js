@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   communityList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 67,
+    marginTop: 27,
   },
 
   communityListContainer: {
@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: FONT_WEIGHT_SEMI_BOLD,
     marginTop: 32,
+  },
+
+  filterBtn: {
+    marginTop: -4,
+    marginLeft: 224,
   },
 
   mostLikeYou: {
