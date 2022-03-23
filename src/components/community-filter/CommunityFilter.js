@@ -1,4 +1,5 @@
 import { View, Text } from "react-native";
+import styles from "./styles";
 
 const CommunityFilter = (props) => {
   const headings = props.headings;
@@ -11,14 +12,18 @@ const CommunityFilter = (props) => {
         let optionList = options[i];
         return (
           <View>
-            <Text style={{ color: "white" }}>{heading}</Text>
-            {optionList.map((option) => {
-              return (
-                <Text style={{ color: "white" }} key={option.id}>
-                  {option.name}
-                </Text>
-              );
-            })}
+            <Text style={styles.filterText}>{heading}</Text>
+            <View style={styles.optionWrapper}>
+              {optionList.map((option) => {
+                return (
+                  <View style={styles.filterWrapper}>
+                    <Text style={styles.filterText} key={option.id}>
+                      {option.name}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
           </View>
         );
       })}

@@ -7,7 +7,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  filterWrapper: {},
+  filterWrapper: {
+    marginLeft: 2,
+    marginRight: 2,
+  },
 
   optionWrapper: {
     flexDirection: "row",
