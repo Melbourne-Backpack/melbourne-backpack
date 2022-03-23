@@ -7,6 +7,7 @@ export const LIGHT_BLUE = "#2972FE";
 export const YELLOW = "#FAC800";
 export const RED = "#E61E2A";
 
-/* WHITE AND BLACK */
+/* WHITE, GREY, BLACK */
 export const WHITE = "#FFFFFF";
 export const BLACK = "#000000";
+export const GREY = "#9A9898";

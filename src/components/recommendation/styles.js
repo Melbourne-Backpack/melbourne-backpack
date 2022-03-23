@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { DARK_BLUE_PURPLE, WHITE, YELLOW } from "../../styles/colors";
-import { scaleFont, scaleSize } from "../../styles/scale";
+import { DARK_BLUE_PURPLE, GREY, WHITE, YELLOW } from "../../styles/colors";
+import { scaleSize } from "../../styles/scale";
 import {
   FONT_WEIGHT_EXTRA_BOLD,
   FONT_WEIGHT_MEDIUM,
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     margin: scaleSize(10),
   },
   imgContainer: {
-    flex: 0.9,
+    flex: 1,
     position: "relative",
   },
   backgroundImg: {
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT_MEDIUM,
   },
   info: {
-    padding: scaleSize(10),
+    paddingHorizontal: scaleSize(10),
+    paddingVertical: scaleSize(7),
   },
   text: {
     color: WHITE,
@@ -43,12 +44,28 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: FONT_WEIGHT_MEDIUM,
-    fontSize: scaleFont(14),
+    fontSize: 17,
   },
   price: {
     fontWeight: FONT_WEIGHT_EXTRA_BOLD,
-    fontSize: scaleFont(16),
-    marginBottom: scaleSize(2),
+    fontSize: 20,
+    marginBottom: scaleSize(5),
+  },
+  location: {
+    fontSize: 12,
+    marginBottom: scaleSize(15),
+  },
+  extraWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  extraContainer: {
+    alignItems: "center",
+  },
+  extra: {
+    fontSize: 12,
+    color: GREY,
+    textAlign: "center",
   },
 });
 
