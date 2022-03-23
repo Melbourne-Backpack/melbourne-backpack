@@ -11,8 +11,8 @@ const CommunityCardLarge = (props) => {
       >
         <ImageBackground
           style={styles.userContent}
-          blurRadius={90}
           source={require("../../../../assets/images/white-background.png")}
+          blurRadius={20}
           imageStyle={{ borderRadius: 20 }}
         >
           <View>
