@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   },
 
   userContent: {
-    borderRadius: 20,
     height: 78,
     marginBottom: 20,
     marginLeft: 8,
