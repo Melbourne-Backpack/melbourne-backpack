@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
+import { scaleFont, scaleSize } from "../../styles/scale";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
+console.log(width, height);
 
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
   },
   secondText: {
     color: "white",
-    fontSize: 70,
+    fontSize: scaleFont(60),
     fontWeight: "200",
     opacity: 1.5,
   },
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#4838d1",
     borderRadius: 30,
     paddingVertical: 20,
-    paddingHorizontal: 60,
+    paddingHorizontal: 50,
   },
   textButton: { color: "white", fontSize: 17, fontWeight: "600" },
 });
