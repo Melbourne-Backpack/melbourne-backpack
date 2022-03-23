@@ -141,8 +141,6 @@ const CommunityScreen = () => {
     },
   ];
 
-  const [show, setShow] = useState(false);
-
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.mostLikeYouContainer}>
@@ -165,21 +163,11 @@ const CommunityScreen = () => {
       </View>
       <View style={styles.communityListContainer}>
         <Text style={styles.communityListText}>Community</Text>
-        <TouchableOpacity
-          style={styles.filterBtn}
-          onPress={() => setShow(!show)}
-        >
-          <Text style={{ color: "#ffffff" }}>Filter</Text>
-        </TouchableOpacity>
         <View>
-          {show ? (
-            <View>
-              <CommunityFilter
-                headings={["Campus", "Topic"]}
-                options={[campus, topic]}
-              />
-            </View>
-          ) : null}
+          <CommunityFilter
+            headings={["Campus", "Topic"]}
+            options={[campus, topic]}
+          />
         </View>
         <View style={styles.communityList}>
           {others.map((user) => {
