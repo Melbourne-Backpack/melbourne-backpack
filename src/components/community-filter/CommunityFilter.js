@@ -1,21 +1,30 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import styles from "./styles";
+import { View, Text } from "react-native";
 
 const CommunityFilter = (props) => {
+  const headings = props.headings;
+  const options = props.options;
+  let i = -1;
   return (
-    <View style={styles.filterWrapper}>
-      <View>
-        <Text style={styles.filterText}>{props.name}</Text>
-        <View style={styles.optionWrapper}>
-          {props.data.map((option) => {
-            return (
-              <TouchableOpacity key={option.id} style={{ color: "#ffffff" }}>
-                {option.name}
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </View>
+    <View>
+      {headings.map((heading) => {
+        i++;
+        console.log(i);
+        console.log(headings[i]);
+        console.log(headings);
+        let optionList = options[i];
+        return (
+          <View>
+            <Text style={{ color: "white" }}>{heading}</Text>
+            {optionList.map((option) => {
+              return (
+                <Text style={{ color: "white" }} key={option.id}>
+                  {option.name}
+                </Text>
+              );
+            })}
+          </View>
+        );
+      })}
     </View>
   );
 };

@@ -4,7 +4,6 @@ import CommunityCardLarge from "../../components/community-card/community-card-l
 import CommunityCardSmall from "../../components/community-card/community-card-small/CommunityCardSmall";
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
-import { Touchable } from "react-native-web";
 
 const CommunityScreen = () => {
   const [mostLikeYouArray, setMostLikeYouArray] = useState([
@@ -84,7 +83,7 @@ const CommunityScreen = () => {
       photo: "",
     },
   ]);
-  const [campus, setCampus] = useState([
+  const campus = [
     {
       id: 1,
       name: "SGS campus",
@@ -97,9 +96,9 @@ const CommunityScreen = () => {
       id: 3,
       name: "Danang campus",
     },
-  ]);
+  ];
 
-  const [topic, setTopic] = useState([
+  const topic = [
     {
       id: 1,
       name: "Economics",
@@ -140,9 +139,9 @@ const CommunityScreen = () => {
       id: 10,
       name: "Digital Marketing",
     },
-  ]);
+  ];
 
-  const [show, setShow] = useState();
+  const [show, setShow] = useState(false);
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -172,15 +171,16 @@ const CommunityScreen = () => {
         >
           <Text style={{ color: "#ffffff" }}>Filter</Text>
         </TouchableOpacity>
-        {show ? (
-          <View>
-            <CommunityFilter name={"Campus"} data={campus} />
-            <CommunityFilter name={"Topic"} data={topic} />
-            <TouchableOpacity onPress={() => this.submit}>
-              <Text>Submit</Text>
-            </TouchableOpacity>
-          </View>
-        ) : null}
+        <View>
+          {show ? (
+            <View>
+              <CommunityFilter
+                headings={["Campus", "Topic"]}
+                options={[campus, topic]}
+              />
+            </View>
+          ) : null}
+        </View>
         <View style={styles.communityList}>
           {others.map((user) => {
             return <CommunityCardSmall id={user.id} name={user.name} />;
