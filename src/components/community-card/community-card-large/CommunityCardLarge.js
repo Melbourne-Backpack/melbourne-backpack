@@ -1,4 +1,10 @@
-import { Text, TouchableOpacity, ImageBackground, View } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  View,
+  Image,
+} from "react-native";
 import styles from "./styles";
 
 const CommunityCardLarge = (props) => {
@@ -9,12 +15,17 @@ const CommunityCardLarge = (props) => {
         source={require("../../../../assets/images/avatar-placeholder.jpg")}
         style={styles.userImg}
       >
-        <ImageBackground
-          style={styles.userContent}
-          source={require("../../../../assets/images/white-background.png")}
-          blurRadius={20}
-          imageStyle={{ borderRadius: 20 }}
-        >
+        <View style={styles.userContent}>
+          <Image
+            style={{
+              backgroundColor: "#ffffff",
+              position: "absolute",
+              borderRadius: 20,
+              opacity: 0.44,
+              width: 218,
+              height: 79,
+            }}
+          />
           <View>
             <View style={styles.userContentRow}>
               <Text style={styles.userName}>{props.name}</Text>
@@ -27,7 +38,7 @@ const CommunityCardLarge = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-        </ImageBackground>
+        </View>
       </ImageBackground>
     </TouchableOpacity>
   );
