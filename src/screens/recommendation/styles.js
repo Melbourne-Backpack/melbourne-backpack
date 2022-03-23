@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { BACKGROUND, WHITE } from "../../styles/colors";
-import { FONT_SIZE_16, FONT_WEIGHT_SEMI_BOLD } from "../../styles/typography";
+import { FONT_WEIGHT_SEMI_BOLD } from "../../styles/typography";
 import { scaleSize } from "../../styles/scale";
 
 const styles = StyleSheet.create({
@@ -8,11 +8,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: BACKGROUND,
   },
-  heading1: {
-    fontSize: FONT_SIZE_16,
-    fontWeight: FONT_WEIGHT_SEMI_BOLD,
+  wrapper: {
+    flex: 1,
     padding: scaleSize(10),
+  },
+  heading1: {
+    fontSize: 20,
+    fontWeight: FONT_WEIGHT_SEMI_BOLD,
     color: WHITE,
+    marginVertical: scaleSize(12),
+  },
+  secondHeader: {
+    flexDirection: "row",
+    marginVertical: scaleSize(22),
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+  },
+  heading2: {
+    color: WHITE,
+    fontSize: 16,
   },
 });
 

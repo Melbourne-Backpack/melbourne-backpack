@@ -15,6 +15,7 @@ const HousingCard = () => {
         <ImageBackground
           source={require("../../../assets/images/student-housing.jpg")}
           style={styles.backgroundImg}
+          imageStyle={{ borderRadius: 20 }}
           resizeMode="cover"
         >
           <View style={styles.overlay}>
@@ -37,10 +38,12 @@ const HousingCard = () => {
             <Text style={styles.extra}>50 sqm</Text>
             <MaterialCommunityIcons name="floor-plan" size={35} color={GREY} />
           </View>
+
           <View style={styles.extraContainer}>
             <Text style={styles.extra}>2</Text>
             <Ionicons name="bed" size={35} color={GREY} />
           </View>
+
           <View style={styles.extraContainer}>
             <Text style={styles.extra}>1</Text>
             <MaterialCommunityIcons name="shower" size={35} color={GREY} />

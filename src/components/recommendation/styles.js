@@ -8,9 +8,10 @@ import {
 
 const styles = StyleSheet.create({
   card: {
-    flex: 0.7,
+    flex: 0.8,
     backgroundColor: DARK_BLUE_PURPLE,
-    margin: scaleSize(10),
+    borderRadius: 20,
+    marginBottom: scaleSize(10),
   },
   imgContainer: {
     flex: 1,
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
   location: {
     fontSize: 12,
-    marginBottom: scaleSize(15),
+    marginBottom: scaleSize(20),
   },
   extraWrapper: {
     flexDirection: "row",
