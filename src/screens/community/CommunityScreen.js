@@ -4,6 +4,7 @@ import CommunityCardLarge from "../../components/community-card/community-card-l
 import CommunityCardSmall from "../../components/community-card/community-card-small/CommunityCardSmall";
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
+import { Touchable } from "react-native-web";
 
 const CommunityScreen = () => {
   const [mostLikeYouArray, setMostLikeYouArray] = useState([
@@ -144,7 +145,7 @@ const CommunityScreen = () => {
   const [show, setShow] = useState();
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.mostLikeYouContainer}>
         <Text style={styles.mostLikeYouText}>Most like you</Text>
         <ScrollView
@@ -175,6 +176,9 @@ const CommunityScreen = () => {
           <View>
             <CommunityFilter name={"Campus"} data={campus} />
             <CommunityFilter name={"Topic"} data={topic} />
+            <TouchableOpacity onPress={() => this.submit}>
+              <Text>Submit</Text>
+            </TouchableOpacity>
           </View>
         ) : null}
         <View style={styles.communityList}>
