@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
 import { scaleFont, scaleSize } from "../../styles/scale";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
@@ -20,35 +24,39 @@ const styles = StyleSheet.create({
   },
   firstText: {
     color: "white",
-    fontSize: 18,
-    fontWeight: "800",
+    fontSize: hp("2%"),
     opacity: 0.9,
-    paddingBottom: 20,
+    paddingBottom: 30,
+    fontFamily: "PoppinsSemiBold",
   },
   secondText: {
     color: "white",
-    fontSize: scaleFont(60),
-    fontWeight: "200",
-    opacity: 1.5,
+    fontSize: hp("6.5%"),
+    fontFamily: "PoppinsThin",
+    paddingBottom: 10,
   },
   thirdText: {
     color: "white",
-    fontSize: 20,
-    fontWeight: "200",
-    opacity: 0.9,
+    fontSize: hp("2%"),
+    opacity: 0.8,
     paddingTop: 20,
     paddingBottom: 35,
+    fontFamily: "PoppinsRegular",
   },
   buttonContainer: {
     alignSelf: "center",
   },
   viewButton: {
     backgroundColor: "#4838d1",
-    borderRadius: 30,
+    borderRadius: 25,
     paddingVertical: 20,
-    paddingHorizontal: 50,
+    paddingHorizontal: wp("15%"),
   },
-  textButton: { color: "white", fontSize: 17, fontWeight: "600" },
+  textButton: {
+    color: "white",
+    fontSize: hp("1.8%"),
+    fontFamily: "PoppinsMedium",
+  },
 });
 
 export default styles;
