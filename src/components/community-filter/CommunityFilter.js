@@ -8,9 +8,6 @@ const CommunityFilter = (props) => {
     <View>
       {headings.map((heading) => {
         i++;
-        console.log(i);
-        console.log(headings[i]);
-        console.log(headings);
         let optionList = options[i];
         return (
           <View>
