@@ -8,7 +8,7 @@ import {
 
 const styles = StyleSheet.create({
   card: {
-    flex: 0.8,
+    flex: 1,
     backgroundColor: DARK_BLUE_PURPLE,
     borderRadius: 20,
     marginBottom: scaleSize(10),
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     justifyContent: "flex-end",
-    backgroundColor: "rgba(0,0,0, 0.40)",
+    backgroundColor: "rgba(0,0,0, 0.32)",
   },
   rating: {
     color: YELLOW,

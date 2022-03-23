@@ -30,7 +30,8 @@ const HousingCard = () => {
         <Text style={[styles.name, styles.text]}>Atira</Text>
         <Text style={[styles.price, styles.text]}>$399.00</Text>
         <Text style={[styles.text, styles.location]}>
-          250 Spencer Street, Melbourne, VIC 3000
+          <Ionicons name="location-sharp" size={12} color="white" /> 250 Spencer
+          Street, Melbourne, VIC 3000
         </Text>
 
         <View style={styles.extraWrapper}>
