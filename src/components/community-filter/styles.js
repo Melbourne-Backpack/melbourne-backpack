@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { WHITE } from "../../../styles/colors";
+import { WHITE } from "../../styles/colors";
 
 const styles = StyleSheet.create({
   filterWrapper: {},
