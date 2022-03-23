@@ -28,11 +28,6 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
 
-  filterBtn: {
-    marginTop: -4,
-    marginLeft: 224,
-  },
-
   mostLikeYou: {
     marginTop: 39,
   },
