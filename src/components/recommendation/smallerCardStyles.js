@@ -7,9 +7,10 @@ const smallerCardStyles = StyleSheet.create({
     flex: 0.3,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-evenly",
     backgroundColor: DARK_BLUE_PURPLE,
     borderRadius: 20,
-    padding: 10,
+    paddingHorizontal: 20,
   },
   imgContainer: {
     flex: 1,
@@ -17,8 +18,11 @@ const smallerCardStyles = StyleSheet.create({
   img: {
     width: scaleSize(100),
     height: scaleSize(100),
-    aspectRatio: 1,
     borderRadius: 20,
+  },
+  text: {
+    color: WHITE,
+    fontSize: 14,
   },
 });
 

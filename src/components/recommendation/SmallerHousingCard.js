@@ -15,9 +15,10 @@ const SmallerHousingCard = () => {
       </View>
 
       <View>
-        <Text>4 bedroom apartment - Atira</Text>
-        <Text>$399.00</Text>
-        <Text>
+        <Text style={styles.text}>4 bedroom apartment</Text>
+        <Text style={styles.text}>Atira</Text>
+        <Text style={styles.text}>$399.00</Text>
+        <Text style={{ color: YELLOW }}>
           4.5 <AntDesign name="star" size={15} color={YELLOW} />
         </Text>
       </View>
