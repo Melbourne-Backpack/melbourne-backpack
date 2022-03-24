@@ -5,17 +5,18 @@ import {
   TextInput,
   Keyboard,
   TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
 import styles from "./styles";
+import { WHITE, DARK_BLUE, LIGHT_BLUE } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
-import {
-  SelectMultipleButton,
-  SelectMultipleGroupButton,
-} from "react-native-selectmultiple-button";
+import { SelectMultipleButton } from "react-native-selectmultiple-button";
 
 const Campus = ({ navigation }) => {
-  const [text, setText] = React.useState("");
+  const [multipleSelectedData, setMultipleSelectedData] = React.useState([]);
+  const [multipleSelectedDataLimited, setMultipleSelectedDataLimited] =
+    React.useState("");
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
@@ -24,6 +25,8 @@ const Campus = ({ navigation }) => {
   if (!loaded) {
     return null;
   }
+
+  const multipleData = ["Hanoi", "Da Nang", "Sai Gon"];
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -36,7 +39,26 @@ const Campus = ({ navigation }) => {
             placeholder={"Campus in Vietnam"}
             placeholderTextColor={"#6A6A8B"}
           />
-          <View></View>
+          <View style={styles.buttonWrapper}>
+            {multipleData.map((interest) => (
+              <SelectMultipleButton
+                key={interest}
+                buttonViewStyle={styles.buttonViewStyle}
+                textStyle={styles.textStyle}
+                highLightStyle={{
+                  borderColor: WHITE,
+                  backgroundColor: "transparent",
+                  textColor: WHITE,
+                  borderTintColor: DARK_BLUE,
+                  backgroundTintColor: "#4838D1",
+                  textTintColor: WHITE,
+                }}
+                value={interest}
+                selected={multipleSelectedData.includes(interest)}
+                singleTap={(valueTap) => setMultipleSelectedData(interest)}
+              />
+            ))}
+          </View>
         </View>
       </View>
     </TouchableWithoutFeedback>

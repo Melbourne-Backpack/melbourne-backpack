@@ -42,6 +42,20 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
   },
+  buttonWrapper: {
+    flexDirection: "row",
+    paddingVertical: 20,
+  },
+  buttonViewStyle: {
+    borderRadius: 20,
+    paddingVertical: 3,
+    paddingHorizontal: 3,
+    borderWidth: 2,
+  },
+  textStyle: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+  },
 });
 
 export default styles;
