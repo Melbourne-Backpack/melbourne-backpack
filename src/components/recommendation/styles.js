@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     backgroundColor: "rgba(0,0,0, 0.32)",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   rating: {
     color: YELLOW,

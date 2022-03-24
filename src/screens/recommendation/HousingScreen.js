@@ -2,6 +2,7 @@ import { Text, SafeAreaView, View } from "react-native";
 import styles from "./styles";
 import HousingCard from "../../components/recommendation/HousingCard";
 import { LIGHT_PURPLE } from "../../styles/colors";
+import SmallerHousingCard from "../../components/recommendation/SmallerHousingCard";
 
 const HousingScreen = () => {
   const DATA = [
@@ -29,18 +30,18 @@ const HousingScreen = () => {
 
   const Item = ({ title }) => (
     <View>
-      <Text style={{ color: "white" }}>{title}</Text>
+      <Text style={{ color: "white", fontSize: 12 }}>{title}</Text>
     </View>
   );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
-        <Text style={styles.heading1}>Trending Housing</Text>
-        <HousingCard />
+        <Text style={styles.heading1}>Top Housing</Text>
+        <SmallerHousingCard />
 
         <View style={styles.secondHeader}>
-          <Text style={styles.heading2}>Most popular</Text>
+          <Text style={styles.heading2}>All</Text>
           <Text style={{ color: LIGHT_PURPLE }}>See more</Text>
         </View>
 
