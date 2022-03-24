@@ -153,7 +153,7 @@ const CommunityScreen = () => {
           {mostLikeYouArray.map((user) => {
             return (
               <CommunityCardLarge
-                id={user.id}
+                key={user.id}
                 name={user.name}
                 campus={user.campus}
               />
@@ -171,7 +171,7 @@ const CommunityScreen = () => {
         </View>
         <View style={styles.communityList}>
           {others.map((user) => {
-            return <CommunityCardSmall id={user.id} name={user.name} />;
+            return <CommunityCardSmall key={user.id} name={user.name} />;
           })}
         </View>
         <View style={styles.seeMoreBtnContainer}>
