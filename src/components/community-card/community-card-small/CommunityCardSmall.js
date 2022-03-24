@@ -9,7 +9,7 @@ import styles from "./styles";
 
 const CommunityCardSmall = (props) => {
   return (
-    <TouchableOpacity id={props.id} style={styles.card}>
+    <TouchableOpacity key={props.id} style={styles.card}>
       <ImageBackground
         resizeMode={"cover"}
         source={require("../../../../assets/images/avatar-placeholder.jpg")}
