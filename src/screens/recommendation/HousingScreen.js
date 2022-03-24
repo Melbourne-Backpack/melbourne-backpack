@@ -38,16 +38,14 @@ const HousingScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
         <Text style={styles.heading1}>Top Housing</Text>
-        <SmallerHousingCard />
+        <HousingCard />
 
         <View style={styles.secondHeader}>
           <Text style={styles.heading2}>All</Text>
           <Text style={{ color: LIGHT_PURPLE }}>See more</Text>
         </View>
 
-        {DATA.map((data) => (
-          <Item key={data.id} title={data.title} />
-        ))}
+        <SmallerHousingCard />
       </View>
     </SafeAreaView>
   );
