@@ -1,10 +1,19 @@
 import { StyleSheet } from "react-native";
-import { WHITE } from "../../styles/colors";
+import { DARK_BLUE, WHITE } from "../../styles/colors";
 
 const styles = StyleSheet.create({
   filterBtn: {
+    backgroundColor: DARK_BLUE,
+    borderRadius: 12,
+    height: 44,
     marginTop: -4,
     marginLeft: 224,
+    width: 44,
+  },
+
+  filterIcon: {
+    justifyContent: "center",
+    margin: 10,
   },
 
   filterText: {

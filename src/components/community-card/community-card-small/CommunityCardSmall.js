@@ -1,4 +1,10 @@
-import { Text, TouchableOpacity, ImageBackground, View } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import styles from "./styles";
 
 const CommunityCardSmall = (props) => {
@@ -11,7 +17,10 @@ const CommunityCardSmall = (props) => {
       >
         <View style={styles.userContent}>
           <TouchableOpacity>
-            <Text>{props.name}</Text>
+            <Image styles={styles.userContentBackground} />
+            <View style={styles.userNameScroll}>
+              <Text style={styles.userName}>{props.name}</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </ImageBackground>

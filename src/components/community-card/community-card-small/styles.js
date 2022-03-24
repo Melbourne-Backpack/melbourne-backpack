@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
 
   userContent: {
-    backgroundColor: WHITE,
+    position: "relative",
     borderRadius: 20,
     height: 24,
     marginLeft: 2,
@@ -27,6 +27,21 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 59,
   },
+
+  userContentBackground: {
+    backgroundColor: WHITE,
+    height: 24,
+    position: "absolute",
+    borderRadius: 20,
+    width: 59,
+  },
+
+  userName: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+
+  userNameScroll: {},
 });
 
 export default styles;

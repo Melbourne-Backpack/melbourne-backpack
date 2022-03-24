@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 
   userCampus: {
-    fontSize: 14,
+    fontSize: 12,
     height: 16,
     marginLeft: 36,
     width: 92,

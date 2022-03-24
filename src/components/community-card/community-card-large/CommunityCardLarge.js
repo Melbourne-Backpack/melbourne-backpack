@@ -1,9 +1,9 @@
 import {
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-  View,
   Image,
+  ImageBackground,
+  Text,
+  View,
+  TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
 

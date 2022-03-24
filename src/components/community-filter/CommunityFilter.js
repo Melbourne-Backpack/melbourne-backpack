@@ -1,5 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
+import { Ionicons } from "@expo/vector-icons";
+import { LIGHT_BLUE } from "../../styles/colors";
 import { useState } from "react";
 
 const CommunityFilter = (props) => {
@@ -10,7 +12,12 @@ const CommunityFilter = (props) => {
   return (
     <View>
       <TouchableOpacity style={styles.filterBtn} onPress={() => setShow(!show)}>
-        <Text style={{ color: "#ffffff" }}>Filter</Text>
+        <Ionicons
+          name="filter"
+          size={24}
+          color={LIGHT_BLUE}
+          style={styles.filterIcon}
+        />
       </TouchableOpacity>
       <View>
         {show ? (
