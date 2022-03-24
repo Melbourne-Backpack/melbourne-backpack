@@ -1,11 +1,10 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
-import { scaleFont, scaleSize } from "../../styles/scale";
-import { WHITE, BACKGROUND } from "../../styles/colors";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { WHITE, BACKGROUND } from "../../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
@@ -21,42 +20,27 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: "flex-start",
     justifyContent: "center",
-    paddingHorizontal: 40,
   },
-  firstText: {
+  textOne: {
     color: WHITE,
-    fontSize: hp("2%"),
-    opacity: 0.9,
-    paddingBottom: 30,
     fontFamily: "PoppinsSemiBold",
+    paddingBottom: 20,
+    fontSize: 20,
   },
-  secondText: {
+  textTwo: {
     color: WHITE,
-    fontSize: hp("6.5%"),
-    fontFamily: "PoppinsThin",
-    paddingBottom: 10,
-  },
-  thirdText: {
-    color: WHITE,
-    fontSize: hp("2%"),
-    opacity: 0.8,
-    paddingTop: 20,
-    paddingBottom: 35,
     fontFamily: "PoppinsRegular",
+    paddingBottom: 50,
   },
-  buttonContainer: {
-    alignSelf: "center",
-  },
-  viewButton: {
-    backgroundColor: "#4838d1",
-    borderRadius: 25,
-    paddingVertical: 20,
-    paddingHorizontal: wp("15%"),
-  },
-  textButton: {
+  textInput: {
     color: WHITE,
-    fontSize: hp("1.8%"),
+
     fontFamily: "PoppinsMedium",
+    backgroundColor: "#1C1C4D",
+    borderRadius: 20,
+    width: wp("70%"),
+    paddingVertical: 15,
+    paddingHorizontal: 30,
   },
 });
 

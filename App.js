@@ -5,6 +5,7 @@ import SplashScreen from "./src/screens/splash/SplashScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./src/screens/home/HomeScreen";
 import Welcome from "./src/screens/welcome/Welcome";
+import Campus from "./src/screens/personalization/campus/Campus";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Campus" component={Campus} />
       </Stack.Navigator>
     </NavigationContainer>
   );
