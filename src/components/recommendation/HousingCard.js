@@ -11,20 +11,18 @@ import { GREY, YELLOW } from "../../styles/colors";
 const HousingCard = () => {
   return (
     <View style={styles.card}>
-      <View style={styles.imgContainer}>
-        <ImageBackground
-          source={require("../../../assets/images/student-housing.jpg")}
-          style={styles.backgroundImg}
-          imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-          resizeMode="cover"
-        >
-          <View style={styles.overlay}>
-            <Text style={styles.rating}>
-              4.9 <AntDesign name="star" size={20} color={YELLOW} />
-            </Text>
-          </View>
-        </ImageBackground>
-      </View>
+      <ImageBackground
+        source={require("../../../assets/images/student-housing.jpg")}
+        style={styles.backgroundImg}
+        imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+        resizeMode="cover"
+      >
+        <View style={styles.overlay}>
+          <Text style={styles.rating}>
+            4.9 <AntDesign name="star" size={20} color={YELLOW} />
+          </Text>
+        </View>
+      </ImageBackground>
 
       <View style={styles.info}>
         <Text style={[styles.name, styles.text]}>

@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, View } from "react-native";
+import { Text, SafeAreaView, View, ScrollView } from "react-native";
 import styles from "./styles";
 import HousingCard from "../../components/recommendation/HousingCard";
 import { LIGHT_PURPLE } from "../../styles/colors";
@@ -8,15 +8,21 @@ const HousingScreen = () => {
   const DATA = [
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
+      title: "4 bedroom apartment - Dwell Student Housing",
+      price: "250.00",
+      rating: "3.5",
     },
     {
       id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
+      title: "2 bedroom apartment - Atira",
+      price: "390.00",
+      rating: "3.9",
     },
     {
       id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
+      title: "Studio Deluxe - Urbanest Melbourne Central",
+      price: "559.00",
+      rating: "4.6",
     },
     {
       id: "ADKDWQKDQWK",
@@ -27,12 +33,6 @@ const HousingScreen = () => {
       title: "Han Sooyoung",
     },
   ];
-
-  const Item = ({ title }) => (
-    <View>
-      <Text style={{ color: "white", fontSize: 12 }}>{title}</Text>
-    </View>
-  );
 
   return (
     <SafeAreaView style={styles.container}>

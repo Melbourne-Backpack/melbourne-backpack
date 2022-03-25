@@ -8,24 +8,16 @@ import {
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
     backgroundColor: DARK_BLUE_PURPLE,
     borderRadius: 20,
     marginBottom: scaleSize(10),
   },
-  imgContainer: {
-    flex: 1,
-    position: "relative",
-  },
   backgroundImg: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    width: "100%",
+    height: scaleSize(300),
   },
   overlay: {
-    flex: 1,
+    height: "100%",
     justifyContent: "flex-end",
     backgroundColor: "rgba(0,0,0, 0.32)",
     borderTopLeftRadius: 20,

@@ -6,7 +6,7 @@ import styles from "./smallerCardStyles";
 const SmallerHousingCard = () => {
   return (
     <View style={styles.card}>
-      <View style={styles.imgContainer}>
+      <View>
         <Image
           source={require("../../../assets/images/placeholder-612x612.jpg")}
           resizeMode="cover"

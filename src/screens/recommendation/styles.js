@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
   },
   wrapper: {
-    flex: 1,
     padding: scaleSize(10),
   },
   heading1: {

@@ -4,16 +4,12 @@ import { scaleSize } from "../../styles/scale";
 
 const smallerCardStyles = StyleSheet.create({
   card: {
-    flex: 0.3,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     backgroundColor: DARK_BLUE_PURPLE,
     borderRadius: 20,
-    paddingHorizontal: 20,
-  },
-  imgContainer: {
-    flex: 1,
+    padding: 20,
   },
   img: {
     width: scaleSize(100),
