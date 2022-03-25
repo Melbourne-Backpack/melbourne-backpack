@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: DARK_BLUE_PURPLE,
     borderRadius: 20,
-    marginBottom: scaleSize(10),
+    marginBottom: scaleSize(30),
   },
   backgroundImg: {
     width: "100%",
@@ -32,14 +32,16 @@ const styles = StyleSheet.create({
   info: {
     paddingHorizontal: scaleSize(10),
     paddingVertical: scaleSize(7),
+    paddingBottom: 15,
   },
   text: {
     color: WHITE,
     marginTop: scaleSize(5),
+    marginBottom: 10,
   },
   name: {
     fontWeight: FONT_WEIGHT_MEDIUM,
-    fontSize: 17,
+    fontSize: 16,
   },
   price: {
     fontWeight: FONT_WEIGHT_EXTRA_BOLD,
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: scaleSize(20),
   },
-  extraWrapper: {
+  extraOuterContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
   },

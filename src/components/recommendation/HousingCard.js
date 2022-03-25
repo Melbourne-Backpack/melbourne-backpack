@@ -1,4 +1,4 @@
-import { ImageBackground, Text, View } from "react-native";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import {
   AntDesign,
   MaterialCommunityIcons,
@@ -8,45 +8,54 @@ import {
 import styles from "./styles";
 import { GREY, YELLOW } from "../../styles/colors";
 
-const HousingCard = () => {
+const HousingCard = ({
+  title,
+  price,
+  address,
+  rating,
+  area,
+  bedroom,
+  bathroom,
+}) => {
   return (
     <View style={styles.card}>
-      <ImageBackground
-        source={require("../../../assets/images/student-housing.jpg")}
-        style={styles.backgroundImg}
-        imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-        resizeMode="cover"
-      >
-        <View style={styles.overlay}>
-          <Text style={styles.rating}>
-            4.9 <AntDesign name="star" size={20} color={YELLOW} />
-          </Text>
-        </View>
-      </ImageBackground>
+      <TouchableOpacity activeOpacity={0.5}>
+        <ImageBackground
+          source={require("../../../assets/images/student-housing.jpg")}
+          style={styles.backgroundImg}
+          imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+          resizeMode="cover"
+        >
+          <View style={styles.overlay}>
+            <Text style={styles.rating}>
+              {rating} <AntDesign name="star" size={20} color={YELLOW} />
+            </Text>
+          </View>
+        </ImageBackground>
+      </TouchableOpacity>
 
       <View style={styles.info}>
-        <Text style={[styles.name, styles.text]}>
-          4 bedroom apartment - Atira
-        </Text>
-        <Text style={[styles.price, styles.text]}>$399.00</Text>
+        <TouchableOpacity>
+          <Text style={[styles.name, styles.text]}>{title}</Text>
+        </TouchableOpacity>
+        <Text style={[styles.price, styles.text]}>${price}</Text>
         <Text style={[styles.text, styles.location]}>
-          <Ionicons name="location-sharp" size={12} color="white" /> 250 Spencer
-          Street, Melbourne, VIC 3000
+          <Ionicons name="location-sharp" size={12} color="white" /> {address}
         </Text>
 
-        <View style={styles.extraWrapper}>
+        <View style={styles.extraOuterContainer}>
           <View style={styles.extraContainer}>
-            <Text style={styles.extra}>50 sqm</Text>
+            <Text style={styles.extra}>{area} sqm</Text>
             <MaterialCommunityIcons name="floor-plan" size={35} color={GREY} />
           </View>
 
           <View style={styles.extraContainer}>
-            <Text style={styles.extra}>2</Text>
+            <Text style={styles.extra}>{bedroom}</Text>
             <Ionicons name="bed" size={35} color={GREY} />
           </View>
 
           <View style={styles.extraContainer}>
-            <Text style={styles.extra}>1</Text>
+            <Text style={styles.extra}>{bathroom}</Text>
             <MaterialCommunityIcons name="shower" size={35} color={GREY} />
           </View>
         </View>
