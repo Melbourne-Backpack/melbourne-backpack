@@ -18,13 +18,14 @@ const styles = StyleSheet.create({
   },
 
   communityListContainer: {
-    marginLeft: 52,
+    marginLeft: 47,
   },
 
   communityListText: {
     color: WHITE,
     fontSize: 35,
     fontWeight: FONT_WEIGHT_SEMI_BOLD,
+    marginLeft: 7,
     marginTop: 32,
   },
 
