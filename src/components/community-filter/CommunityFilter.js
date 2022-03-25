@@ -26,15 +26,13 @@ const CommunityFilter = (props) => {
               i++;
               let optionList = options[i];
               return (
-                <View>
+                <View key={heading}>
                   <Text style={styles.filterText}>{heading}</Text>
                   <View style={styles.optionWrapper}>
                     {optionList.map((option) => {
                       return (
-                        <View style={styles.filterWrapper}>
-                          <Text style={styles.filterText} key={option.id}>
-                            {option.name}
-                          </Text>
+                        <View style={styles.filterWrapper} key={option.id}>
+                          <Text style={styles.filterText}>{option.name}</Text>
                         </View>
                       );
                     })}
