@@ -1,4 +1,10 @@
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import { useState } from "react";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import CommunityCardSmall from "../../components/community-card/community-card-small/CommunityCardSmall";
@@ -145,21 +151,24 @@ const CommunityScreen = () => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.mostLikeYouContainer}>
         <Text style={styles.mostLikeYouText}>Most like you</Text>
-        <ScrollView
+        <FlatList
           style={styles.mostLikeYou}
           horizontal={true}
+          data={mostLikeYouArray}
           showsHorizontalScrollIndicator={false}
-        >
-          {mostLikeYouArray.map((user) => {
+          renderItem={(item) => {
             return (
               <CommunityCardLarge
-                key={user.id}
-                name={user.name}
-                campus={user.campus}
+                key={item.item.id}
+                name={item.item.name}
+                campus={item.item.campus}
               />
             );
-          })}
-        </ScrollView>
+          }}
+          keyExtractor={(item) => {
+            item.id;
+          }}
+        />
       </View>
       <View style={styles.communityListContainer}>
         <Text style={styles.communityListText}>Community</Text>
