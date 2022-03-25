@@ -3,7 +3,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { YELLOW } from "../../styles/colors";
 import styles from "./smallerCardStyles";
 
-const SmallerHousingCard = () => {
+const SmallerHousingCard = ({ title, price, rating }) => {
   return (
     <View style={styles.card}>
       <View>
@@ -14,12 +14,15 @@ const SmallerHousingCard = () => {
         />
       </View>
 
-      <View>
-        <Text style={styles.text}>4 bedroom apartment</Text>
-        <Text style={styles.text}>Atira</Text>
-        <Text style={styles.text}>$399.00</Text>
+      <View style={styles.infoContainer}>
+        <View style={styles.longTextContainer}>
+          <Text style={[styles.title, styles.text]} numberOfLines={2}>
+            {title}
+          </Text>
+        </View>
+        <Text style={[styles.text, styles.price]}>${price}</Text>
         <Text style={{ color: YELLOW }}>
-          4.5 <AntDesign name="star" size={15} color={YELLOW} />
+          {rating} <AntDesign name="star" size={15} color={YELLOW} />
         </Text>
       </View>
     </View>

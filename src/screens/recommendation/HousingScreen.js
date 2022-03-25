@@ -26,27 +26,33 @@ const HousingScreen = () => {
     },
     {
       id: "ADKDWQKDQWK",
-      title: "Go Junho",
-    },
-    {
-      id: "HAHHHAHAHA",
-      title: "Han Sooyoung",
+      title: "6 bedroom apartment - Iglu Melbourne",
+      price: "299.00",
+      rating: "4.1",
     },
   ];
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.wrapper}>
-        <Text style={styles.heading1}>Top Housing</Text>
-        <HousingCard />
+      <ScrollView>
+        <View style={styles.wrapper}>
+          <Text style={styles.heading1}>Top Housing</Text>
+          <HousingCard />
 
-        <View style={styles.secondHeader}>
-          <Text style={styles.heading2}>All</Text>
-          <Text style={{ color: LIGHT_PURPLE }}>See more</Text>
+          <View style={styles.secondHeader}>
+            <Text style={styles.heading2}>All</Text>
+            <Text style={{ color: LIGHT_PURPLE }}>See more</Text>
+          </View>
+
+          {DATA.map((data) => (
+            <SmallerHousingCard
+              title={data.title}
+              price={data.price}
+              rating={data.rating}
+            />
+          ))}
         </View>
-
-        <SmallerHousingCard />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
