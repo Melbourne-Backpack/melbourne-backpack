@@ -1,8 +1,8 @@
 import { Text, SafeAreaView, View, ScrollView } from "react-native";
 import styles from "./styles";
-import HousingCard from "../../components/recommendation/HousingCard";
+import RecommendationCard from "../../components/recommendation/RecommendationCard";
 import { LIGHT_PURPLE } from "../../styles/colors";
-import SmallerHousingCard from "../../components/recommendation/SmallerHousingCard";
+import RecommendationScreen from "./RecommendationScreen";
 
 const HousingScreen = () => {
   const DATA = [
@@ -32,7 +32,7 @@ const HousingScreen = () => {
       price: "559.00",
       rating: "4.6",
       address: " 599 Swanston St, Carlton VIC 3053",
-      area: 50,
+      area: 38,
       bedroom: 1,
       bathroom: 1,
     },
@@ -52,39 +52,11 @@ const HousingScreen = () => {
   const otherData = DATA.slice(1, DATA.length);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.wrapper}>
-          <Text style={styles.heading1}>Top Housing</Text>
-          <HousingCard
-            title={firstData.title}
-            price={firstData.price}
-            rating={firstData.rating}
-            address={firstData.address}
-            area={firstData.area}
-            bedroom={firstData.bedroom}
-            bathroom={firstData.bathroom}
-          />
-
-          <View style={styles.secondHeader}>
-            <Text style={styles.heading2}>All</Text>
-            <Text style={{ color: LIGHT_PURPLE }}>See more</Text>
-          </View>
-
-          {otherData.map((data) => (
-            <HousingCard
-              title={data.title}
-              price={data.price}
-              rating={data.rating}
-              address={data.address}
-              area={data.area}
-              bedroom={data.bedroom}
-              bathroom={data.bathroom}
-            />
-          ))}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <RecommendationScreen
+      topic="Housing"
+      firstData={firstData}
+      otherData={otherData}
+    />
   );
 };
 export default HousingScreen;

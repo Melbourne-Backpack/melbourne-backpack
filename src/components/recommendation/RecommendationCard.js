@@ -8,15 +8,7 @@ import {
 import styles from "./styles";
 import { GREY, YELLOW } from "../../styles/colors";
 
-const HousingCard = ({
-  title,
-  price,
-  address,
-  rating,
-  area,
-  bedroom,
-  bathroom,
-}) => {
+const RecommendationCard = ({ data }) => {
   return (
     <View style={styles.card}>
       <TouchableOpacity activeOpacity={0.5}>
@@ -28,7 +20,7 @@ const HousingCard = ({
         >
           <View style={styles.overlay}>
             <Text style={styles.rating}>
-              {rating} <AntDesign name="star" size={20} color={YELLOW} />
+              {data.rating} <AntDesign name="star" size={20} color={YELLOW} />
             </Text>
           </View>
         </ImageBackground>
@@ -36,26 +28,27 @@ const HousingCard = ({
 
       <View style={styles.info}>
         <TouchableOpacity>
-          <Text style={[styles.name, styles.text]}>{title}</Text>
+          <Text style={[styles.name, styles.text]}>{data.title}</Text>
         </TouchableOpacity>
-        <Text style={[styles.price, styles.text]}>${price}</Text>
+        <Text style={[styles.price, styles.text]}>${data.price}</Text>
         <Text style={[styles.text, styles.location]}>
-          <Ionicons name="location-sharp" size={12} color="white" /> {address}
+          <Ionicons name="location-sharp" size={12} color="white" />{" "}
+          {data.address}
         </Text>
 
         <View style={styles.extraOuterContainer}>
           <View style={styles.extraContainer}>
-            <Text style={styles.extra}>{area} sqm</Text>
+            <Text style={styles.extra}>{data.area} sqm</Text>
             <MaterialCommunityIcons name="floor-plan" size={35} color={GREY} />
           </View>
 
           <View style={styles.extraContainer}>
-            <Text style={styles.extra}>{bedroom}</Text>
+            <Text style={styles.extra}>{data.bedroom}</Text>
             <Ionicons name="bed" size={35} color={GREY} />
           </View>
 
           <View style={styles.extraContainer}>
-            <Text style={styles.extra}>{bathroom}</Text>
+            <Text style={styles.extra}>{data.bathroom}</Text>
             <MaterialCommunityIcons name="shower" size={35} color={GREY} />
           </View>
         </View>
@@ -64,4 +57,4 @@ const HousingCard = ({
   );
 };
 
-export default HousingCard;
+export default RecommendationCard;
