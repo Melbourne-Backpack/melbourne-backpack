@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 10,
     height: 285,
-    marginLeft: 24,
+    marginLeft: 20,
+    marginRight: 20,
     overflow: "hidden",
     width: 234,
   },
@@ -46,11 +47,11 @@ const styles = StyleSheet.create({
 
   userContentBackground: {
     backgroundColor: WHITE,
-    position: "absolute",
     borderRadius: 20,
-    opacity: 0.44,
-    width: 218,
     height: 79,
+    opacity: 0.44,
+    position: "absolute",
+    width: 218,
   },
 
   userContentRow: {

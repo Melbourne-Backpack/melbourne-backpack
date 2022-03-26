@@ -16,12 +16,12 @@ const CommunityCardSmall = (props) => {
         style={styles.userImg}
       >
         <View style={styles.userContent}>
-          <TouchableOpacity>
-            <Image styles={styles.userContentBackground} />
-            <View style={styles.userNameScroll}>
-              <Text style={styles.userName}>{props.name}</Text>
-            </View>
-          </TouchableOpacity>
+          <Image style={styles.userContentBackground} />
+          <View style={styles.userContentRow}>
+            <TouchableOpacity style={styles.detailBtn}>
+              <Text style={styles.detailBtnText}>{props.name}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ImageBackground>
     </TouchableOpacity>

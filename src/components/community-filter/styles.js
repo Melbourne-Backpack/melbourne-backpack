@@ -1,19 +1,26 @@
 import { StyleSheet } from "react-native";
 import { DARK_BLUE, WHITE } from "../../styles/colors";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const styles = StyleSheet.create({
   filterBtn: {
     backgroundColor: DARK_BLUE,
-    borderRadius: 12,
-    height: 44,
-    marginTop: -4,
-    marginLeft: 224,
-    width: 44,
+    borderRadius: wp("3.5%"),
+    height: "auto",
+    marginTop: hp("0.5%"),
+    width: hp("5.4%"),
+    aspectRatio: 1,
+  },
+
+  filterBtnWrapper: {
+    alignItems: "flex-end",
   },
 
   filterIcon: {
-    justifyContent: "center",
-    margin: 10,
+    margin: wp("2.6%"),
   },
 
   filterText: {

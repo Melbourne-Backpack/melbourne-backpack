@@ -1,14 +1,32 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { WHITE } from "../../../styles/colors";
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "react-native-responsive-screen";
+
+let width = Dimensions.get("window").width;
+let cardHeight = 87;
+let cardWidth = 63;
+let containerWidth = (width * 3) / 4;
+const responsiveCardMarginLeft = () => {
+  let maxCardPerRow = 4;
+  let totalCardSpace = cardWidth * maxCardPerRow;
+  while (containerWidth < totalCardSpace) {
+    totalCardSpace -= cardWidth;
+    maxCardPerRow -= 1;
+  }
+  return (containerWidth - totalCardSpace) / maxCardPerRow - 1;
+};
 
 const styles = StyleSheet.create({
   card: {
     borderRadius: 10,
-    height: 86,
-    marginLeft: 5,
-    marginBottom: 18,
+    height: cardHeight,
+    marginLeft: responsiveCardMarginLeft(),
+    marginBottom: hp("2.2%"),
     overflow: "hidden",
-    width: 63,
+    width: cardWidth,
   },
 
   userImg: {
@@ -26,23 +44,29 @@ const styles = StyleSheet.create({
     marginTop: 45,
     overflow: "hidden",
     textAlign: "center",
-    width: 59,
+    width: wp("15.7%"),
   },
 
   userContentBackground: {
     backgroundColor: WHITE,
-    height: 24,
-    position: "absolute",
     borderRadius: 20,
-    width: 59,
+    height: 24,
+    opacity: 0.44,
+    position: "absolute",
+    width: wp("15.7%"),
+  },
+
+  userContentRow: {
+    flexWrap: "wrap",
+    flexDirection: "row",
+    marginTop: 3,
+    marginLeft: 6,
+    marginRight: 10,
   },
 
   userName: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    fontSize: 10,
   },
-
-  userNameScroll: {},
 });
 
 export default styles;

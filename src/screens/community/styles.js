@@ -6,54 +6,63 @@ import {
   FONT_WEIGHT_SEMI_BOLD,
 } from "../../styles/typography";
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
+// designed dimension:375 X 812
+
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: BACKGROUND,
   },
 
   communityList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 27,
+    marginTop: hp("3%"),
   },
 
   communityListContainer: {
-    marginLeft: 47,
+    marginLeft: wp("12.5%"),
+    marginRight: wp("12.5%"),
   },
 
   communityListText: {
     color: WHITE,
-    fontSize: 35,
+    fontSize: hp("2.4%"),
     fontWeight: FONT_WEIGHT_SEMI_BOLD,
-    marginLeft: 7,
-    marginTop: 32,
+    marginLeft: wp("1.8%"),
+    marginTop: hp("4%"),
   },
 
   mostLikeYou: {
-    marginTop: 39,
+    marginTop: hp("4.8%"),
   },
 
   mostLikeYouContainer: {
-    marginLeft: 24,
+    marginLeft: wp("6.4%"),
   },
 
   mostLikeYouText: {
     color: WHITE,
-    fontSize: 20,
+    fontSize: hp("2.4%"),
     fontWeight: FONT_WEIGHT_EXTRA_BOLD,
-    marginTop: 53,
+    marginTop: hp("6.5%"),
   },
 
   seeMoreBtn: {
     color: PURPLE_BLUE,
-    fontSize: 14,
+    fontSize: hp("1.7%"),
     fontWeight: FONT_WEIGHT_MEDIUM,
   },
 
   seeMoreBtnContainer: {
-    marginBottom: 60,
-    marginLeft: 200,
-    marginTop: 18,
+    marginBottom: hp("7.3%"),
+    marginLeft: wp("53%"),
+    marginTop: hp("4.5%"),
   },
 });
 
