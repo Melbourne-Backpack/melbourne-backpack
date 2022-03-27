@@ -1,7 +1,3 @@
-import { Text, SafeAreaView, View, ScrollView } from "react-native";
-import styles from "./styles";
-import RecommendationCard from "../../components/recommendation/RecommendationCard";
-import { LIGHT_PURPLE } from "../../styles/colors";
 import RecommendationScreen from "./RecommendationScreen";
 
 const HousingScreen = () => {
@@ -56,6 +52,7 @@ const HousingScreen = () => {
       topic="Housing"
       firstData={firstData}
       otherData={otherData}
+      housing={true}
     />
   );
 };
