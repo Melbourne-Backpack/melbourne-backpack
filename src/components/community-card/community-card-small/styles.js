@@ -5,6 +5,7 @@ import {
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 
+/* function to auto adjust margin depended on the screen width */
 let width = Dimensions.get("window").width;
 let cardHeight = 87;
 let cardWidth = 63;
@@ -16,6 +17,8 @@ const responsiveCardMarginLeft = () => {
     totalCardSpace -= cardWidth;
     maxCardPerRow -= 1;
   }
+  /* find the margin space to fit cards in a row, minus 1 because without it cards will go to another row and leave a big gap,
+   * margin: auto works on the web version but not on iphone */
   return (containerWidth - totalCardSpace) / maxCardPerRow - 1;
 };
 
