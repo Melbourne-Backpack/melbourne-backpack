@@ -9,7 +9,7 @@ const CommunityScreen = () => {
   const [mostLikeYouArray, setMostLikeYouArray] = useState([
     {
       id: "1",
-      name: "aaaaaa",
+      name: "agagag",
       campus: "sgs",
       photo: "../../../assets/images/avatar-placeholder.jpg",
     },

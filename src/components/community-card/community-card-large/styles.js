@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flexDirection: "row",
     marginTop: 9,
+    height: 25,
   },
 
   userImg: {
