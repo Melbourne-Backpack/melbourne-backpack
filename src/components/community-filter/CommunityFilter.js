@@ -1,14 +1,8 @@
-import { View, Text, TouchableOpacity, Dimensions } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { LIGHT_BLUE } from "../../styles/colors";
 import { useState } from "react";
-
-let width = Dimensions.get("window").width;
-let responsiveSize = (width * 24) / 375;
-if (width <= 370) {
-  responsiveSize = (responsiveSize * 5) / 8;
-}
 
 const CommunityFilter = (props) => {
   const headings = props.headings;
@@ -24,7 +18,7 @@ const CommunityFilter = (props) => {
         >
           <Ionicons
             name="filter"
-            size={responsiveSize}
+            size={24}
             color={LIGHT_BLUE}
             style={styles.filterIcon}
           />

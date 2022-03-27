@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     borderRadius: wp("3.5%"),
     height: "auto",
     marginTop: hp("0.5%"),
-    width: hp("5.4%"),
+    width: 44,
     aspectRatio: 1,
   },
 
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 
   filterIcon: {
-    margin: wp("2.6%"),
+    margin: 10,
   },
 
   filterText: {
