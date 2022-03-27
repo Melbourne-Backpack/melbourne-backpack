@@ -38,7 +38,18 @@ const Subject = ({ navigation }) => {
     return null;
   }
 
-  const multipleData = ["Economics", "Business", "Robotics"];
+  const multipleData = [
+    "Economics",
+    "Business",
+    "Robotics",
+    "Management",
+    "Aviation",
+    "Education",
+    "Design",
+    "Professional Communication",
+    "Technology",
+    "Digital Marketing",
+  ];
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -62,9 +73,9 @@ const Subject = ({ navigation }) => {
             {selected ? _.join(selectedData, "") : ""}
           </TextInput>
           <View style={styles.buttonWrapper}>
-            {multipleData.map((interest) => (
+            {multipleData.map((subject, index) => (
               <SelectMultipleButton
-                key={interest}
+                key={subject}
                 buttonViewStyle={styles.buttonViewStyle}
                 textStyle={styles.textStyle}
                 highLightStyle={{
@@ -75,18 +86,24 @@ const Subject = ({ navigation }) => {
                   backgroundTintColor: SELECTED_BUTTON,
                   textTintColor: WHITE,
                 }}
-                value={interest}
-                selected={selectedData.includes(interest)}
+                value={subject}
+                selected={selectedData.includes(subject)}
                 singleTap={(valueTap) => {
-                  setSelectedData(interest);
+                  setSelectedData(subject);
                   setSelected(true);
                 }}
               />
             ))}
           </View>
+          <Text style={styles.selectedText}>3 topics Selected</Text>
           <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
             <View style={styles.nextButtonView}>
               <Text style={styles.nextButtonText}>Next</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Campus")}>
+            <View style={styles.backButtonView}>
+              <Text style={styles.backButtonText}>Back</Text>
             </View>
           </TouchableOpacity>
         </View>

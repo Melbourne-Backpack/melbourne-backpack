@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: "flex-start",
     justifyContent: "center",
+    width: wp("80%"),
   },
   textOne: {
     color: WHITE,
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: TEXT_INPUT,
     borderRadius: 20,
-    width: wp("70%"),
+    width: wp("80%"),
     paddingVertical: 15,
     paddingHorizontal: 30,
     color: WHITE,
@@ -53,8 +54,8 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     flexDirection: "row",
+    flexWrap: "wrap",
     paddingVertical: 20,
-    width: wp("70%"),
   },
   buttonViewStyle: {
     borderRadius: 20,
@@ -66,13 +67,30 @@ const styles = StyleSheet.create({
     color: WHITE,
     fontFamily: "PoppinsMedium",
   },
+  selectedText: {
+    fontFamily: "PoppinsRegular",
+    color: WHITE,
+  },
   nextButtonView: {
     backgroundColor: SELECTED_BUTTON,
     borderRadius: 15,
-    width: wp("70%"),
-    marginTop: 150,
+    width: wp("80%"),
+    marginTop: 30,
   },
   nextButtonText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    textAlign: "center",
+    paddingVertical: 15,
+  },
+  backButtonView: {
+    borderRadius: 15,
+    borderColor: WHITE,
+    borderWidth: 1.5,
+    width: wp("80%"),
+    marginTop: 15,
+  },
+  backButtonText: {
     color: WHITE,
     fontFamily: "PoppinsMedium",
     textAlign: "center",

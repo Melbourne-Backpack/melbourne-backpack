@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: "flex-start",
     justifyContent: "center",
+    width: wp("80%"),
   },
   textOne: {
     color: WHITE,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: TEXT_INPUT,
     borderRadius: 20,
-    width: wp("70%"),
+    width: wp("80%"),
     paddingVertical: 15,
     paddingHorizontal: 30,
     color: WHITE,
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
   nextButtonView: {
     backgroundColor: SELECTED_BUTTON,
     borderRadius: 15,
-    width: wp("70%"),
+    width: wp("80%"),
     marginTop: 150,
   },
   nextButtonText: {

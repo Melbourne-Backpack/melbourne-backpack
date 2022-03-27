@@ -57,9 +57,9 @@ const Campus = ({ navigation }) => {
             {selected ? _.join(selectedData, "") : ""}
           </TextInput>
           <View style={styles.buttonWrapper}>
-            {multipleData.map((interest) => (
+            {multipleData.map((campus) => (
               <SelectMultipleButton
-                key={interest}
+                key={campus}
                 buttonViewStyle={styles.buttonViewStyle}
                 textStyle={styles.textStyle}
                 highLightStyle={{
@@ -70,10 +70,10 @@ const Campus = ({ navigation }) => {
                   backgroundTintColor: SELECTED_BUTTON,
                   textTintColor: WHITE,
                 }}
-                value={interest}
-                selected={selectedData.includes(interest)}
+                value={campus}
+                selected={selectedData.includes(campus)}
                 singleTap={(valueTap) => {
-                  setSelectedData(interest);
+                  setSelectedData(campus);
                   setSelected(true);
                 }}
               />
