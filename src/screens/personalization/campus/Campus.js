@@ -6,17 +6,29 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
-import { WHITE, DARK_BLUE, LIGHT_BLUE } from "../../../styles/colors";
+import {
+  WHITE,
+  DARK_BLUE,
+  LIGHT_BLUE,
+  SELECTED_BUTTON,
+  TEXT_INPUT,
+} from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import { SelectMultipleButton } from "react-native-selectmultiple-button";
+import _ from "lodash";
 
 const Campus = ({ navigation }) => {
-  const [multipleSelectedData, setMultipleSelectedData] = React.useState([]);
-  const [multipleSelectedDataLimited, setMultipleSelectedDataLimited] =
-    React.useState("");
+  // handle Selected button
+  const [selectedData, setSelectedData] = React.useState([]);
+  const [selected, setSelected] = React.useState(false);
+
+  // handle Text Input value
+  const [text, setText] = useState("");
+  // handle font
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
@@ -34,11 +46,16 @@ const Campus = ({ navigation }) => {
         <View style={styles.wrapper}>
           <Text style={styles.textOne}>Tell us more about yourself</Text>
           <Text style={styles.textTwo}>Choose your current campus</Text>
+
           <TextInput
             style={styles.textInput}
             placeholder={"Campus in Vietnam"}
             placeholderTextColor={"#6A6A8B"}
-          />
+            onChangeText={(newText) => setText(newText)}
+            defaultValue={text}
+          >
+            {selected ? _.join(selectedData, "") : ""}
+          </TextInput>
           <View style={styles.buttonWrapper}>
             {multipleData.map((interest) => (
               <SelectMultipleButton
@@ -50,15 +67,23 @@ const Campus = ({ navigation }) => {
                   backgroundColor: "transparent",
                   textColor: WHITE,
                   borderTintColor: DARK_BLUE,
-                  backgroundTintColor: "#4838D1",
+                  backgroundTintColor: SELECTED_BUTTON,
                   textTintColor: WHITE,
                 }}
                 value={interest}
-                selected={multipleSelectedData.includes(interest)}
-                singleTap={(valueTap) => setMultipleSelectedData(interest)}
+                selected={selectedData.includes(interest)}
+                singleTap={(valueTap) => {
+                  setSelectedData(interest);
+                  setSelected(true);
+                }}
               />
             ))}
           </View>
+          <TouchableOpacity onPress={() => navigation.navigate("SimpleButton")}>
+            <View style={styles.nextButtonView}>
+              <Text style={styles.nextButtonText}>Next</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
