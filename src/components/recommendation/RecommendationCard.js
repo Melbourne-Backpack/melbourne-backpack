@@ -32,7 +32,7 @@ const RecommendationCard = ({ data, housing }) => {
 
       <View style={styles.info}>
         <TouchableOpacity>
-          <Text style={[styles.name, styles.text]}>{data.title}</Text>
+          <Text style={[styles.name, styles.text]}>{data.name}</Text>
         </TouchableOpacity>
         {housing !== true ? (
           <></>

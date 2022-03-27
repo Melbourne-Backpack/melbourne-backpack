@@ -1,14 +1,14 @@
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import styles from "./styles";
-import RecommendationCard from "../../components/recommendation/RecommendationCard";
+import RecommendationCard from "../recommendation/RecommendationCard";
 import { LIGHT_PURPLE } from "../../styles/colors";
 
-const RecommendationScreen = ({ topic, firstData, otherData, housing }) => {
+const RecommendationTemplate = ({ topic, firstData, otherData, housing }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.wrapper}>
-          <Text style={styles.heading1}>Top {topic}</Text>
+          <Text style={styles.heading1}>Trending {topic}</Text>
           <RecommendationCard data={firstData} housing={housing} />
 
           <View style={styles.secondHeader}>
@@ -25,4 +25,4 @@ const RecommendationScreen = ({ topic, firstData, otherData, housing }) => {
   );
 };
 
-export default RecommendationScreen;
+export default RecommendationTemplate;
