@@ -21,7 +21,7 @@ import React, { useState } from "react";
 import { SelectMultipleButton } from "react-native-selectmultiple-button";
 import _ from "lodash";
 
-const Campus = ({ navigation }) => {
+const Subject = ({ navigation }) => {
   // handle Selected button
   const [selectedData, setSelectedData] = React.useState([]);
   const [selected, setSelected] = React.useState(false);
@@ -38,18 +38,23 @@ const Campus = ({ navigation }) => {
     return null;
   }
 
-  const multipleData = ["Hanoi", "Da Nang", "Sai Gon"];
+  const multipleData = ["Economics", "Business", "Robotics"];
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <Text style={styles.textOne}>Tell us more about yourself</Text>
-          <Text style={styles.textTwo}>Choose your current campus</Text>
+          <Text style={styles.textTwo}>
+            Choose min.3 subjects you like, we will
+          </Text>
+          <Text style={styles.textThree}>
+            give you more often that relate to it.
+          </Text>
 
           <TextInput
             style={styles.textInput}
-            placeholder={"Campus in Vietnam"}
+            placeholder={"Programs | Subjects of interest"}
             placeholderTextColor={"#6A6A8B"}
             onChangeText={(newText) => setText(newText)}
             defaultValue={text}
@@ -90,4 +95,4 @@ const Campus = ({ navigation }) => {
   );
 };
 
-export default Campus;
+export default Subject;
