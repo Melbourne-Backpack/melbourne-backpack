@@ -7,8 +7,19 @@ import {
 
 import styles from "./styles";
 import { GREY, YELLOW } from "../../styles/colors";
+import { useFonts } from "expo-font";
 
 const RecommendationCard = ({ data, housing }) => {
+  const [loaded, error] = useFonts({
+    PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <View style={styles.card}>
       <TouchableOpacity activeOpacity={0.5}>

@@ -41,15 +41,15 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: FONT_WEIGHT_MEDIUM,
-    fontSize: 16,
+    fontSize: 18,
   },
   price: {
-    fontWeight: FONT_WEIGHT_EXTRA_BOLD,
+    fontFamily: "PoppinsExtraBold",
     fontSize: 20,
     marginBottom: scaleSize(5),
   },
   location: {
-    fontSize: 12,
+    fontSize: 14,
     marginBottom: scaleSize(20),
   },
   extraOuterContainer: {
