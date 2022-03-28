@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import styles from "./styles";
 
+// use replace instead of navigate to avoid the back button on Android
 const SplashScreen = ({ navigation }) => {
   setTimeout(() => {
     navigation.replace("Welcome");
