@@ -11,7 +11,7 @@ import styles from "./styles";
 const SplashScreen = ({ navigation }) => {
   setTimeout(() => {
     navigation.replace("Welcome");
-  }, 3000);
+  }, 5000);
   return (
     <View style={styles.container}>
       <ImageBackground
