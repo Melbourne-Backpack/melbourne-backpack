@@ -7,22 +7,34 @@ import {
   TextInput,
 } from "react-native";
 import styles from "./styles";
+import { useFonts } from "expo-font";
 
 const Welcome = ({ navigation }) => {
+  const [loaded, error] = useFonts({
+    PoppinsThin: require("../../../assets/fonts/Poppins-Thin.ttf"),
+    PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.firstText}>Welcome !</Text>
-      <Text style={styles.secondText}>
-        Find what {"\n"}you are {"\n"}looking for
-      </Text>
-      <Text style={styles.thirdText}>
-        By personalize your account, we can help you to find what you like.
-      </Text>
-      <TouchableOpacity onPress={() => console.log("Hello")}>
-        <View style={styles.viewButton}>
-          <Text style={styles.textButton}>Personalize your account</Text>
+      <View style={styles.wrapper}>
+        <Text style={styles.firstText}>Welcome to Melbourne Backpack!</Text>
+        <Text style={styles.secondText}>Customize{"\n"}Your Needs</Text>
+        <Text style={styles.thirdText}>
+          Tell us who you are to get the best {"\n"}experiences.
+        </Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={() => console.log("Hello")}>
+            <View style={styles.viewButton}>
+              <Text style={styles.textButton}>Personalize your account</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };
