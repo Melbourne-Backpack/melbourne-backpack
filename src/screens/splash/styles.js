@@ -7,13 +7,18 @@ let height = Dimensions.get("window").height; //full height
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   backgroundImage: {
     width: width,
     height: height,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    paddingVertical: 30,
+  },
+  icon: {
+    width: 200,
+    height: 200,
+    resizeMode: "contain",
   },
   textTitle: {
     color: "#ffffff",

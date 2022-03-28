@@ -1,4 +1,4 @@
-import { ImageBackground, Text, View } from "react-native";
+import { Image, ImageBackground, Text, View } from "react-native";
 import styles from "./styles";
 
 // use replace instead of navigate to avoid the back button on Android
@@ -9,9 +9,13 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/splash.png")}
+        source={require("../../../assets/images/melbourne-bg.jpg")}
         style={styles.backgroundImage}
       >
+        <Image
+          source={require("../../../assets/adaptive-icon.png")}
+          style={styles.icon}
+        />
         <Text style={styles.textTitle}>
           Melbourne {"\n"} Backpack {"\n"}
         </Text>
