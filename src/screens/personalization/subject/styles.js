@@ -1,9 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import {
   WHITE,
   BACKGROUND,
@@ -16,11 +13,14 @@ let height = Dimensions.get("window").height; //full height
 console.log(width, height);
 
 const styles = StyleSheet.create({
-  container: {
+  scrollview: {
     flex: 1,
     backgroundColor: BACKGROUND,
+  },
+  container: {
     alignItems: "center",
     justifyContent: "center",
+    paddingVertical: 50,
   },
   wrapper: {
     alignItems: "flex-start",
@@ -36,13 +36,8 @@ const styles = StyleSheet.create({
   textTwo: {
     color: WHITE,
     fontFamily: "PoppinsRegular",
-  },
-  textThree: {
-    color: WHITE,
-    fontFamily: "PoppinsRegular",
     paddingBottom: 50,
   },
-
   textInput: {
     backgroundColor: TEXT_INPUT,
     borderRadius: 20,
