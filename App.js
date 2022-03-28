@@ -11,8 +11,13 @@ import CommunityScreen from "./src/screens/community/CommunityScreen";
 import Campus from "./src/screens/personalization/campus/Campus";
 import Subject from "./src/screens/personalization/subject/Subject";
 
+import { Text } from "react-native";
+
 export default function App() {
   const Stack = createStackNavigator();
+
+  Text.defaultProps = Text.defaultProps || {};
+  Text.defaultProps.allowFontScaling = false;
 
   return (
     <NavigationContainer>
