@@ -8,20 +8,18 @@ import {
 import styles from "./styles";
 
 const SplashScreen = ({ navigation }) => {
+  setTimeout(() => {
+    navigation.replace("Welcome");
+  }, 3000);
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/images/melbourne-bg.jpg")}
+        source={require("../../../assets/splash.png")}
         style={styles.backgroundImage}
       >
         <Text style={styles.textTitle}>
           Melbourne {"\n"} Backpack {"\n"}
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-          <View style={styles.viewButton}>
-            <Text style={styles.textButton}>Welcome to Melbourne Backpack</Text>
-          </View>
-        </TouchableOpacity>
         <Text style={styles.versionText}>Version 1.0</Text>
       </ImageBackground>
     </View>

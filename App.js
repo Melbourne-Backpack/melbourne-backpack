@@ -12,7 +12,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
+          headerMode="navigation"
+        />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Welcome" component={Welcome} />
       </Stack.Navigator>
