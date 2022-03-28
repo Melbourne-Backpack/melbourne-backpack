@@ -1,47 +1,63 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
+import { scaleFont, scaleSize } from "../../styles/scale";
+import { WHITE, BACKGROUND } from "../../styles/colors";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
+console.log(width, height);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f0f29",
+    backgroundColor: BACKGROUND,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  wrapper: {
     alignItems: "flex-start",
     justifyContent: "center",
-    paddingLeft: 60,
+    paddingHorizontal: 40,
   },
   firstText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "800",
-    opacity: 0.8,
+    color: WHITE,
+    fontSize: hp("2%"),
+    opacity: 0.9,
+    paddingBottom: 30,
+    fontFamily: "PoppinsSemiBold",
   },
   secondText: {
-    color: "white",
-    fontSize: 70,
-    fontWeight: "200",
-    opacity: 0.8,
+    color: WHITE,
+    fontSize: hp("6.5%"),
+    fontFamily: "PoppinsThin",
+    paddingBottom: 10,
   },
   thirdText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "200",
+    color: WHITE,
+    fontSize: hp("2%"),
     opacity: 0.8,
-    paddingRight: 20,
-    paddingTop: 30,
+    paddingTop: 20,
+    paddingBottom: 35,
+    fontFamily: "PoppinsRegular",
+  },
+  buttonContainer: {
+    alignSelf: "center",
   },
   viewButton: {
     backgroundColor: "#4838d1",
-    borderRadius: 30,
-    paddingLeft: 65,
-    paddingRight: 65,
-    paddingTop: 20,
-    paddingBottom: 20,
-    marginTop: 50,
+    borderRadius: 25,
+    paddingVertical: 20,
+    paddingHorizontal: wp("14%"),
   },
-  textButton: { color: "white", fontSize: 15, fontWeight: "600" },
+  textButton: {
+    color: WHITE,
+    fontSize: hp("1.8%"),
+    fontFamily: "PoppinsMedium",
+  },
 });
 
 export default styles;
