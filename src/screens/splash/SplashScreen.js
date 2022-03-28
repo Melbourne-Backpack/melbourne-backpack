@@ -17,7 +17,7 @@ const SplashScreen = ({ navigation }) => {
         <Text style={styles.textTitle}>
           Melbourne {"\n"} Backpack {"\n"}
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Campus")}>
           <View style={styles.viewButton}>
             <Text style={styles.textButton}>Welcome</Text>
           </View>
