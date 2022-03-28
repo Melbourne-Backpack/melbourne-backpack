@@ -5,6 +5,8 @@ export const PURPLE_BLUE = "#4838D1";
 export const LIGHT_BLUE = "#2972FE";
 export const YELLOW = "#FAC800";
 export const RED = "#E61E2A";
+export const SELECTED_BUTTON = "#4838D1";
+export const TEXT_INPUT = "#1C1C4D";
 
 /* WHITE AND BLACK */
 export const WHITE = "#FFFFFF";
