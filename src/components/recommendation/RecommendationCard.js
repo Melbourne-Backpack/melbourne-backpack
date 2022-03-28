@@ -13,7 +13,7 @@ const RecommendationCard = ({ data, housing }) => {
   const [loaded, error] = useFonts({
     PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
-    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
+    PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
   });
 
   if (!loaded) {
@@ -34,7 +34,7 @@ const RecommendationCard = ({ data, housing }) => {
               <></>
             ) : (
               <Text style={styles.rating}>
-                {data.rating} <AntDesign name="star" size={20} color={YELLOW} />
+                {data.rating} <AntDesign name="star" size={30} color={YELLOW} />
               </Text>
             )}
           </View>
@@ -51,7 +51,7 @@ const RecommendationCard = ({ data, housing }) => {
           <Text style={[styles.price, styles.text]}>${data.price}</Text>
         )}
         <Text style={[styles.text, styles.location]}>
-          <Ionicons name="location-sharp" size={12} color="white" />{" "}
+          <Ionicons name="location-sharp" size={16} color="white" />{" "}
           {data.address}
         </Text>
 

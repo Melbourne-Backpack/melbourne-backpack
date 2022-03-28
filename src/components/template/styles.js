@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
-import { BACKGROUND, WHITE } from "../../styles/colors";
-import { FONT_WEIGHT_SEMI_BOLD } from "../../styles/typography";
+import { BACKGROUND, LIGHT_PURPLE, WHITE } from "../../styles/colors";
 import { scaleSize } from "../../styles/scale";
 
 const styles = StyleSheet.create({
@@ -9,23 +8,30 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
   },
   wrapper: {
-    padding: scaleSize(10),
+    padding: "2.5%",
   },
   heading1: {
-    fontSize: 20,
-    fontWeight: FONT_WEIGHT_SEMI_BOLD,
+    fontSize: 26,
+    fontFamily: "PoppinsSemiBold",
     color: WHITE,
-    marginVertical: scaleSize(12),
+    marginTop: "2%",
+    marginBottom: "5%",
   },
   secondHeader: {
     flexDirection: "row",
     marginVertical: scaleSize(22),
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-between",
   },
   heading2: {
     color: WHITE,
-    fontSize: 18,
+    fontSize: 22,
+    fontFamily: "PoppinsMedium",
+  },
+  subtitle: {
+    color: LIGHT_PURPLE,
+    fontFamily: "PoppinsRegular",
+    fontSize: 16,
   },
 });
 
