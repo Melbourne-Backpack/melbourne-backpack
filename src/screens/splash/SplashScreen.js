@@ -3,13 +3,13 @@ import styles from "./styles";
 
 // use replace instead of navigate to avoid the back button on Android
 const SplashScreen = ({ navigation }) => {
-  setTimeout(() => {
-    navigation.replace("Welcome");
-  }, 5000);
+  // setTimeout(() => {
+  //   navigation.replace("Welcome");
+  // }, 5000);
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/images/melbourne-bg.png")}
+        source={require("../../../assets/images/melbourne-bg.jpg")}
         style={styles.backgroundImage}
       >
         <Image

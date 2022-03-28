@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
     width: width,
     height: height,
     alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 30,
+    justifyContent: "space-around",
   },
   icon: {
     width: 200,
@@ -24,23 +23,12 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 50,
     fontWeight: "800",
-    marginTop: 100,
+    marginTop: -100,
   },
-  viewButton: {
-    backgroundColor: "#1c1c4d",
-    borderRadius: 15,
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop: 15,
-    paddingBottom: 15,
-    marginTop: 50,
-  },
-  textButton: { color: "white", fontSize: 20, fontWeight: "800" },
   versionText: {
     color: "#ffffff",
     fontSize: 20,
     fontWeight: "400",
-    marginTop: 250,
   },
 });
 
