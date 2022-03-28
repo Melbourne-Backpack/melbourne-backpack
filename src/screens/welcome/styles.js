@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#4838d1",
     borderRadius: 25,
     paddingVertical: 20,
-    paddingHorizontal: wp("15%"),
+    paddingHorizontal: wp("14%"),
   },
   textButton: {
     color: WHITE,
