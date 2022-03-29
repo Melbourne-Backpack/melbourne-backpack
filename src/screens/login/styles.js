@@ -76,6 +76,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 15,
   },
+  registerButtonView: {
+    borderRadius: 15,
+    borderColor: WHITE,
+    borderWidth: 1,
+    width: wp("80%"),
+    marginTop: 15,
+  },
+  registerButtonText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    textAlign: "center",
+    paddingVertical: 15,
+  },
 });
 
 export default styles;
