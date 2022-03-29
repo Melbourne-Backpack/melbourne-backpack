@@ -25,6 +25,7 @@ export default function App() {
           headerShown: false,
         }}
       >
+        <Stack.Screen name="Community" component={CommunityScreen} />
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Campus" component={Campus} />
@@ -32,7 +33,6 @@ export default function App() {
         <Stack.Screen name="Housing" component={HousingScreen} />
         <Stack.Screen name="Shopping" component={ShoppingScreen} />
         <Stack.Screen name="Transport" component={TransportScreen} />
-        <Stack.Screen name="Community" component={CommunityScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

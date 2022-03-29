@@ -1,11 +1,33 @@
 import { StyleSheet } from "react-native";
-import { DARK_BLUE, WHITE } from "../../styles/colors";
+import { DARK_BLUE, SELECTED_BUTTON, WHITE } from "../../styles/colors";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
 const styles = StyleSheet.create({
+  optionBtn: {
+    borderColor: WHITE,
+    borderRadius: 20,
+    color: WHITE,
+    paddingVertical: 1,
+    paddingHorizontal: 4,
+    borderWidth: 1,
+    margin: 7,
+    height: 30,
+  },
+  optionText: {
+    margin: 5,
+    color: WHITE,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  selectedBtn: {
+    backgroundColor: SELECTED_BUTTON,
+    borderColor: SELECTED_BUTTON,
+  },
+
   filterBtn: {
     backgroundColor: DARK_BLUE,
     borderRadius: wp("3.5%"),
