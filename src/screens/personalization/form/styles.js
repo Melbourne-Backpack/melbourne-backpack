@@ -9,6 +9,7 @@ import {
   BACKGROUND,
   SELECTED_BUTTON,
   TEXT_INPUT,
+  YELLOW,
 } from "../../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
@@ -22,22 +23,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   wrapper: {
-    alignItems: "flex-start",
+    flex: 1,
+    alignItems: "center",
     justifyContent: "center",
     width: wp("80%"),
   },
-  textOne: {
+  avatarImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+  avatarText: {
     color: WHITE,
     fontFamily: "PoppinsSemiBold",
-    paddingBottom: 20,
-    fontSize: 20,
-  },
-  textTwo: {
-    color: WHITE,
-    fontFamily: "PoppinsRegular",
+    paddingTop: 10,
     paddingBottom: 50,
   },
-
   textInput: {
     backgroundColor: TEXT_INPUT,
     borderRadius: 20,
@@ -46,28 +47,44 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     color: WHITE,
     fontFamily: "PoppinsMedium",
+    marginVertical: 10,
   },
-  buttonWrapper: {
+  introduction: {
+    paddingBottom: 100,
+  },
+  textController: {
+    width: wp("80%"),
     flexDirection: "row",
-    paddingVertical: 20,
+    flexWrap: "wrap",
   },
-  buttonViewStyle: {
-    borderRadius: 20,
-    paddingVertical: 1,
-    paddingHorizontal: 4,
-    borderWidth: 1,
-  },
-  textStyle: {
+  normalText: {
+    fontFamily: "PoppinsRegular",
     color: WHITE,
-    fontFamily: "PoppinsMedium",
+  },
+  yellowText: {
+    fontFamily: "PoppinsRegular",
+    color: YELLOW,
   },
   nextButtonView: {
     backgroundColor: SELECTED_BUTTON,
     borderRadius: 15,
     width: wp("80%"),
-    marginTop: 150,
+    marginTop: 30,
   },
   nextButtonText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    textAlign: "center",
+    paddingVertical: 15,
+  },
+  backButtonView: {
+    borderRadius: 15,
+    borderColor: WHITE,
+    borderWidth: 1,
+    width: wp("80%"),
+    marginTop: 15,
+  },
+  backButtonText: {
     color: WHITE,
     fontFamily: "PoppinsMedium",
     textAlign: "center",

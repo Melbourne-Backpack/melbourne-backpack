@@ -9,8 +9,9 @@ import TransportScreen from "./src/screens/recommendation/TransportScreen";
 import CommunityScreen from "./src/screens/community/CommunityScreen";
 import Campus from "./src/screens/personalization/campus/Campus";
 import Subject from "./src/screens/personalization/subject/Subject";
-
 import { Text } from "react-native";
+import Form from "./src/screens/personalization/form/Form";
+import Ready from "./src/screens/personalization/ready/Ready";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -29,6 +30,8 @@ export default function App() {
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Campus" component={Campus} />
         <Stack.Screen name="Subject" component={Subject} />
+        <Stack.Screen name="Form" component={Form} />
+        <Stack.Screen name="Ready" component={Ready} />
         <Stack.Screen name="Housing" component={HousingScreen} />
         <Stack.Screen name="Shopping" component={ShoppingScreen} />
         <Stack.Screen name="Transport" component={TransportScreen} />

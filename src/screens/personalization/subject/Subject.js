@@ -7,13 +7,22 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  LogBox,
 } from "react-native";
 import styles from "./styles";
-import { WHITE, DARK_BLUE, SELECTED_BUTTON } from "../../../styles/colors";
+import {
+  WHITE,
+  DARK_BLUE,
+  SELECTED_BUTTON,
+  PLACEHOLDER,
+} from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import { SelectMultipleButton } from "react-native-selectmultiple-button";
 import _ from "lodash";
+
+LogBox.ignoreLogs(["Warning: ..."]);
+LogBox.ignoreAllLogs();
 
 const Subject = ({ navigation }) => {
   // handle Selected button
@@ -63,7 +72,7 @@ const Subject = ({ navigation }) => {
               <TextInput
                 style={styles.textInput}
                 placeholder={"Programs | Subjects of interest"}
-                placeholderTextColor={"#6A6A8B"}
+                placeholderTextColor={PLACEHOLDER}
                 onChangeText={(newText) => setText(newText)}
                 defaultValue={text}
               >
@@ -93,7 +102,7 @@ const Subject = ({ navigation }) => {
                 ))}
               </View>
               <Text style={styles.selectedText}>3 topics Selected</Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
+              <TouchableOpacity onPress={() => navigation.navigate("Form")}>
                 <View style={styles.nextButtonView}>
                   <Text style={styles.nextButtonText}>Next</Text>
                 </View>

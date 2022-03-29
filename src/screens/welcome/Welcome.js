@@ -28,7 +28,7 @@ const Welcome = ({ navigation }) => {
           Tell us who you are to get the best {"\n"}experiences.
         </Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => console.log("Hello")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Campus")}>
             <View style={styles.viewButton}>
               <Text style={styles.textButton}>Personalize your account</Text>
             </View>
