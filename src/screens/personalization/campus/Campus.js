@@ -51,7 +51,7 @@ const Campus = ({ navigation }) => {
             style={styles.textInput}
             placeholder={"Campus in Vietnam"}
             placeholderTextColor={PLACEHOLDER}
-            onChangeText={(newText) => setText(newText)}
+            onChangeText={(text) => setText(text)}
             defaultValue={text}
           >
             {choose ? _.join(selectedData, ", ") : ""}

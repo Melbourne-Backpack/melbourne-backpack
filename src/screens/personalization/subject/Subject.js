@@ -73,7 +73,7 @@ const Subject = ({ navigation }) => {
                 style={styles.textInput}
                 placeholder={"Programs | Subjects of interest"}
                 placeholderTextColor={PLACEHOLDER}
-                onChangeText={(newText) => setText(newText)}
+                onChangeText={(text) => setText(text)}
                 defaultValue={text}
               >
                 {selected ? _.join(selectedData, "") : ""}

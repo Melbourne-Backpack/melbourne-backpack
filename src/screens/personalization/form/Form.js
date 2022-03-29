@@ -69,28 +69,28 @@ const Form = ({ navigation }) => {
             style={styles.textInput}
             placeholder={"Full Name"}
             placeholderTextColor={PLACEHOLDER}
-            onChangeText={(newText) => setFullName(newText)}
+            onChangeText={(text) => setFullName(text)}
             defaultValue={fullName}
           />
           <TextInput
             style={styles.textInput}
             placeholder={"Why are you using this app"}
             placeholderTextColor={PLACEHOLDER}
-            onChangeText={(newText) => setPurpose(newText)}
+            onChangeText={(text) => setPurpose(text)}
             defaultValue={purpose}
           />
           <TextInput
             style={styles.textInput}
             placeholder={"Facebook Link"}
             placeholderTextColor={PLACEHOLDER}
-            onChangeText={(newText) => setFacebook(newText)}
+            onChangeText={(text) => setFacebook(text)}
             defaultValue={facebook}
           />
           <TextInput
             style={[styles.textInput, styles.introduction]}
             placeholder={"Introduce yourself"}
             placeholderTextColor={PLACEHOLDER}
-            onChangeText={(newText) => setIntroduce(newText)}
+            onChangeText={(text) => setIntroduce(text)}
             defaultValue={introduce}
           />
           <View style={styles.textController}>

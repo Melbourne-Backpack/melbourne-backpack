@@ -12,6 +12,7 @@ import Subject from "./src/screens/personalization/subject/Subject";
 import { Text } from "react-native";
 import Form from "./src/screens/personalization/form/Form";
 import Ready from "./src/screens/personalization/ready/Ready";
+import Login from "./src/screens/login/Login";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -26,7 +27,8 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Splash" component={SplashScreen} />
+        {/*<Stack.Screen name="Splash" component={SplashScreen} />*/}
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Campus" component={Campus} />
         <Stack.Screen name="Subject" component={Subject} />
