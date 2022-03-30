@@ -153,9 +153,10 @@ const CommunityScreen = ({ navigation }) => {
           {mostLikeYouArray.map((user) => {
             return (
               <CommunityCardLarge
-                key={user.id}
+                userID={user.id}
                 name={user.name}
                 campus={user.campus}
+                topic={"IT"}
                 navigation={navigation}
               />
             );
@@ -174,7 +175,7 @@ const CommunityScreen = ({ navigation }) => {
           {others.map((user) => {
             return (
               <CommunityCardSmall
-                key={user.id}
+                userID={user.id}
                 name={user.name}
                 navigation={navigation}
               />

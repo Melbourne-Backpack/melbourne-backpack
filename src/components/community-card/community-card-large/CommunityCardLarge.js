@@ -5,17 +5,18 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles";
 
-const CommunityCardLarge = (props) => {
+const CommunityCardLarge = ({ userID, name, topic, campus, navigation }) => {
   return (
     <TouchableOpacity
-      key={props.id}
+      key={userID}
       style={styles.card}
       onPress={() => {
-        props.navigation.navigate("Profile", {
-          userID: props.id,
+        console.log(userID);
+        navigation.navigate("Profile", {
+          id: userID,
         });
       }}
     >
@@ -28,11 +29,11 @@ const CommunityCardLarge = (props) => {
           <Image style={styles.userContentBackground} />
           <View>
             <View style={styles.userContentRow}>
-              <Text style={styles.userName}>{props.name}</Text>
-              <Text style={styles.userTopic}>IT</Text>
+              <Text style={styles.userName}>{name}</Text>
+              <Text style={styles.userTopic}>{topic}</Text>
             </View>
             <View style={styles.userContentRow}>
-              <Text style={styles.userCampus}>{props.campus}</Text>
+              <Text style={styles.userCampus}>{campus}</Text>
               <TouchableOpacity style={styles.detailBtn}>
                 <Text style={styles.detailBtnText}>Details</Text>
               </TouchableOpacity>

@@ -1,4 +1,5 @@
 import { Image, View, Text, TouchableOpacity } from "react-native";
+import styles from "./styles";
 
 const data = [
   {
@@ -36,15 +37,17 @@ const data = [
 ];
 
 const Profile = ({ route }) => {
-  console.log(route);
-  const id = 2;
-  const self = 2;
+  const id = route.params.id;
   return (
     <View>
       {data.map((user) => {
-        if (user.id === id.toString()) {
+        if (user.id === id) {
           return (
             <View key={user.id}>
+              <Image
+                source={require("../../../assets/images/avatar-placeholder.jpg")}
+                style={styles.profileImage}
+              />
               <View>
                 <Text>{user.name}</Text>
               </View>
