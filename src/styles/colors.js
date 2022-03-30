@@ -14,3 +14,4 @@ export const TEXT_INPUT = "#1C1C4D";
 export const WHITE = "#FFFFFF";
 export const BLACK = "#000000";
 export const GREY = "#9A9898";
+export const LIGHTER_GREY = "#E5E3E0";
