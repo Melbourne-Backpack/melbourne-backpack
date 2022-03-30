@@ -5,11 +5,20 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import React from "react";
 import styles from "./styles";
 
 const CommunityCardLarge = (props) => {
   return (
-    <TouchableOpacity key={props.id} style={styles.card}>
+    <TouchableOpacity
+      key={props.id}
+      style={styles.card}
+      onPress={() => {
+        props.navigation.navigate("Profile", {
+          userID: props.id,
+        });
+      }}
+    >
       <ImageBackground
         resizeMode={"cover"}
         source={require("../../../../assets/images/avatar-placeholder.jpg")}

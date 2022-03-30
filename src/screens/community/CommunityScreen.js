@@ -5,7 +5,7 @@ import CommunityCardSmall from "../../components/community-card/community-card-s
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
 
-const CommunityScreen = () => {
+const CommunityScreen = ({ navigation }) => {
   const [mostLikeYouArray, setMostLikeYouArray] = useState([
     {
       id: "1",
@@ -156,6 +156,7 @@ const CommunityScreen = () => {
                 key={user.id}
                 name={user.name}
                 campus={user.campus}
+                navigation={navigation}
               />
             );
           })}
@@ -171,7 +172,13 @@ const CommunityScreen = () => {
         </View>
         <View style={styles.communityList}>
           {others.map((user) => {
-            return <CommunityCardSmall key={user.id} name={user.name} />;
+            return (
+              <CommunityCardSmall
+                key={user.id}
+                name={user.name}
+                navigation={navigation}
+              />
+            );
           })}
         </View>
         <View style={styles.seeMoreBtnContainer}>
