@@ -34,7 +34,9 @@ const Form = ({ navigation }) => {
 
   const pickImage = async () => {
     if (hasPermission === false) {
-      window.alert("No permission");
+      window.alert(
+        "No permission! Go to settings and allow Melbourne Backpack to access your library."
+      );
     } else {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
