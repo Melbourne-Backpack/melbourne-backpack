@@ -21,7 +21,7 @@ const Form = ({ navigation }) => {
   const [fullName, setFullName] = useState("");
   const [purpose, setPurpose] = useState("");
   const [facebook, setFacebook] = useState("");
-  const [introduce, setIntroduce] = useState("");
+  const [bio, setBio] = useState("");
   const [hasPermission, setHasPermission] = useState(null);
 
   useEffect(() => {
@@ -107,8 +107,8 @@ const Form = ({ navigation }) => {
             style={[styles.textInput, styles.introduction]}
             placeholder={"Introduce yourself"}
             placeholderTextColor={PLACEHOLDER}
-            onChangeText={(text) => setIntroduce(text)}
-            defaultValue={introduce}
+            onChangeText={(text) => setBio(text)}
+            defaultValue={bio}
           />
           <View style={styles.textController}>
             <Text style={styles.normalText}>
