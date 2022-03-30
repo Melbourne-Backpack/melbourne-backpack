@@ -9,9 +9,10 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { PLACEHOLDER } from "../../../styles/colors";
+import alert from "react-native-web/dist/exports/Alert";
 
 const Form = ({ navigation }) => {
   const [image, setImage] = useState(null);
@@ -21,6 +22,35 @@ const Form = ({ navigation }) => {
   const [purpose, setPurpose] = useState("");
   const [facebook, setFacebook] = useState("");
   const [introduce, setIntroduce] = useState("");
+  const [hasPermission, setHasPermission] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const galleryStatus =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      setHasPermission(galleryStatus.status === "granted");
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    if (hasPermission === false) {
+      window.alert("No permission");
+    } else {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      console.log(result);
+
+      if (!result.cancelled) {
+        setImage(result.uri);
+      }
+    }
+  };
+
   // handle font
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -30,21 +60,6 @@ const Form = ({ navigation }) => {
   if (!loaded) {
     return null;
   }
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
