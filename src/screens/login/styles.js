@@ -5,6 +5,8 @@ import {
   BACKGROUND,
   SELECTED_BUTTON,
   TEXT_INPUT,
+  LIGHT_PURPLE,
+  LIGHT_BLUE,
 } from "../../styles/colors";
 import {
   widthPercentageToDP as wp,
@@ -25,6 +27,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: wp("80%"),
+  },
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: "center",
   },
   icon: {
     width: 180,
@@ -52,6 +58,11 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsMedium",
     marginVertical: 10,
   },
+  midFlex: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: wp("80%"),
+  },
   checkBox: {
     flexDirection: "row",
     alignItems: "center",
@@ -68,7 +79,7 @@ const styles = StyleSheet.create({
     backgroundColor: SELECTED_BUTTON,
     borderRadius: 15,
     width: wp("80%"),
-    marginTop: 30,
+    marginTop: 10,
   },
   loginButtonText: {
     color: WHITE,
@@ -84,10 +95,19 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   registerButtonText: {
-    color: WHITE,
+    color: LIGHT_PURPLE,
     fontFamily: "PoppinsMedium",
     textAlign: "center",
     paddingVertical: 15,
+  },
+  field: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  label: {
+    color: WHITE,
+    fontFamily: "PoppinsRegular",
+    marginRight: 5,
   },
 });
 

@@ -13,14 +13,15 @@ let height = Dimensions.get("window").height; //full height
 console.log(width, height);
 
 const styles = StyleSheet.create({
-  scrollview: {
+  container: {
     flex: 1,
     backgroundColor: BACKGROUND,
-  },
-  container: {
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 50,
+  },
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: "center",
   },
   wrapper: {
     alignItems: "flex-start",

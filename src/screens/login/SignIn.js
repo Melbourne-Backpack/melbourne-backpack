@@ -1,6 +1,4 @@
 import {
-  Button,
-  ImageBackground,
   Text,
   View,
   TouchableOpacity,
@@ -8,21 +6,17 @@ import {
   Image,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
-import {
-  LIGHT_PURPLE,
-  PLACEHOLDER,
-  SELECTED_BUTTON,
-  WHITE,
-} from "../../styles/colors";
+import { LIGHT_PURPLE, SELECTED_BUTTON, WHITE } from "../../styles/colors";
 import CheckBox from "react-native-check-box";
-import { auth } from "../../../firebase";
-import alert from "react-native-web/dist/exports/Alert";
+import { auth } from "../../config/firebase";
 
-const Login = ({ navigation }) => {
+const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -36,29 +30,30 @@ const Login = ({ navigation }) => {
     return unsubscribe;
   }, []);
 
-  const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log(email);
-      })
-      .catch((error) => console.log(error.message));
-  };
-
   const handleSignIn = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log("Login success");
+        console.log("SignIn success");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.code === "auth/invalid-email") {
+          alert("That email address is invalid!");
+        }
+        if (error.code === "auth/wrong-password") {
+          alert("Wrong password!");
+        }
+        if (error.code === "auth/user-not-found") {
+          alert("User not found!");
+        }
+      });
   };
 
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
   });
   if (!loaded) {
     return null;
@@ -66,14 +61,14 @@ const Login = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
           <Image
             source={require("../../../assets/adaptive-icon.png")}
             style={styles.icon}
           />
           <View style={styles.loginField}>
-            <Text style={styles.textOne}>Login to your account</Text>
+            <Text style={styles.textOne}>Sign in to your account</Text>
             <TextInput
               style={styles.textInput}
               placeholder={"Email"}
@@ -89,6 +84,8 @@ const Login = ({ navigation }) => {
               defaultValue={password}
               secureTextEntry={true}
             />
+          </View>
+          <View style={styles.midFlex}>
             <View style={styles.checkBox}>
               <CheckBox
                 style={styles.checkBoxIcon}
@@ -101,23 +98,27 @@ const Login = ({ navigation }) => {
               />
               <Text style={styles.checkBoxText}>Remember me</Text>
             </View>
-            <TouchableOpacity onPress={handleSignIn}>
-              <View style={styles.loginButtonView}>
-                <Text style={styles.loginButtonText}>Login</Text>
-              </View>
+            <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+              <Text style={styles.registerButtonText}>Reset Password</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleSignUp}>
-              <View style={styles.registerButtonView}>
-                <Text style={styles.registerButtonText}>Register</Text>
-              </View>
+          </View>
+          <TouchableOpacity onPress={handleSignIn}>
+            <View style={styles.loginButtonView}>
+              <Text style={styles.loginButtonText}>Login</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.field}>
+            <Text style={styles.label}>Don't have an account?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+              <Text style={styles.registerButtonText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };
 
-export default Login;
+export default SignIn;
 
 //🇦🇺 🇦🇺
