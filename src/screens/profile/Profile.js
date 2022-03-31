@@ -1,5 +1,7 @@
-import { Image, View, Text, TouchableOpacity } from "react-native";
+import { Image, View, Text, TouchableOpacity, ScrollView } from "react-native";
 import styles from "./styles";
+import { AntDesign } from "@expo/vector-icons";
+import { WHITE } from "../../styles/colors";
 
 const data = [
   {
@@ -7,8 +9,8 @@ const data = [
     name: "agagag",
     campus: "sgs",
     photo: "../../../assets/images/avatar-placeholder.jpg",
-    facebook: "facebook.com/user/123235",
-    bio: "abcdefghjdfafeffijfkadlsjfvalrwerwerwer",
+    facebook: "facebook.com/user/123235780432",
+    bio: "abcdefghjdfafeffijfkadlsjfvalrwerwerwerdasddasdasdsadsadsadadsadsa",
   },
   {
     id: "2",
@@ -36,35 +38,66 @@ const data = [
   },
 ];
 
-const Profile = ({ route }) => {
+const Profile = ({ route, navigation: { goBack } }) => {
   const id = route.params.id;
   return (
-    <View>
+    <ScrollView style={styles.background}>
+      <View style={styles.topBar}>
+        <TouchableOpacity onPress={goBack}>
+          <AntDesign
+            name={"left"}
+            size={24}
+            color={WHITE}
+            style={styles.backBtn}
+          />
+        </TouchableOpacity>
+        <Text style={styles.title}>Profile</Text>
+      </View>
       {data.map((user) => {
         if (user.id === id) {
           return (
             <View key={user.id}>
-              <Image
-                source={require("../../../assets/images/avatar-placeholder.jpg")}
-                style={styles.profileImage}
-              />
-              <View>
-                <Text>{user.name}</Text>
+              <View style={styles.profileImageWrapper}>
+                <Image
+                  source={require("../../../assets/images/avatar-placeholder.jpg")}
+                  style={styles.profileImage}
+                />
               </View>
-              <View>
-                <Text>{user.campus}</Text>
-              </View>
-              <View>
-                <Text>{user.facebook}</Text>
-              </View>
-              <View>
-                <Text>{user.bio}</Text>
+              <View style={styles.userInfoGrid}>
+                <View>
+                  <View style={styles.cellWrapper}>
+                    <Text style={styles.userInfoHeading}>Display Name</Text>
+                  </View>
+                  <View style={styles.cellWrapper}>
+                    <Text style={styles.userInfoHeading}>Campus</Text>
+                  </View>
+                  <View style={styles.cellWrapper}>
+                    <Text style={styles.userInfoHeading}>Facebook link</Text>
+                  </View>
+                  <View style={styles.cellWrapper}>
+                    <Text style={styles.userInfoHeading}>Bio</Text>
+                  </View>
+                </View>
+                <View>
+                  <View style={styles.cellWrapper}>
+                    <Text style={styles.userInfo}>{user.name}</Text>
+                  </View>
+                  <View style={styles.cellWrapper}>
+                    <Text style={styles.userInfo}>{user.campus}</Text>
+                  </View>
+                  <View style={styles.cellWrapper}>
+                    <Text style={styles.userInfo}>{user.facebook}</Text>
+                  </View>
+                  <View style={styles.cellWrapper}>
+                    <Text style={styles.userInfo}>{user.bio}</Text>
+                  </View>
+                </View>
               </View>
             </View>
           );
         }
       })}
-    </View>
+    </ScrollView>
   );
 };
 
