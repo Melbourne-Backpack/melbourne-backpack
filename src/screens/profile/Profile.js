@@ -1,14 +1,7 @@
 import { Image, View, Text, TouchableOpacity, ScrollView } from "react-native";
-import {
-  Table,
-  TableWrapper,
-  Rows,
-  Col,
-  Row,
-} from "react-native-table-component";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
-import { GREY, WHITE } from "../../styles/colors";
+import { WHITE } from "../../styles/colors";
 
 const data = [
   {
@@ -47,6 +40,7 @@ const data = [
 
 const Profile = ({ route, navigation: { goBack } }) => {
   const id = route.params.id;
+  const self = 2;
   return (
     <ScrollView style={styles.background}>
       <View style={styles.topBar}>
@@ -70,61 +64,53 @@ const Profile = ({ route, navigation: { goBack } }) => {
                   style={styles.profileImage}
                 />
               </View>
-              {/*<View style={styles.userInfoGrid}>*/}
-              {/*  <View>*/}
-              {/*    <View style={styles.cellWrapper}>*/}
-              {/*      <Text style={styles.userInfoHeading}>Display Name</Text>*/}
-              {/*    </View>*/}
-              {/*    <View style={styles.cellWrapper}>*/}
-              {/*      <Text style={styles.userInfoHeading}>Campus</Text>*/}
-              {/*    </View>*/}
-              {/*    <View style={styles.cellWrapper}>*/}
-              {/*      <Text style={styles.userInfoHeading}>Facebook link</Text>*/}
-              {/*    </View>*/}
-              {/*    <View style={styles.cellWrapper}>*/}
-              {/*      <Text style={styles.userInfoHeading}>Bio</Text>*/}
-              {/*    </View>*/}
-              {/*  </View>*/}
-              {/*  <View>*/}
-              {/*    <View style={styles.cellWrapper}>*/}
-              {/*      <Text style={styles.userInfo}>{user.name}</Text>*/}
-              {/*    </View>*/}
-              {/*    <View style={styles.cellWrapper}>*/}
-              {/*      <Text style={styles.userInfo}>{user.campus}</Text>*/}
-              {/*    </View>*/}
-              {/*    <View style={styles.cellWrapper}>*/}
-              {/*      <Text style={styles.userInfo}>{user.facebook}</Text>*/}
-              {/*    </View>*/}
-              {/*    <View style={styles.cellWrapper}>*/}
-              {/*      <Text style={styles.userInfo}>{user.bio}</Text>*/}
-              {/*    </View>*/}
-              {/*  </View>*/}
-              {/*</View>*/}
-
-              <View>
-                <Table style={styles.table}>
-                  <Rows
-                    data={[
-                      ["Display Name", user.name],
-                      ["Campus", user.campus],
-                      ["Facebook", user.facebook],
-                    ]}
-                    flexArr={[1, 1.5]}
-                    textStyle={styles.userInfo}
-                    style={styles.row}
-                  />
-                  <Row
-                    data={["Bio", user.bio]}
-                    flexArr={[1, 1.5]}
-                    textStyle={styles.userInfo}
-                    style={[styles.row, styles.rowLast]}
-                  />
-                </Table>
+              <View style={styles.userContentDisplay}>
+                <View style={styles.userContentRow}>
+                  <View style={styles.userContentHeadingWrapper}>
+                    <Text style={styles.userContentHeading}>Display Name</Text>
+                  </View>
+                  <View style={styles.userContentWrapper}>
+                    <Text style={styles.userContent}>{user.name}</Text>
+                  </View>
+                </View>
+                <View style={styles.userContentRow}>
+                  <View style={styles.userContentHeadingWrapper}>
+                    <Text style={styles.userContentHeading}>Campus</Text>
+                  </View>
+                  <View style={styles.userContentWrapper}>
+                    <Text style={styles.userContent}>{user.campus}</Text>
+                  </View>
+                </View>
+                <View style={styles.userContentRow}>
+                  <View style={styles.userContentHeadingWrapper}>
+                    <Text style={styles.userContentHeading}>Facebook Link</Text>
+                  </View>
+                  <View style={styles.userContentWrapper}>
+                    <Text style={styles.userContent}>{user.facebook}</Text>
+                  </View>
+                </View>
+                <View
+                  style={[styles.userContentRow, styles.userContentLastRow]}
+                >
+                  <View style={styles.userContentHeadingWrapper}>
+                    <Text style={styles.userContentHeading}>Bio</Text>
+                  </View>
+                  <View style={styles.userContentWrapper}>
+                    <Text style={styles.userContent}>{user.bio}</Text>
+                  </View>
+                </View>
               </View>
             </View>
           );
         }
       })}
+      {id !== self ? (
+        <View style={styles.logoutBtnWrapper}>
+          <TouchableOpacity style={styles.logoutBtn}>
+            <Text style={styles.logoutBtnText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </ScrollView>
   );
 };

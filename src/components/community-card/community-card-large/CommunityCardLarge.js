@@ -14,7 +14,6 @@ const CommunityCardLarge = ({ userID, name, topic, campus, navigation }) => {
       key={userID}
       style={styles.card}
       onPress={() => {
-        console.log(userID);
         navigation.navigate("Profile", {
           id: userID,
         });

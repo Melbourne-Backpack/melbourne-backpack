@@ -1,10 +1,12 @@
 import { StyleSheet } from "react-native";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-import { BACKGROUND, DARK_BLUE_PURPLE, GREY, WHITE } from "../../styles/colors";
-import { min } from "lodash";
+  BACKGROUND,
+  DARK_BLUE_PURPLE,
+  GREY,
+  RED,
+  WHITE,
+} from "../../styles/colors";
 
 const styles = StyleSheet.create({
   background: {
@@ -29,36 +31,19 @@ const styles = StyleSheet.create({
 
   profileImageWrapper: {
     alignItems: "center",
+    marginTop: 80,
   },
 
   title: {
     color: WHITE,
-    marginLeft: wp(30),
+    fontSize: 24,
+    marginLeft: wp(25),
   },
 
   topBar: {
     flexDirection: "row",
     marginTop: 75,
     width: wp(100),
-  },
-
-  userInfo: {
-    padding: 15,
-    color: WHITE,
-    width: wp(55),
-    height: min(50),
-    fontSize: 14,
-    flexWrap: "wrap",
-  },
-
-  userInfoHeading: {
-    padding: 15,
-    borderTopWidth: 1,
-    borderTopColor: GREY,
-    color: WHITE,
-    width: wp(35),
-    fontSize: 14,
-    marginLeft: wp(5),
   },
 
   userInfoGrid: {
@@ -68,22 +53,56 @@ const styles = StyleSheet.create({
     height: 50,
   },
 
-  rowWrapper: {
-    flexDirection: "row",
+  userContentDisplay: {
+    marginTop: 70,
   },
 
-  table: {
-    marginTop: 50,
-  },
-
-  row: {
+  userContentRow: {
+    alignItems: "center",
     borderTopWidth: 1,
     borderColor: GREY,
-    borderRightWidth: 0,
+    flexDirection: "row",
+    minHeight: 50,
   },
 
-  rowLast: {
+  userContentLastRow: {
     borderBottomWidth: 1,
+  },
+
+  userContentHeading: {
+    color: WHITE,
+    marginLeft: wp(5),
+  },
+
+  userContent: {
+    color: WHITE,
+    marginLeft: wp(5),
+    marginRight: wp(5),
+  },
+
+  userContentHeadingWrapper: {
+    flex: 1,
+  },
+
+  userContentWrapper: {
+    flex: 2,
+  },
+
+  logoutBtnWrapper: {
+    marginTop: 20,
+    alignItems: "center",
+  },
+
+  logoutBtn: {
+    backgroundColor: RED,
+    borderColor: RED,
+    borderWidth: 1,
+    borderRadius: 20,
+    padding: 10,
+  },
+
+  logoutBtnText: {
+    color: WHITE,
   },
 });
 export default styles;
