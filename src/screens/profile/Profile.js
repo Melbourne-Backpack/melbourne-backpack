@@ -10,7 +10,7 @@ const data = [
     campus: "sgs",
     photo: "../../../assets/images/avatar-placeholder.jpg",
     facebook: "facebook.com/user/123235780432",
-    bio: "abcdefghjdfafeffijfkadlsjfvalrwerwerwerdasddasdasdsadsadsadadsadsa",
+    bio: "abcdefghjdfafeffijfkadlsjfvalrwerwerwerdasddasdasdsadsadsadadsadsadsadskdjlsadjaskldjsladsdsadsdasdasdasdasds",
   },
   {
     id: "2",

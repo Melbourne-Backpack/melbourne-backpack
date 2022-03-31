@@ -72,10 +72,14 @@ const styles = StyleSheet.create({
   userContentHeading: {
     color: WHITE,
     marginLeft: wp(5),
+    marginTop: 10,
+    marginBottom: 10,
   },
 
   userContent: {
     color: WHITE,
+    marginTop: 10,
+    marginBottom: 10,
     marginLeft: wp(5),
     marginRight: wp(5),
   },
