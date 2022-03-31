@@ -44,8 +44,6 @@ const styles = StyleSheet.create({
 
   userInfo: {
     padding: 15,
-    borderTopWidth: 1,
-    borderTopColor: GREY,
     color: WHITE,
     width: wp(55),
     height: min(50),
@@ -68,6 +66,24 @@ const styles = StyleSheet.create({
     alignContent: "stretch",
     flexWrap: "wrap",
     height: 50,
+  },
+
+  rowWrapper: {
+    flexDirection: "row",
+  },
+
+  table: {
+    marginTop: 50,
+  },
+
+  row: {
+    borderTopWidth: 1,
+    borderColor: GREY,
+    borderRightWidth: 0,
+  },
+
+  rowLast: {
+    borderBottomWidth: 1,
   },
 });
 export default styles;
