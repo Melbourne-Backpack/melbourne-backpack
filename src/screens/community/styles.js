@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND,
+    marginBottom: "20%",
   },
 
   communityList: {

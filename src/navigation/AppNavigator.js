@@ -28,7 +28,6 @@ const AppNavigator = () => {
           position: "absolute",
           bottom: 0,
           paddingTop: 10,
-          marginBottom: 7,
           zIndex: 8,
         },
         tabBarShowLabel: false,
