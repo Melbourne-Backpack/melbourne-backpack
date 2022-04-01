@@ -40,7 +40,7 @@ const data = [
 
 const Profile = ({ route, navigation: { goBack } }) => {
   const id = route.params.id;
-  const self = 2;
+  const self = "2";
   return (
     <ScrollView style={styles.background}>
       <View style={styles.topBar}>
@@ -104,13 +104,15 @@ const Profile = ({ route, navigation: { goBack } }) => {
           );
         }
       })}
-      {id !== self ? (
+      {id === self ? (
         <View style={styles.logoutBtnWrapper}>
           <TouchableOpacity style={styles.logoutBtn}>
             <Text style={styles.logoutBtnText}>Logout</Text>
           </TouchableOpacity>
         </View>
-      ) : null}
+      ) : (
+        console.log("id: " + id + "self: " + self)
+      )}
     </ScrollView>
   );
 };

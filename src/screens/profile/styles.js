@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     color: WHITE,
     fontSize: 24,
     marginLeft: wp(25),
+    marginTop: -5,
   },
 
   topBar: {
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   logoutBtnWrapper: {
-    marginTop: 20,
+    marginTop: 40,
     alignItems: "center",
   },
 
@@ -103,10 +104,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     padding: 10,
+    width: 100,
   },
 
   logoutBtnText: {
     color: WHITE,
+    textAlign: "center",
   },
 });
 export default styles;
