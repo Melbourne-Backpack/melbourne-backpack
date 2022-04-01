@@ -1,14 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-import {
-  DARK_BLUE,
-  LIGHT_BLUE,
-  SELECTED_BUTTON,
-  WHITE,
-} from "../../styles/colors";
+import { LIGHT_BLUE } from "../../styles/colors";
+import CommunityFilterBtn from "./CommunityFilterBtn/CommunityFilterBtn";
 import React, { useState } from "react";
-import { SelectMultipleButton } from "react-native-selectmultiple-button";
 
 const CommunityFilter = (props) => {
   /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding data in 1 view*/
@@ -46,34 +41,14 @@ const CommunityFilter = (props) => {
               return (
                 <View key={heading}>
                   <Text style={styles.filterText}>{heading}</Text>
-                  {filter[heading].map((option) => {
-                    return <Text>{option}</Text>;
-                  })}
                   <View style={styles.optionWrapper}>
                     {optionList.map((option) => {
                       return (
-                        <SelectMultipleButton
-                          key={option.name}
-                          buttonViewStyle={styles.optionBtn}
-                          highLightStyle={{
-                            borderColor: WHITE,
-                            backgroundColor: "transparent",
-                            textColor: WHITE,
-                            borderTintColor: DARK_BLUE,
-                            backgroundTintColor: SELECTED_BUTTON,
-                            textTintColor: WHITE,
-                          }}
+                        <CommunityFilterBtn
+                          key={option.id}
                           value={option.name}
-                          multiple={true}
-                          selected={filter[heading].includes[option.name]}
-                          singleTap={() => {
-                            if (!filter[heading].includes(option.name)) {
-                              filter[heading].push(option.name);
-                            } else {
-                              filter[heading].pop(option.name);
-                              console.log(filter);
-                            }
-                          }}
+                          filter={filter}
+                          heading={heading}
                         />
                       );
                     })}
