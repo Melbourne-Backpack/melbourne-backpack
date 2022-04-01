@@ -7,7 +7,6 @@ const signIn = (email, password) => {
     .then((userCredentials) => {
       const user = userCredentials.user;
       console.log("SignIn success");
-      const uid = user.uid;
     })
     .catch((error) => {
       if (error.code === "auth/invalid-email") {

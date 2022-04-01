@@ -109,6 +109,26 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsRegular",
     marginRight: 5,
   },
+
+  textTwo: {
+    color: WHITE,
+    fontFamily: "PoppinsRegular",
+    marginBottom: 10,
+  },
+
+  cancelButtonView: {
+    borderRadius: 15,
+    width: wp("80%"),
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: WHITE,
+  },
+  cancelButtonText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    textAlign: "center",
+    paddingVertical: 15,
+  },
 });
 
 export default styles;

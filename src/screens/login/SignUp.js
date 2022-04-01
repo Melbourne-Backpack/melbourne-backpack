@@ -54,6 +54,7 @@ const SignUp = ({ navigation }) => {
               <TextInput
                 style={styles.textInput}
                 placeholder={"Email"}
+                keyboardType={"email-address"}
                 placeholderTextColor={WHITE}
                 onChangeText={(text) => setEmail(text)}
                 defaultValue={email}

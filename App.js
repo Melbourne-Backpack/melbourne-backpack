@@ -14,6 +14,7 @@ import Form from "./src/screens/personalization/form/Form";
 import Ready from "./src/screens/personalization/ready/Ready";
 import SignIn from "./src/screens/login/SignIn";
 import SignUp from "./src/screens/login/SignUp";
+import ForgotPassword from "./src/screens/login/ForgotPassword";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -31,6 +32,7 @@ export default function App() {
         {/*<Stack.Screen name="Splash" component={SplashScreen} />*/}
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name={"ForgotPassword"} component={ForgotPassword} />
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Campus" component={Campus} />
         <Stack.Screen name="Subject" component={Subject} />

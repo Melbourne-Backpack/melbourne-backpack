@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
+import { auth } from "../../config/firebase";
 
 const Welcome = ({ navigation }) => {
   const [loaded, error] = useFonts({

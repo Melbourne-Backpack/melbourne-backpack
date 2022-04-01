@@ -1,9 +1,11 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-const pushData = async (fullName, purpose, facebook, bio) => {
+const pushData = async (uid, email, fullName, purpose, facebook, bio) => {
   try {
     const docRef = await addDoc(collection(db, "users"), {
+      uid: uid,
+      email: email,
       fullName: fullName,
       purpose: purpose,
       facebook: facebook,

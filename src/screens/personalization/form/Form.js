@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { PLACEHOLDER } from "../../../styles/colors";
 import { pushData } from "../../../api/pushData";
+import { auth } from "../../../config/firebase";
 
 const Form = ({ navigation }) => {
   const [image, setImage] = useState(null);
@@ -121,7 +122,14 @@ const Form = ({ navigation }) => {
           </View>
           <TouchableOpacity
             onPress={() => {
-              pushData(fullName, purpose, facebook, bio);
+              pushData(
+                auth.currentUser.uid,
+                auth.currentUser.email,
+                fullName,
+                purpose,
+                facebook,
+                bio
+              );
               navigation.navigate("Ready");
             }}
           >
