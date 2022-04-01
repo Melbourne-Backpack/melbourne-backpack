@@ -14,7 +14,8 @@ import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 import { LIGHT_PURPLE, SELECTED_BUTTON, WHITE } from "../../styles/colors";
 import CheckBox from "react-native-check-box";
-import { auth } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
+import { signIn } from "../../api/loginApi";
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -29,26 +30,6 @@ const SignIn = ({ navigation }) => {
     });
     return unsubscribe;
   }, []);
-
-  const handleSignIn = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("SignIn success");
-      })
-      .catch((error) => {
-        if (error.code === "auth/invalid-email") {
-          alert("That email address is invalid!");
-        }
-        if (error.code === "auth/wrong-password") {
-          alert("Wrong password!");
-        }
-        if (error.code === "auth/user-not-found") {
-          alert("User not found!");
-        }
-      });
-  };
 
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -102,7 +83,7 @@ const SignIn = ({ navigation }) => {
               <Text style={styles.registerButtonText}>Reset Password</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={handleSignIn}>
+          <TouchableOpacity onPress={() => signIn(email, password)}>
             <View style={styles.loginButtonView}>
               <Text style={styles.loginButtonText}>Login</Text>
             </View>

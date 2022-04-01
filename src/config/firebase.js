@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import { getFirestore } from "firebase/firestore";
 import {
   API_KEY,
   AUTH_DOMAIN,
@@ -28,5 +29,6 @@ let app;
 app = firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
+const db = getFirestore(app);
 
-export { auth };
+export { auth, db };

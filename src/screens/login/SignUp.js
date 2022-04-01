@@ -15,6 +15,7 @@ import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 import { WHITE } from "../../styles/colors";
 import { auth } from "../../config/firebase";
+import { signUp } from "../../api/loginApi";
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -29,27 +30,6 @@ const SignUp = ({ navigation }) => {
     });
     return unsubscribe;
   }, []);
-
-  const handleSignUp = () => {
-    if (password !== cfPassword) {
-      window.alert("Password and confirm password does not match");
-    } else {
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((userCredentials) => {
-          const user = userCredentials.user;
-          console.log(email);
-        })
-        .catch((error) => {
-          if (error.code === "auth/email-already-in-use") {
-            window.alert("That email address is already in use!");
-          }
-          if (error.code === "auth/invalid-email") {
-            window.alert("That email address is invalid!");
-          }
-        });
-    }
-  };
 
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -94,7 +74,11 @@ const SignUp = ({ navigation }) => {
                 defaultValue={cfPassword}
                 secureTextEntry={true}
               />
-              <TouchableOpacity onPress={handleSignUp}>
+              <TouchableOpacity
+                onPress={() => {
+                  signUp(email, password, cfPassword);
+                }}
+              >
                 <View style={styles.loginButtonView}>
                   <Text style={styles.loginButtonText}>Sign Up</Text>
                 </View>

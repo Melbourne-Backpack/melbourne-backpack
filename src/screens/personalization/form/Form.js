@@ -12,7 +12,7 @@ import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { PLACEHOLDER } from "../../../styles/colors";
-import alert from "react-native-web/dist/exports/Alert";
+import { pushData } from "../../../api/pushData";
 
 const Form = ({ navigation }) => {
   const [image, setImage] = useState(null);
@@ -119,7 +119,12 @@ const Form = ({ navigation }) => {
             <Text style={styles.normalText}>and </Text>
             <Text style={styles.yellowText}>Cookies Policy</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("Ready")}>
+          <TouchableOpacity
+            onPress={() => {
+              pushData(fullName, purpose, facebook, bio);
+              navigation.navigate("Ready");
+            }}
+          >
             <View style={styles.nextButtonView}>
               <Text style={styles.nextButtonText}>Submit</Text>
             </View>
