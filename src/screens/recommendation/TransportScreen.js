@@ -1,4 +1,4 @@
-import RecommendationTemplate from "../../components/template/RecommendationTemplate";
+import RecommendationTemplate from "../../components/recommendation/template/RecommendationTemplate";
 
 const TransportScreen = () => {
   const data = [

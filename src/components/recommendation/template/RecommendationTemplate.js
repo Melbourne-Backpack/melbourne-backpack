@@ -1,13 +1,13 @@
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import styles from "./styles";
-import RecommendationCard from "../recommendation/RecommendationCard";
+import RecommendationCard from "../RecommendationCard";
 import { useFonts } from "expo-font";
 
 const RecommendationTemplate = ({ topic, firstData, otherData, housing }) => {
   const [loaded, error] = useFonts({
-    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
-    PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
-    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
+    PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
+    PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
   });
 
   if (!loaded) {

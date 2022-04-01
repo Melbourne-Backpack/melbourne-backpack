@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { BACKGROUND, LIGHT_PURPLE, WHITE } from "../../styles/colors";
-import { scaleSize } from "../../styles/scale";
+import { BACKGROUND, LIGHT_PURPLE, WHITE } from "../../../styles/colors";
+import { scaleSize } from "../../../styles/scale";
 
 const styles = StyleSheet.create({
   container: {
