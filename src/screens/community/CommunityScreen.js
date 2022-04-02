@@ -2,11 +2,64 @@ import { Text, View, ScrollView } from "react-native";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
+import data from "../../../assets/mockJSON/MOCK_DATA.json";
 
 const CommunityScreen = ({ navigation }) => {
-  const data = require("../../../assets/mockJSON/MOCK_DATA.json");
   const mostLikeYouMaxCards = 4;
-  const mostLikeYouData = data.slice(0, mostLikeYouMaxCards);
+  const self = "2";
+  let mostLikeYouCount = 0;
+  const mostLikeYouData = () => {
+    let temp = [];
+    let myCampus = "";
+    let myTopic = [];
+    data.map((user) => {
+      let id = user.index;
+      if (id.toString() === self.toString()) {
+        myCampus = user.campus;
+        myTopic = user.topic;
+      }
+    });
+
+    for (let i = 0; i < data.length; i++) {
+      let user = data[i];
+      let id = user.index;
+
+      if (
+        id.toString() !== self.toString() &&
+        user.campus === myCampus &&
+        !temp.includes(id.toString())
+      ) {
+        temp.push(user);
+        mostLikeYouCount++;
+      }
+
+      if (
+        data.indexOf(user) === data.length - 1 &&
+        temp.length !== mostLikeYouMaxCards
+      ) {
+        for (let i = 0; i < data.length; i++) {
+          if (
+            id.toString() !== self.toString() &&
+            !temp.includes(id.toString())
+          ) {
+            myTopic.map((topic) => {
+              if (user.topic.includes(topic)) {
+                temp.push(user);
+                mostLikeYouCount++;
+              }
+            });
+          }
+        }
+      }
+
+      if (mostLikeYouCount === mostLikeYouMaxCards) {
+        break;
+      }
+    }
+    return temp;
+  };
+
+  const mostLikeYouDataForDisplay = mostLikeYouData();
   const campus = [
     {
       id: 1,
@@ -74,7 +127,7 @@ const CommunityScreen = ({ navigation }) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
-          {mostLikeYouData.map((user) => {
+          {mostLikeYouDataForDisplay.map((user) => {
             return (
               <CommunityCardLarge
                 userID={user.index}
