@@ -30,7 +30,7 @@ const Ready = ({ navigation }) => {
         <Text style={styles.textTwo}>
           Congratulations, you are ready to view all our recommendations
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Housing")}>
           <View style={styles.nextButtonView}>
             <Text style={styles.nextButtonText}>Finish</Text>
           </View>
