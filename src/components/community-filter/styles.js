@@ -1,11 +1,23 @@
 import { StyleSheet } from "react-native";
-import { DARK_BLUE, SELECTED_BUTTON, WHITE } from "../../styles/colors";
+import {
+  DARK_BLUE,
+  PURPLE_BLUE,
+  SELECTED_BUTTON,
+  WHITE,
+} from "../../styles/colors";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { FONT_WEIGHT_MEDIUM } from "../../styles/typography";
 
 const styles = StyleSheet.create({
+  communityList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: hp("3%"),
+  },
+
   filterBtn: {
     backgroundColor: DARK_BLUE,
     borderRadius: wp("3.5%"),
@@ -23,9 +35,14 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 
+  filterSingleWrapper: {
+    marginBottom: 20,
+  },
+
   filterText: {
     color: WHITE,
     fontSize: 16,
+    marginBottom: 10,
   },
 
   filterWrapper: {
@@ -35,6 +52,18 @@ const styles = StyleSheet.create({
   optionWrapper: {
     flexDirection: "row",
     flexWrap: "wrap",
+  },
+
+  seeMoreBtn: {
+    color: PURPLE_BLUE,
+    fontSize: hp("1.7%"),
+    fontWeight: FONT_WEIGHT_MEDIUM,
+  },
+
+  seeMoreBtnContainer: {
+    marginBottom: hp("7.3%"),
+    marginLeft: wp("53%"),
+    marginTop: hp("2%"),
   },
 
   submitBtn: {

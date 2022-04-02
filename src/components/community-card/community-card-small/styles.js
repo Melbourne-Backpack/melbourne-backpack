@@ -7,8 +7,8 @@ import {
 
 /* function to auto adjust margin depended on the screen width */
 let width = Dimensions.get("window").width;
-let cardHeight = 87;
-let cardWidth = 63;
+let cardHeight = 87 * 1.2;
+let cardWidth = 63 * 1.2;
 let containerWidth = (width * 3) / 4;
 const responsiveCardMarginLeft = () => {
   let maxCardPerRow = 4;
@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
     position: "relative",
     borderRadius: 20,
     height: 24,
-    marginLeft: 2,
+    marginLeft: 7,
     marginRight: 5,
     marginTop: 45,
     overflow: "hidden",
     textAlign: "center",
-    width: wp("15.7%"),
+    width: 65,
   },
 
   userContentBackground: {

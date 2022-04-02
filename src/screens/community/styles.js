@@ -1,9 +1,6 @@
 import { StyleSheet } from "react-native";
-import { WHITE, BACKGROUND, PURPLE_BLUE } from "../../styles/colors";
-import {
-  FONT_WEIGHT_EXTRA_BOLD,
-  FONT_WEIGHT_MEDIUM,
-} from "../../styles/typography";
+import { WHITE, BACKGROUND } from "../../styles/colors";
+import { FONT_WEIGHT_EXTRA_BOLD } from "../../styles/typography";
 
 import {
   widthPercentageToDP as wp,
@@ -22,12 +19,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND,
-  },
-
-  communityList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginTop: hp("3%"),
   },
 
   communityListContainer: {
@@ -57,18 +48,6 @@ const styles = StyleSheet.create({
     fontSize: hp("2.4%"),
     fontWeight: FONT_WEIGHT_EXTRA_BOLD,
     marginTop: hp("6.5%"),
-  },
-
-  seeMoreBtn: {
-    color: PURPLE_BLUE,
-    fontSize: hp("1.7%"),
-    fontWeight: FONT_WEIGHT_MEDIUM,
-  },
-
-  seeMoreBtnContainer: {
-    marginBottom: hp("7.3%"),
-    marginLeft: wp("53%"),
-    marginTop: hp("4.5%"),
   },
 });
 

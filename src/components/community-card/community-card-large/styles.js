@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
 
   userTopic: {
     height: 16,
-    marginLeft: 26,
+    marginLeft: 10,
     marginTop: 4,
-    width: 52,
+    width: 65,
   },
 });
 
