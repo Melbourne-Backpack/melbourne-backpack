@@ -1,4 +1,4 @@
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, FlatList } from "react-native";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
@@ -122,24 +122,24 @@ const CommunityScreen = ({ navigation }) => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.mostLikeYouContainer}>
         <Text style={styles.mostLikeYouText}>Most like you</Text>
-        <ScrollView
+        <FlatList
           style={styles.mostLikeYou}
+          data={mostLikeYouDataForDisplay}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-        >
-          {mostLikeYouDataForDisplay.map((user) => {
+          renderItem={(user) => {
             return (
               <CommunityCardLarge
-                userID={user.index}
-                name={user.name}
-                campus={user.campus}
-                picture={user.picture}
-                topic={user.topic[Math.floor(Math.random() * 2)]}
+                userID={user.item.index}
+                name={user.item.name}
+                campus={user.item.campus}
+                picture={user.item.picture}
+                topic={user.item.topic[Math.floor(Math.random() * 2)]}
                 navigation={navigation}
               />
             );
-          })}
-        </ScrollView>
+          }}
+        />
       </View>
       <View style={styles.communityListContainer}>
         <Text style={styles.communityListText}>Community</Text>

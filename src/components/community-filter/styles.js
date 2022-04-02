@@ -13,8 +13,6 @@ import { FONT_WEIGHT_MEDIUM } from "../../styles/typography";
 
 const styles = StyleSheet.create({
   communityList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
     marginTop: hp("3%"),
   },
 

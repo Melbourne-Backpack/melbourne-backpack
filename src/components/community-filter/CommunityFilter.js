@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { LIGHT_BLUE } from "../../styles/colors";
@@ -75,7 +75,8 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
                     headings.map((heading) => {
                       filter[heading].map((option) => {
                         if (
-                          user[heading].includes(option) ||
+                          (!data.includes(option) &&
+                            user[heading].includes(option)) ||
                           user[heading] === option
                         ) {
                           setData((prevState) => [...prevState, user]);
@@ -92,17 +93,23 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
           </View>
         ) : null}
         <View style={styles.communityList}>
-          {data.slice(0, filterMaxCards).map((user) => {
-            return (
-              <CommunityCardSmall
-                userID={user.index}
-                name={user.name}
-                picture={user.picture}
-                navigation={navigation}
-              />
-            );
-          })}
+          <FlatList
+            data={data.slice(0, filterMaxCards)}
+            horizontal={false}
+            numColumns={3}
+            renderItem={(user) => {
+              return (
+                <CommunityCardSmall
+                  userID={user.item.index}
+                  name={user.item.name}
+                  picture={user.item.picture}
+                  navigation={navigation}
+                />
+              );
+            }}
+          />
         </View>
+
         <View style={styles.seeMoreBtnContainer}>
           <TouchableOpacity
             onPress={() => {

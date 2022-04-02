@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingVertical: 4,
     paddingHorizontal: 10,
+    textAlign: "center",
   },
 
   selectedText: {
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     paddingVertical: 4,
     paddingHorizontal: 10,
+    textAlign: "center",
   },
 });
 
