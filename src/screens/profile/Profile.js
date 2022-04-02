@@ -3,40 +3,7 @@ import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
 
-const data = [
-  {
-    id: "1",
-    name: "agagag",
-    campus: "sgs",
-    photo: "../../../assets/images/avatar-placeholder.jpg",
-    facebook: "facebook.com/user/123235780432",
-    bio: "abcdefghjdfafeffijfkadlsjfvalrwerwerwerdasddasdasdsadsadsadadsadsadsadskdjlsadjaskldjsladsdsadsdasdasdasdasds",
-  },
-  {
-    id: "2",
-    name: "bbbbb",
-    campus: "sgs",
-    photo: "../../../assets/images/avatar-placeholder.jpg",
-    facebook: "facebook.com/user/124535",
-    bio: "abcdefghjdfafeffijfkadlsjfvalrwerwerwer",
-  },
-  {
-    id: "3",
-    name: "ccccc",
-    campus: "sgs",
-    photo: "../../../assets/images/avatar-placeholder.jpg",
-    facebook: "facebook.com/user/126235",
-    bio: "abcdefghjdfafeffijfkadlsjfvalrwerwerwer",
-  },
-  {
-    id: "4",
-    name: "ddddd",
-    campus: "sgs",
-    photo: "../../../assets/images/avatar-placeholder.jpg",
-    facebook: "facebook.com/user/123275",
-    bio: "abcdefghjdfafeffijfkadlsjfvalrwerwerwer",
-  },
-];
+const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
 const Profile = ({ route, navigation: { goBack } }) => {
   const id = route.params.id;
@@ -55,12 +22,14 @@ const Profile = ({ route, navigation: { goBack } }) => {
         <Text style={styles.title}>Profile</Text>
       </View>
       {data.map((user) => {
-        if (user.id.toString() === id.toString()) {
+        if (user.index.toString() === id.toString()) {
           return (
             <View key={user.id}>
               <View style={styles.profileImageWrapper}>
                 <Image
-                  source={require("../../../assets/images/avatar-placeholder.jpg")}
+                  source={{
+                    uri: user.picture,
+                  }}
                   style={styles.profileImage}
                 />
               </View>
@@ -75,10 +44,38 @@ const Profile = ({ route, navigation: { goBack } }) => {
                 </View>
                 <View style={styles.userContentRow}>
                   <View style={styles.userContentHeadingWrapper}>
+                    <Text style={styles.userContentHeading}>E-mail</Text>
+                  </View>
+                  <View style={styles.userContentWrapper}>
+                    <Text style={styles.userContent}>{user.email}</Text>
+                  </View>
+                </View>
+                <View style={styles.userContentRow}>
+                  <View style={styles.userContentHeadingWrapper}>
                     <Text style={styles.userContentHeading}>Campus</Text>
                   </View>
                   <View style={styles.userContentWrapper}>
                     <Text style={styles.userContent}>{user.campus}</Text>
+                  </View>
+                </View>
+                <View style={styles.userContentRow}>
+                  <View style={styles.userContentHeadingWrapper}>
+                    <Text style={styles.userContentHeading}>Interest in</Text>
+                  </View>
+                  <View style={styles.userContentWrapper}>
+                    <Text style={styles.userContent}>
+                      {user.topic.join(", ")}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.userContentRow}>
+                  <View style={styles.userContentHeadingWrapper}>
+                    <Text style={styles.userContentHeading}>Date of Birth</Text>
+                  </View>
+                  <View style={styles.userContentWrapper}>
+                    <Text style={styles.userContent}>
+                      {user.dob.slice(0, 10)}
+                    </Text>
                   </View>
                 </View>
                 <View style={styles.userContentRow}>
@@ -96,7 +93,7 @@ const Profile = ({ route, navigation: { goBack } }) => {
                     <Text style={styles.userContentHeading}>Bio</Text>
                   </View>
                   <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{user.bio}</Text>
+                    <Text style={styles.userContent}>{user.about}</Text>
                   </View>
                 </View>
               </View>

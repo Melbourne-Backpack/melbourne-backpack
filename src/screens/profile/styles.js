@@ -94,8 +94,9 @@ const styles = StyleSheet.create({
   },
 
   logoutBtnWrapper: {
-    marginTop: 40,
     alignItems: "center",
+    marginTop: 40,
+    marginBottom: 40,
   },
 
   logoutBtn: {
