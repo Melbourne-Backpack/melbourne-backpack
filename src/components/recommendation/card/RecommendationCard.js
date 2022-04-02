@@ -6,14 +6,14 @@ import {
 } from "@expo/vector-icons";
 
 import styles from "./styles";
-import { GREY, YELLOW } from "../../styles/colors";
+import { GREY, YELLOW } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 
 const RecommendationCard = ({ data, housing }) => {
   const [loaded, error] = useFonts({
-    PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
-    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
-    PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
+    PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
   });
 
   if (!loaded) {
@@ -24,7 +24,7 @@ const RecommendationCard = ({ data, housing }) => {
     <View style={styles.card}>
       <TouchableOpacity activeOpacity={0.5}>
         <ImageBackground
-          source={require("../../../assets/images/student-housing.jpg")}
+          source={require("../../../../assets/images/student-housing.jpg")}
           style={styles.backgroundImg}
           imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
           resizeMode="cover"

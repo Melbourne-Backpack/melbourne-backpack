@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     padding: "2.5%",
   },
   heading1: {
-    fontSize: 26,
+    fontSize: 24,
     fontFamily: "PoppinsSemiBold",
     color: WHITE,
     marginTop: "2%",

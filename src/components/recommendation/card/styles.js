@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { DARK_BLUE_PURPLE, GREY, WHITE, YELLOW } from "../../styles/colors";
-import { scaleSize } from "../../styles/scale";
+import { DARK_BLUE_PURPLE, GREY, WHITE, YELLOW } from "../../../styles/colors";
+import { scaleSize } from "../../../styles/scale";
 
 const styles = StyleSheet.create({
   card: {

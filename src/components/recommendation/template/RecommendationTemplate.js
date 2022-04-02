@@ -1,7 +1,8 @@
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import styles from "./styles";
-import RecommendationCard from "../RecommendationCard";
+import RecommendationCard from "../card/RecommendationCard";
 import { useFonts } from "expo-font";
+import RecommendationFilter from "../filter/RecommendationFilter";
 
 const RecommendationTemplate = ({ topic, firstData, otherData, housing }) => {
   const [loaded, error] = useFonts({
@@ -23,7 +24,7 @@ const RecommendationTemplate = ({ topic, firstData, otherData, housing }) => {
 
           <View style={styles.secondHeader}>
             <Text style={styles.heading2}>All</Text>
-            <Text style={styles.subtitle}>See more</Text>
+            <RecommendationFilter />
           </View>
 
           {otherData.map((data) => (
