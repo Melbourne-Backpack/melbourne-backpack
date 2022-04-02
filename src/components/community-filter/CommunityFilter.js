@@ -85,7 +85,7 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
                   setSubmitted(false);
                 }}
               >
-                <Text style={styles.submitBtnText}>Submit</Text>
+                <Text style={styles.submitBtnText}>Apply</Text>
               </TouchableOpacity>
             </View>
           </View>
