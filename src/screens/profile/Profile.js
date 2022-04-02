@@ -55,7 +55,9 @@ const Profile = ({ route, navigation: { goBack } }) => {
         <Text style={styles.title}>Profile</Text>
       </View>
       {data.map((user) => {
-        if (user.id === id) {
+        console.log(user.id === id);
+        console.log(route);
+        if (user.id.toString() === id.toString()) {
           return (
             <View key={user.id}>
               <View style={styles.profileImageWrapper}>
@@ -104,7 +106,7 @@ const Profile = ({ route, navigation: { goBack } }) => {
           );
         }
       })}
-      {id === self ? (
+      {id.toString() === self.toString() ? (
         <View style={styles.logoutBtnWrapper}>
           <TouchableOpacity style={styles.logoutBtn}>
             <Text style={styles.logoutBtnText}>Logout</Text>

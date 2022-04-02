@@ -3,13 +3,13 @@ import { useState } from "react";
 import styles from "./styles";
 
 const CommunityFilterBtn = ({ key, value, filter, heading }) => {
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(filter[heading].includes(value));
   return (
     <TouchableWithoutFeedback
       key={key}
       onPress={() => {
         selected ? filter[heading].pop(value) : filter[heading].push(value);
-        setSelected(!filter[heading].includes(value));
+        setSelected(filter[heading].includes(value));
         console.log(filter);
       }}
       style={styles.btnWrapper}
