@@ -1,10 +1,27 @@
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import styles from "./styles";
 import RecommendationCard from "../card/RecommendationCard";
 import { useFonts } from "expo-font";
-import RecommendationFilter from "../filter/RecommendationFilter";
+import { useState } from "react";
+import FilterCategory from "../filter/FilterCategory";
+import { Ionicons } from "@expo/vector-icons";
+import { LIGHT_BLUE } from "../../../styles/colors";
 
-const RecommendationTemplate = ({ topic, firstData, otherData, housing }) => {
+const RecommendationTemplate = ({
+  topic,
+  firstData,
+  otherData,
+  housing,
+  categories,
+}) => {
+  const [isVisible, setVisible] = useState(false);
+
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -24,7 +41,26 @@ const RecommendationTemplate = ({ topic, firstData, otherData, housing }) => {
 
           <View style={styles.secondHeader}>
             <Text style={styles.heading2}>All</Text>
-            <RecommendationFilter />
+            <View style={styles.filterBtn}>
+              <TouchableOpacity
+                style={styles.filterBtn}
+                onPress={() => {
+                  setVisible(!isVisible);
+                }}
+              >
+                <Ionicons name="filter" size={24} color={LIGHT_BLUE} />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.filterOptions}>
+            {isVisible ? (
+              categories.map((category, id) => (
+                <FilterCategory category={category} key={id} />
+              ))
+            ) : (
+              <></>
+            )}
           </View>
 
           {otherData.map((data) => (

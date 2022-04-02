@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";
-import { BACKGROUND, LIGHT_PURPLE, WHITE } from "../../../styles/colors";
+import {
+  BACKGROUND,
+  DARK_BLUE,
+  LIGHT_PURPLE,
+  WHITE,
+} from "../../../styles/colors";
 import { scaleSize } from "../../../styles/scale";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +34,18 @@ const styles = StyleSheet.create({
     color: WHITE,
     fontSize: 22,
     fontFamily: "PoppinsMedium",
+  },
+  filterBtn: {
+    backgroundColor: DARK_BLUE,
+    borderRadius: wp("3.5%"),
+    height: "auto",
+    width: 44,
+    aspectRatio: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  filterOptions: {
+    marginBottom: 30,
   },
   subtitle: {
     color: LIGHT_PURPLE,

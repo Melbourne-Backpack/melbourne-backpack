@@ -28,11 +28,14 @@ const TransportScreen = () => {
   const firstData = data[0];
   const otherData = data.slice(1, data.length);
 
+  const categories = ["Distance from RMIT"];
+
   return (
     <RecommendationTemplate
       firstData={firstData}
       otherData={otherData}
       topic="Transportation"
+      categories={categories}
     />
   );
 };
