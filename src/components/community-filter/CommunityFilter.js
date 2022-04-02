@@ -13,10 +13,16 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState(userList);
   const filterMaxCardsPerPage = 6;
-  const [filterMaxCards, setFilterMaxCards] = useState(6);
-  // const filter = {};
-  const [filter, setFilter] = useState({});
+  const [filterMaxCards, setFilterMaxCards] = useState(filterMaxCardsPerPage);
   const [submitted, setSubmitted] = useState(false);
+  let filter = {};
+  let [filterPrevState, setFilterPrevState] = useState({});
+  headings.map((heading) => {
+    filter[heading] = [];
+  });
+  if (submitted) {
+    filter = filterPrevState;
+  }
 
   /* start at -1 instead of 0 because i++ is put before return (in toggle function for filter btn */
   let i = -1;
@@ -42,7 +48,7 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
             {headings.map((heading) => {
               i++;
               let optionList = options[i];
-              filter[heading] = [];
+
               return (
                 <View key={heading} style={styles.filterSingleWrapper}>
                   <Text style={styles.filterText}>
@@ -68,6 +74,8 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
               <TouchableOpacity
                 style={styles.submitBtn}
                 onPress={() => {
+                  let all = true;
+                  setFilterPrevState(filter);
                   setSubmitted(true);
                   setData([]);
                   userList.map((user) => {
@@ -81,8 +89,17 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
                         }
                       });
                     });
+                    headings.map((heading) => {
+                      if (filter[heading] !== []) {
+                        all = false;
+                      }
+                    });
+                    if (!all) {
+                      setData(userList);
+                    } else {
+                    }
                   });
-                  setSubmitted(false);
+                  setFilterMaxCards(filterMaxCardsPerPage);
                 }}
               >
                 <Text style={styles.submitBtnText}>Submit</Text>

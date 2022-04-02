@@ -13,7 +13,6 @@ const CommunityFilterBtn = ({ key, value, filter, heading }) => {
         console.log(filter);
       }}
       style={styles.btnWrapper}
-      selected={false}
     >
       <Text style={selected ? styles.selectedText : styles.notSelectedText}>
         {value}
