@@ -57,6 +57,7 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
                           value={option.name}
                           filter={filter}
                           heading={heading}
+                          submitted={submitted}
                         />
                       );
                     })}
@@ -68,7 +69,7 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
               <TouchableOpacity
                 style={styles.submitBtn}
                 onPress={() => {
-                  setSubmitted(true);
+                  setSubmitted((prev) => !prev);
                   setData([]);
                   userList.map((user) => {
                     headings.map((heading) => {
@@ -82,7 +83,7 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
                       });
                     });
                   });
-                  setSubmitted(false);
+                  console.log(filter);
                 }}
               >
                 <Text style={styles.submitBtnText}>Apply</Text>
@@ -108,7 +109,6 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
               setFilterMaxCards(
                 (prevState) => prevState + filterMaxCardsPerPage
               );
-              console.log(filterMaxCards);
             }}
           >
             <Text style={styles.seeMoreBtn}>See more</Text>

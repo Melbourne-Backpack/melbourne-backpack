@@ -55,8 +55,6 @@ const Profile = ({ route, navigation: { goBack } }) => {
         <Text style={styles.title}>Profile</Text>
       </View>
       {data.map((user) => {
-        console.log(user.id === id);
-        console.log(route);
         if (user.id.toString() === id.toString()) {
           return (
             <View key={user.id}>

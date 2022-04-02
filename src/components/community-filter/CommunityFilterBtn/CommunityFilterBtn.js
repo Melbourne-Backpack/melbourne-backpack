@@ -1,16 +1,20 @@
 import { TouchableWithoutFeedback, Text } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles";
 
-const CommunityFilterBtn = ({ key, value, filter, heading }) => {
+const CommunityFilterBtn = ({ key, value, filter, heading, submitted }) => {
   const [selected, setSelected] = useState(filter[heading].includes(value));
+
+  useEffect(() => {
+    setSelected(filter[heading].includes(value));
+  }, [submitted]);
   return (
     <TouchableWithoutFeedback
       key={key}
       onPress={() => {
         selected ? filter[heading].pop(value) : filter[heading].push(value);
         setSelected(filter[heading].includes(value));
-        console.log(filter);
+        submitted = false;
       }}
       style={styles.btnWrapper}
     >
