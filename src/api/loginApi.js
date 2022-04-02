@@ -1,12 +1,14 @@
 import { auth, db } from "../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
 
-const signIn = (email, password) => {
+const signIn = ({ navigation }, email, password) => {
   auth
     .signInWithEmailAndPassword(email, password)
     .then((userCredentials) => {
       const user = userCredentials.user;
       console.log("SignIn success");
+      navigation.replace("Welcome");
     })
     .catch((error) => {
       if (error.code === "auth/invalid-email") {
@@ -21,7 +23,7 @@ const signIn = (email, password) => {
     });
 };
 
-const signUp = (email, password, cfPassword) => {
+const signUp = ({ navigation }, email, password, cfPassword) => {
   if (password !== cfPassword) {
     window.alert("Password and confirm password does not match");
   } else {
@@ -29,7 +31,9 @@ const signUp = (email, password, cfPassword) => {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log(email);
+        console.log("Create user: ", email);
+        window.alert("Sign up successful!");
+        navigation.replace("SignIn");
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
@@ -42,4 +46,24 @@ const signUp = (email, password, cfPassword) => {
   }
 };
 
-export { signIn, signUp };
+const signOut = ({ navigation }) => {
+  auth
+    .signOut()
+    .then(() => {
+      navigation.replace("SignIn");
+    })
+    .catch((error) => window.alert(error.message));
+};
+
+const emailVerification = ({ navigation }, email) => {
+  auth
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      console.log("Password reset email sent!");
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+export { signIn, signUp, signOut, emailVerification };

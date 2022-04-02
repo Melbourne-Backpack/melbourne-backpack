@@ -116,6 +116,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+  textGroup: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+
+  textEmail: {
+    color: WHITE,
+    fontFamily: "PoppinsSemiBold",
+  },
+
   cancelButtonView: {
     borderRadius: 15,
     width: wp("80%"),

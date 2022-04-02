@@ -123,8 +123,8 @@ const Form = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => {
               pushData(
-                auth.currentUser.uid,
-                auth.currentUser.email,
+                auth.currentUser?.uid,
+                auth.currentUser?.email,
                 fullName,
                 purpose,
                 facebook,

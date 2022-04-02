@@ -16,8 +16,8 @@ import { LIGHT_PURPLE, SELECTED_BUTTON, WHITE } from "../../styles/colors";
 import { auth, db } from "../../config/firebase";
 import { emailVerification, signIn } from "../../api/loginApi";
 
-const ForgotPassword = ({ navigation }) => {
-  const [email, setEmail] = useState("");
+const EmailSent = ({ route, navigation }) => {
+  const { email } = route.params;
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
@@ -36,32 +36,26 @@ const ForgotPassword = ({ navigation }) => {
             style={styles.icon}
           />
           <View style={styles.loginField}>
-            <Text style={styles.textOne}>Forget Password</Text>
-            <Text style={styles.textTwo}>
-              Please fill email or phone number and we'll send you a link to get
-              back into your account.
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              keyboardType={"email-address"}
-              placeholder={"Email"}
-              placeholderTextColor={WHITE}
-              onChangeText={(text) => setEmail(text)}
-              defaultValue={email}
-            />
+            <Text style={styles.textOne}>Email Sent</Text>
+            <View style={styles.textGroup}>
+              <Text style={styles.textTwo}>We sent an email to {""}</Text>
+              <Text style={styles.textEmail}>
+                {JSON.stringify(email).slice(1, -1)} {""}
+              </Text>
+              <Text style={styles.textTwo}>with {""}</Text>
+              <Text style={styles.textTwo}>a {""}</Text>
+              <Text style={styles.textTwo}>link {""}</Text>
+              <Text style={styles.textTwo}>to {""}</Text>
+              <Text style={styles.textTwo}>get back into your account.</Text>
+            </View>
+
             <TouchableOpacity
               onPress={() => {
-                emailVerification({ navigation }, email);
-                navigation.navigate("EmailSent", { email: email });
+                navigation.navigate("SignIn");
               }}
             >
               <View style={styles.loginButtonView}>
-                <Text style={styles.loginButtonText}>Submit</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.cancelButtonView}>
-                <Text style={styles.cancelButtonText}>Cancel</Text>
+                <Text style={styles.loginButtonText}>Continue</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -71,6 +65,6 @@ const ForgotPassword = ({ navigation }) => {
   );
 };
 
-export default ForgotPassword;
+export default EmailSent;
 
 //🇦🇺 🇦🇺

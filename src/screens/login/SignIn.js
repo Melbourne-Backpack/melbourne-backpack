@@ -6,7 +6,6 @@ import {
   Image,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView,
   SafeAreaView,
 } from "react-native";
 import styles from "./styles";
@@ -21,15 +20,6 @@ const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.replace("Welcome");
-      }
-    });
-    return unsubscribe;
-  }, []);
 
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -87,7 +77,9 @@ const SignIn = ({ navigation }) => {
               <Text style={styles.registerButtonText}>Reset Password</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => signIn(email, password)}>
+          <TouchableOpacity
+            onPress={() => signIn({ navigation }, email, password)}
+          >
             <View style={styles.loginButtonView}>
               <Text style={styles.loginButtonText}>Login</Text>
             </View>

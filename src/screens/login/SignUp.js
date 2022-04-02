@@ -22,15 +22,6 @@ const SignUp = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [cfPassword, setCfPassword] = useState("");
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.replace("Welcome");
-      }
-    });
-    return unsubscribe;
-  }, []);
-
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
@@ -77,7 +68,7 @@ const SignUp = ({ navigation }) => {
               />
               <TouchableOpacity
                 onPress={() => {
-                  signUp(email, password, cfPassword);
+                  signUp({ navigation }, email, password, cfPassword);
                 }}
               >
                 <View style={styles.loginButtonView}>
