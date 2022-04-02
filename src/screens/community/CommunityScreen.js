@@ -1,88 +1,11 @@
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
-import { useState } from "react";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import CommunityCardSmall from "../../components/community-card/community-card-small/CommunityCardSmall";
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
 
 const CommunityScreen = ({ navigation }) => {
-  const [mostLikeYouArray, setMostLikeYouArray] = useState([
-    {
-      id: "1",
-      name: "agagag",
-      campus: "sgs",
-      photo: "../../../assets/images/avatar-placeholder.jpg",
-    },
-    {
-      id: "2",
-      name: "bbbbb",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "3",
-      name: "ccccc",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "4",
-      name: "ddddd",
-      campus: "sgs",
-      photo: "",
-    },
-  ]);
-
-  const [others, setOthers] = useState([
-    {
-      id: "5",
-      name: "ababab",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "6",
-      name: "bcbcbc",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "7",
-      name: "cdcdcd",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "8",
-      name: "acacac",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "9",
-      name: "bdbdbd",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "10",
-      name: "cececece",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "11",
-      name: "afafaf",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "12",
-      name: "bgbgbg",
-      campus: "sgs",
-      photo: "",
-    },
-  ]);
+  const data = require("../../../assets/mockJSON/MOCK_DATA.json");
   const campus = [
     {
       id: 1,
@@ -129,7 +52,7 @@ const CommunityScreen = ({ navigation }) => {
     },
     {
       id: 8,
-      name: "Professional Communication",
+      name: "Prof Com",
     },
     {
       id: 9,
@@ -141,6 +64,8 @@ const CommunityScreen = ({ navigation }) => {
     },
   ];
 
+  console.log(data);
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.mostLikeYouContainer}>
@@ -150,12 +75,13 @@ const CommunityScreen = ({ navigation }) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
-          {mostLikeYouArray.map((user) => {
+          {data.map((user) => {
             return (
               <CommunityCardLarge
-                userID={user.id}
+                userID={user.index}
                 name={user.name}
                 campus={user.campus}
+                picture={user.picture}
                 topic={"IT"}
                 navigation={navigation}
               />
@@ -172,11 +98,12 @@ const CommunityScreen = ({ navigation }) => {
           />
         </View>
         <View style={styles.communityList}>
-          {others.map((user) => {
+          {data.map((user) => {
             return (
               <CommunityCardSmall
-                userID={user.id}
+                userID={user.index}
                 name={user.name}
+                picture={user.picture}
                 navigation={navigation}
               />
             );

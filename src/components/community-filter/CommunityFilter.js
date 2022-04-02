@@ -12,6 +12,7 @@ const CommunityFilter = (props) => {
   const [show, setShow] = useState(false);
   // const filter = {};
   const [filter, setFilter] = useState({});
+  const [submitted, setSubmitted] = useState({});
 
   /* start at -1 instead of 0 because i++ is put before return (in toggle function for filter btn */
   let i = -1;
@@ -56,6 +57,17 @@ const CommunityFilter = (props) => {
                 </View>
               );
             })}
+            <View style={styles.submitBtnWrapper}>
+              <TouchableOpacity
+                style={styles.submitBtn}
+                onPress={() => {
+                  setSubmitted(filter);
+                  console.log(filter);
+                }}
+              >
+                <Text style={styles.submitBtnText}>Submit</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         ) : null}
       </View>

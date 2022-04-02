@@ -8,7 +8,7 @@ import {
 import React from "react";
 import styles from "./styles";
 
-const CommunityCardSmall = ({ userID, name, navigation }) => {
+const CommunityCardSmall = ({ userID, name, navigation, picture }) => {
   return (
     <TouchableOpacity
       key={userID}
@@ -21,7 +21,7 @@ const CommunityCardSmall = ({ userID, name, navigation }) => {
     >
       <ImageBackground
         resizeMode={"cover"}
-        source={require("../../../../assets/images/avatar-placeholder.jpg")}
+        source={{ uri: picture }}
         style={styles.userImg}
       >
         <View style={styles.userContent}>

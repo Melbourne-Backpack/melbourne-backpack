@@ -5,10 +5,16 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
 import styles from "./styles";
 
-const CommunityCardLarge = ({ userID, name, topic, campus, navigation }) => {
+const CommunityCardLarge = ({
+  userID,
+  name,
+  picture,
+  topic,
+  campus,
+  navigation,
+}) => {
   return (
     <TouchableOpacity
       key={userID}
@@ -21,7 +27,9 @@ const CommunityCardLarge = ({ userID, name, topic, campus, navigation }) => {
     >
       <ImageBackground
         resizeMode={"cover"}
-        source={require("../../../../assets/images/avatar-placeholder.jpg")}
+        source={{
+          uri: picture,
+        }}
         style={styles.userImg}
       >
         <View style={styles.userContent}>
