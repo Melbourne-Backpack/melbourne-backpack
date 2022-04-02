@@ -9,11 +9,10 @@ const CommunityFilterBtn = ({ key, value, filter, heading }) => {
       key={key}
       onPress={() => {
         selected ? filter[heading].pop(value) : filter[heading].push(value);
-        setSelected(!selected);
+        setSelected(!filter[heading].includes(value));
         console.log(filter);
       }}
       style={styles.btnWrapper}
-      selected={false}
     >
       <Text style={selected ? styles.selectedText : styles.notSelectedText}>
         {value}
