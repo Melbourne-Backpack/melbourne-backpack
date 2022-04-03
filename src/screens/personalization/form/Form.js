@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
@@ -66,84 +68,89 @@ const Form = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <TouchableOpacity onPress={pickImage}>
-            <View>
-              <Image
-                source={
-                  image === null
-                    ? require("../../../../assets/avatar-default.png")
-                    : { uri: image }
-                }
-                style={styles.avatarImage}
-              />
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.wrapper}>
+            <TouchableOpacity onPress={pickImage}>
+              <View>
+                <Image
+                  source={
+                    image === null
+                      ? require("../../../../assets/avatar-default.png")
+                      : { uri: image }
+                  }
+                  style={styles.avatarImage}
+                />
+              </View>
+              <View>
+                <Text style={styles.avatarText}>Upload avatar</Text>
+              </View>
+            </TouchableOpacity>
+            <TextInput
+              style={styles.textInput}
+              placeholder={"Full Name"}
+              placeholderTextColor={PLACEHOLDER}
+              onChangeText={(text) => setFullName(text)}
+              defaultValue={fullName}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder={"Why are you using this app"}
+              placeholderTextColor={PLACEHOLDER}
+              onChangeText={(text) => setPurpose(text)}
+              defaultValue={purpose}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder={"Facebook Link"}
+              placeholderTextColor={PLACEHOLDER}
+              onChangeText={(text) => setFacebook(text)}
+              defaultValue={facebook}
+            />
+            <TextInput
+              style={[styles.textInput, styles.introduction]}
+              placeholder={"Introduce yourself"}
+              placeholderTextColor={PLACEHOLDER}
+              onChangeText={(text) => setBio(text)}
+              defaultValue={bio}
+            />
+            <View style={styles.textController}>
+              <Text style={styles.normalText}>
+                By summiting, you agree to our{" "}
+              </Text>
+              <Text style={styles.yellowText}>Terms, Data </Text>
+              <Text style={styles.yellowText}>Policy </Text>
+              <Text style={styles.normalText}>and </Text>
+              <Text style={styles.yellowText}>Cookies Policy</Text>
             </View>
-            <View>
-              <Text style={styles.avatarText}>Upload avatar</Text>
-            </View>
-          </TouchableOpacity>
-          <TextInput
-            style={styles.textInput}
-            placeholder={"Full Name"}
-            placeholderTextColor={PLACEHOLDER}
-            onChangeText={(text) => setFullName(text)}
-            defaultValue={fullName}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder={"Why are you using this app"}
-            placeholderTextColor={PLACEHOLDER}
-            onChangeText={(text) => setPurpose(text)}
-            defaultValue={purpose}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder={"Facebook Link"}
-            placeholderTextColor={PLACEHOLDER}
-            onChangeText={(text) => setFacebook(text)}
-            defaultValue={facebook}
-          />
-          <TextInput
-            style={[styles.textInput, styles.introduction]}
-            placeholder={"Introduce yourself"}
-            placeholderTextColor={PLACEHOLDER}
-            onChangeText={(text) => setBio(text)}
-            defaultValue={bio}
-          />
-          <View style={styles.textController}>
-            <Text style={styles.normalText}>
-              By summiting, you agree to our{" "}
-            </Text>
-            <Text style={styles.yellowText}>Terms, Data </Text>
-            <Text style={styles.yellowText}>Policy </Text>
-            <Text style={styles.normalText}>and </Text>
-            <Text style={styles.yellowText}>Cookies Policy</Text>
+            <TouchableOpacity
+              onPress={() => {
+                pushData(
+                  auth.currentUser?.uid,
+                  auth.currentUser?.email,
+                  fullName,
+                  purpose,
+                  facebook,
+                  bio
+                );
+                navigation.navigate("Ready");
+              }}
+            >
+              <View style={styles.nextButtonView}>
+                <Text style={styles.nextButtonText}>Submit</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
+              <View style={styles.backButtonView}>
+                <Text style={styles.backButtonText}>Back</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              pushData(
-                auth.currentUser?.uid,
-                auth.currentUser?.email,
-                fullName,
-                purpose,
-                facebook,
-                bio
-              );
-              navigation.navigate("Ready");
-            }}
-          >
-            <View style={styles.nextButtonView}>
-              <Text style={styles.nextButtonText}>Submit</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
-            <View style={styles.backButtonView}>
-              <Text style={styles.backButtonText}>Back</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+        </ScrollView>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };

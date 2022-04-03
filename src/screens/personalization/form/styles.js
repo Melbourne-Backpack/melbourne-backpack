@@ -22,11 +22,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: "center",
+  },
   wrapper: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     width: wp("80%"),
+    marginTop: 50,
   },
   avatarImage: {
     width: 100,
