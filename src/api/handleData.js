@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "../config/firebase";
 
 const pushData = async (

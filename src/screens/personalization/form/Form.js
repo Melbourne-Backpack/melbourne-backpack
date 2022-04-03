@@ -14,7 +14,7 @@ import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { PLACEHOLDER } from "../../../styles/colors";
-import { pushData } from "../../../api/pushData";
+import { pushData } from "../../../api/handleData";
 import { auth } from "../../../config/firebase";
 
 const Form = ({ navigation }) => {
@@ -139,7 +139,7 @@ const Form = ({ navigation }) => {
                   facebook,
                   bio
                 );
-                navigation.navigate("Ready", { avatar: imageObject });
+                navigation.navigate("Ready");
               }}
             >
               <View style={styles.nextButtonView}>

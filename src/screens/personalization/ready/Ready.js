@@ -10,9 +10,9 @@ import {
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React from "react";
+import { auth, db } from "../../../config/firebase";
 
 const Ready = ({ route, navigation }) => {
-  const { avatar } = route.params;
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
