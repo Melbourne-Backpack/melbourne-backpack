@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { LIGHT_BLUE } from "../../styles/colors";
@@ -92,7 +98,7 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
             </View>
           </View>
         ) : null}
-        <View style={styles.communityList}>
+        <SafeAreaView style={styles.communityList}>
           <FlatList
             data={data.slice(0, filterMaxCards)}
             horizontal={false}
@@ -108,7 +114,7 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
               );
             }}
           />
-        </View>
+        </SafeAreaView>
 
         <View style={styles.seeMoreBtnContainer}>
           <TouchableOpacity

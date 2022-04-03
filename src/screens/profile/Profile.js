@@ -93,7 +93,7 @@ const Profile = ({ route, navigation: { goBack } }) => {
                     <Text style={styles.userContentHeading}>Bio</Text>
                   </View>
                   <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{user.about}</Text>
+                    <Text style={styles.userContent}>{user.bio}</Text>
                   </View>
                 </View>
               </View>

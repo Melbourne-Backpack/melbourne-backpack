@@ -1,4 +1,4 @@
-import { Text, View, ScrollView, FlatList } from "react-native";
+import { Text, View, ScrollView, FlatList, SafeAreaView } from "react-native";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
@@ -122,24 +122,26 @@ const CommunityScreen = ({ navigation }) => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.mostLikeYouContainer}>
         <Text style={styles.mostLikeYouText}>Most like you</Text>
-        <FlatList
-          style={styles.mostLikeYou}
-          data={mostLikeYouDataForDisplay}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          renderItem={(user) => {
-            return (
-              <CommunityCardLarge
-                userID={user.item.index}
-                name={user.item.name}
-                campus={user.item.campus}
-                picture={user.item.picture}
-                topic={user.item.topic[Math.floor(Math.random() * 2)]}
-                navigation={navigation}
-              />
-            );
-          }}
-        />
+        <SafeAreaView>
+          <FlatList
+            style={styles.mostLikeYou}
+            data={mostLikeYouDataForDisplay}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={(user) => {
+              return (
+                <CommunityCardLarge
+                  userID={user.item.index}
+                  name={user.item.name}
+                  campus={user.item.campus}
+                  picture={user.item.picture}
+                  topic={user.item.topic[Math.floor(Math.random() * 2)]}
+                  navigation={navigation}
+                />
+              );
+            }}
+          />
+        </SafeAreaView>
       </View>
       <View style={styles.communityListContainer}>
         <Text style={styles.communityListText}>Community</Text>
