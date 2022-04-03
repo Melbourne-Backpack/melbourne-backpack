@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
+import { useFonts } from "expo-font";
 
 const CommunityCardLarge = ({
   userID,
@@ -15,6 +16,14 @@ const CommunityCardLarge = ({
   campus,
   navigation,
 }) => {
+  const [loaded, error] = useFonts({
+    PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
   return (
     <TouchableOpacity
       key={userID}

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 10,
     textAlign: "center",
+    fontFamily: "PoppinsRegular",
   },
 
   selectedText: {
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 10,
     textAlign: "center",
+    fontFamily: "PoppinsRegular",
   },
 });
 

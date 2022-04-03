@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     color: WHITE,
     fontSize: responsiveFontSize(),
     fontWeight: FONT_WEIGHT_EXTRA_BOLD,
+    fontFamily: "PoppinsBold",
     textAlign: "right",
     marginRight: 49,
     marginTop: hp("4%"),
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   mostLikeYouText: {
     color: WHITE,
     fontSize: hp("2.4%"),
-    fontWeight: FONT_WEIGHT_EXTRA_BOLD,
+    fontFamily: "PoppinsBold",
     marginTop: hp("6.5%"),
   },
 });

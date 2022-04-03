@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
 
   userName: {
     fontSize: 10,
+    fontFamily: "PoppinsRegular",
   },
 });
 

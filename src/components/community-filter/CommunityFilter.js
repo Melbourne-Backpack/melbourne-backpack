@@ -11,6 +11,7 @@ import { LIGHT_BLUE } from "../../styles/colors";
 import CommunityFilterBtn from "./CommunityFilterBtn/CommunityFilterBtn";
 import React, { useState } from "react";
 import CommunityCardSmall from "../community-card/community-card-small/CommunityCardSmall";
+import { useFonts } from "expo-font";
 
 const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
   /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding data in 1 view*/
@@ -18,11 +19,22 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
   const options = optionList;
   const [show, setShow] = useState(false);
   const [data, setData] = useState(userList);
+  const filterMaxCardsPerPageInitial = 6;
   const filterMaxCardsPerPage = 6;
-  const [filterMaxCards, setFilterMaxCards] = useState(6);
+  const [filterMaxCards, setFilterMaxCards] = useState(
+    filterMaxCardsPerPageInitial
+  );
   // const filter = {};
   const [filter, setFilter] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [loaded, error] = useFonts({
+    PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
 
   /* start at -1 instead of 0 because i++ is put before return (in toggle function for filter btn */
   let i = -1;
@@ -90,7 +102,6 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
                       });
                     });
                   });
-                  console.log(filter);
                 }}
               >
                 <Text style={styles.submitBtnText}>Apply</Text>
@@ -117,15 +128,26 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
         </SafeAreaView>
 
         <View style={styles.seeMoreBtnContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              setFilterMaxCards(
-                (prevState) => prevState + filterMaxCardsPerPage
-              );
-            }}
-          >
-            <Text style={styles.seeMoreBtn}>See more</Text>
-          </TouchableOpacity>
+          {filterMaxCards >= data.length &&
+          data.length >= filterMaxCardsPerPageInitial ? (
+            <TouchableOpacity
+              onPress={() => {
+                setFilterMaxCards(filterMaxCardsPerPageInitial);
+              }}
+            >
+              <Text style={styles.seeMoreBtn}>See less</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                setFilterMaxCards(
+                  (prevState) => prevState + filterMaxCardsPerPage
+                );
+              }}
+            >
+              <Text style={styles.seeMoreBtn}>See more</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </View>

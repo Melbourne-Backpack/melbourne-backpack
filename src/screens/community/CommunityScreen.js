@@ -3,11 +3,22 @@ import CommunityCardLarge from "../../components/community-card/community-card-l
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
 import data from "../../../assets/mockJSON/MOCK_DATA.json";
+import { useFonts } from "expo-font";
 
 const CommunityScreen = ({ navigation }) => {
   const mostLikeYouMaxCards = 4;
   const self = "2";
   let mostLikeYouCount = 0;
+
+  const [loaded, error] = useFonts({
+    PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
   const mostLikeYouData = () => {
     let temp = [];
     let myCampus = "";

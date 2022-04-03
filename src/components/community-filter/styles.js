@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import {
   DARK_BLUE,
-  PURPLE_BLUE,
+  LIGHT_PURPLE,
   SELECTED_BUTTON,
   WHITE,
 } from "../../styles/colors";
@@ -9,7 +9,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { FONT_WEIGHT_MEDIUM } from "../../styles/typography";
 
 const styles = StyleSheet.create({
   communityList: {
@@ -41,6 +40,7 @@ const styles = StyleSheet.create({
     color: WHITE,
     fontSize: 16,
     marginBottom: 10,
+    fontFamily: "PoppinsBold",
   },
 
   filterWrapper: {
@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
   },
 
   seeMoreBtn: {
-    color: PURPLE_BLUE,
+    color: LIGHT_PURPLE,
     fontSize: hp("1.7%"),
-    fontWeight: FONT_WEIGHT_MEDIUM,
+    fontFamily: "PoppinsBold",
   },
 
   seeMoreBtnContainer: {
