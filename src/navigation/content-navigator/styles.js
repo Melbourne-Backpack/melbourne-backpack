@@ -1,14 +1,13 @@
 import { StyleSheet } from "react-native";
-import { BACKGROUND, WHITE } from "../../styles/colors";
+import { BLACK, WHITE } from "../../styles/colors";
 
 const styles = StyleSheet.create({
   tabBar: {
     borderTopColor: WHITE,
-    backgroundColor: BACKGROUND,
-    position: "absolute",
-    bottom: 0,
-    paddingTop: 10,
-    zIndex: 8,
+    backgroundColor: BLACK,
+    paddingTop: 5,
+    height: 90,
+    zIndex: 10,
   },
 });
 

@@ -45,7 +45,7 @@ const ContentNavigator = () => {
             if (route.name === tabIcon.route) {
               iconName = focused ? tabIcon.iconFocus : tabIcon.iconName;
               iconColor = focused ? LIGHT_PURPLE : LIGHTER_GREY;
-              iconSize = focused ? 40 : 28;
+              iconSize = focused ? 38 : 28;
             }
           });
           return <Ionicons name={iconName} size={iconSize} color={iconColor} />;
