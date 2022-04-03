@@ -33,8 +33,8 @@ export default function App() {
         {/*<Stack.Screen name="Splash" component={SplashScreen} />*/}
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name={"ForgotPassword"} component={ForgotPassword} />
-        <Stack.Screen name={"EmailSent"} component={EmailSent} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="EmailSent" component={EmailSent} />
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Campus" component={Campus} />
         <Stack.Screen name="Subject" component={Subject} />
