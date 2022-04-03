@@ -9,10 +9,25 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const Ready = ({ route, navigation }) => {
+  const [data, setData] = useState({});
+  const getData = () => {
+    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
@@ -31,6 +46,10 @@ const Ready = ({ route, navigation }) => {
         <Text style={styles.textTwo}>
           Congratulations, you are ready to view all our recommendations
         </Text>
+        <Image
+          source={{ uri: data.avatar.uri }}
+          style={{ width: 100, height: 100, borderRadius: 50 }}
+        />
 
         <TouchableOpacity onPress={() => navigation.navigate("Housing")}>
           <View style={styles.nextButtonView}>
