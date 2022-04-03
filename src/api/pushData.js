@@ -1,11 +1,20 @@
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db, auth } from "../config/firebase";
 
-const pushData = async (uid, email, fullName, purpose, facebook, bio) => {
+const pushData = async (
+  uid,
+  email,
+  fullName,
+  avatar,
+  purpose,
+  facebook,
+  bio
+) => {
   try {
     await setDoc(doc(db, "users", uid), {
       email: email,
       fullName: fullName,
+      avatar: avatar,
       purpose: purpose,
       facebook: facebook,
       bio: bio,

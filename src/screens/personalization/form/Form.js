@@ -19,6 +19,7 @@ import { auth } from "../../../config/firebase";
 
 const Form = ({ navigation }) => {
   const [image, setImage] = useState(null);
+  const [imageObject, setImageObject] = useState({});
 
   // Information
   const [fullName, setFullName] = useState("");
@@ -48,10 +49,11 @@ const Form = ({ navigation }) => {
         quality: 1,
       });
 
-      console.log(result);
+      // console.log(result);
 
       if (!result.cancelled) {
         setImage(result.uri);
+        setImageObject(result);
       }
     }
   };
@@ -132,11 +134,12 @@ const Form = ({ navigation }) => {
                   auth.currentUser?.uid,
                   auth.currentUser?.email,
                   fullName,
+                  imageObject,
                   purpose,
                   facebook,
                   bio
                 );
-                navigation.navigate("Ready");
+                navigation.navigate("Ready", { avatar: imageObject });
               }}
             >
               <View style={styles.nextButtonView}>

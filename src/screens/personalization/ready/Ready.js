@@ -11,7 +11,8 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import React from "react";
 
-const Ready = ({ navigation }) => {
+const Ready = ({ route, navigation }) => {
+  const { avatar } = route.params;
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
@@ -30,6 +31,7 @@ const Ready = ({ navigation }) => {
         <Text style={styles.textTwo}>
           Congratulations, you are ready to view all our recommendations
         </Text>
+
         <TouchableOpacity onPress={() => navigation.navigate("Housing")}>
           <View style={styles.nextButtonView}>
             <Text style={styles.nextButtonText}>Finish</Text>
