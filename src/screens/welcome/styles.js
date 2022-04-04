@@ -1,11 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
-import { scaleFont, scaleSize } from "../../styles/scale";
 import { WHITE, BACKGROUND } from "../../styles/colors";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
@@ -30,9 +26,12 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsSemiBold",
     width: wp("80%"),
   },
+  cusHolder: {
+    flexWrap: "wrap",
+  },
   secondText: {
     color: WHITE,
-    fontSize: 60,
+    fontSize: wp("15%"),
     fontFamily: "PoppinsThin",
     paddingBottom: 10,
     width: wp("80%"),

@@ -121,7 +121,7 @@ const Form = ({ navigation }) => {
             />
             <View style={styles.textController}>
               <Text style={styles.normalText}>
-                By summiting, you agree to our{" "}
+                By submitting, you agree to our{" "}
               </Text>
               <Text style={styles.yellowText}>Terms, Data </Text>
               <Text style={styles.yellowText}>Policy </Text>

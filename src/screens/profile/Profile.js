@@ -3,10 +3,12 @@ import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
 
+import { auth } from "../../config/firebase";
+
 const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
-const Profile = ({ route, navigation: { goBack } }) => {
-  const id = route.params.id;
+const Profile = ({ navigation: { goBack } }) => {
+  const id = auth.currentUser.uid;
   const self = "2";
   return (
     <ScrollView style={styles.background}>
