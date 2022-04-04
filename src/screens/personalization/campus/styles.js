@@ -13,7 +13,6 @@ import {
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
-console.log(width, height);
 
 const styles = StyleSheet.create({
   container: {

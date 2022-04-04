@@ -1,100 +1,88 @@
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
-import { useState } from "react";
+import { Text, View, ScrollView, FlatList, SafeAreaView } from "react-native";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
-import CommunityCardSmall from "../../components/community-card/community-card-small/CommunityCardSmall";
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
+import data from "../../../assets/mockJSON/MOCK_DATA.json";
+import { useFonts } from "expo-font";
 
-const CommunityScreen = () => {
-  const [mostLikeYouArray, setMostLikeYouArray] = useState([
-    {
-      id: "1",
-      name: "agagag",
-      campus: "sgs",
-      photo: "../../../assets/images/avatar-placeholder.jpg",
-    },
-    {
-      id: "2",
-      name: "bbbbb",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "3",
-      name: "ccccc",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "4",
-      name: "ddddd",
-      campus: "sgs",
-      photo: "",
-    },
-  ]);
+const CommunityScreen = ({ navigation }) => {
+  const mostLikeYouMaxCards = 4;
+  const self = "2";
+  let mostLikeYouCount = 0;
 
-  const [others, setOthers] = useState([
-    {
-      id: "5",
-      name: "ababab",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "6",
-      name: "bcbcbc",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "7",
-      name: "cdcdcd",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "8",
-      name: "acacac",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "9",
-      name: "bdbdbd",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "10",
-      name: "cececece",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "11",
-      name: "afafaf",
-      campus: "sgs",
-      photo: "",
-    },
-    {
-      id: "12",
-      name: "bgbgbg",
-      campus: "sgs",
-      photo: "",
-    },
-  ]);
+  const [loaded, error] = useFonts({
+    PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
+  const mostLikeYouData = () => {
+    let temp = [];
+    let myCampus = "";
+    let myTopic = [];
+    data.map((user) => {
+      let id = user.index;
+      if (id.toString() === self.toString()) {
+        myCampus = user.campus;
+        myTopic = user.topic;
+      }
+    });
+
+    for (let i = 0; i < data.length; i++) {
+      let user = data[i];
+      let id = user.index;
+
+      if (
+        id.toString() !== self.toString() &&
+        user.campus === myCampus &&
+        !temp.includes(id.toString())
+      ) {
+        temp.push(user);
+        mostLikeYouCount++;
+      }
+
+      if (
+        data.indexOf(user) === data.length - 1 &&
+        temp.length !== mostLikeYouMaxCards
+      ) {
+        for (let i = 0; i < data.length; i++) {
+          if (
+            id.toString() !== self.toString() &&
+            !temp.includes(id.toString())
+          ) {
+            myTopic.map((topic) => {
+              if (user.topic.includes(topic)) {
+                temp.push(user);
+                mostLikeYouCount++;
+              }
+            });
+          }
+        }
+      }
+
+      if (mostLikeYouCount === mostLikeYouMaxCards) {
+        break;
+      }
+    }
+    return temp;
+  };
+
+  const mostLikeYouDataForDisplay = mostLikeYouData();
   const campus = [
     {
       id: 1,
-      name: "SGS campus",
+      name: "SGS Campus",
     },
     {
       id: 2,
-      name: "Hanoi campus",
+      name: "Hanoi Campus",
     },
     {
       id: 3,
-      name: "Danang campus",
+      name: "Danang Campus",
     },
   ];
 
@@ -129,7 +117,7 @@ const CommunityScreen = () => {
     },
     {
       id: 8,
-      name: "Professional Communication",
+      name: "Prof Com",
     },
     {
       id: 9,
@@ -145,39 +133,36 @@ const CommunityScreen = () => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.mostLikeYouContainer}>
         <Text style={styles.mostLikeYouText}>Most like you</Text>
-        <ScrollView
-          style={styles.mostLikeYou}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        >
-          {mostLikeYouArray.map((user) => {
-            return (
-              <CommunityCardLarge
-                key={user.id}
-                name={user.name}
-                campus={user.campus}
-              />
-            );
-          })}
-        </ScrollView>
+        <SafeAreaView>
+          <FlatList
+            style={styles.mostLikeYou}
+            data={mostLikeYouDataForDisplay}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={(user) => {
+              return (
+                <CommunityCardLarge
+                  userID={user.item.index}
+                  name={user.item.name}
+                  campus={user.item.campus}
+                  picture={user.item.picture}
+                  topic={user.item.topic[Math.floor(Math.random() * 2)]}
+                  navigation={navigation}
+                />
+              );
+            }}
+          />
+        </SafeAreaView>
       </View>
       <View style={styles.communityListContainer}>
         <Text style={styles.communityListText}>Community</Text>
         <View>
           <CommunityFilter
-            headings={["Campus", "Topic"]}
-            options={[campus, topic]}
+            headingList={["campus", "topic"]}
+            optionList={[campus, topic]}
+            navigation={navigation}
+            userList={data}
           />
-        </View>
-        <View style={styles.communityList}>
-          {others.map((user) => {
-            return <CommunityCardSmall key={user.id} name={user.name} />;
-          })}
-        </View>
-        <View style={styles.seeMoreBtnContainer}>
-          <TouchableOpacity>
-            <Text style={styles.seeMoreBtn}>See more</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

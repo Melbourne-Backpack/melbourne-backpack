@@ -9,8 +9,10 @@ export const YELLOW = "#FAC800";
 export const RED = "#E61E2A";
 export const SELECTED_BUTTON = "#4838D1";
 export const TEXT_INPUT = "#1C1C4D";
+export const PLACEHOLDER = "#6A6A8B";
 
 /* WHITE, GREY, BLACK */
 export const WHITE = "#FFFFFF";
 export const BLACK = "#000000";
 export const GREY = "#9A9898";
+export const LIGHTER_GREY = "#E5E3E0";

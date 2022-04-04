@@ -1,4 +1,4 @@
-import RecommendationTemplate from "../../components/template/RecommendationTemplate";
+import RecommendationTemplate from "../../components/recommendation/template/RecommendationTemplate";
 
 const ShoppingScreen = () => {
   const data = [
@@ -27,11 +27,14 @@ const ShoppingScreen = () => {
   const firstData = data[0];
   const otherData = data.slice(1, data.length);
 
+  const categories = ["Distance from RMIT"];
+
   return (
     <RecommendationTemplate
       firstData={firstData}
       otherData={otherData}
       topic="Shopping"
+      categories={categories}
     />
   );
 };
