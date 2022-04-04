@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   icon: {
-    width: 200,
-    height: 200,
+    width: 180,
+    height: 180,
     resizeMode: "contain",
   },
   textTitle: {

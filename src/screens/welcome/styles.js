@@ -9,7 +9,6 @@ import {
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
-console.log(width, height);
 
 const styles = StyleSheet.create({
   container: {
@@ -21,24 +20,26 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: "flex-start",
     justifyContent: "center",
-    paddingHorizontal: 40,
+    width: wp("80%"),
   },
   firstText: {
     color: WHITE,
-    fontSize: hp("2%"),
+    fontSize: 18,
     opacity: 0.9,
     paddingBottom: 30,
     fontFamily: "PoppinsSemiBold",
+    width: wp("80%"),
   },
   secondText: {
     color: WHITE,
-    fontSize: hp("6.5%"),
+    fontSize: 60,
     fontFamily: "PoppinsThin",
     paddingBottom: 10,
+    width: wp("80%"),
   },
   thirdText: {
     color: WHITE,
-    fontSize: hp("2%"),
+    fontSize: 18,
     opacity: 0.8,
     paddingTop: 20,
     paddingBottom: 35,
@@ -51,12 +52,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#4838d1",
     borderRadius: 25,
     paddingVertical: 20,
-    paddingHorizontal: wp("14%"),
+    width: wp("80%"),
   },
   textButton: {
     color: WHITE,
-    fontSize: hp("1.8%"),
+    fontSize: 15,
     fontFamily: "PoppinsMedium",
+    textAlign: "center",
   },
 });
 

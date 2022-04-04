@@ -1,30 +1,30 @@
 import {
-  Button,
   Text,
   View,
   TextInput,
   Keyboard,
   TouchableWithoutFeedback,
-  Dimensions,
   TouchableOpacity,
+  LogBox,
 } from "react-native";
 import styles from "./styles";
 import {
   WHITE,
   DARK_BLUE,
-  LIGHT_BLUE,
   SELECTED_BUTTON,
-  TEXT_INPUT,
+  PLACEHOLDER,
 } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import { SelectMultipleButton } from "react-native-selectmultiple-button";
 import _ from "lodash";
 
+LogBox.ignoreLogs(["Warning: ..."]);
+LogBox.ignoreAllLogs();
 const Campus = ({ navigation }) => {
   // handle Selected button
   const [selectedData, setSelectedData] = React.useState([]);
-  const [selected, setSelected] = React.useState(false);
+  const [choose, setChoose] = React.useState(false);
 
   // handle Text Input value
   const [text, setText] = useState("");
@@ -50,11 +50,11 @@ const Campus = ({ navigation }) => {
           <TextInput
             style={styles.textInput}
             placeholder={"Campus in Vietnam"}
-            placeholderTextColor={"#6A6A8B"}
-            onChangeText={(newText) => setText(newText)}
+            placeholderTextColor={PLACEHOLDER}
+            onChangeText={(text) => setText(text)}
             defaultValue={text}
           >
-            {selected ? _.join(selectedData, "") : ""}
+            {choose ? _.join(selectedData, ", ") : ""}
           </TextInput>
           <View style={styles.buttonWrapper}>
             {multipleData.map((campus) => (
@@ -73,8 +73,18 @@ const Campus = ({ navigation }) => {
                 value={campus}
                 selected={selectedData.includes(campus)}
                 singleTap={(valueTap) => {
-                  setSelectedData(campus);
-                  setSelected(true);
+                  console.log(selectedData.includes(campus));
+                  if (selectedData.includes(campus)) {
+                    _.remove(selectedData, (ele) => {
+                      return ele === campus;
+                    });
+                  } else {
+                    selectedData.push(campus);
+                  }
+                  console.log(selectedData);
+                  console.log(selectedData.includes(campus));
+                  setSelectedData(selectedData);
+                  setChoose(selectedData.includes(campus));
                 }}
               />
             ))}
