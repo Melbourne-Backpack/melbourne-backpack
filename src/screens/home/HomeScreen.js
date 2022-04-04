@@ -1,9 +1,7 @@
-import { StyleSheet, Text, View, ImageBackground, Image } from "react-native";
+import { Text, View, ImageBackground } from "react-native";
 import styles from "./styles";
 import { TouchableOpacity } from "react-native";
 import { useFonts } from "expo-font";
-import { AntDesign } from "@expo/vector-icons";
-import { YELLOW } from "../../styles/colors";
 
 const HomeScreen = ({ navigation }) => {
   // handle font
