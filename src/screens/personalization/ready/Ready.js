@@ -1,19 +1,11 @@
-import {
-  Button,
-  ImageBackground,
-  Text,
-  View,
-  TouchableOpacity,
-  TextInput,
-  Image,
-} from "react-native";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-const Ready = ({ route, navigation }) => {
+const Ready = ({ navigation }) => {
   const [data, setData] = useState({});
   const getData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
@@ -46,7 +38,7 @@ const Ready = ({ route, navigation }) => {
         <Text style={styles.textTwo}>
           Congratulations, you are ready to view all our recommendations
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Housing")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <View style={styles.nextButtonView}>
             <Text style={styles.nextButtonText}>Finish</Text>
           </View>

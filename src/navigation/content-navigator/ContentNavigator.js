@@ -7,8 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "./styles";
-import { LIGHT_PURPLE, LIGHTER_GREY, WHITE } from "../../styles/colors";
-import { Image } from "react-native";
+import { LIGHT_PURPLE, LIGHTER_GREY } from "../../styles/colors";
 
 const Tab = createBottomTabNavigator();
 

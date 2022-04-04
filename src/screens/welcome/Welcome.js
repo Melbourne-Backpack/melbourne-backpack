@@ -1,11 +1,4 @@
-import {
-  Button,
-  ImageBackground,
-  Text,
-  View,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import { auth } from "../../config/firebase";
@@ -24,9 +17,9 @@ const Welcome = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <Text style={styles.firstText}>Welcome to Melbourne Backpack!</Text>
-        <Text style={styles.secondText}>Customize{"\n"}Your Needs</Text>
+        <Text style={styles.secondText}>Customize Your Needs</Text>
         <Text style={styles.thirdText}>
-          Tell us who you are to get the best {"\n"}experiences.
+          Tell us who you are to get the best experiences.
         </Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={() => navigation.navigate("Campus")}>

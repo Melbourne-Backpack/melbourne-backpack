@@ -20,13 +20,17 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.melbourneBackpackText}>Melbourne Backpack</Text>
       <View style={styles.furtherButton}>
-        <TouchableOpacity activeOpacity={0.5}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() =>
+            navigation.navigate("Content", { screen: "Community" })
+          }
+        >
           <ImageBackground
             resizeMode={"cover"}
             source={require("../../../assets/images/community.jpg")}
             style={styles.backgroundImage}
             imageStyle={{ borderRadius: 20 }}
-            onPress={() => navigation.navigate("Community")}
           >
             <View style={styles.overlay}>
               <Text style={styles.subtitle}>Community</Text>
@@ -35,13 +39,15 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.furtherButton}>
-        <TouchableOpacity activeOpacity={0.5}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate("Content", { screen: "Housing" })}
+        >
           <ImageBackground
             resizeMode={"cover"}
             source={require("../../../assets/images/housing.jpg")}
             style={styles.backgroundImage}
             imageStyle={{ borderRadius: 20 }}
-            onPress={() => navigation.navigate("Housing")}
           >
             <View style={styles.overlay}>
               <Text style={styles.subtitle}>Housing</Text>
@@ -50,13 +56,15 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.furtherButton}>
-        <TouchableOpacity activeOpacity={0.5}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate("Content", { screen: "Shopping" })}
+        >
           <ImageBackground
             resizeMode={"cover"}
             source={require("../../../assets/images/shopping.jpg")}
             style={styles.backgroundImage}
             imageStyle={{ borderRadius: 20 }}
-            onPress={() => navigation.navigate("Shopping")}
           >
             <View style={styles.overlay}>
               <Text style={styles.subtitle}>Shopping</Text>
@@ -65,7 +73,12 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.furtherButton}>
-        <TouchableOpacity activeOpacity={0.5}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() =>
+            navigation.navigate("Content", { screen: "Transport" })
+          }
+        >
           <ImageBackground
             resizeMode={"cover"}
             source={require("../../../assets/images/transport.jpg")}
@@ -79,13 +92,15 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.furtherButton}>
-        <TouchableOpacity activeOpacity={0.5}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate("Profile")}
+        >
           <ImageBackground
             resizeMode={"cover"}
             source={require("../../../assets/images/profile.jpg")}
             style={styles.backgroundImage}
             imageStyle={{ borderRadius: 20 }}
-            onPress={() => navigation.navigate("Profile")}
           >
             <View style={styles.overlay}>
               <Text style={styles.subtitle}>Profile</Text>
