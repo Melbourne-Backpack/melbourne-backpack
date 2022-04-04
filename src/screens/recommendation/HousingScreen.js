@@ -1,4 +1,4 @@
-import RecommendationTemplate from "../../components/template/RecommendationTemplate";
+import RecommendationTemplate from "../../components/recommendation/template/RecommendationTemplate";
 
 const HousingScreen = () => {
   const DATA = [
@@ -44,6 +44,8 @@ const HousingScreen = () => {
     },
   ];
 
+  const categories = ["Type", "Price", "Distance from RMIT"];
+
   const firstData = DATA[0];
   const otherData = DATA.slice(1, DATA.length);
 
@@ -53,6 +55,7 @@ const HousingScreen = () => {
       firstData={firstData}
       otherData={otherData}
       housing={true}
+      categories={categories}
     />
   );
 };

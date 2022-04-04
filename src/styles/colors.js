@@ -15,3 +15,4 @@ export const PLACEHOLDER = "#6A6A8B";
 export const WHITE = "#FFFFFF";
 export const BLACK = "#000000";
 export const GREY = "#9A9898";
+export const LIGHTER_GREY = "#E5E3E0";
