@@ -9,6 +9,7 @@ import TransportScreen from "./src/screens/recommendation/TransportScreen";
 import CommunityScreen from "./src/screens/community/CommunityScreen";
 import Campus from "./src/screens/personalization/campus/Campus";
 import Subject from "./src/screens/personalization/subject/Subject";
+import Profile from "./src/screens/profile/Profile";
 
 import { Text } from "react-native";
 
@@ -25,6 +26,8 @@ export default function App() {
           headerShown: false,
         }}
       >
+        <Stack.Screen name="Community" component={CommunityScreen} />
+        <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Campus" component={Campus} />
@@ -32,7 +35,6 @@ export default function App() {
         <Stack.Screen name="Housing" component={HousingScreen} />
         <Stack.Screen name="Shopping" component={ShoppingScreen} />
         <Stack.Screen name="Transport" component={TransportScreen} />
-        <Stack.Screen name="Community" component={CommunityScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

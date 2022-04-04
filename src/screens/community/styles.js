@@ -1,9 +1,6 @@
 import { StyleSheet } from "react-native";
-import { WHITE, BACKGROUND, PURPLE_BLUE } from "../../styles/colors";
-import {
-  FONT_WEIGHT_EXTRA_BOLD,
-  FONT_WEIGHT_MEDIUM,
-} from "../../styles/typography";
+import { WHITE, BACKGROUND } from "../../styles/colors";
+import { FONT_WEIGHT_EXTRA_BOLD } from "../../styles/typography";
 
 import {
   widthPercentageToDP as wp,
@@ -24,12 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
   },
 
-  communityList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginTop: hp("3%"),
-  },
-
   communityListContainer: {
     marginLeft: wp("12.5%"),
     marginRight: wp("12.5%"),
@@ -39,6 +30,7 @@ const styles = StyleSheet.create({
     color: WHITE,
     fontSize: responsiveFontSize(),
     fontWeight: FONT_WEIGHT_EXTRA_BOLD,
+    fontFamily: "PoppinsBold",
     textAlign: "right",
     marginRight: 49,
     marginTop: hp("4%"),
@@ -55,20 +47,8 @@ const styles = StyleSheet.create({
   mostLikeYouText: {
     color: WHITE,
     fontSize: hp("2.4%"),
-    fontWeight: FONT_WEIGHT_EXTRA_BOLD,
+    fontFamily: "PoppinsBold",
     marginTop: hp("6.5%"),
-  },
-
-  seeMoreBtn: {
-    color: PURPLE_BLUE,
-    fontSize: hp("1.7%"),
-    fontWeight: FONT_WEIGHT_MEDIUM,
-  },
-
-  seeMoreBtnContainer: {
-    marginBottom: hp("7.3%"),
-    marginLeft: wp("53%"),
-    marginTop: hp("4.5%"),
   },
 });
 
