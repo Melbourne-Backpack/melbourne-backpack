@@ -8,19 +8,29 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.melbourneBackpackText}>Melbourne Backpack</Text>
-      <Text style={styles.subtitle}>Community</Text>
       <View style={styles.container}>
+        <Text style={styles.subtitle}>Community</Text>
         <ImageBackground
           resizeMode={"cover"}
           source={require("../../../assets/images/community.jpg")}
           style={styles.backgroundImage}
-        >
-          <View>
-            <TouchableOpacity style={styles.furtherButton}>
-              <Image source={require("../../../assets/images/community.jpg")} />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
+        />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.subtitle}>Community</Text>
+        <ImageBackground
+          resizeMode={"cover"}
+          source={require("../../../assets/images/community.jpg")}
+          style={styles.backgroundImage}
+        />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.subtitle}>Community</Text>
+        <ImageBackground
+          resizeMode={"cover"}
+          source={require("../../../assets/images/community.jpg")}
+          style={styles.backgroundImage}
+        />
       </View>
     </View>
   );
