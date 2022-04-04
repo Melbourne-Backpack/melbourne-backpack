@@ -46,11 +46,6 @@ const Ready = ({ route, navigation }) => {
         <Text style={styles.textTwo}>
           Congratulations, you are ready to view all our recommendations
         </Text>
-        <Image
-          source={{ uri: data.avatar.uri }}
-          style={{ width: 100, height: 100, borderRadius: 50 }}
-        />
-
         <TouchableOpacity onPress={() => navigation.navigate("Housing")}>
           <View style={styles.nextButtonView}>
             <Text style={styles.nextButtonText}>Finish</Text>
