@@ -6,24 +6,50 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
+import { useFonts } from "expo-font";
 
-const CommunityCardLarge = (props) => {
+const CommunityCardLarge = ({
+  userID,
+  name,
+  picture,
+  topic,
+  campus,
+  navigation,
+}) => {
+  const [loaded, error] = useFonts({
+    PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
   return (
-    <TouchableOpacity key={props.id} style={styles.card}>
+    <TouchableOpacity
+      key={userID}
+      style={styles.card}
+      onPress={() => {
+        navigation.navigate("Profile", {
+          id: userID,
+        });
+      }}
+    >
       <ImageBackground
         resizeMode={"cover"}
-        source={require("../../../../assets/images/avatar-placeholder.jpg")}
+        source={{
+          uri: picture,
+        }}
         style={styles.userImg}
       >
         <View style={styles.userContent}>
           <Image style={styles.userContentBackground} />
           <View>
             <View style={styles.userContentRow}>
-              <Text style={styles.userName}>{props.name}</Text>
-              <Text style={styles.userTopic}>IT</Text>
+              <Text style={styles.userName}>{name}</Text>
+              <Text style={styles.userTopic}>{topic}</Text>
             </View>
             <View style={styles.userContentRow}>
-              <Text style={styles.userCampus}>{props.campus}</Text>
+              <Text style={styles.userCampus}>{campus}</Text>
               <TouchableOpacity style={styles.detailBtn}>
                 <Text style={styles.detailBtnText}>Details</Text>
               </TouchableOpacity>

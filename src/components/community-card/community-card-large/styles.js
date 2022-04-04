@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { BLACK, WHITE } from "../../../styles/colors";
-import { FONT_WEIGHT_EXTRA_BOLD } from "../../../styles/typography";
 
 const styles = StyleSheet.create({
   card: {
@@ -26,6 +25,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 5,
+    fontFamily: "PoppinsRegular",
   },
 
   userCampus: {
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     height: 16,
     marginLeft: 36,
     width: 92,
+    fontFamily: "PoppinsRegular",
   },
 
   userContent: {
@@ -69,8 +70,8 @@ const styles = StyleSheet.create({
 
   userName: {
     color: BLACK,
-    fontWeight: FONT_WEIGHT_EXTRA_BOLD,
     fontSize: 16,
+    fontFamily: "PoppinsExtraBold",
     height: 20,
     marginLeft: 12,
     width: 115,
@@ -78,9 +79,10 @@ const styles = StyleSheet.create({
 
   userTopic: {
     height: 16,
-    marginLeft: 26,
+    marginLeft: 10,
     marginTop: 4,
-    width: 52,
+    width: 65,
+    fontFamily: "PoppinsRegular",
   },
 });
 
