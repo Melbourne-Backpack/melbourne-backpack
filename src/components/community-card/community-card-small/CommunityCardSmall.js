@@ -5,22 +5,40 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import React from "react";
 import styles from "./styles";
+import { useFonts } from "expo-font";
 
-const CommunityCardSmall = (props) => {
+const CommunityCardSmall = ({ userID, name, navigation, picture }) => {
+  const [loaded, error] = useFonts({
+    PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
   return (
-    <TouchableOpacity key={props.id} style={styles.card}>
+    <TouchableOpacity
+      key={userID}
+      style={styles.card}
+      onPress={() => {
+        navigation.navigate("Profile", {
+          id: userID,
+        });
+      }}
+    >
       <ImageBackground
         resizeMode={"cover"}
-        source={require("../../../../assets/images/avatar-placeholder.jpg")}
+        source={{ uri: picture }}
         style={styles.userImg}
       >
         <View style={styles.userContent}>
           <Image style={styles.userContentBackground} />
           <View style={styles.userContentRow}>
-            <TouchableOpacity style={styles.detailBtn}>
-              <Text style={styles.detailBtnText}>{props.name}</Text>
-            </TouchableOpacity>
+            <Text style={styles.detailBtn}>
+              <Text style={styles.detailBtnText}>{name}</Text>
+            </Text>
           </View>
         </View>
       </ImageBackground>
