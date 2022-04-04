@@ -1,10 +1,6 @@
 import { StyleSheet } from "react-native";
-import { DARK_BLUE_PURPLE, GREY, WHITE, YELLOW } from "../../styles/colors";
-import { scaleSize } from "../../styles/scale";
-import {
-  FONT_WEIGHT_EXTRA_BOLD,
-  FONT_WEIGHT_MEDIUM,
-} from "../../styles/typography";
+import { DARK_BLUE_PURPLE, GREY, WHITE, YELLOW } from "../../../styles/colors";
+import { scaleSize } from "../../../styles/scale";
 
 const styles = StyleSheet.create({
   card: {
@@ -25,9 +21,9 @@ const styles = StyleSheet.create({
   },
   rating: {
     color: YELLOW,
-    fontSize: 20,
+    fontSize: 30,
     margin: scaleSize(10),
-    fontWeight: FONT_WEIGHT_MEDIUM,
+    fontFamily: "PoppinsSemiBold",
   },
   info: {
     paddingHorizontal: scaleSize(10),
@@ -40,17 +36,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   name: {
-    fontWeight: FONT_WEIGHT_MEDIUM,
-    fontSize: 18,
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 20,
   },
   price: {
     fontFamily: "PoppinsExtraBold",
-    fontSize: 20,
+    fontSize: 26,
     marginBottom: scaleSize(5),
   },
   location: {
-    fontSize: 14,
+    fontSize: 16,
     marginBottom: scaleSize(20),
+    fontFamily: "PoppinsRegular",
   },
   extraOuterContainer: {
     flexDirection: "row",
@@ -60,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   extra: {
-    fontSize: 12,
+    fontSize: 14,
     color: GREY,
     textAlign: "center",
   },

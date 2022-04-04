@@ -13,19 +13,21 @@ let height = Dimensions.get("window").height; //full height
 console.log(width, height);
 
 const styles = StyleSheet.create({
-  scrollview: {
+  container: {
     flex: 1,
     backgroundColor: BACKGROUND,
-  },
-  container: {
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 50,
+  },
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: "center",
   },
   wrapper: {
     alignItems: "flex-start",
     justifyContent: "center",
     width: wp("80%"),
+    marginTop: 120,
   },
   textOne: {
     color: WHITE,
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
   backButtonView: {
     borderRadius: 15,
     borderColor: WHITE,
-    borderWidth: 1.5,
+    borderWidth: 1,
     width: wp("80%"),
     marginTop: 15,
   },
