@@ -28,6 +28,7 @@ const HomeScreen = ({ navigation }) => {
             source={require("../../../assets/images/community.jpg")}
             style={styles.backgroundImage}
             imageStyle={{ borderRadius: 20 }}
+            onPress={() => navigation.navigate("Community")}
           >
             <View style={styles.overlay}>
               <Text style={styles.subtitle}>Community</Text>
@@ -42,6 +43,7 @@ const HomeScreen = ({ navigation }) => {
             source={require("../../../assets/images/housing.jpg")}
             style={styles.backgroundImage}
             imageStyle={{ borderRadius: 20 }}
+            onPress={() => navigation.navigate("Housing")}
           >
             <View style={styles.overlay}>
               <Text style={styles.subtitle}>Housing</Text>
@@ -56,6 +58,7 @@ const HomeScreen = ({ navigation }) => {
             source={require("../../../assets/images/shopping.jpg")}
             style={styles.backgroundImage}
             imageStyle={{ borderRadius: 20 }}
+            onPress={() => navigation.navigate("Shopping")}
           >
             <View style={styles.overlay}>
               <Text style={styles.subtitle}>Shopping</Text>
@@ -84,6 +87,7 @@ const HomeScreen = ({ navigation }) => {
             source={require("../../../assets/images/profile.jpg")}
             style={styles.backgroundImage}
             imageStyle={{ borderRadius: 20 }}
+            onPress={() => navigation.navigate("Profile")}
           >
             <View style={styles.overlay}>
               <Text style={styles.subtitle}>Profile</Text>
