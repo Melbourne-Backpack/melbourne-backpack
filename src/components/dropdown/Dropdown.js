@@ -30,11 +30,11 @@ const Dropdown = ({ data = [], value = {}, onSelected = () => {} }) => {
         />
       </TouchableOpacity>
       {showOption && (
-        <View>
+        <View style={styles["optionWrapper"]}>
           {data.map((val) => {
             return (
               <TouchableOpacity key={val} onPress={() => onSelectedItem(val)}>
-                <Text style={{ color: WHITE }}>{val}</Text>
+                <Text style={styles["option"]}>{val}</Text>
               </TouchableOpacity>
             );
           })}

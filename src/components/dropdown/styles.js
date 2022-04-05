@@ -1,5 +1,11 @@
 import { StyleSheet } from "react-native";
-import { PLACEHOLDER, TEXT_INPUT, WHITE } from "../../styles/colors";
+import {
+  LIGHT_PURPLE,
+  PLACEHOLDER,
+  PURPLE_BLUE,
+  TEXT_INPUT,
+  WHITE,
+} from "../../styles/colors";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 const styles = StyleSheet.create({
@@ -18,8 +24,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginVertical: 10,
   },
+  optionWrapper: {},
   option: {
+    borderRadius: 20,
+    width: wp("80%"),
+    paddingVertical: 15,
+    paddingHorizontal: 30,
     color: WHITE,
+    fontFamily: "PoppinsSemiBold",
+    marginVertical: 3,
+    textAlign: "center",
   },
 });
 
