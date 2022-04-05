@@ -16,6 +16,9 @@ import * as ImagePicker from "expo-image-picker";
 import { PLACEHOLDER } from "../../../styles/colors";
 import { pushData } from "../../../api/handleData";
 import { auth } from "../../../config/firebase";
+import Dropdown from "../../../components/dropdown/Dropdown";
+
+let data = ["Exchange", "Transfer", "Get Information"];
 
 const Form = ({ navigation }) => {
   const [image, setImage] = useState(null);
@@ -28,6 +31,12 @@ const Form = ({ navigation }) => {
   const [bio, setBio] = useState("");
   const [hasPermission, setHasPermission] = useState(null);
 
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const onSelected = (item) => {
+    setSelectedItem(item);
+    setPurpose(item);
+  };
   useEffect(() => {
     (async () => {
       const galleryStatus =
@@ -98,12 +107,11 @@ const Form = ({ navigation }) => {
               onChangeText={(text) => setFullName(text)}
               defaultValue={fullName}
             />
-            <TextInput
-              style={styles.textInput}
-              placeholder={"Why are you using this app"}
-              placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => setPurpose(text)}
-              defaultValue={purpose}
+
+            <Dropdown
+              data={data}
+              onSelected={onSelected}
+              value={selectedItem}
             />
             <TextInput
               style={styles.textInput}

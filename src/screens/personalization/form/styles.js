@@ -10,6 +10,7 @@ import {
   SELECTED_BUTTON,
   TEXT_INPUT,
   YELLOW,
+  PLACEHOLDER,
 } from "../../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsMedium",
     marginVertical: 10,
   },
+
   introduction: {
     paddingBottom: 100,
   },

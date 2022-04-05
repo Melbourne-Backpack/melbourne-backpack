@@ -17,12 +17,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APPID,
+  apiKey: "AIzaSyCLZhG8wXVb8_B0qX4non3ZgP4-VVqGvGw",
+  authDomain: "melbourne-backpack.firebaseapp.com",
+  projectId: "melbourne-backpack",
+  storageBucket: "melbourne-backpack.appspot.com",
+  messagingSenderId: "675237133664",
+  appId: "1:675237133664:web:32110119e2d1f78fb3b205",
 };
 
 // Initialize Firebase
