@@ -25,7 +25,7 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
     filterMaxCardsPerPageInitial
   );
   // const filter = {};
-  const [filter, setFilter] = useState({});
+  let filter = useState();
   const [submitted, setSubmitted] = useState(false);
   const [loaded, error] = useFonts({
     PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
@@ -90,14 +90,17 @@ const CommunityFilter = ({ headingList, optionList, navigation, userList }) => {
                   setSubmitted((prev) => !prev);
                   setData([]);
                   userList.map((user) => {
+                    let added = 0;
                     headings.map((heading) => {
                       filter[heading].map((option) => {
                         if (
-                          (!data.includes(option) &&
-                            user[heading].includes(option)) ||
+                          user[heading].includes(option) ||
                           user[heading] === option
                         ) {
-                          setData((prevState) => [...prevState, user]);
+                          if (added === 0) {
+                            setData((data) => [...data, user]);
+                            added++;
+                          }
                         }
                       });
                     });

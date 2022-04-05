@@ -7,8 +7,7 @@ import { useFonts } from "expo-font";
 
 const CommunityScreen = ({ navigation }) => {
   const mostLikeYouMaxCards = 4;
-  const self = "2";
-  let mostLikeYouCount = 0;
+  const self = "1";
 
   const [loaded, error] = useFonts({
     PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
@@ -41,7 +40,6 @@ const CommunityScreen = ({ navigation }) => {
         !temp.includes(id.toString())
       ) {
         temp.push(user);
-        mostLikeYouCount++;
       }
 
       if (
@@ -56,21 +54,19 @@ const CommunityScreen = ({ navigation }) => {
             myTopic.map((topic) => {
               if (user.topic.includes(topic)) {
                 temp.push(user);
-                mostLikeYouCount++;
               }
             });
           }
         }
       }
-
-      if (mostLikeYouCount === mostLikeYouMaxCards) {
-        break;
-      }
     }
     return temp;
   };
 
-  const mostLikeYouDataForDisplay = mostLikeYouData();
+  const mostLikeYouDataForDisplay = mostLikeYouData().splice(
+    0,
+    mostLikeYouMaxCards
+  );
   const campus = [
     {
       id: 1,
