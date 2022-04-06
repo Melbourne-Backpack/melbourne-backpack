@@ -16,7 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 import { PLACEHOLDER } from "../../../styles/colors";
 import { pushData } from "../../../api/handleData";
 import { auth } from "../../../config/firebase";
-import storage from "@react-native-firebase/storage";
+// import storage from "@react-native-firebase/storage";
 import Dropdown from "../../../components/dropdown/Dropdown";
 
 let data = ["Exchange", "Transfer", "Get Information"];

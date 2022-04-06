@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
   },
   optionWrapper: {},
   option: {
+    borderColor: WHITE,
+    borderWidth: 1,
     borderRadius: 20,
     width: wp("80%"),
     paddingVertical: 15,
