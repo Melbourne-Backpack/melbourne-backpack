@@ -16,6 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 import { PLACEHOLDER } from "../../../styles/colors";
 import { pushData } from "../../../api/handleData";
 import { auth } from "../../../config/firebase";
+import storage from "@react-native-firebase/storage";
 import Dropdown from "../../../components/dropdown/Dropdown";
 
 let data = ["Exchange", "Transfer", "Get Information"];
@@ -23,6 +24,8 @@ let data = ["Exchange", "Transfer", "Get Information"];
 const Form = ({ navigation }) => {
   const [image, setImage] = useState(null);
   const [imageObject, setImageObject] = useState({});
+  const [uploading, setUploading] = useState(false);
+  const [transferred, setTransferred] = useState(0);
 
   // Information
   const [fullName, setFullName] = useState("");
@@ -78,6 +81,55 @@ const Form = ({ navigation }) => {
         setImage(result.uri);
         setImageObject(result);
       }
+    }
+  };
+
+  const uploadImage = async () => {
+    if (image == null) {
+      return null;
+    }
+    const uploadUri = image;
+    let filename = uploadUri.substring(uploadUri.lastIndexOf("/") + 1);
+
+    // Add timestamp to File Name
+    const extension = filename.split(".").pop();
+    const name = filename.split(".").slice(0, -1).join(".");
+    filename = name + Date.now() + "." + extension;
+
+    setUploading(true);
+    setTransferred(0);
+
+    const storageRef = storage().ref(`photos/${filename}`);
+    const task = storageRef.putFile(uploadUri);
+
+    // Set transferred state
+    task.on("state_changed", (taskSnapshot) => {
+      console.log(
+        `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`
+      );
+
+      setTransferred(
+        Math.round(taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) *
+          100
+      );
+    });
+
+    try {
+      await task;
+
+      const url = await storageRef.getDownloadURL();
+
+      setUploading(false);
+      setImage(null);
+
+      // Alert.alert(
+      //   'Image uploaded!',
+      //   'Your image has been uploaded to the Firebase Cloud Storage Successfully!',
+      // );
+      return url;
+    } catch (e) {
+      console.log(e);
+      return null;
     }
   };
 
@@ -204,18 +256,19 @@ const Form = ({ navigation }) => {
                   auth.currentUser?.uid,
                   auth.currentUser?.email,
                   fullName,
-                  imageObject,
                   purpose,
                   facebook,
                   bio
                 );
+                uploadImage(image);
                 checkValidate(fullName);
                 checkValidate(facebook);
                 checkValidate(bio);
                 if (
                   fullNameValidate.valid &&
+                  purposeValidate.valid &&
                   facebookValidate.valid &&
-                  bioValidate.valid
+                  bioValidate.valid === true
                 ) {
                   navigation.navigate("Ready");
                 }
