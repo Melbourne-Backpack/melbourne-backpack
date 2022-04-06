@@ -1,14 +1,15 @@
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { WHITE } from "../../styles/colors";
+import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { WHITE, YELLOW } from "../../styles/colors";
 import styles from "./styles";
+import { useFonts } from "expo-font";
 
 const HousingDetailScreen = () => {
   const data = {
     name: "4 bedroom apartment deluxe",
     building: "Dwell Student Housing",
     address: "250 Spencer Street, Melbourne VIC 3000",
-    rating: 4.0,
+    rating: "4.0",
     tags: ["Northwest", "Apartment", "Student Housing"],
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
@@ -17,7 +18,7 @@ const HousingDetailScreen = () => {
       "has survived not only five centuries, but also the leap into electronic typesetting, " +
       "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset " +
       "sheets containing Lorem Ipsum passages, and more recently with desktop publishing software " +
-      "like Aldus PageMaker including versions of Lorem Ipsum. \nContrary to popular belief, Lorem " +
+      "like Aldus PageMaker including versions of Lorem Ipsum. \n\nContrary to popular belief, Lorem " +
       "Ipsum is not simply random text. It has roots in a piece of classical Latin literature from " +
       "45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney " +
       "College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem " +
@@ -28,6 +29,7 @@ const HousingDetailScreen = () => {
       '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
     comments: {
       username: "Go Junho",
+      avatar: "",
       rating: 4.5,
       comment:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet lacinia aliquam. " +
@@ -38,15 +40,50 @@ const HousingDetailScreen = () => {
     },
   };
 
+  const [loaded, error] = useFonts({
+    PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
+    PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
+    PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
+
   return (
-    <ScrollView style={styles.container}>
-      <SafeAreaView>
-        <View style={styles.header}>
-          <Ionicons name="chevron-back" size={30} color={WHITE} />
-          <Text style={styles.building}>{data.building}</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Ionicons name="chevron-back" size={30} color={WHITE} />
+        <Text style={[styles.building, styles.text]}>{data.building}</Text>
+      </View>
+
+      <ScrollView style={styles.wrapper}>
+        <Image
+          source={require("../../../assets/images/student-room.jpg")}
+          style={styles.img}
+        />
+        <Text style={[styles.text, styles.name]}>{data.name}</Text>
+        <Text style={[styles.text, styles.address]}>{data.address}</Text>
+
+        <View style={styles.starContainer}>
+          <AntDesign name="star" size={30} color={YELLOW} style={styles.star} />
+          <AntDesign name="star" size={30} color={YELLOW} style={styles.star} />
+          <AntDesign name="star" size={30} color={YELLOW} style={styles.star} />
+          <AntDesign name="star" size={30} color={YELLOW} style={styles.star} />
+          <AntDesign
+            name="staro"
+            size={30}
+            color={YELLOW}
+            style={styles.star}
+          />
+          <Text style={[styles.text, styles.rating]}>{data.rating}</Text>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+
+        <Text style={styles.text}>Description</Text>
+        <Text style={styles.text}>{data.description}</Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

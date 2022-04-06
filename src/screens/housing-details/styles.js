@@ -1,20 +1,61 @@
 import { StyleSheet } from "react-native";
-import { BACKGROUND, WHITE } from "../../styles/colors";
+import { BACKGROUND, WHITE, YELLOW } from "../../styles/colors";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { scaleSize } from "../../styles/scale";
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: BACKGROUND,
-    padding: "5%",
+    position: "absolute",
+    bottom: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+  wrapper: {
+    paddingHorizontal: wp(7),
+    marginTop: wp(7),
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: wp(5),
+    paddingHorizontal: wp(3),
+  },
+  text: {
+    color: WHITE,
   },
   building: {
-    color: WHITE,
-    fontSize: 20,
-    marginLeft: wp(10),
+    fontSize: 18,
+    fontFamily: "PoppinsMedium",
+    marginLeft: wp(12),
+  },
+  img: {
+    width: "100%",
+    height: scaleSize(300),
+  },
+  name: {
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 25,
+    marginVertical: wp(5),
+  },
+  address: {
+    fontFamily: "PoppinsRegular",
+    fontSize: 18,
+    textTransform: "uppercase",
+    marginBottom: wp(1),
+  },
+  starContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  star: {
+    marginRight: wp(2),
+  },
+  rating: {
+    fontFamily: "PoppinsSemiBold",
+    color: YELLOW,
+    fontSize: 30,
   },
 });
 
