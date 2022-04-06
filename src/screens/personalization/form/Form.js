@@ -29,6 +29,20 @@ const Form = ({ navigation }) => {
   const [purpose, setPurpose] = useState("");
   const [facebook, setFacebook] = useState("");
   const [bio, setBio] = useState("");
+
+  const [fullNameValidate, setFullNameValidate] = useState({
+    error: "",
+    valid: false,
+  });
+  const [purposeValidate, setPurposeValidate] = useState({
+    error: "",
+    valid: false,
+  });
+  const [facebookValidate, setFacebookValidate] = useState({
+    error: "",
+    valid: false,
+  });
+  const [bioValidate, setBioValidate] = useState({ error: "", valid: false });
   const [hasPermission, setHasPermission] = useState(null);
 
   const [selectedItem, setSelectedItem] = useState(null);
@@ -77,6 +91,33 @@ const Form = ({ navigation }) => {
     return null;
   }
 
+  const checkValidate = (component) => {
+    if (component === fullName && fullName === "") {
+      setFullNameValidate({ error: "*Full name is required", valid: false });
+    } else {
+      setFullNameValidate({ error: "", valid: true });
+    }
+
+    if (component === purpose && purpose === "") {
+      setPurposeValidate({ error: "*Purpose is required", valid: false });
+    } else {
+      setPurposeValidate({ error: "", valid: true });
+    }
+    if (component === facebook && facebook === "") {
+      setFacebookValidate({
+        error: "*Facebook link is required",
+        valid: false,
+      });
+    } else {
+      setFacebookValidate({ error: "", valid: true });
+    }
+    if (component === bio && bio === "") {
+      setBioValidate({ error: "*Introduction is required", valid: false });
+    } else {
+      setBioValidate({ error: "", valid: true });
+    }
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -104,29 +145,50 @@ const Form = ({ navigation }) => {
               style={styles.textInput}
               placeholder={"Full Name"}
               placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => setFullName(text)}
+              onChangeText={(text) => {
+                setFullName(text);
+              }}
               defaultValue={fullName}
             />
+            <View style={styles.errorHolder}>
+              <Text style={styles.error}>{fullNameValidate.error}</Text>
+            </View>
 
             <Dropdown
               data={data}
               onSelected={onSelected}
               value={selectedItem}
             />
+            <View style={styles.errorHolder}>
+              <Text style={styles.error}>{purposeValidate.error}</Text>
+            </View>
+
             <TextInput
               style={styles.textInput}
               placeholder={"Facebook Link"}
               placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => setFacebook(text)}
+              onChangeText={(text) => {
+                setFacebook(text);
+              }}
               defaultValue={facebook}
             />
+            <View style={styles.errorHolder}>
+              <Text style={styles.error}>{facebookValidate.error}</Text>
+            </View>
+
             <TextInput
               style={[styles.textInput, styles.introduction]}
               placeholder={"Introduce yourself"}
               placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => setBio(text)}
+              onChangeText={(text) => {
+                setBio(text);
+              }}
               defaultValue={bio}
             />
+            <View style={styles.errorHolder}>
+              <Text style={styles.error}>{bioValidate.error}</Text>
+            </View>
+
             <View style={styles.textController}>
               <Text style={styles.normalText}>
                 By submitting, you agree to our{" "}
@@ -147,7 +209,16 @@ const Form = ({ navigation }) => {
                   facebook,
                   bio
                 );
-                navigation.navigate("Ready");
+                checkValidate(fullName);
+                checkValidate(facebook);
+                checkValidate(bio);
+                if (
+                  fullNameValidate.valid &&
+                  facebookValidate.valid &&
+                  bioValidate.valid
+                ) {
+                  navigation.navigate("Ready");
+                }
               }}
             >
               <View style={styles.nextButtonView}>

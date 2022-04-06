@@ -11,6 +11,7 @@ import {
   TEXT_INPUT,
   YELLOW,
   PLACEHOLDER,
+  RED,
 } from "../../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
@@ -55,6 +56,14 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsMedium",
     marginVertical: 10,
   },
+  errorHolder: {
+    width: wp("80%"),
+    alignItems: "flex-start",
+  },
+  error: {
+    color: RED,
+    fontFamily: "PoppinsSemiBold",
+  },
 
   introduction: {
     paddingBottom: 100,
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
     width: wp("80%"),
     flexDirection: "row",
     flexWrap: "wrap",
+    marginTop: 20,
   },
   normalText: {
     fontFamily: "PoppinsRegular",
