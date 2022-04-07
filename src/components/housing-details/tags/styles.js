@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: WHITE,
-    fontFamily: "PoppinsSemiBold",
+    fontFamily: "PoppinsMedium",
     fontSize: 16,
   },
 });

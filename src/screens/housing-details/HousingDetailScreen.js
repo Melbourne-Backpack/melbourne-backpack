@@ -48,8 +48,7 @@ const HousingDetailScreen = () => {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet lacinia aliquam. " +
           "Integer non augue dui. Proin a odio rhoncus, fermentum magna ac, maximus quam. Curabitur eget " +
           "risus ex. Maecenas egestas bibendum urna iaculis ullamcorper. Cras sed egestas velit, eget " +
-          "facilisis tellus. Curabitur ac ipsum eu ex pharetra bibendum. Sed vel enim porta, condimentum " +
-          "nunc et, interdum dui. Nullam bibendum ipsum nisi, id condimentum velit tincidunt non.",
+          "facilisis tellus. Curabitur ac ipsum eu ex pharetra bibendum.",
       },
       {
         username: "Han Sooyoung",
@@ -133,8 +132,8 @@ const HousingDetailScreen = () => {
             RMIT student's reviews
           </Text>
 
-          {data.reviews.map((review) => (
-            <Review review={review} />
+          {data.reviews.map((review, id) => (
+            <Review key={id} review={review} />
           ))}
         </View>
       </ScrollView>

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     height: scaleSize(300),
   },
   name: {
-    fontFamily: "PoppinsSemiBold",
+    fontFamily: "PoppinsBold",
     fontSize: 25,
     marginVertical: wp(5),
   },
@@ -64,14 +64,14 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontFamily: "PoppinsSemiBold",
-    fontSize: 18,
+    fontSize: 20,
     marginTop: wp(10),
-    marginBottom: wp(2),
+    marginBottom: wp(5),
   },
   desc: {
     marginBottom: wp(5),
-    fontSize: 16,
-    textAlign: "justify",
+    fontFamily: "PoppinsRegular",
+    fontSize: 15,
   },
   addReview: {
     flexDirection: "row",
@@ -82,13 +82,13 @@ const styles = StyleSheet.create({
   },
   addReviewTitle: {
     fontFamily: "PoppinsSemiBold",
-    fontSize: 18,
+    fontSize: 20,
   },
   comment: {
     backgroundColor: TEXT_INPUT,
     borderRadius: 20,
-    paddingVertical: 40,
-    paddingHorizontal: 30,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
     fontFamily: "PoppinsRegular",
     marginBottom: 30,
     textAlignVertical: "top",

@@ -4,7 +4,7 @@ import { useFonts } from "expo-font";
 
 const Tag = ({ text }) => {
   const [loaded, error] = useFonts({
-    PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
+    PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
   });
   if (!loaded) {
     return null;
