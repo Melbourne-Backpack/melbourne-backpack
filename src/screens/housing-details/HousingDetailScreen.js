@@ -3,6 +3,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { WHITE, YELLOW } from "../../styles/colors";
 import styles from "./styles";
 import { useFonts } from "expo-font";
+import Tag from "../../components/housing-details/Tag";
 
 const HousingDetailScreen = () => {
   const data = {
@@ -80,8 +81,16 @@ const HousingDetailScreen = () => {
           <Text style={[styles.text, styles.rating]}>{data.rating}</Text>
         </View>
 
-        <Text style={styles.text}>Description</Text>
-        <Text style={styles.text}>{data.description}</Text>
+        <View style={styles.tagContainer}>
+          {data.tags.map((tag, id) => {
+            return <Tag key={id} text={tag} />;
+          })}
+        </View>
+
+        <Text style={[styles.text, styles.sectionTitle]}>Description</Text>
+        <Text style={[styles.text, styles.desc]}>{data.description}</Text>
+
+        <Text style={[styles.text, styles.sectionTitle]}>Review</Text>
       </ScrollView>
     </SafeAreaView>
   );

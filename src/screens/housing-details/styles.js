@@ -57,6 +57,22 @@ const styles = StyleSheet.create({
     color: YELLOW,
     fontSize: 30,
   },
+  tagContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: wp(5),
+  },
+  sectionTitle: {
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 18,
+    marginTop: wp(10),
+    marginBottom: wp(2),
+  },
+  desc: {
+    marginBottom: wp(5),
+    fontSize: 16,
+    textAlign: "justify",
+  },
 });
 
 export default styles;
