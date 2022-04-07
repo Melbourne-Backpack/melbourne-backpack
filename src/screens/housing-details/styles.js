@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { BACKGROUND, WHITE, YELLOW } from "../../styles/colors";
+import { BACKGROUND, TEXT_INPUT, WHITE, YELLOW } from "../../styles/colors";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { scaleSize } from "../../styles/scale";
 
@@ -72,6 +72,15 @@ const styles = StyleSheet.create({
     marginBottom: wp(5),
     fontSize: 16,
     textAlign: "justify",
+  },
+  comment: {
+    backgroundColor: TEXT_INPUT,
+    borderRadius: 20,
+    paddingVertical: 40,
+    paddingHorizontal: 30,
+    fontFamily: "PoppinsRegular",
+    marginBottom: 700,
+    textAlignVertical: "top",
   },
 });
 

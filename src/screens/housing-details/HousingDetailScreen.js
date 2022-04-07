@@ -1,11 +1,21 @@
-import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
-import { WHITE, YELLOW } from "../../styles/colors";
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import { AntDesign, Ionicons, Entypo } from "@expo/vector-icons";
+import { PLACEHOLDER, WHITE, YELLOW } from "../../styles/colors";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import Tag from "../../components/housing-details/Tag";
+import { useState } from "react";
 
 const HousingDetailScreen = () => {
+  const [myComment, setMyComment] = useState("");
+
   const data = {
     name: "4 bedroom apartment deluxe",
     building: "Dwell Student Housing",
@@ -91,6 +101,17 @@ const HousingDetailScreen = () => {
         <Text style={[styles.text, styles.desc]}>{data.description}</Text>
 
         <Text style={[styles.text, styles.sectionTitle]}>Review</Text>
+        <View>
+          <Entypo name="pencil" size={24} color={YELLOW} />
+          <TextInput
+            placeholder="Enter comment..."
+            placeholderTextColor={PLACEHOLDER}
+            multiline
+            onChangeText={setMyComment}
+            value={myComment}
+            style={[styles.text, styles.comment]}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
