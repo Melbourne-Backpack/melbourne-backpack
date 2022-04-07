@@ -6,12 +6,13 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { AntDesign, Ionicons, Entypo } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE, YELLOW } from "../../styles/colors";
 import styles from "./styles";
 import { useFonts } from "expo-font";
-import Tag from "../../components/housing-details/Tag";
+import Tag from "../../components/housing-details/tags/Tag";
 import { useState } from "react";
+import Review from "../../components/housing-details/reviews/Review";
 
 const HousingDetailScreen = () => {
   const [myComment, setMyComment] = useState("");
@@ -38,17 +39,28 @@ const HousingDetailScreen = () => {
       'et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise ' +
       "on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, " +
       '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
-    comments: {
-      username: "Go Junho",
-      avatar: "",
-      rating: 4.5,
-      comment:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet lacinia aliquam. " +
-        "Integer non augue dui. Proin a odio rhoncus, fermentum magna ac, maximus quam. Curabitur eget " +
-        "risus ex. Maecenas egestas bibendum urna iaculis ullamcorper. Cras sed egestas velit, eget " +
-        "facilisis tellus. Curabitur ac ipsum eu ex pharetra bibendum. Sed vel enim porta, condimentum " +
-        "nunc et, interdum dui. Nullam bibendum ipsum nisi, id condimentum velit tincidunt non.",
-    },
+    reviews: [
+      {
+        username: "Go Junho",
+        avatar: "",
+        rating: 4.5,
+        comment:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet lacinia aliquam. " +
+          "Integer non augue dui. Proin a odio rhoncus, fermentum magna ac, maximus quam. Curabitur eget " +
+          "risus ex. Maecenas egestas bibendum urna iaculis ullamcorper. Cras sed egestas velit, eget " +
+          "facilisis tellus. Curabitur ac ipsum eu ex pharetra bibendum. Sed vel enim porta, condimentum " +
+          "nunc et, interdum dui. Nullam bibendum ipsum nisi, id condimentum velit tincidunt non.",
+      },
+      {
+        username: "Han Sooyoung",
+        avatar: "",
+        rating: 4.2,
+        comment:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet lacinia aliquam. " +
+          "Integer non augue dui. Proin a odio rhoncus, fermentum magna ac, maximus quam. Curabitur eget " +
+          "risus ex. Maecenas egestas bibendum urna iaculis ullamcorper.",
+      },
+    ],
   };
 
   const [loaded, error] = useFonts({
@@ -100,17 +112,30 @@ const HousingDetailScreen = () => {
         <Text style={[styles.text, styles.sectionTitle]}>Description</Text>
         <Text style={[styles.text, styles.desc]}>{data.description}</Text>
 
-        <Text style={[styles.text, styles.sectionTitle]}>Review</Text>
+        <View style={styles.addReview}>
+          <Text style={[styles.text, styles.addReviewTitle]}>
+            Add your review
+          </Text>
+          <AntDesign name="plussquare" size={24} color={YELLOW} />
+        </View>
+
+        <TextInput
+          placeholder="Enter comment..."
+          placeholderTextColor={PLACEHOLDER}
+          multiline
+          onChangeText={setMyComment}
+          value={myComment}
+          style={[styles.text, styles.comment]}
+        />
+
         <View>
-          <Entypo name="pencil" size={24} color={YELLOW} />
-          <TextInput
-            placeholder="Enter comment..."
-            placeholderTextColor={PLACEHOLDER}
-            multiline
-            onChangeText={setMyComment}
-            value={myComment}
-            style={[styles.text, styles.comment]}
-          />
+          <Text style={[styles.text, styles.sectionTitle]}>
+            RMIT student's reviews
+          </Text>
+
+          {data.reviews.map((review) => (
+            <Review review={review} />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>

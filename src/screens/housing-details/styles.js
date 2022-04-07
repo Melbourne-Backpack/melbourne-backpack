@@ -73,13 +73,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "justify",
   },
+  addReview: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: wp(10),
+    marginBottom: wp(5),
+  },
+  addReviewTitle: {
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 18,
+  },
   comment: {
     backgroundColor: TEXT_INPUT,
     borderRadius: 20,
     paddingVertical: 40,
     paddingHorizontal: 30,
     fontFamily: "PoppinsRegular",
-    marginBottom: 700,
+    marginBottom: 30,
     textAlignVertical: "top",
   },
 });
