@@ -1,20 +1,13 @@
 import { collection, addDoc, doc, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "../config/firebase";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { storage } from "../config/firebase";
 
-const pushData = async (
-  uid,
-  email,
-  fullName,
-  avatar,
-  purpose,
-  facebook,
-  bio
-) => {
+const pushData = async (uid, email, fullName, purpose, facebook, bio) => {
   try {
     await setDoc(doc(db, "users", uid), {
       email: email,
       fullName: fullName,
-      avatar: avatar,
       purpose: purpose,
       facebook: facebook,
       bio: bio,
@@ -25,4 +18,17 @@ const pushData = async (
   }
 };
 
-export { pushData };
+const uploadImage = async (uri, filename) => {
+  try {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    const ref = storage.ref(`avatar/${filename}`);
+    console.log("Upload image success");
+    return ref.put(blob);
+  } catch (e) {
+    console.log("Error upload image", e);
+  }
+};
+
+export { pushData, uploadImage };
