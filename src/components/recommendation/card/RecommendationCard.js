@@ -8,8 +8,11 @@ import {
 import styles from "./styles";
 import { GREY, YELLOW } from "../../../styles/colors";
 import { useFonts } from "expo-font";
+import { useNavigation } from "@react-navigation/native";
 
 const RecommendationCard = ({ data, housing }) => {
+  const navigation = useNavigation();
+
   const [loaded, error] = useFonts({
     PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
@@ -22,33 +25,45 @@ const RecommendationCard = ({ data, housing }) => {
 
   return (
     <View style={styles.card}>
-      <TouchableOpacity activeOpacity={0.5}>
+      {housing !== true ? (
         <ImageBackground
           source={require("../../../../assets/images/student-housing.jpg")}
           style={styles.backgroundImg}
           imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
           resizeMode="cover"
         >
-          <View style={styles.overlay}>
-            {housing !== true ? (
-              <></>
-            ) : (
+          <View style={styles.overlay} />
+        </ImageBackground>
+      ) : (
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate("Details")}
+        >
+          <ImageBackground
+            source={require("../../../../assets/images/student-housing.jpg")}
+            style={styles.backgroundImg}
+            imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+            resizeMode="cover"
+          >
+            <View style={styles.overlay}>
               <Text style={styles.rating}>
                 {data.rating} <AntDesign name="star" size={30} color={YELLOW} />
               </Text>
-            )}
-          </View>
-        </ImageBackground>
-      </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
+      )}
 
       <View style={styles.info}>
-        <TouchableOpacity>
-          <Text style={[styles.name, styles.text]}>{data.name}</Text>
-        </TouchableOpacity>
         {housing !== true ? (
-          <></>
+          <Text style={[styles.name, styles.text]}>{data.name}</Text>
         ) : (
-          <Text style={[styles.price, styles.text]}>${data.price}</Text>
+          <View>
+            <TouchableOpacity onPress={() => navigation.navigate("Details")}>
+              <Text style={[styles.name, styles.text]}>{data.name}</Text>
+            </TouchableOpacity>
+            <Text style={[styles.price, styles.text]}>${data.price}</Text>
+          </View>
         )}
         <Text style={[styles.text, styles.location]}>
           <Ionicons name="location-sharp" size={16} color="white" />{" "}

@@ -4,6 +4,7 @@ import {
   ScrollView,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -14,7 +15,7 @@ import Tag from "../../components/housing-details/tags/Tag";
 import { useState } from "react";
 import Review from "../../components/housing-details/reviews/Review";
 
-const HousingDetailScreen = () => {
+const HousingDetailScreen = ({ navigation: { goBack } }) => {
   const [myComment, setMyComment] = useState("");
   const [addReviewVisible, setAddReviewVisible] = useState(false);
   const [otherReviewVisible, setOtherReviewVisible] = useState(false);
@@ -78,7 +79,9 @@ const HousingDetailScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Ionicons name="chevron-back" size={30} color={WHITE} />
+        <TouchableOpacity onPress={() => goBack()}>
+          <Ionicons name="chevron-back" size={30} color={WHITE} />
+        </TouchableOpacity>
         <Text style={[styles.building, styles.text]}>{data.building}</Text>
       </View>
 
