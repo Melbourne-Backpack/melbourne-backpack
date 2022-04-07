@@ -23,8 +23,10 @@ LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
 const Campus = ({ navigation }) => {
   // handle Selected button
-  const [selectedData, setSelectedData] = React.useState([]);
-  const [choose, setChoose] = React.useState(false);
+  const [selectedCity, setSelectedCity] = useState("");
+  const [hanoiSelected, setHanoiSelected] = useState(false);
+  const [danangSelected, setDanangSelected] = useState(false);
+  const [saigonSelected, setSaigonSelected] = useState(false);
 
   // handle Text Input value
   const [text, setText] = useState("");
@@ -38,7 +40,31 @@ const Campus = ({ navigation }) => {
     return null;
   }
 
-  const multipleData = ["Hanoi", "Da Nang", "Sai Gon"];
+  const city = [
+    { city: "Hanoi", selected: hanoiSelected },
+    { city: "Da Nang", selected: danangSelected },
+    { city: "Saigon", selected: saigonSelected },
+  ];
+
+  const handleToggle = (campus) => {
+    if (campus.city === "Hanoi" && campus.selected === false) {
+      setHanoiSelected(true);
+    } else {
+      setHanoiSelected(false);
+    }
+
+    if (campus.city === "Da Nang" && campus.selected === false) {
+      setDanangSelected(true);
+    } else {
+      setDanangSelected(false);
+    }
+
+    if (campus.city === "Saigon" && campus.selected === false) {
+      setSaigonSelected(true);
+    } else {
+      setSaigonSelected(false);
+    }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -54,42 +80,37 @@ const Campus = ({ navigation }) => {
             onChangeText={(text) => setText(text)}
             defaultValue={text}
           >
-            {choose ? _.join(selectedData, ", ") : ""}
+            {selectedCity}
           </TextInput>
           <View style={styles.buttonWrapper}>
-            {multipleData.map((campus) => (
-              <SelectMultipleButton
-                key={campus}
-                buttonViewStyle={styles.buttonViewStyle}
-                textStyle={styles.textStyle}
-                highLightStyle={{
-                  borderColor: WHITE,
-                  backgroundColor: "transparent",
-                  textColor: WHITE,
-                  borderTintColor: DARK_BLUE,
-                  backgroundTintColor: SELECTED_BUTTON,
-                  textTintColor: WHITE,
-                }}
-                value={campus}
-                selected={selectedData.includes(campus)}
-                singleTap={(valueTap) => {
-                  console.log(selectedData.includes(campus));
-                  if (selectedData.includes(campus)) {
-                    _.remove(selectedData, (ele) => {
-                      return ele === campus;
-                    });
-                  } else {
-                    selectedData.push(campus);
+            {city.map((campus) => {
+              return (
+                <TouchableOpacity
+                  key={campus.city}
+                  style={
+                    campus.selected
+                      ? styles.buttonSelectedStyle
+                      : styles.buttonViewStyle
                   }
-                  console.log(selectedData);
-                  console.log(selectedData.includes(campus));
-                  setSelectedData(selectedData);
-                  setChoose(selectedData.includes(campus));
-                }}
-              />
-            ))}
+                  onPress={() => {
+                    handleToggle(campus);
+                    if (campus.selected === false) {
+                      setSelectedCity(campus.city);
+                    } else {
+                      setSelectedCity("");
+                    }
+                  }}
+                >
+                  <Text style={styles.textStyle}>{campus.city}</Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Subject", { campus: selectedCity })
+            }
+          >
             <View style={styles.nextButtonView}>
               <Text style={styles.nextButtonText}>Next</Text>
             </View>
