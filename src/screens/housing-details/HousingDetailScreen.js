@@ -16,6 +16,8 @@ import Review from "../../components/housing-details/reviews/Review";
 
 const HousingDetailScreen = () => {
   const [myComment, setMyComment] = useState("");
+  const [addReviewVisible, setAddReviewVisible] = useState(false);
+  const [otherReviewVisible, setOtherReviewVisible] = useState(false);
 
   const data = {
     name: "4 bedroom apartment deluxe",
@@ -108,33 +110,70 @@ const HousingDetailScreen = () => {
           })}
         </View>
 
-        <Text style={[styles.text, styles.sectionTitle]}>Description</Text>
+        <View style={styles.sectionHeader}>
+          <Text style={[styles.text, styles.sectionTitle]}>Description</Text>
+        </View>
         <Text style={[styles.text, styles.desc]}>{data.description}</Text>
 
-        <View style={styles.addReview}>
-          <Text style={[styles.text, styles.addReviewTitle]}>
+        <View style={styles.sectionHeader}>
+          <Text style={[styles.text, styles.sectionTitle]}>
             Add your review
           </Text>
-          <AntDesign name="plussquare" size={24} color={YELLOW} />
+          {addReviewVisible ? (
+            <AntDesign
+              name="minussquare"
+              size={28}
+              color={YELLOW}
+              onPress={() => setAddReviewVisible(!addReviewVisible)}
+            />
+          ) : (
+            <AntDesign
+              name="plussquare"
+              size={28}
+              color={YELLOW}
+              onPress={() => setAddReviewVisible(!addReviewVisible)}
+            />
+          )}
         </View>
 
-        <TextInput
-          placeholder="Enter comment..."
-          placeholderTextColor={PLACEHOLDER}
-          multiline
-          onChangeText={setMyComment}
-          value={myComment}
-          style={[styles.text, styles.comment]}
-        />
+        {addReviewVisible ? (
+          <TextInput
+            placeholder="Enter comment..."
+            placeholderTextColor={PLACEHOLDER}
+            multiline
+            onChangeText={setMyComment}
+            value={myComment}
+            style={[styles.text, styles.comment]}
+          />
+        ) : null}
 
-        <View>
-          <Text style={[styles.text, styles.sectionTitle]}>
-            RMIT student's reviews
-          </Text>
+        <View style={styles.reviewContainer}>
+          <View style={styles.sectionHeader}>
+            <Text style={[styles.text, styles.sectionTitle]}>
+              RMIT students' reviews
+            </Text>
+            {otherReviewVisible ? (
+              <AntDesign
+                name="minussquare"
+                size={28}
+                color={YELLOW}
+                onPress={() => setOtherReviewVisible(!otherReviewVisible)}
+              />
+            ) : (
+              <AntDesign
+                name="plussquare"
+                size={28}
+                color={YELLOW}
+                onPress={() => setOtherReviewVisible(!otherReviewVisible)}
+              />
+            )}
+          </View>
 
-          {data.reviews.map((review, id) => (
-            <Review key={id} review={review} />
-          ))}
+          {otherReviewVisible
+            ? data.reviews.map((review, id) => (
+                <Review key={id} review={review} />
+              ))
+            : null}
         </View>
       </ScrollView>
     </SafeAreaView>
