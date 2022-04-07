@@ -31,17 +31,17 @@ const Form = ({ navigation }) => {
 
   const [fullNameValidate, setFullNameValidate] = useState({
     error: "",
-    valid: false,
+    valid: true,
   });
   const [purposeValidate, setPurposeValidate] = useState({
     error: "",
-    valid: false,
+    valid: true,
   });
   const [facebookValidate, setFacebookValidate] = useState({
     error: "",
-    valid: false,
+    valid: true,
   });
-  const [bioValidate, setBioValidate] = useState({ error: "", valid: false });
+  const [bioValidate, setBioValidate] = useState({ error: "", valid: true });
   const [hasPermission, setHasPermission] = useState(null);
 
   const [selectedItem, setSelectedItem] = useState(null);
@@ -199,6 +199,10 @@ const Form = ({ navigation }) => {
             </View>
             <TouchableOpacity
               onPress={() => {
+                checkValidate(fullName);
+                checkValidate(purpose);
+                checkValidate(facebook);
+                checkValidate(bio);
                 if (
                   fullNameValidate.valid &&
                   purposeValidate.valid &&
