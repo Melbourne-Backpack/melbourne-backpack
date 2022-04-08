@@ -17,11 +17,12 @@ import { PLACEHOLDER } from "../../../styles/colors";
 import { pushData, uploadImage } from "../../../api/handleData";
 import { auth } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
 const Form = ({ navigation }) => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
 
   // Information
   const [fullName, setFullName] = useState("");
@@ -31,17 +32,21 @@ const Form = ({ navigation }) => {
 
   const [fullNameValidate, setFullNameValidate] = useState({
     error: "",
-    valid: true,
+    valid: false,
   });
   const [purposeValidate, setPurposeValidate] = useState({
     error: "",
-    valid: true,
+    valid: false,
   });
   const [facebookValidate, setFacebookValidate] = useState({
     error: "",
-    valid: true,
+    valid: false,
   });
-  const [bioValidate, setBioValidate] = useState({ error: "", valid: true });
+  const [bioValidate, setBioValidate] = useState({ error: "", valid: false });
+  const [imageValidate, setImageValidate] = useState({
+    error: "",
+    valid: false,
+  });
   const [hasPermission, setHasPermission] = useState(null);
 
   const [selectedItem, setSelectedItem] = useState(null);
@@ -91,6 +96,11 @@ const Form = ({ navigation }) => {
   }
 
   const checkValidate = (component) => {
+    if (component === image && image === "") {
+      setImageValidate({ error: "*Avatar is required", valid: false });
+    } else {
+      setImageValidate({ error: "", valid: true });
+    }
     if (component === fullName && fullName === "") {
       setFullNameValidate({ error: "*Full name is required", valid: false });
     } else {
@@ -107,11 +117,21 @@ const Form = ({ navigation }) => {
         error: "*Facebook link is required",
         valid: false,
       });
+    } else if (!facebook.includes("facebook.com/")) {
+      setFacebookValidate({
+        error: "*Facebook link must be format facebook.com/...",
+        valid: false,
+      });
     } else {
       setFacebookValidate({ error: "", valid: true });
     }
     if (component === bio && bio === "") {
       setBioValidate({ error: "*Introduction is required", valid: false });
+    } else if (bio.length < 1) {
+      setBioValidate({
+        error: "*Introduction must be more than 100 words",
+        valid: false,
+      });
     } else {
       setBioValidate({ error: "", valid: true });
     }
@@ -126,20 +146,23 @@ const Form = ({ navigation }) => {
         >
           <View style={styles.wrapper}>
             <TouchableOpacity onPress={pickImage}>
-              <View>
+              <View style={{ alignItems: "center" }}>
                 <Image
                   source={
-                    image === null
+                    image === ""
                       ? require("../../../../assets/avatar-default.png")
                       : { uri: image }
                   }
                   style={styles.avatarImage}
                 />
               </View>
-              <View>
+
+              <View style={{ alignItems: "center" }}>
                 <Text style={styles.avatarText}>Upload avatar</Text>
+                <Text style={styles.errorImage}>{imageValidate.error}</Text>
               </View>
             </TouchableOpacity>
+
             <TextInput
               style={styles.textInput}
               placeholder={"Full Name"}
@@ -197,48 +220,72 @@ const Form = ({ navigation }) => {
               <Text style={styles.normalText}>and </Text>
               <Text style={styles.yellowText}>Cookies Policy</Text>
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                checkValidate(fullName);
-                checkValidate(purpose);
-                checkValidate(facebook);
-                checkValidate(bio);
-                if (
-                  fullNameValidate.valid &&
-                  purposeValidate.valid &&
-                  facebookValidate.valid &&
-                  bioValidate.valid === true
-                ) {
-                  pushData(
-                    auth.currentUser.uid,
-                    auth.currentUser?.email,
-                    fullName,
-                    purpose,
-                    facebook,
-                    bio
-                  );
-                  uploadImage(
-                    image,
-                    auth.currentUser.uid +
-                      "." +
-                      image
-                        .substring(image.lastIndexOf("/") + 1)
-                        .split(".")
-                        .pop()
-                  );
-                  navigation.navigate("Ready");
-                }
-              }}
-            >
-              <View style={styles.nextButtonView}>
-                <Text style={styles.nextButtonText}>Submit</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
-              <View style={styles.backButtonView}>
-                <Text style={styles.backButtonText}>Back</Text>
-              </View>
-            </TouchableOpacity>
+            {!(
+              imageValidate.valid &&
+              fullNameValidate.valid &&
+              purposeValidate.valid &&
+              facebookValidate.valid &&
+              bioValidate.valid
+            ) && (
+              <TouchableOpacity
+                onPress={() => {
+                  checkValidate(image);
+                  checkValidate(fullName);
+                  checkValidate(purpose);
+                  checkValidate(facebook);
+                  checkValidate(bio);
+                }}
+              >
+                <View style={styles.nextButtonView}>
+                  <Text style={styles.nextButtonText}>Validate</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            {!(
+              imageValidate.valid &&
+              fullNameValidate.valid &&
+              purposeValidate.valid &&
+              facebookValidate.valid &&
+              bioValidate.valid
+            ) && (
+              <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
+                <View style={styles.backButtonView}>
+                  <Text style={styles.backButtonText}>Back</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            {imageValidate.valid &&
+              fullNameValidate.valid &&
+              purposeValidate.valid &&
+              facebookValidate.valid &&
+              bioValidate.valid && (
+                <TouchableOpacity
+                  onPress={() => {
+                    pushData(
+                      auth.currentUser.uid,
+                      auth.currentUser?.email,
+                      fullName,
+                      purpose,
+                      facebook,
+                      bio
+                    );
+                    uploadImage(
+                      image,
+                      auth.currentUser.uid +
+                        "." +
+                        image
+                          .substring(image.lastIndexOf("/") + 1)
+                          .split(".")
+                          .pop()
+                    );
+                    navigation.navigate("Ready");
+                  }}
+                >
+                  <View style={styles.nextButtonView}>
+                    <Text style={styles.nextButtonText}>Submit</Text>
+                  </View>
+                </TouchableOpacity>
+              )}
           </View>
         </ScrollView>
       </SafeAreaView>

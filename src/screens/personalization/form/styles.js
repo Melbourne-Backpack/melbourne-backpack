@@ -43,7 +43,11 @@ const styles = StyleSheet.create({
   avatarText: {
     color: WHITE,
     fontFamily: "PoppinsSemiBold",
-    paddingTop: 10,
+    paddingVertical: 10,
+  },
+  errorImage: {
+    color: RED,
+    fontFamily: "PoppinsSemiBold",
     paddingBottom: 50,
   },
   textInput: {
