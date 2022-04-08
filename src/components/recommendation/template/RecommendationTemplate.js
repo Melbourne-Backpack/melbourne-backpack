@@ -72,7 +72,7 @@ const bed = [
   },
   {
     index: 4,
-    name: "4+",
+    name: "5+",
   },
 ];
 const bath = [
@@ -94,7 +94,7 @@ const bath = [
   },
   {
     index: 4,
-    name: "4+",
+    name: "5+",
   },
 ];
 const area = [

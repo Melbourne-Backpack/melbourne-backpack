@@ -135,7 +135,7 @@ const CommunityFilter = ({
         ) : null}
         <SafeAreaView style={styles.communityList}>
           <FlatList
-            data={data.splice(0, filterMaxCards)}
+            data={data.slice(0, filterMaxCards)}
             horizontal={false}
             numColumns={1}
             renderItem={(info) => {
