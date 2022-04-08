@@ -110,12 +110,16 @@ const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
   let highestRating = 0;
   let trendingCard = {};
 
-  data.map((item) => {
-    if (parseFloat(item.rating) > highestRating) {
-      highestRating = parseFloat(item.rating);
-      trendingCard = item;
-    }
-  });
+  if (housing) {
+    data.map((item) => {
+      if (parseFloat(item.rating) > highestRating) {
+        highestRating = parseFloat(item.rating);
+        trendingCard = item;
+      }
+    });
+  } else {
+    trendingCard = data[0];
+  }
 
   console.log(trendingCard);
 
@@ -147,8 +151,17 @@ const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
                 optionList={[type, price, bed, bath, area]}
                 navigation={navigation}
                 housingList={data}
+                isHousing={true}
               />
-            ) : null}
+            ) : (
+              <HousingFilter
+                headingList={[]}
+                optionList={[]}
+                navigation={navigation}
+                housingList={data}
+                isHousing={false}
+              />
+            )}
           </View>
         </View>
       </ScrollView>

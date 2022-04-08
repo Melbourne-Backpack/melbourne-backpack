@@ -31,8 +31,7 @@ const ShoppingScreen = () => {
 
   return (
     <RecommendationTemplate
-      firstData={firstData}
-      otherData={otherData}
+      data={data}
       topic="Shopping"
       categories={categories}
     />

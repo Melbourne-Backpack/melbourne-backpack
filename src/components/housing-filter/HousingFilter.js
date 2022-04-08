@@ -18,6 +18,7 @@ const CommunityFilter = ({
   optionList,
   navigation,
   housingList,
+  isHousing,
 }) => {
   /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding data in 1 view*/
   const headings = headingList;
@@ -45,19 +46,21 @@ const CommunityFilter = ({
   let i = -1;
   return (
     <View>
-      <View style={styles.filterBtnWrapper}>
-        <TouchableOpacity
-          style={styles.filterBtn}
-          onPress={() => setShow(!show)}
-        >
-          <Ionicons
-            name="filter"
-            size={24}
-            color={LIGHT_BLUE}
-            style={styles.filterIcon}
-          />
-        </TouchableOpacity>
-      </View>
+      {isHousing ? (
+        <View style={styles.filterBtnWrapper}>
+          <TouchableOpacity
+            style={styles.filterBtn}
+            onPress={() => setShow(!show)}
+          >
+            <Ionicons
+              name="filter"
+              size={24}
+              color={LIGHT_BLUE}
+              style={styles.filterIcon}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : null}
       <View>
         {/* filter toggle btn */}
         {show ? (
@@ -141,13 +144,22 @@ const CommunityFilter = ({
             horizontal={false}
             numColumns={1}
             renderItem={(info) => {
-              return (
-                <RecommendationCard
-                  key={info.index}
-                  data={info.item}
-                  housing={true}
-                />
-              );
+              if (isHousing) {
+                return (
+                  <RecommendationCard
+                    key={info.index}
+                    data={info.item}
+                    housing={true}
+                  />
+                );
+              } else
+                return (
+                  <RecommendationCard
+                    key={info.index}
+                    data={info.item}
+                    housing={false}
+                  />
+                );
             }}
           />
         </SafeAreaView>
