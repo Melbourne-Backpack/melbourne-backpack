@@ -16,8 +16,6 @@ import {
 } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
-import { SelectMultipleButton } from "react-native-selectmultiple-button";
-import _ from "lodash";
 
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
