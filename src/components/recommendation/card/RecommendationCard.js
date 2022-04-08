@@ -19,7 +19,6 @@ const RecommendationCard = ({ data, housing }) => {
   if (!loaded) {
     return null;
   }
-
   return (
     <View style={styles.card}>
       <TouchableOpacity activeOpacity={0.5}>

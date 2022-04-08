@@ -12,13 +12,120 @@ import { useState } from "react";
 import FilterCategory from "../filter/FilterCategory";
 import { Ionicons } from "@expo/vector-icons";
 import { LIGHT_BLUE } from "../../../styles/colors";
+import CommunityFilter from "../../community-filter/CommunityFilter";
+import data from "../../../../assets/mockJSON/MOCK_DATA.json";
+import HousingFilter from "../../housing-filter/HousingFilter";
 
+const housingHeading = ["type", "price", "bed", "bath", "area"];
+const type = [
+  {
+    index: 0,
+    name: "Apartment",
+  },
+  {
+    index: 1,
+    name: "House",
+  },
+  {
+    index: 2,
+    name: "Townhouse",
+  },
+];
+const price = [
+  {
+    index: 0,
+    name: "<200",
+  },
+  {
+    index: 1,
+    name: "<400",
+  },
+  {
+    index: 2,
+    name: "<800",
+  },
+  {
+    index: 3,
+    name: "<1600",
+  },
+  {
+    index: 4,
+    name: "1600+",
+  },
+];
+const bed = [
+  {
+    index: 0,
+    name: "1",
+  },
+  {
+    index: 1,
+    name: "2",
+  },
+  {
+    index: 2,
+    name: "3",
+  },
+  {
+    index: 3,
+    name: "4",
+  },
+  {
+    index: 4,
+    name: "4+",
+  },
+];
+const bath = [
+  {
+    index: 0,
+    name: "1",
+  },
+  {
+    index: 1,
+    name: "2",
+  },
+  {
+    index: 2,
+    name: "3",
+  },
+  {
+    index: 3,
+    name: "4",
+  },
+  {
+    index: 4,
+    name: "4+",
+  },
+];
+const area = [
+  {
+    index: 0,
+    name: "<50",
+  },
+  {
+    index: 1,
+    name: "<100",
+  },
+  {
+    index: 2,
+    name: "<200",
+  },
+  {
+    index: 3,
+    name: "<400",
+  },
+  {
+    index: 4,
+    name: "400+",
+  },
+];
 const RecommendationTemplate = ({
   topic,
   firstData,
   otherData,
   housing,
   categories,
+  navigation,
 }) => {
   const [isVisible, setVisible] = useState(false);
 
@@ -41,31 +148,18 @@ const RecommendationTemplate = ({
 
           <View style={styles.secondHeader}>
             <Text style={styles.heading2}>All</Text>
-            <View style={styles.filterBtn}>
-              <TouchableOpacity
-                style={styles.filterBtn}
-                onPress={() => {
-                  setVisible(!isVisible);
-                }}
-              >
-                <Ionicons name="filter" size={24} color={LIGHT_BLUE} />
-              </TouchableOpacity>
-            </View>
           </View>
 
           <View style={styles.filterOptions}>
-            {isVisible ? (
-              categories.map((category, id) => (
-                <FilterCategory category={category} key={id} />
-              ))
-            ) : (
-              <></>
-            )}
+            {housing ? (
+              <HousingFilter
+                headingList={housingHeading}
+                optionList={[type, price, bed, bath, area]}
+                navigation={navigation}
+                housingList={otherData}
+              />
+            ) : null}
           </View>
-
-          {otherData.map((data) => (
-            <RecommendationCard key={data.id} data={data} housing={housing} />
-          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
