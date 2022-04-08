@@ -1,6 +1,6 @@
 import { collection, addDoc, doc, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "../config/firebase";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { storage } from "../config/firebase";
 
 const pushData = async (uid, email, fullName, purpose, facebook, bio) => {
@@ -24,8 +24,9 @@ const uploadImage = async (uri, filename) => {
     const blob = await response.blob();
 
     const ref = storage.ref(`avatar/${filename}`);
+    const uploadTask = await uploadBytes(ref, blob);
     console.log("Upload image success");
-    return ref.put(blob);
+    return await getDownloadURL(uploadTask.ref);
   } catch (e) {
     console.log("Error upload image", e);
   }
