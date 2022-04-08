@@ -14,11 +14,10 @@ import { useFonts } from "expo-font";
 import Tag from "../../components/housing-details/tags/Tag";
 import { useState } from "react";
 import Review from "../../components/housing-details/reviews/Review";
+import SectionInfo from "../../components/housing-details/section-info/SectionInfo";
 
 const HousingDetailScreen = ({ navigation: { goBack } }) => {
   const [myComment, setMyComment] = useState("");
-  const [addReviewVisible, setAddReviewVisible] = useState(false);
-  const [otherReviewVisible, setOtherReviewVisible] = useState(false);
 
   const data = {
     name: "4 bedroom apartment deluxe",
@@ -118,28 +117,7 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
         </View>
         <Text style={[styles.text, styles.desc]}>{data.description}</Text>
 
-        <View style={styles.sectionHeader}>
-          <Text style={[styles.text, styles.sectionTitle]}>
-            Add your review
-          </Text>
-          {addReviewVisible ? (
-            <AntDesign
-              name="minussquare"
-              size={28}
-              color={YELLOW}
-              onPress={() => setAddReviewVisible(!addReviewVisible)}
-            />
-          ) : (
-            <AntDesign
-              name="plussquare"
-              size={28}
-              color={YELLOW}
-              onPress={() => setAddReviewVisible(!addReviewVisible)}
-            />
-          )}
-        </View>
-
-        {addReviewVisible ? (
+        <SectionInfo title="Add your review">
           <TextInput
             placeholder="Enter comment..."
             placeholderTextColor={PLACEHOLDER}
@@ -148,35 +126,14 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
             value={myComment}
             style={[styles.text, styles.comment]}
           />
-        ) : null}
+        </SectionInfo>
 
         <View style={styles.reviewContainer}>
-          <View style={styles.sectionHeader}>
-            <Text style={[styles.text, styles.sectionTitle]}>
-              RMIT students' reviews
-            </Text>
-            {otherReviewVisible ? (
-              <AntDesign
-                name="minussquare"
-                size={28}
-                color={YELLOW}
-                onPress={() => setOtherReviewVisible(!otherReviewVisible)}
-              />
-            ) : (
-              <AntDesign
-                name="plussquare"
-                size={28}
-                color={YELLOW}
-                onPress={() => setOtherReviewVisible(!otherReviewVisible)}
-              />
-            )}
-          </View>
-
-          {otherReviewVisible
-            ? data.reviews.map((review, id) => (
-                <Review key={id} review={review} />
-              ))
-            : null}
+          <SectionInfo title="RMIT students' reviews">
+            {data.reviews.map((review, id) => (
+              <Review key={id} review={review} />
+            ))}
+          </SectionInfo>
         </View>
       </ScrollView>
     </SafeAreaView>
