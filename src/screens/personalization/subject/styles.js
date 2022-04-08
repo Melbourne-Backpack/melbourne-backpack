@@ -56,9 +56,21 @@ const styles = StyleSheet.create({
   },
   buttonViewStyle: {
     borderRadius: 20,
-    paddingVertical: 1,
-    paddingHorizontal: 4,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
     borderWidth: 1,
+    borderColor: WHITE,
+    marginHorizontal: 5,
+    marginVertical: 5,
+  },
+  buttonSelectedStyle: {
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    marginHorizontal: 5,
+    backgroundColor: SELECTED_BUTTON,
+    marginVertical: 5,
   },
   textStyle: {
     color: WHITE,
