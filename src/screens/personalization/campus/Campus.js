@@ -25,6 +25,7 @@ const Campus = ({ navigation }) => {
   const [hanoiSelected, setHanoiSelected] = useState(false);
   const [danangSelected, setDanangSelected] = useState(false);
   const [saigonSelected, setSaigonSelected] = useState(false);
+  const [valid, setValid] = useState(true);
 
   // handle Text Input value
   const [text, setText] = useState("");
@@ -104,10 +105,19 @@ const Campus = ({ navigation }) => {
               );
             })}
           </View>
+          {valid ? null : (
+            <Text style={styles.errorText}>
+              *Please select your current campus
+            </Text>
+          )}
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("Subject", { campus: selectedCity })
-            }
+            onPress={() => {
+              if (selectedCity === "") {
+                setValid(false);
+              } else {
+                navigation.navigate("Subject", { campus: selectedCity });
+              }
+            }}
           >
             <View style={styles.nextButtonView}>
               <Text style={styles.nextButtonText}>Next</Text>

@@ -9,6 +9,7 @@ import {
   BACKGROUND,
   SELECTED_BUTTON,
   TEXT_INPUT,
+  RED,
 } from "../../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
@@ -70,6 +71,10 @@ const styles = StyleSheet.create({
   textStyle: {
     color: WHITE,
     fontFamily: "PoppinsMedium",
+  },
+  errorText: {
+    fontFamily: "PoppinsRegular",
+    color: RED,
   },
   nextButtonView: {
     backgroundColor: SELECTED_BUTTON,
