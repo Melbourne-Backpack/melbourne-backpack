@@ -11,7 +11,7 @@ let cardHeight = 87 * 1.2;
 let cardWidth = 63 * 1.2;
 let containerWidth = (width * 3) / 4;
 const responsiveCardMarginLeft = () => {
-  let maxCardPerRow = 4;
+  let maxCardPerRow = 3;
   let totalCardSpace = cardWidth * maxCardPerRow;
   while (containerWidth < totalCardSpace) {
     totalCardSpace -= cardWidth;
