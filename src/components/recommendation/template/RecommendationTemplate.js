@@ -1,34 +1,21 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import styles from "./styles";
 import RecommendationCard from "../card/RecommendationCard";
 import { useFonts } from "expo-font";
-import { useState } from "react";
-import FilterCategory from "../filter/FilterCategory";
-import { Ionicons } from "@expo/vector-icons";
-import { LIGHT_BLUE } from "../../../styles/colors";
-import CommunityFilter from "../../community-filter/CommunityFilter";
-import data from "../../../../assets/mockJSON/MOCK_DATA.json";
 import HousingFilter from "../../housing-filter/HousingFilter";
 
-const housingHeading = ["type", "price", "bed", "bath", "area"];
 const type = [
   {
     index: 0,
-    name: "Apartment",
+    name: "apartment",
   },
   {
     index: 1,
-    name: "House",
+    name: "house",
   },
   {
     index: 2,
-    name: "Townhouse",
+    name: "townhouse",
   },
 ];
 const price = [
@@ -119,15 +106,18 @@ const area = [
     name: "400+",
   },
 ];
-const RecommendationTemplate = ({
-  topic,
-  firstData,
-  otherData,
-  housing,
-  categories,
-  navigation,
-}) => {
-  const [isVisible, setVisible] = useState(false);
+const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
+  let highestRating = 0;
+  let trendingCard = {};
+
+  data.map((item) => {
+    if (parseFloat(item.rating) > highestRating) {
+      highestRating = parseFloat(item.rating);
+      trendingCard = item;
+    }
+  });
+
+  console.log(trendingCard);
 
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
@@ -144,7 +134,7 @@ const RecommendationTemplate = ({
       <ScrollView>
         <View style={styles.wrapper}>
           <Text style={styles.heading1}>Trending {topic}</Text>
-          <RecommendationCard data={firstData} housing={housing} />
+          <RecommendationCard data={trendingCard} housing={housing} />
 
           <View style={styles.secondHeader}>
             <Text style={styles.heading2}>All</Text>
@@ -153,10 +143,10 @@ const RecommendationTemplate = ({
           <View style={styles.filterOptions}>
             {housing ? (
               <HousingFilter
-                headingList={housingHeading}
+                headingList={["type", "price", "bedroom", "bathroom", "area"]}
                 optionList={[type, price, bed, bath, area]}
                 navigation={navigation}
-                housingList={otherData}
+                housingList={data}
               />
             ) : null}
           </View>

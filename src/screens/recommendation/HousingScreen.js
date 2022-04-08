@@ -11,6 +11,7 @@ const HousingScreen = () => {
       area: 102,
       bedroom: 4,
       bathroom: 2,
+      type: "apartment",
     },
     {
       id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
@@ -21,6 +22,7 @@ const HousingScreen = () => {
       area: 50,
       bedroom: 2,
       bathroom: 1,
+      type: "apartment",
     },
     {
       id: "58694a0f-3da1-471f-bd96-145571e29d72",
@@ -31,6 +33,7 @@ const HousingScreen = () => {
       area: 38,
       bedroom: 1,
       bathroom: 1,
+      type: "apartment",
     },
     {
       id: "ADKDWQKDQWK",
@@ -41,19 +44,16 @@ const HousingScreen = () => {
       area: 120,
       bedroom: 6,
       bathroom: 4,
+      type: "apartment",
     },
   ];
 
   const categories = ["Type", "Price", "Distance from RMIT"];
 
-  const firstData = DATA[0];
-  const otherData = DATA.slice(1, DATA.length);
-
   return (
     <RecommendationTemplate
       topic="Housing"
-      firstData={firstData}
-      otherData={otherData}
+      data={DATA}
       housing={true}
       categories={categories}
     />
