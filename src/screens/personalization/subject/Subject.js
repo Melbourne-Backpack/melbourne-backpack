@@ -23,7 +23,8 @@ import _ from "lodash";
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
 
-const Subject = ({ navigation }) => {
+const Subject = ({ route, navigation }) => {
+  const { campus } = route.params;
   const subjects = [
     "Economics",
     "Business",
@@ -137,7 +138,10 @@ const Subject = ({ navigation }) => {
                 if (selectedSubjects.length < 3) {
                   setValid(false);
                 } else {
-                  navigation.navigate("Form");
+                  navigation.navigate("Form", {
+                    campus: campus,
+                    subjects: selectedSubjects,
+                  });
                 }
               }}
             >

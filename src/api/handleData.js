@@ -3,9 +3,20 @@ import { db, auth } from "../config/firebase";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { storage } from "../config/firebase";
 
-const pushData = async (uid, email, fullName, purpose, facebook, bio) => {
+const pushData = async (
+  uid,
+  campus,
+  subjects,
+  email,
+  fullName,
+  purpose,
+  facebook,
+  bio
+) => {
   try {
     await setDoc(doc(db, "users", uid), {
+      campus: campus,
+      subjects: subjects,
       email: email,
       fullName: fullName,
       purpose: purpose,

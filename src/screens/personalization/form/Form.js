@@ -21,7 +21,8 @@ import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
-const Form = ({ navigation }) => {
+const Form = ({ route, navigation }) => {
+  const { campus, subjects } = route.params;
   const [image, setImage] = useState("");
 
   // Information
@@ -263,6 +264,8 @@ const Form = ({ navigation }) => {
                   onPress={() => {
                     pushData(
                       auth.currentUser.uid,
+                      campus,
+                      subjects,
                       auth.currentUser?.email,
                       fullName,
                       purpose,
