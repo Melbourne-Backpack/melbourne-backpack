@@ -45,7 +45,7 @@ const Subject = ({ navigation }) => {
   // handle Selected button
   const [subjectList, setSubjectList] = useState(subjects);
   const [falseList, setFalseList] = useState(fList);
-  const [count, setCount] = useState(0);
+  const [valid, setValid] = useState(true);
   const [selectedSubjects, setSelectedSubjects] = useState([]);
 
   // handle Text Input value
@@ -63,12 +63,21 @@ const Subject = ({ navigation }) => {
   const handleList = (subject) => {
     for (let i = 0; i < subjectList.length; i++) {
       if (subjectList[i] === subject) {
-        let newArr = [...falseList];
-        newArr[i] = !falseList[i];
-        setFalseList(newArr);
-        let newList = [...selectedSubjects];
-        newList.push(subject);
-        setSelectedSubjects(newList);
+        if (selectedSubjects.includes(subject)) {
+          _.remove(selectedSubjects, (ele) => {
+            return ele === subject;
+          });
+          let newArr = [...falseList];
+          newArr[i] = false;
+          setFalseList(newArr);
+        } else {
+          let newList = [...selectedSubjects];
+          newList.push(subject);
+          setSelectedSubjects(newList);
+          let newArr = [...falseList];
+          newArr[i] = true;
+          setFalseList(newArr);
+        }
       }
     }
   };
@@ -94,7 +103,7 @@ const Subject = ({ navigation }) => {
               onChangeText={(text) => setText(text)}
               defaultValue={text}
             >
-              {_.join(selectedSubjects, ", ")}
+              {_.join(selectedSubjects, " | ")}
             </TextInput>
             <View style={styles.buttonWrapper}>
               {subjects.map((subject, index) => {
@@ -115,8 +124,23 @@ const Subject = ({ navigation }) => {
                 );
               })}
             </View>
-            <Text style={styles.selectedText}>{count} topics Selected</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Form")}>
+            <Text style={styles.selectedText}>
+              {selectedSubjects.length} topics Selected
+            </Text>
+            {valid ? null : (
+              <Text style={styles.errorText}>
+                *Please select minimum 3 subjects
+              </Text>
+            )}
+            <TouchableOpacity
+              onPress={() => {
+                if (selectedSubjects.length < 3) {
+                  setValid(false);
+                } else {
+                  navigation.navigate("Form");
+                }
+              }}
+            >
               <View style={styles.nextButtonView}>
                 <Text style={styles.nextButtonText}>Next</Text>
               </View>
