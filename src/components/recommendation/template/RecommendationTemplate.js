@@ -21,23 +21,23 @@ const type = [
 const price = [
   {
     index: 0,
-    name: "<200",
+    name: "1-200",
   },
   {
     index: 1,
-    name: "<400",
+    name: "201-400",
   },
   {
     index: 2,
-    name: "<800",
+    name: "401-800",
   },
   {
     index: 3,
-    name: "<1600",
+    name: "801-1600",
   },
   {
     index: 4,
-    name: "1600+",
+    name: "1601+",
   },
 ];
 const bed = [
@@ -87,23 +87,23 @@ const bath = [
 const area = [
   {
     index: 0,
-    name: "<50",
+    name: "1-50",
   },
   {
     index: 1,
-    name: "<100",
+    name: "51-100",
   },
   {
     index: 2,
-    name: "<200",
+    name: "101-200",
   },
   {
     index: 3,
-    name: "<400",
+    name: "201-400",
   },
   {
     index: 4,
-    name: "400+",
+    name: "401+",
   },
 ];
 const RecommendationTemplate = ({ topic, data, housing, navigation }) => {

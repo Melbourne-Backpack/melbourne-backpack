@@ -30,7 +30,7 @@ const CommunityFilter = ({
     filterMaxCardsPerPageInitial
   );
   // const filter = {};
-  let filter = useState();
+  let filter = {};
   const [submitted, setSubmitted] = useState(false);
   const [loaded, error] = useFonts({
     PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
@@ -99,25 +99,27 @@ const CommunityFilter = ({
                     headings.map((heading) => {
                       filter[heading].map((option) => {
                         if (
-                          housing[heading].includes(option) ||
-                          housing[heading] === option
+                          option.includes("-") &&
+                          option.slice(0, option.indexOf("-")) <=
+                            housing[heading] &&
+                          option.slice(
+                            option.indexOf("-") + 1,
+                            option.length
+                          ) >= housing[heading]
                         ) {
                           if (added === 0) {
                             setData((data) => [...data, housing]);
                             added++;
                           }
                         } else if (
-                          housing[heading][0] === "<" ||
-                          option < housing[heading]
+                          option[option.length - 1] === "+" &&
+                          option.slice(0, option.length - 1) <= housing[heading]
                         ) {
                           if (added === 0) {
                             setData((data) => [...data, housing]);
                             added++;
                           }
-                        } else if (
-                          housing[heading][-1] === "+" ||
-                          option < housing[heading]
-                        ) {
+                        } else if (housing[heading].toString() === option) {
                           if (added === 0) {
                             setData((data) => [...data, housing]);
                             added++;
