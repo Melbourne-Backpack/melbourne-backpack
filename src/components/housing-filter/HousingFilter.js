@@ -9,9 +9,10 @@ import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { LIGHT_BLUE } from "../../styles/colors";
 import CommunityFilterBtn from "../community-filter/CommunityFilterBtn/CommunityFilterBtn";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import RecommendationCard from "../recommendation/card/RecommendationCard";
+import Distance from "../distance/Distance";
 
 const CommunityFilter = ({
   headingList,
@@ -21,6 +22,7 @@ const CommunityFilter = ({
   isHousing,
 }) => {
   /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding data in 1 view*/
+  const origin = "124 La Trobe St, Melbourne VIC 3000";
   const headings = headingList;
   const options = optionList;
   const [show, setShow] = useState(false);
@@ -98,32 +100,51 @@ const CommunityFilter = ({
                   setSubmitted((prev) => !prev);
                   setData([]);
                   housingList.map((housing) => {
+                    let distance = Distance(housing["address"], origin);
+                    console.log(distance);
                     let added = 0;
                     headings.map((heading) => {
                       filter[heading].map((option) => {
-                        if (
-                          option.includes("-") &&
-                          option.slice(0, option.indexOf("-")) <=
-                            housing[heading] &&
-                          option.slice(
-                            option.indexOf("-") + 1,
-                            option.length
-                          ) >= housing[heading]
-                        ) {
-                          if (added === 0) {
+                        if (heading !== "distance from RMIT" && added === 0) {
+                          if (
+                            option.includes("-") &&
+                            option.slice(0, option.indexOf("-")) <=
+                              housing[heading] &&
+                            option.slice(
+                              option.indexOf("-") + 1,
+                              option.length
+                            ) >= housing[heading]
+                          ) {
+                            setData((data) => [...data, housing]);
+                            added++;
+                          } else if (
+                            option[option.length - 1] === "+" &&
+                            option.slice(0, option.length - 1) <=
+                              housing[heading]
+                          ) {
+                            setData((data) => [...data, housing]);
+                            added++;
+                          } else if (housing[heading].toString() === option) {
                             setData((data) => [...data, housing]);
                             added++;
                           }
-                        } else if (
-                          option[option.length - 1] === "+" &&
-                          option.slice(0, option.length - 1) <= housing[heading]
-                        ) {
-                          if (added === 0) {
+                        }
+
+                        if (heading === "distance from RMIT" && added === 0) {
+                          if (
+                            option.includes("-") &&
+                            option.slice(0, option.indexOf("-")) <= distance &&
+                            option.slice(
+                              option.indexOf("-") + 1,
+                              option.length
+                            ) >= distance
+                          ) {
                             setData((data) => [...data, housing]);
                             added++;
-                          }
-                        } else if (housing[heading].toString() === option) {
-                          if (added === 0) {
+                          } else if (
+                            option[option.length - 1] === "+" &&
+                            option.slice(0, option.length - 1) <= distance
+                          ) {
                             setData((data) => [...data, housing]);
                             added++;
                           }

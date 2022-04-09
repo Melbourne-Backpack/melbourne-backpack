@@ -106,6 +106,26 @@ const area = [
     name: "401+",
   },
 ];
+
+const distanceFromRMIT = [
+  {
+    index: 0,
+    name: "0-5",
+  },
+  {
+    index: 1,
+    name: "5-10",
+  },
+  {
+    index: 2,
+    name: "10-15",
+  },
+  {
+    index: 3,
+    name: "15+",
+  },
+];
+
 const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
   let highestRating = 0;
   let trendingCard = {};
@@ -120,8 +140,6 @@ const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
   } else {
     trendingCard = data[0];
   }
-
-  console.log(trendingCard);
 
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
@@ -147,8 +165,15 @@ const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
           <View style={styles.filterOptions}>
             {housing ? (
               <HousingFilter
-                headingList={["type", "price", "bedroom", "bathroom", "area"]}
-                optionList={[type, price, bed, bath, area]}
+                headingList={[
+                  "type",
+                  "price",
+                  "bedroom",
+                  "bathroom",
+                  "area",
+                  "distance from RMIT",
+                ]}
+                optionList={[type, price, bed, bath, area, distanceFromRMIT]}
                 navigation={navigation}
                 housingList={data}
                 isHousing={true}

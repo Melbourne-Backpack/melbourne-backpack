@@ -29,7 +29,7 @@ const HousingScreen = () => {
       name: "Studio Deluxe - Urbanest Melbourne Central",
       price: "559.00",
       rating: "4.6",
-      address: " 599 Swanston St, Carlton VIC 3053",
+      address: "599 Swanston St, Carlton VIC 3053",
       area: 38,
       bedroom: 1,
       bathroom: 1,
