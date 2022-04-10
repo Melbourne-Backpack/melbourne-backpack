@@ -2,24 +2,8 @@ import { Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../../../config/firebase";
-import { doc, getDoc } from "firebase/firestore";
 
 const Ready = ({ navigation }) => {
-  const [data, setData] = useState({});
-  const getData = () => {
-    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
-      if (docSnap.exists()) {
-        setData(docSnap.data());
-      } else {
-        console.log("No such document!");
-      }
-    });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
