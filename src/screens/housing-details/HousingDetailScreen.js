@@ -7,23 +7,34 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE, YELLOW } from "../../styles/colors";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import Tag from "../../components/housing-details/tags/Tag";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Review from "../../components/housing-details/reviews/Review";
 import SectionInfo from "../../components/housing-details/section-info/SectionInfo";
+import { AirbnbRating, Rating } from "react-native-ratings";
+import StarRatingBar from "react-native-star-rating-view/StarRatingBar";
 
 const HousingDetailScreen = ({ navigation: { goBack } }) => {
   const [myComment, setMyComment] = useState("");
+  const [myRating, setMyRating] = useState();
+
+  const ratingCompleted = (starRating) => {
+    setMyRating(starRating);
+  };
+
+  useEffect(() => {
+    console.log("Rating is: " + myRating);
+  }, [myRating]);
 
   const data = {
     name: "4 bedroom apartment deluxe",
     building: "Dwell Student Housing",
     address: "250 Spencer Street, Melbourne VIC 3000",
-    rating: "4.0",
+    rating: 4.5,
     tags: ["Northwest", "Apartment", "Student Housing"],
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
@@ -93,15 +104,16 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
         <Text style={[styles.text, styles.address]}>{data.address}</Text>
 
         <View style={styles.starContainer}>
-          <AntDesign name="star" size={30} color={YELLOW} style={styles.star} />
-          <AntDesign name="star" size={30} color={YELLOW} style={styles.star} />
-          <AntDesign name="star" size={30} color={YELLOW} style={styles.star} />
-          <AntDesign name="star" size={30} color={YELLOW} style={styles.star} />
-          <AntDesign
-            name="staro"
-            size={30}
-            color={YELLOW}
-            style={styles.star}
+          <StarRatingBar
+            tintColor={YELLOW}
+            starStyle={{
+              width: 30,
+              height: 30,
+            }}
+            score={data.rating}
+            dontShowScore={true}
+            allowsHalfStars={true}
+            accurateHalfStars={true}
           />
           <Text style={[styles.text, styles.rating]}>{data.rating}</Text>
         </View>

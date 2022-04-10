@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsSemiBold",
     color: YELLOW,
     fontSize: 30,
+    marginLeft: 10,
   },
   tagContainer: {
     flexDirection: "row",
