@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { PLACEHOLDER, WHITE, YELLOW } from "../../styles/colors";
+import { PLACEHOLDER, WHITE } from "../../styles/colors";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import Tag from "../../components/housing-details/tags/Tag";
@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import Review from "../../components/housing-details/reviews/Review";
 import SectionInfo from "../../components/housing-details/section-info/SectionInfo";
 import { AirbnbRating, Rating } from "react-native-ratings";
-import StarRatingBar from "react-native-star-rating-view/StarRatingBar";
+import StarRatingView from "../../components/housing-details/StarRatingView";
 
 const HousingDetailScreen = ({ navigation: { goBack } }) => {
   const [myComment, setMyComment] = useState("");
@@ -104,17 +104,7 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
         <Text style={[styles.text, styles.address]}>{data.address}</Text>
 
         <View style={styles.starContainer}>
-          <StarRatingBar
-            tintColor={YELLOW}
-            starStyle={{
-              width: 30,
-              height: 30,
-            }}
-            score={data.rating}
-            dontShowScore={true}
-            allowsHalfStars={true}
-            accurateHalfStars={true}
-          />
+          <StarRatingView width={30} height={30} rating={data.rating} />
           <Text style={[styles.text, styles.rating]}>{data.rating}</Text>
         </View>
 

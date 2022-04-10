@@ -1,13 +1,13 @@
 import { Image, Text, View } from "react-native";
-import { YELLOW } from "../../../styles/colors";
-import { AntDesign } from "@expo/vector-icons";
 
 import styles from "./styles";
 import { useFonts } from "expo-font";
+import StarRatingView from "../StarRatingView";
 
 const Review = ({ review }) => {
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
   });
   if (!loaded) {
@@ -22,11 +22,13 @@ const Review = ({ review }) => {
           style={styles.img}
           resizeMode="cover"
         />
+
         <View>
           <Text style={styles.username}>{review.username}</Text>
-          <Text style={styles.rating}>
-            {review.rating} <AntDesign name="star" size={20} color={YELLOW} />
-          </Text>
+          <View style={styles.ratingContainer}>
+            <StarRatingView width={18} height={18} rating={review.rating} />
+            <Text style={styles.rating}>{review.rating}</Text>
+          </View>
         </View>
       </View>
       <Text style={styles.text}>{review.comment}</Text>

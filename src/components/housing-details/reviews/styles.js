@@ -23,9 +23,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
+  ratingContainer: {
+    flexDirection: "row",
+  },
   rating: {
     color: YELLOW,
     fontSize: 18,
+    fontFamily: "PoppinsSemiBold",
+    marginLeft: 10,
   },
   text: {
     color: WHITE,
