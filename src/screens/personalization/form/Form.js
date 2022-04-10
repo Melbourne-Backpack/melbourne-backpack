@@ -13,11 +13,12 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { PLACEHOLDER } from "../../../styles/colors";
+import { PLACEHOLDER, WHITE } from "../../../styles/colors";
 import { pushData, uploadImage } from "../../../api/handleData";
 import { auth } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { value } from "lodash/seq";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
@@ -27,11 +28,26 @@ const Form = ({ route, navigation }) => {
 
   // Information
   const [fullName, setFullName] = useState("");
+  const [dob, setDob] = useState("");
   const [purpose, setPurpose] = useState("");
   const [facebook, setFacebook] = useState("");
   const [bio, setBio] = useState("");
 
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
   const [fullNameValidate, setFullNameValidate] = useState({
+    error: "",
+    valid: false,
+  });
+  const [dobValidate, setDobValidate] = useState({
     error: "",
     valid: false,
   });
@@ -108,6 +124,12 @@ const Form = ({ route, navigation }) => {
       setFullNameValidate({ error: "", valid: true });
     }
 
+    if (component === dob && purpose === "") {
+      setDobValidate({ error: "*Date of birth is required", valid: false });
+    } else {
+      setDobValidate({ error: "", valid: true });
+    }
+
     if (component === purpose && purpose === "") {
       setPurposeValidate({ error: "*Purpose is required", valid: false });
     } else {
@@ -177,6 +199,33 @@ const Form = ({ route, navigation }) => {
               <Text style={styles.error}>{fullNameValidate.error}</Text>
             </View>
 
+            <View style={styles.dobWrapper}>
+              <TouchableOpacity onPress={showDatePicker} style={styles.dob}>
+                <Text
+                  style={{
+                    color: dob ? WHITE : PLACEHOLDER,
+                    fontFamily: "PoppinsMedium",
+                  }}
+                >
+                  {dob === "" ? "Date of birth" : dob}
+                </Text>
+                <DateTimePickerModal
+                  isVisible={isDatePickerVisible}
+                  mode="date"
+                  date={new Date()}
+                  value={dob}
+                  onConfirm={(date) => {
+                    setDob(date.toLocaleDateString("en-US"));
+                    hideDatePicker();
+                  }}
+                  onCancel={hideDatePicker}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.errorHolder}>
+              <Text style={styles.error}>{dobValidate.error}</Text>
+            </View>
+
             <Dropdown
               data={data}
               onSelected={onSelected}
@@ -232,6 +281,7 @@ const Form = ({ route, navigation }) => {
                 onPress={() => {
                   checkValidate(image);
                   checkValidate(fullName);
+                  checkValidate(dob);
                   checkValidate(purpose);
                   checkValidate(facebook);
                   checkValidate(bio);
@@ -244,6 +294,7 @@ const Form = ({ route, navigation }) => {
             )}
             {!(
               imageValidate.valid &&
+              dobValidate.valid &&
               fullNameValidate.valid &&
               purposeValidate.valid &&
               facebookValidate.valid &&
@@ -268,6 +319,7 @@ const Form = ({ route, navigation }) => {
                       subjects,
                       auth.currentUser?.email,
                       fullName,
+                      dob,
                       purpose,
                       facebook,
                       bio

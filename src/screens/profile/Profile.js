@@ -66,6 +66,14 @@ const Profile = ({ navigation: { goBack } }) => {
           </View>
           <View style={styles.userContentRow}>
             <View style={styles.userContentHeadingWrapper}>
+              <Text style={styles.userContentHeading}>Date of birth</Text>
+            </View>
+            <View style={styles.userContentWrapper}>
+              <Text style={styles.userContent}>{data.dob}</Text>
+            </View>
+          </View>
+          <View style={styles.userContentRow}>
+            <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>E-mail</Text>
             </View>
             <View style={styles.userContentWrapper}>

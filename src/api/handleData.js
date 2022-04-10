@@ -9,6 +9,7 @@ const pushData = async (
   subjects,
   email,
   fullName,
+  dob,
   purpose,
   facebook,
   bio
@@ -19,6 +20,7 @@ const pushData = async (
       subjects: subjects,
       email: email,
       fullName: fullName,
+      dob: dob,
       purpose: purpose,
       facebook: facebook,
       bio: bio,

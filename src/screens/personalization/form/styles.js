@@ -50,6 +50,21 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsSemiBold",
     paddingBottom: 50,
   },
+  dob: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: TEXT_INPUT,
+    width: wp("80%"),
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    marginVertical: 10,
+  },
+  dobWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
   textInput: {
     backgroundColor: TEXT_INPUT,
     borderRadius: 20,
