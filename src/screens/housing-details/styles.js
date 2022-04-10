@@ -1,5 +1,11 @@
 import { StyleSheet } from "react-native";
-import { BACKGROUND, TEXT_INPUT, WHITE, YELLOW } from "../../styles/colors";
+import {
+  BACKGROUND,
+  PURPLE_BLUE,
+  TEXT_INPUT,
+  WHITE,
+  YELLOW,
+} from "../../styles/colors";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { scaleSize } from "../../styles/scale";
 
@@ -88,11 +94,32 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     textAlignVertical: "top",
   },
+  ratingWrapper: {
+    flex: 1,
+    alignItems: "center",
+  },
+  starStyle: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   myRating: {
     fontFamily: "PoppinsRegular",
     fontSize: 18,
-    textAlign: "center",
     marginBottom: 7,
+  },
+  btn: {
+    backgroundColor: PURPLE_BLUE,
+    borderRadius: 20,
+    width: "50%",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    marginVertical: "10%",
+  },
+  btnText: {
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 16,
   },
   reviewContainer: {
     marginBottom: "15%",

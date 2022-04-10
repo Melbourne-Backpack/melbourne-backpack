@@ -11,7 +11,6 @@ import SignIn from "../screens/login/SignIn";
 import SignUp from "../screens/login/SignUp";
 import ForgotPassword from "../screens/login/ForgotPassword";
 import EmailSent from "../screens/login/EmailSent";
-import Profile from "../screens/profile/Profile";
 import HousingDetailScreen from "../screens/housing-details/HousingDetailScreen";
 
 const AppNavigator = () => {
@@ -34,7 +33,6 @@ const AppNavigator = () => {
       <Stack.Screen name="Form" component={Form} />
       <Stack.Screen name="Ready" component={Ready} />
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Content" component={ContentNavigator} />
       <Stack.Screen name="Details" component={HousingDetailScreen} />
     </Stack.Navigator>

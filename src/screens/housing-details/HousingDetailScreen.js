@@ -125,20 +125,21 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
             style={[styles.text, styles.comment]}
           />
 
-          <Text style={[styles.text, styles.myRating]}>
-            Your rating: {myRating}
-          </Text>
-          <StarRating
-            rating={myRating}
-            onChange={setMyRating}
-            starSize={42}
-            starStyle={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-            style={{ marginBottom: 7 }}
-          />
+          <View style={styles.ratingWrapper}>
+            <Text style={[styles.text, styles.myRating]}>
+              Rate this housing: {myRating}
+            </Text>
+            <StarRating
+              rating={myRating}
+              onChange={setMyRating}
+              starSize={42}
+              starStyle={styles.starStyle}
+            />
+
+            <TouchableOpacity style={styles.btn}>
+              <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
+            </TouchableOpacity>
+          </View>
         </SectionInfo>
 
         <View style={styles.reviewContainer}>
