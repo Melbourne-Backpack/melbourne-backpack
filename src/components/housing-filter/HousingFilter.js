@@ -1,9 +1,9 @@
 import {
-  View,
-  Text,
-  TouchableOpacity,
   FlatList,
   SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
@@ -12,7 +12,31 @@ import CommunityFilterBtn from "../community-filter/CommunityFilterBtn/Community
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import RecommendationCard from "../recommendation/card/RecommendationCard";
-import Distance from "../distance/Distance";
+
+const Distance = (addressList, origin) => {
+  const destination = origin;
+  const key =
+    "AhF8TK_HweNDznULWo2UdUeUVlbR8lWnH1YmkWH7QWzXs1B_AbA634cKcCvR2PtB";
+  const [distanceList, setDistanceList] = useState([]);
+  useEffect(() => {
+    addressList.map((address) => {
+      let url = `http://dev.virtualearth.net/REST/v1/Routes?wayPoint.1=${address}&wayPoint.2=${destination}&key=${key}`;
+      return fetch(url, {
+        method: "GET",
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setDistanceList((prevState) => [
+            ...prevState,
+            data["resourceSets"][0]["resources"][0]["travelDistance"],
+          ]);
+        });
+    });
+  }, []);
+  return distanceList;
+};
 
 const CommunityFilter = ({
   headingList,
@@ -34,6 +58,11 @@ const CommunityFilter = ({
   );
   // const filter = {};
   let filter = {};
+  let addresses = [];
+  housingList.map((housing) => {
+    addresses.push(housing["address"]);
+  });
+  let distanceList = Distance(addresses, origin);
   const [submitted, setSubmitted] = useState(false);
   const [loaded, error] = useFonts({
     PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
@@ -100,8 +129,6 @@ const CommunityFilter = ({
                   setSubmitted((prev) => !prev);
                   setData([]);
                   housingList.map((housing) => {
-                    let distance = Distance(housing["address"], origin);
-                    console.log(distance);
                     let added = 0;
                     headings.map((heading) => {
                       filter[heading].map((option) => {
@@ -131,6 +158,15 @@ const CommunityFilter = ({
                         }
 
                         if (heading === "distance from RMIT" && added === 0) {
+                          let distance =
+                            distanceList[housingList.indexOf(housing)];
+                          // console.log(
+                          //   option.slice(0, option.indexOf("-")) <= distance &&
+                          //     option.slice(
+                          //       option.indexOf("-") + 1,
+                          //       option.length
+                          //     ) >= distance
+                          // );
                           if (
                             option.includes("-") &&
                             option.slice(0, option.indexOf("-")) <= distance &&
