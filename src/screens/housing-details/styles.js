@@ -88,6 +88,12 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     textAlignVertical: "top",
   },
+  myRating: {
+    fontFamily: "PoppinsRegular",
+    fontSize: 18,
+    textAlign: "center",
+    marginBottom: 7,
+  },
   reviewContainer: {
     marginBottom: "15%",
   },

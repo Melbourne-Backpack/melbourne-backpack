@@ -15,16 +15,12 @@ import Tag from "../../components/housing-details/tags/Tag";
 import { useEffect, useState } from "react";
 import Review from "../../components/housing-details/reviews/Review";
 import SectionInfo from "../../components/housing-details/section-info/SectionInfo";
-import { AirbnbRating, Rating } from "react-native-ratings";
 import StarRatingView from "../../components/housing-details/StarRatingView";
+import StarRating from "react-native-star-rating-widget";
 
 const HousingDetailScreen = ({ navigation: { goBack } }) => {
   const [myComment, setMyComment] = useState("");
   const [myRating, setMyRating] = useState();
-
-  const ratingCompleted = (starRating) => {
-    setMyRating(starRating);
-  };
 
   useEffect(() => {
     console.log("Rating is: " + myRating);
@@ -34,7 +30,7 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
     name: "4 bedroom apartment deluxe",
     building: "Dwell Student Housing",
     address: "250 Spencer Street, Melbourne VIC 3000",
-    rating: 4.5,
+    rating: 4.3,
     tags: ["Northwest", "Apartment", "Student Housing"],
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
@@ -127,6 +123,21 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
             onChangeText={setMyComment}
             value={myComment}
             style={[styles.text, styles.comment]}
+          />
+
+          <Text style={[styles.text, styles.myRating]}>
+            Your rating: {myRating}
+          </Text>
+          <StarRating
+            rating={myRating}
+            onChange={setMyRating}
+            starSize={42}
+            starStyle={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+            style={{ marginBottom: 7 }}
           />
         </SectionInfo>
 

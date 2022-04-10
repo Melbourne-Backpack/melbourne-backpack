@@ -5,6 +5,7 @@ const StarRatingView = ({ width, height, rating }) => {
   return (
     <StarRatingBar
       tintColor={YELLOW}
+      emptyStarColor={YELLOW}
       starStyle={{
         width: width,
         height: height,
