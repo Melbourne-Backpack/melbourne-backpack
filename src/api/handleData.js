@@ -8,6 +8,7 @@ const pushData = async (
   campus,
   subjects,
   email,
+  avatar,
   fullName,
   dob,
   purpose,
@@ -19,6 +20,7 @@ const pushData = async (
       campus: campus,
       subjects: subjects,
       email: email,
+      avatar: avatar,
       fullName: fullName,
       dob: dob,
       purpose: purpose,
@@ -31,18 +33,4 @@ const pushData = async (
   }
 };
 
-const uploadImage = async (uri, filename) => {
-  try {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    const ref = storage.ref(`avatar/${filename}`);
-    const uploadTask = await uploadBytes(ref, blob);
-    console.log("Upload image success");
-    return await getDownloadURL(uploadTask.ref);
-  } catch (e) {
-    console.log("Error upload image", e);
-  }
-};
-
-export { pushData, uploadImage };
+export { pushData };

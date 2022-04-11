@@ -19,8 +19,8 @@ import {
   SELECTED_BUTTON,
   WHITE,
 } from "../../../styles/colors";
-import { pushData, uploadImage } from "../../../api/handleData";
-import { auth } from "../../../config/firebase";
+import { pushData } from "../../../api/handleData";
+import { auth, storage } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { value } from "lodash/seq";
@@ -32,6 +32,7 @@ const Form = ({ route, navigation }) => {
   const [image, setImage] = useState("");
 
   // Information
+  const [avatar, setAvatar] = useState("");
   const [fullName, setFullName] = useState("");
   const [dob, setDob] = useState("");
   const [purpose, setPurpose] = useState("");
@@ -104,6 +105,26 @@ const Form = ({ route, navigation }) => {
       if (!result.cancelled) {
         setImage(result.uri);
       }
+    }
+  };
+
+  const uploadImage = async (uri, filename) => {
+    try {
+      const response = await fetch(uri);
+      const blob = await response.blob();
+
+      storage
+        .ref(`avatar/${filename}`)
+        .put(blob)
+        .then((snapshot) => {
+          snapshot.ref.getDownloadURL().then((url) => {
+            console.log("Upload image success");
+            console.log("downloadURL", url);
+            setAvatar(url.toString());
+          });
+        });
+    } catch (e) {
+      console.log("Error upload image", e);
     }
   };
 
@@ -345,6 +366,7 @@ const Form = ({ route, navigation }) => {
                       campus,
                       subjects,
                       auth.currentUser?.email,
+                      avatar,
                       fullName,
                       dob,
                       purpose,

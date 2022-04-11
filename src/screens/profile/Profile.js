@@ -47,14 +47,14 @@ const Profile = ({ navigation: { goBack } }) => {
         <Text style={styles.title}>Profile</Text>
       </View>
       <View>
-        {/*<View style={styles.profileImageWrapper}>*/}
-        {/*  <Image*/}
-        {/*      source={{*/}
-        {/*        uri: user.picture,*/}
-        {/*      }}*/}
-        {/*      style={styles.profileImage}*/}
-        {/*  />*/}
-        {/*</View>*/}
+        <View style={styles.profileImageWrapper}>
+          <Image
+            source={{
+              uri: data.avatar,
+            }}
+            style={styles.profileImage}
+          />
+        </View>
         <View style={styles.userContentDisplay}>
           <View style={styles.userContentRow}>
             <View style={styles.userContentHeadingWrapper}>
@@ -96,14 +96,6 @@ const Profile = ({ navigation: { goBack } }) => {
               <Text style={styles.userContent}>{data.subjects}</Text>
             </View>
           </View>
-          {/*<View style={styles.userContentRow}>*/}
-          {/*  <View style={styles.userContentHeadingWrapper}>*/}
-          {/*    <Text style={styles.userContentHeading}>Date of Birth</Text>*/}
-          {/*  </View>*/}
-          {/*  <View style={styles.userContentWrapper}>*/}
-          {/*    <Text style={styles.userContent}>{user.dob.slice(0, 10)}</Text>*/}
-          {/*  </View>*/}
-          {/*</View>*/}
           <View style={styles.userContentRow}>
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Facebook Link</Text>
