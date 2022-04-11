@@ -13,7 +13,12 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { PLACEHOLDER, WHITE } from "../../../styles/colors";
+import {
+  LIGHT_PURPLE,
+  PLACEHOLDER,
+  SELECTED_BUTTON,
+  WHITE,
+} from "../../../styles/colors";
 import { pushData, uploadImage } from "../../../api/handleData";
 import { auth } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
@@ -219,6 +224,28 @@ const Form = ({ route, navigation }) => {
                     hideDatePicker();
                   }}
                   onCancel={hideDatePicker}
+                  buttonTextColorIOS={SELECTED_BUTTON}
+                  customHeaderIOS={() => {
+                    return (
+                      <View
+                        style={{
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginTop: 15,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            fontSize: 16,
+                            fontFamily: "PoppinsSemiBold",
+                          }}
+                        >
+                          {"Date of birth"}
+                        </Text>
+                      </View>
+                    );
+                  }}
+                  display="spinner"
                 />
               </TouchableOpacity>
             </View>
