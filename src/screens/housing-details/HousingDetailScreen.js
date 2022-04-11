@@ -17,6 +17,7 @@ import Review from "../../components/housing-details/reviews/Review";
 import SectionInfo from "../../components/housing-details/section-info/SectionInfo";
 import StarRatingView from "../../components/housing-details/StarRatingView";
 import StarRating from "react-native-star-rating-widget";
+import { postReview } from "../../api/handleReview";
 
 const HousingDetailScreen = ({ navigation: { goBack } }) => {
   const [myComment, setMyComment] = useState("");
@@ -136,7 +137,12 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
               starStyle={styles.starStyle}
             />
 
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => {
+                postReview(1, myComment, myRating);
+              }}
+            >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
             </TouchableOpacity>
           </View>
