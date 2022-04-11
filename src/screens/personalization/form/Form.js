@@ -118,9 +118,8 @@ const Form = ({ route, navigation }) => {
         .put(blob)
         .then((snapshot) => {
           snapshot.ref.getDownloadURL().then((url) => {
-            console.log("Upload image success");
-            console.log("downloadURL", url);
-            setAvatar(url.toString());
+            console.log("download URL", url);
+            setAvatar(url);
           });
         });
     } catch (e) {
@@ -361,6 +360,15 @@ const Form = ({ route, navigation }) => {
               bioValidate.valid && (
                 <TouchableOpacity
                   onPress={() => {
+                    uploadImage(
+                      image,
+                      auth.currentUser.uid +
+                        "." +
+                        image
+                          .substring(image.lastIndexOf("/") + 1)
+                          .split(".")
+                          .pop()
+                    );
                     pushData(
                       auth.currentUser.uid,
                       campus,
@@ -373,15 +381,7 @@ const Form = ({ route, navigation }) => {
                       facebook,
                       bio
                     );
-                    uploadImage(
-                      image,
-                      auth.currentUser.uid +
-                        "." +
-                        image
-                          .substring(image.lastIndexOf("/") + 1)
-                          .split(".")
-                          .pop()
-                    );
+
                     navigation.navigate("Ready");
                   }}
                 >
