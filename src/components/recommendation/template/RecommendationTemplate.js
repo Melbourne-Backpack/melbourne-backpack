@@ -1,75 +1,184 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import {SafeAreaView, ScrollView, Text, View} from "react-native";
 import styles from "./styles";
 import RecommendationCard from "../card/RecommendationCard";
-import { useFonts } from "expo-font";
-import { useState } from "react";
-import FilterCategory from "../filter/FilterCategory";
-import { Ionicons } from "@expo/vector-icons";
-import { LIGHT_BLUE } from "../../../styles/colors";
+import {useFonts} from "expo-font";
+import HousingFilter from "../../housing-filter/HousingFilter";
 
-const RecommendationTemplate = ({
-  topic,
-  firstData,
-  otherData,
-  housing,
-  categories,
-}) => {
-  const [isVisible, setVisible] = useState(false);
+const type = [
+    {
+        index: 0,
+        name: "apartment",
+    },
+    {
+        index: 1,
+        name: "house",
+    },
+    {
+        index: 2,
+        name: "townhouse",
+    },
+];
+const price = [
+    {
+        index: 0,
+        name: "1-200",
+    },
+    {
+        index: 1,
+        name: "201-400",
+    },
+    {
+        index: 2,
+        name: "401-800",
+    },
+    {
+        index: 3,
+        name: "801-1600",
+    },
+    {
+        index: 4,
+        name: "1601+",
+    },
+];
+const bed = [
+    {
+        index: 0,
+        name: "1",
+    },
+    {
+        index: 1,
+        name: "2",
+    },
+    {
+        index: 2,
+        name: "3",
+    },
+    {
+        index: 3,
+        name: "4",
+    },
+    {
+        index: 4,
+        name: "5+",
+    },
+];
+const bath = [
+    {
+        index: 0,
+        name: "1",
+    },
+    {
+        index: 1,
+        name: "2",
+    },
+    {
+        index: 2,
+        name: "3",
+    },
+    {
+        index: 3,
+        name: "4",
+    },
+    {
+        index: 4,
+        name: "5+",
+    },
+];
+const area = [
+    {
+        index: 0,
+        name: "1-50",
+    },
+    {
+        index: 1,
+        name: "51-100",
+    },
+    {
+        index: 2,
+        name: "101-200",
+    },
+    {
+        index: 3,
+        name: "201-400",
+    },
+    {
+        index: 4,
+        name: "401+",
+    },
+];
 
-  const [loaded, error] = useFonts({
-    PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
-    PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
-    PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
-  });
+const distanceFromRMIT = [
+    {
+        index: 0,
+        name: "0-1",
+    },
+    {
+        index: 1,
+        name: "2-5",
+    },
+    {
+        index: 2,
+        name: "5-10",
+    },
+    {
+        index: 3,
+        name: "10+",
+    },
+];
 
-  if (!loaded) {
-    return null;
-  }
+const RecommendationTemplate = ({topic, data, housing, navigation}) => {
+    let highestRating = 0;
+    let trendingCard = {};
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.wrapper}>
-          <Text style={styles.heading1}>Trending {topic}</Text>
-          <RecommendationCard data={firstData} housing={housing} />
+    if (data.length > 0) {
+        trendingCard = data[0]
+    }
 
-          <View style={styles.secondHeader}>
-            <Text style={styles.heading2}>All</Text>
-            <View style={styles.filterBtn}>
-              <TouchableOpacity
-                style={styles.filterBtn}
-                onPress={() => {
-                  setVisible(!isVisible);
-                }}
-              >
-                <Ionicons name="filter" size={24} color={LIGHT_BLUE} />
-              </TouchableOpacity>
-            </View>
-          </View>
+    const [loaded, error] = useFonts({
+        PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
+        PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
+        PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
+    });
 
-          <View style={styles.filterOptions}>
-            {isVisible ? (
-              categories.map((category, id) => (
-                <FilterCategory category={category} key={id} />
-              ))
-            ) : (
-              <></>
-            )}
-          </View>
+    if (!loaded) {
+        return null;
+    }
 
-          {otherData.map((data) => (
-            <RecommendationCard key={data.id} data={data} housing={housing} />
-          ))}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+    return (
+        <SafeAreaView style={styles.container}>
+            <ScrollView>
+                <View style={styles.wrapper}>
+                    <Text style={styles.heading1}>Trending {topic}</Text>
+                    {
+                        data !== [] ? <RecommendationCard data={trendingCard} housing={housing}/> : null
+                    }
+
+                    <View style={styles.secondHeader}>
+                        <Text style={styles.heading2}>All</Text>
+                    </View>
+
+                    <View style={styles.filterOptions}>
+                        {data.length > 0 ? (
+                            <HousingFilter
+                                headingList={[
+                                    "type",
+                                    "price",
+                                    "bed",
+                                    "bath",
+                                    "distance from RMIT",
+                                ]}
+                                optionList={[type, price, bed, bath, distanceFromRMIT]}
+                                navigation={navigation}
+                                housingList={data}
+                                isHousing={housing}
+                            />
+                        ) : null
+                        }
+                    </View>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+    );
 };
 
 export default RecommendationTemplate;

@@ -14,7 +14,6 @@ const CommunityFilterBtn = ({ key, value, filter, heading, submitted }) => {
       onPress={() => {
         selected ? filter[heading].pop(value) : filter[heading].push(value);
         setSelected(filter[heading].includes(value));
-        submitted = false;
       }}
       style={styles.btnWrapper}
     >
