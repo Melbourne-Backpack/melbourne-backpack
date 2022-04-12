@@ -2,12 +2,24 @@ import {Text, View, ScrollView, FlatList, SafeAreaView} from "react-native";
 import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import CommunityFilter from "../../components/community-filter/CommunityFilter";
 import styles from "./styles";
-import data from "../../../assets/mockJSON/MOCK_DATA.json";
 import {useFonts} from "expo-font";
+import {collection, getDocs} from "firebase/firestore";
+import {db, auth} from "../../config/firebase";
+import {useEffect, useState} from "react";
 
 const CommunityScreen = ({navigation}) => {
+    const communityRef = collection(db, "users")
+    const [community, setCommunity] = useState([])
+    const fetchData = () => {
+        getDocs(communityRef).then((data) => {
+            setCommunity(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+        })
+    }
+    useEffect(() => {
+        fetchData()
+    }, [])
     const mostLikeYouMaxCards = 4;
-    const self = "1";
+    const self = auth.currentUser.uid;
 
     const [loaded, error] = useFonts({
         PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
@@ -22,37 +34,37 @@ const CommunityScreen = ({navigation}) => {
         let temp = [];
         let myCampus = "";
         let myTopic = [];
-        data.map((user) => {
-            let id = user.index;
-            if (id.toString() === self.toString()) {
-                myCampus = user.campus;
-                myTopic = user.topic;
+        community.map((user) => {
+            let id = user.id;
+            if (id === self) {
+                if (user.campus) myCampus = user.campus;
+                if (user.subjects) myTopic = user.subjects;
             }
         });
 
-        for (let i = 0; i < data.length; i++) {
-            let user = data[i];
-            let id = user.index;
+        for (let i = 0; i < community.length; i++) {
+            let user = community[i];
+            let id = user.id;
 
             if (
-                id.toString() !== self.toString() &&
+                id !== self &&
                 user.campus === myCampus &&
-                !temp.includes(id.toString())
+                !temp.includes(id)
             ) {
                 temp.push(user);
             }
 
             if (
-                data.indexOf(user) === data.length - 1 &&
+                community.indexOf(user) === community.length - 1 &&
                 temp.length !== mostLikeYouMaxCards
             ) {
-                for (let i = 0; i < data.length; i++) {
+                for (let i = 0; i < community.length; i++) {
                     if (
-                        id.toString() !== self.toString() &&
-                        !temp.includes(id.toString())
+                        id !== self &&
+                        !temp.includes(id)
                     ) {
                         myTopic.map((topic) => {
-                            if (user.topic.includes(topic)) {
+                            if (user.subjects.includes(topic)) {
                                 temp.push(user);
                             }
                         });
@@ -63,10 +75,7 @@ const CommunityScreen = ({navigation}) => {
         return temp;
     };
 
-    const mostLikeYouDataForDisplay = mostLikeYouData().splice(
-        0,
-        mostLikeYouMaxCards
-    );
+
     const campus = [
         {
             id: 1,
@@ -124,6 +133,15 @@ const CommunityScreen = ({navigation}) => {
             name: "Digital Marketing",
         },
     ];
+    let mostLikeYouDataForDisplay
+    if (community.length > 0) {
+        mostLikeYouDataForDisplay = mostLikeYouData().splice(
+            0,
+            mostLikeYouMaxCards)
+        if (mostLikeYouDataForDisplay.length === 0) {
+            mostLikeYouDataForDisplay = community.splice(0, mostLikeYouMaxCards)
+        }
+    }
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -132,17 +150,18 @@ const CommunityScreen = ({navigation}) => {
                 <SafeAreaView>
                     <FlatList
                         style={styles.mostLikeYou}
+                        extraData={community}
                         data={mostLikeYouDataForDisplay}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         renderItem={(user) => {
                             return (
                                 <CommunityCardLarge
-                                    userID={user.item.index}
-                                    name={user.item.name}
+                                    userID={user.item.id}
+                                    name={user.item.fullName}
                                     campus={user.item.campus}
-                                    picture={user.item.picture}
-                                    topic={user.item.topic[Math.floor(Math.random() * 2)]}
+                                    picture={user.item.avatar}
+                                    topic={user.item.subjects ? user.item.subjects[Math.floor(Math.random() * 2)] : null}
                                     navigation={navigation}
                                 />
                             );
@@ -153,12 +172,13 @@ const CommunityScreen = ({navigation}) => {
             <View style={styles.communityListContainer}>
                 <Text style={styles.communityListText}>Community</Text>
                 <View>
-                    <CommunityFilter
-                        headingList={["campus", "topic"]}
-                        optionList={[campus, topic]}
-                        navigation={navigation}
-                        userList={data}
-                    />
+                    {community.length > 0 ?
+                        <CommunityFilter
+                            headingList={["campus", "subjects"]}
+                            optionList={[campus, topic]}
+                            navigation={navigation}
+                            userList={community}
+                        /> : null}
                 </View>
             </View>
         </ScrollView>
