@@ -94,7 +94,7 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.furtherButton}>
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={() => navigation.navigate("Profile")}
+          onPress={() => navigation.navigate("Content", { screen: "Profile" })}
         >
           <ImageBackground
             resizeMode={"cover"}

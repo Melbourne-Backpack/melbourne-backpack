@@ -384,8 +384,9 @@ const Form = ({ route, navigation }) => {
                       facebook,
                       bio
                     );
-
-                    navigation.navigate("Ready");
+                    if (avatar !== "") {
+                      navigation.navigate("Ready");
+                    }
                   }}
                 >
                   <View style={styles.nextButtonView}>

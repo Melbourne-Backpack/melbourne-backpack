@@ -34,7 +34,7 @@ const Profile = ({ navigation: { goBack } }) => {
   }
 
   return (
-    <ScrollView style={styles.background}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.background}>
       <View style={styles.topBar}>
         <TouchableOpacity onPress={goBack}>
           <AntDesign
