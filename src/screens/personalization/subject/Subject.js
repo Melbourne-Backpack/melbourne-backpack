@@ -18,16 +18,36 @@ import {
 } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
-import { SelectMultipleButton } from "react-native-selectmultiple-button";
 import _ from "lodash";
 
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
 
-const Subject = ({ navigation }) => {
+const Subject = ({ route, navigation }) => {
+  const { campus } = route.params;
+  const subjects = [
+    "Economics",
+    "Business",
+    "Engineer",
+    "Robotics",
+    "Management",
+    "Aviation",
+    "Education",
+    "Design",
+    "ProfComm",
+    "Information Technology",
+    "Digital Marketing",
+  ];
+  let fList = [];
+
+  for (let i = 0; i < subjects.length; i++) {
+    fList.push(false);
+  }
   // handle Selected button
-  const [selectedData, setSelectedData] = React.useState([]);
-  const [selected, setSelected] = React.useState(false);
+  const [subjectList, setSubjectList] = useState(subjects);
+  const [falseList, setFalseList] = useState(fList);
+  const [valid, setValid] = useState(true);
+  const [selectedSubjects, setSelectedSubjects] = useState([]);
 
   // handle Text Input value
   const [text, setText] = useState("");
@@ -41,18 +61,27 @@ const Subject = ({ navigation }) => {
     return null;
   }
 
-  const multipleData = [
-    "Economics",
-    "Business",
-    "Robotics",
-    "Management",
-    "Aviation",
-    "Education",
-    "Design",
-    "ProfComm",
-    "Technology",
-    "Digital Marketing",
-  ];
+  const handleList = (subject) => {
+    for (let i = 0; i < subjectList.length; i++) {
+      if (subjectList[i] === subject) {
+        if (selectedSubjects.includes(subject)) {
+          _.remove(selectedSubjects, (ele) => {
+            return ele === subject;
+          });
+          let newArr = [...falseList];
+          newArr[i] = false;
+          setFalseList(newArr);
+        } else {
+          let newList = [...selectedSubjects];
+          newList.push(subject);
+          setSelectedSubjects(newList);
+          let newArr = [...falseList];
+          newArr[i] = true;
+          setFalseList(newArr);
+        }
+      }
+    }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -75,33 +104,47 @@ const Subject = ({ navigation }) => {
               onChangeText={(text) => setText(text)}
               defaultValue={text}
             >
-              {selected ? _.join(selectedData, "") : ""}
+              {_.join(selectedSubjects, " | ")}
             </TextInput>
             <View style={styles.buttonWrapper}>
-              {multipleData.map((subject, index) => (
-                <SelectMultipleButton
-                  key={subject}
-                  buttonViewStyle={styles.buttonViewStyle}
-                  textStyle={styles.textStyle}
-                  highLightStyle={{
-                    borderColor: WHITE,
-                    backgroundColor: "transparent",
-                    textColor: WHITE,
-                    borderTintColor: DARK_BLUE,
-                    backgroundTintColor: SELECTED_BUTTON,
-                    textTintColor: WHITE,
-                  }}
-                  value={subject}
-                  selected={selectedData.includes(subject)}
-                  singleTap={(valueTap) => {
-                    setSelectedData(subject);
-                    setSelected(true);
-                  }}
-                />
-              ))}
+              {subjects.map((subject, index) => {
+                return (
+                  <TouchableOpacity
+                    key={subject}
+                    style={
+                      falseList[index]
+                        ? styles.buttonSelectedStyle
+                        : styles.buttonViewStyle
+                    }
+                    onPress={() => {
+                      handleList(subject);
+                    }}
+                  >
+                    <Text style={styles.textStyle}>{subject}</Text>
+                  </TouchableOpacity>
+                );
+              })}
             </View>
-            <Text style={styles.selectedText}>3 topics Selected</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Form")}>
+            <Text style={styles.selectedText}>
+              {selectedSubjects.length} topics Selected
+            </Text>
+            {valid ? null : (
+              <Text style={styles.errorText}>
+                *Please select minimum 3 subjects
+              </Text>
+            )}
+            <TouchableOpacity
+              onPress={() => {
+                if (selectedSubjects.length < 3) {
+                  setValid(false);
+                } else {
+                  navigation.navigate("Form", {
+                    campus: campus,
+                    subjects: selectedSubjects,
+                  });
+                }
+              }}
+            >
               <View style={styles.nextButtonView}>
                 <Text style={styles.nextButtonText}>Next</Text>
               </View>

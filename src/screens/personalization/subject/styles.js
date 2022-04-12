@@ -6,6 +6,7 @@ import {
   BACKGROUND,
   SELECTED_BUTTON,
   TEXT_INPUT,
+  RED,
 } from "../../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
@@ -56,9 +57,21 @@ const styles = StyleSheet.create({
   },
   buttonViewStyle: {
     borderRadius: 20,
-    paddingVertical: 1,
-    paddingHorizontal: 4,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
     borderWidth: 1,
+    borderColor: WHITE,
+    marginHorizontal: 5,
+    marginVertical: 5,
+  },
+  buttonSelectedStyle: {
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    marginHorizontal: 5,
+    backgroundColor: SELECTED_BUTTON,
+    marginVertical: 5,
   },
   textStyle: {
     color: WHITE,
@@ -67,6 +80,11 @@ const styles = StyleSheet.create({
   selectedText: {
     fontFamily: "PoppinsRegular",
     color: WHITE,
+  },
+  errorText: {
+    fontFamily: "PoppinsRegular",
+    color: RED,
+    marginTop: 5,
   },
   nextButtonView: {
     backgroundColor: SELECTED_BUTTON,

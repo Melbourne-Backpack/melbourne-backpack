@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import "firebase/compat/storage";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 import {
   API_KEY,
@@ -17,12 +19,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APPID,
+  apiKey: "AIzaSyCLZhG8wXVb8_B0qX4non3ZgP4-VVqGvGw",
+  authDomain: "melbourne-backpack.firebaseapp.com",
+  projectId: "melbourne-backpack",
+  storageBucket: "melbourne-backpack.appspot.com",
+  messagingSenderId: "675237133664",
+  appId: "1:675237133664:web:32110119e2d1f78fb3b205",
 };
 
 // Initialize Firebase
@@ -31,5 +33,6 @@ app = firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = getFirestore(app);
+const storage = firebase.storage();
 
-export { auth, db };
+export { auth, db, storage };
