@@ -233,6 +233,10 @@ const Form = ({ route, navigation }) => {
                 >
                   {dob === "" ? "Date of birth" : dob}
                 </Text>
+                <Image
+                  style={{ width: 20, height: 20 }}
+                  source={require("../../../../assets/date-of-birth.png")}
+                />
                 <DateTimePickerModal
                   isVisible={isDatePickerVisible}
                   mode="date"
