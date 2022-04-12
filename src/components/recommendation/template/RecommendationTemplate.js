@@ -170,7 +170,7 @@ const RecommendationTemplate = ({topic, data, housing, navigation}) => {
                                 optionList={[type, price, bed, bath, distanceFromRMIT]}
                                 navigation={navigation}
                                 housingList={data}
-                                isHousing={true}
+                                isHousing={housing}
                             />
                         ) : null
                         }

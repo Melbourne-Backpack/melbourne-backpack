@@ -63,8 +63,8 @@ const HousingFilter = ({
     housingList.map((housing) => {
         addresses.push(housing["address"]);
     });
-    let distanceList = Distance(addresses, origin);
-    console.log(distanceList)
+    let distanceList = []
+    if (isHousing) distanceList = Distance(addresses, origin);
     const [submitted, setSubmitted] = useState(false);
     const [loaded, error] = useFonts({
         PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
