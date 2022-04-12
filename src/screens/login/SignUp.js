@@ -14,7 +14,6 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 import { WHITE } from "../../styles/colors";
-import { auth } from "../../config/firebase";
 import { signUp } from "../../api/loginApi";
 
 const SignUp = ({ navigation }) => {
@@ -33,7 +32,11 @@ const SignUp = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={20}
+        behavior="padding"
+        style={styles.container}
+      >
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.wrapper}>
             <Image
@@ -84,7 +87,7 @@ const SignUp = ({ navigation }) => {
             </View>
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };

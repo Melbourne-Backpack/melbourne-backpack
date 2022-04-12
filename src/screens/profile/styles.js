@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     marginLeft: wp(5),
     marginTop: 10,
     marginBottom: 10,
+    fontFamily: "PoppinsBold",
   },
 
   userContent: {
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: wp(5),
     marginRight: wp(5),
+    fontFamily: "PoppinsRegular",
   },
 
   userContentHeadingWrapper: {

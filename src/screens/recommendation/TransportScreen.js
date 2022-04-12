@@ -32,8 +32,7 @@ const TransportScreen = () => {
 
   return (
     <RecommendationTemplate
-      firstData={firstData}
-      otherData={otherData}
+      data={data}
       topic="Transportation"
       categories={categories}
     />
