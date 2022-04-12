@@ -6,6 +6,7 @@ import {
 } from "@expo/vector-icons";
 
 import styles from "./styles";
+import { useNavigation } from "@react-navigation/native";
 import {GREY, YELLOW} from "../../../styles/colors";
 import {useFonts} from "expo-font";
 
@@ -19,10 +20,13 @@ const RecommendationCard = ({data, housing}) => {
     if (!loaded) {
         return null;
     }
-
+  
     return (
         <View style={styles.card}>
-            <TouchableOpacity activeOpacity={0.5}>
+            <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate("Details")}
+        >
                 <ImageBackground
                     source={{uri: data.image}}
                     style={styles.backgroundImg}
@@ -42,7 +46,7 @@ const RecommendationCard = ({data, housing}) => {
             </TouchableOpacity>
 
             <View style={styles.info}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Details")}>
                     <Text style={[styles.name, styles.text]}>{data.title}</Text>
                 </TouchableOpacity>
                 {housing !== true ? (

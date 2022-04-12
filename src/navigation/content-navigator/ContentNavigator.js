@@ -8,6 +8,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "./styles";
 import { LIGHT_PURPLE, LIGHTER_GREY } from "../../styles/colors";
+import Profile from "../../screens/profile/Profile";
+import { Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +34,9 @@ const tabIcons = [
     iconName: "md-people-outline",
     iconFocus: "md-people",
   },
+  {
+    route: "Profile",
+  },
 ];
 
 const ContentNavigator = () => {
@@ -44,35 +49,36 @@ const ContentNavigator = () => {
 
           tabIcons.map((tabIcon) => {
             if (route.name === tabIcon.route) {
-              // if (route.name === "Community") {
-              //   icon = (
-              //     <Image
-              //       source={require("../../../assets/images/avatar-clone.jpg")}
-              //       style={
-              //         focused
-              //           ? {
-              //               width: iconSize,
-              //               height: iconSize,
-              //               borderRadius: 50,
-              //               borderColor: LIGHT_PURPLE,
-              //               borderWidth: 3,
-              //             }
-              //           : {
-              //               width: iconSize,
-              //               height: iconSize,
-              //               borderRadius: 50,
-              //             }
-              //       }
-              //     />
-              //   );
-              // } else {
-              iconName = focused ? tabIcon.iconFocus : tabIcon.iconName;
-              iconColor = focused ? LIGHT_PURPLE : LIGHTER_GREY;
-              icon = (
-                <Ionicons name={iconName} size={iconSize} color={iconColor} />
-              );
+              if (route.name === "Profile") {
+                icon = (
+                  <Image
+                    source={require("../../../assets/images/avatar-placeholder.jpg")}
+                    style={
+                      focused
+                        ? {
+                            width: iconSize,
+                            height: iconSize,
+                            borderRadius: 50,
+                            borderColor: LIGHT_PURPLE,
+                            borderWidth: 3,
+                          }
+                        : {
+                            width: iconSize,
+                            height: iconSize,
+                            borderRadius: 50,
+                          }
+                    }
+                  />
+                );
+              } else {
+                iconName = focused ? tabIcon.iconFocus : tabIcon.iconName;
+                iconColor = focused ? LIGHT_PURPLE : LIGHTER_GREY;
+                icon = (
+                  <Ionicons name={iconName} size={iconSize} color={iconColor} />
+                );
+              }
+              // }
             }
-            // }
           });
           return icon;
         },
@@ -85,6 +91,7 @@ const ContentNavigator = () => {
       <Tab.Screen name="Transport" component={TransportScreen} />
       <Tab.Screen name="Shopping" component={ShoppingScreen} />
       <Tab.Screen name="Community" component={CommunityScreen} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 };

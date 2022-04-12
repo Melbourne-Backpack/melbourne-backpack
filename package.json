@@ -32,6 +32,8 @@
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-selectmultiple-button": "^0.1.105",
+    "react-native-star-rating-view": "^0.0.12",
+    "react-native-star-rating-widget": "^1.2.0",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
