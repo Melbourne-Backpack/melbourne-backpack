@@ -10,6 +10,8 @@ import {
   SELECTED_BUTTON,
   TEXT_INPUT,
   YELLOW,
+  PLACEHOLDER,
+  RED,
 } from "../../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
@@ -41,8 +43,27 @@ const styles = StyleSheet.create({
   avatarText: {
     color: WHITE,
     fontFamily: "PoppinsSemiBold",
-    paddingTop: 10,
+    paddingVertical: 10,
+  },
+  errorImage: {
+    color: RED,
+    fontFamily: "PoppinsSemiBold",
     paddingBottom: 50,
+  },
+  dob: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: TEXT_INPUT,
+    width: wp("80%"),
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    marginVertical: 10,
+  },
+  dobWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
   },
   textInput: {
     backgroundColor: TEXT_INPUT,
@@ -54,6 +75,15 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsMedium",
     marginVertical: 10,
   },
+  errorHolder: {
+    width: wp("80%"),
+    alignItems: "flex-start",
+  },
+  error: {
+    color: RED,
+    fontFamily: "PoppinsSemiBold",
+  },
+
   introduction: {
     paddingBottom: 100,
   },
@@ -61,6 +91,7 @@ const styles = StyleSheet.create({
     width: wp("80%"),
     flexDirection: "row",
     flexWrap: "wrap",
+    marginTop: 20,
   },
   normalText: {
     fontFamily: "PoppinsRegular",

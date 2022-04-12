@@ -6,10 +6,12 @@ import {
 } from "@expo/vector-icons";
 
 import styles from "./styles";
+import { useNavigation } from "@react-navigation/native";
 import { GREY, YELLOW } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 
 const RecommendationCard = ({ data, housing }) => {
+  const navigation = useNavigation();
   const [loaded, error] = useFonts({
     PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
@@ -22,9 +24,12 @@ const RecommendationCard = ({ data, housing }) => {
 
   return (
     <View style={styles.card}>
-      <TouchableOpacity activeOpacity={0.5}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => navigation.navigate("Details")}
+      >
         <ImageBackground
-          source={require("../../../../assets/images/student-housing.jpg")}
+          source={{ uri: data.image }}
           style={styles.backgroundImg}
           imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
           resizeMode="cover"
@@ -42,8 +47,8 @@ const RecommendationCard = ({ data, housing }) => {
       </TouchableOpacity>
 
       <View style={styles.info}>
-        <TouchableOpacity>
-          <Text style={[styles.name, styles.text]}>{data.name}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Details")}>
+          <Text style={[styles.name, styles.text]}>{data.title}</Text>
         </TouchableOpacity>
         {housing !== true ? (
           <></>
@@ -60,21 +65,12 @@ const RecommendationCard = ({ data, housing }) => {
         ) : (
           <View style={styles.extraOuterContainer}>
             <View style={styles.extraContainer}>
-              <Text style={styles.extra}>{data.area} sqm</Text>
-              <MaterialCommunityIcons
-                name="floor-plan"
-                size={35}
-                color={GREY}
-              />
-            </View>
-
-            <View style={styles.extraContainer}>
-              <Text style={styles.extra}>{data.bedroom}</Text>
+              <Text style={styles.extra}>{data.bed}</Text>
               <Ionicons name="bed" size={35} color={GREY} />
             </View>
 
             <View style={styles.extraContainer}>
-              <Text style={styles.extra}>{data.bathroom}</Text>
+              <Text style={styles.extra}>{data.bath}</Text>
               <MaterialCommunityIcons name="shower" size={35} color={GREY} />
             </View>
           </View>
