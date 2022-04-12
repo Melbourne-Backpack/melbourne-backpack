@@ -23,7 +23,6 @@ import { pushData } from "../../../api/handleData";
 import { auth, storage } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { value } from "lodash/seq";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
