@@ -174,9 +174,9 @@ const Form = ({ route, navigation }) => {
     }
     if (component === bio && bio === "") {
       setBioValidate({ error: "*Introduction is required", valid: false });
-    } else if (bio.length < 1) {
+    } else if (bio.length < 50 || bio.length > 500) {
       setBioValidate({
-        error: "*Introduction must be more than 100 words",
+        error: "*Introduction must be between 50 and 500 characters.",
         valid: false,
       });
     } else {
@@ -218,6 +218,7 @@ const Form = ({ route, navigation }) => {
                 setFullName(text);
               }}
               defaultValue={fullName}
+              multiline
             />
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{fullNameValidate.error}</Text>
@@ -293,6 +294,7 @@ const Form = ({ route, navigation }) => {
                 setFacebook(text);
               }}
               defaultValue={facebook}
+              multiline
             />
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{facebookValidate.error}</Text>
@@ -306,6 +308,7 @@ const Form = ({ route, navigation }) => {
                 setBio(text);
               }}
               defaultValue={bio}
+              multiline
             />
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{bioValidate.error}</Text>
