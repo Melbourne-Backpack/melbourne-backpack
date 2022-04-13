@@ -110,7 +110,7 @@ const area = [
 const distanceFromRMIT = [
     {
         index: 0,
-        name: "0-1",
+        name: "0-2",
     },
     {
         index: 1,
