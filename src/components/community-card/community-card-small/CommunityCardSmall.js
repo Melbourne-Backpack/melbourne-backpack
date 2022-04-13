@@ -18,15 +18,15 @@ const CommunityCardSmall = ({userID, name, navigation, picture}) => {
     if (!loaded) {
         return null;
     }
-    console.log(userID)
     return (
         <TouchableOpacity
             key={userID}
             style={styles.card}
             onPress={() => {
-                navigation.navigate("Profile", {
-                    id: userID,
-                });
+                navigation.navigate('Content', {
+                    screen: "Profile",
+                    params: {user: userID},
+                })
             }}
         >
             <ImageBackground

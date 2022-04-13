@@ -122,7 +122,6 @@ const CommunityFilter = ({headingList, optionList, navigation, userList}) => {
                                 horizontal={false}
                                 numColumns={3}
                                 renderItem={(user) => {
-                                    console.log(user.item.id)
                                     return (
                                         <CommunityCardSmall
                                             userID={user.item.id}
