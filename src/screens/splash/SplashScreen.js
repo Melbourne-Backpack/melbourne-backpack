@@ -4,7 +4,7 @@ import styles from "./styles";
 // use replace instead of navigate to avoid the back button on Android
 const SplashScreen = ({ navigation }) => {
   setTimeout(() => {
-    navigation.replace("SignIn");
+    navigation.replace("Home");
   }, 5000);
   return (
     <View style={styles.container}>

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: wp(5),
-    paddingHorizontal: wp(3),
+    justifyContent: "center",
   },
   text: {
     color: WHITE,
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   building: {
     fontSize: 18,
     fontFamily: "PoppinsMedium",
-    marginLeft: wp(12),
   },
   img: {
     width: "100%",

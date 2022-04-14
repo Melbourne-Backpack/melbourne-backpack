@@ -18,14 +18,27 @@ import SectionInfo from "../../components/housing-details/section-info/SectionIn
 import StarRatingView from "../../components/housing-details/StarRatingView";
 import StarRating from "react-native-star-rating-widget";
 import { postReview } from "../../api/handleReview";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 const HousingDetailScreen = ({ navigation: { goBack } }) => {
   const [myComment, setMyComment] = useState("");
   const [myRating, setMyRating] = useState();
 
+  const [housingData, setHousingData] = useState({});
+  const getData = () => {
+    getDoc(doc(db, "housing", "2ikuQKCkBJkwSsMOtoO9")).then((docSnap) => {
+      if (docSnap.exists()) {
+        setHousingData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+
   useEffect(() => {
-    console.log("Rating is: " + myRating);
-  }, [myRating]);
+    getData();
+  }, []);
 
   const data = {
     name: "4 bedroom apartment deluxe",
@@ -89,16 +102,13 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
         <TouchableOpacity onPress={() => goBack()}>
           <Ionicons name="chevron-back" size={30} color={WHITE} />
         </TouchableOpacity>
-        <Text style={[styles.building, styles.text]}>{data.building}</Text>
+        <Text style={[styles.building, styles.text]}>{housingData.name}</Text>
       </View>
 
       <ScrollView style={styles.wrapper}>
-        <Image
-          source={require("../../../assets/images/student-room.jpg")}
-          style={styles.img}
-        />
-        <Text style={[styles.text, styles.name]}>{data.name}</Text>
-        <Text style={[styles.text, styles.address]}>{data.address}</Text>
+        <Image source={{ uri: housingData.image }} style={styles.img} />
+        <Text style={[styles.text, styles.name]}>{housingData.title}</Text>
+        <Text style={[styles.text, styles.address]}>{housingData.address}</Text>
 
         <View style={styles.starContainer}>
           <StarRatingView width={30} height={30} rating={data.rating} />
