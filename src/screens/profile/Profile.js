@@ -11,7 +11,7 @@ import {signOut} from "../../api/loginApi";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
-const Profile = ({navigation: {goBack}, route}) => {
+const Profile = ({navigation, route}) => {
     const [uid, setUid] = useState(auth.currentUser.uid)
     useEffect(() => {
         if (route.params.user !== undefined && route.params.user !== auth.currentUser.uid) {
@@ -43,7 +43,9 @@ const Profile = ({navigation: {goBack}, route}) => {
     return (
         <ScrollView style={styles.background}>
             <View style={styles.topBar}>
-                <TouchableOpacity onPress={goBack}>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate("Community")
+                }}>
                     <AntDesign
                         name={"left"}
                         size={24}
