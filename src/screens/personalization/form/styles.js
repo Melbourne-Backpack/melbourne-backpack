@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     width: wp("80%"),
     paddingVertical: 15,
     paddingHorizontal: 30,
+    paddingTop: 15,
     color: WHITE,
     fontFamily: "PoppinsMedium",
     marginVertical: 10,

@@ -11,14 +11,9 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
-import {
-  LIGHT_PURPLE,
-  PLACEHOLDER,
-  SELECTED_BUTTON,
-  WHITE,
-} from "../../../styles/colors";
+import { PLACEHOLDER, SELECTED_BUTTON, WHITE } from "../../../styles/colors";
 import { pushData } from "../../../api/handleData";
 import { auth, storage } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
@@ -126,6 +121,24 @@ const Form = ({ route, navigation }) => {
     }
   };
 
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if (didMount.current) {
+      uploadImage(
+        image,
+        auth.currentUser.uid +
+          "." +
+          image
+            .substring(image.lastIndexOf("/") + 1)
+            .split(".")
+            .pop()
+      );
+    } else {
+      didMount.current = true;
+    }
+  }, [image]);
+
   // handle font
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -174,7 +187,7 @@ const Form = ({ route, navigation }) => {
     }
     if (component === bio && bio === "") {
       setBioValidate({ error: "*Introduction is required", valid: false });
-    } else if (bio.length < 50 || bio.length > 500) {
+    } else if (bio.length < 1 || bio.length > 500) {
       setBioValidate({
         error: "*Introduction must be between 50 and 500 characters.",
         valid: false,
@@ -366,15 +379,6 @@ const Form = ({ route, navigation }) => {
               bioValidate.valid && (
                 <TouchableOpacity
                   onPress={() => {
-                    uploadImage(
-                      image,
-                      auth.currentUser.uid +
-                        "." +
-                        image
-                          .substring(image.lastIndexOf("/") + 1)
-                          .split(".")
-                          .pop()
-                    );
                     pushData(
                       auth.currentUser.uid,
                       campus,
@@ -387,9 +391,7 @@ const Form = ({ route, navigation }) => {
                       facebook,
                       bio
                     );
-                    if (avatar !== "") {
-                      navigation.navigate("Ready");
-                    }
+                    navigation.navigate("Ready");
                   }}
                 >
                   <View style={styles.nextButtonView}>

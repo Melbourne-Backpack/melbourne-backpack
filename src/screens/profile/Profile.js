@@ -1,4 +1,11 @@
-import { Image, View, Text, TouchableOpacity, ScrollView } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Linking,
+} from "react-native";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
@@ -101,7 +108,12 @@ const Profile = ({ navigation: { goBack } }) => {
               <Text style={styles.userContentHeading}>Facebook Link</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.facebook}</Text>
+              <Text
+                style={styles.hyperlink}
+                onPress={() => Linking.openURL("https://" + data.facebook)}
+              >
+                {data.facebook}
+              </Text>
             </View>
           </View>
           <View style={[styles.userContentRow, styles.userContentLastRow]}>
