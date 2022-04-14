@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Linking,
+  Pressable,
 } from "react-native";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
@@ -107,14 +108,14 @@ const Profile = ({ navigation: { goBack } }) => {
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Facebook Link</Text>
             </View>
-            <View style={styles.userContentWrapper}>
+            <Pressable style={styles.userContentWrapper}>
               <Text
                 style={styles.hyperlink}
                 onPress={() => Linking.openURL("https://" + data.facebook)}
               >
                 {data.facebook}
               </Text>
-            </View>
+            </Pressable>
           </View>
           <View style={[styles.userContentRow, styles.userContentLastRow]}>
             <View style={styles.userContentHeadingWrapper}>
