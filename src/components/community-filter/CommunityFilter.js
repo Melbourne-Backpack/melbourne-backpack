@@ -90,21 +90,29 @@ const CommunityFilter = ({headingList, optionList, navigation, userList}) => {
                                 onPress={() => {
                                     setSubmitted((prev) => !prev);
                                     setData([]);
+                                    let filterListLength = 0
+                                    headings.map((heading) => {
+                                        if (filter[heading].length > 0) {
+                                            filterListLength++
+                                        }
+                                    })
                                     userList.map((user) => {
-                                        let added = 0;
+                                        let checked = 0
                                         headings.map((heading) => {
+                                            let count = 0
                                             filter[heading].map((option) => {
+                                                count++
                                                 if (
-                                                    user[heading].includes(option) ||
-                                                    user[heading] === option
+                                                    user[heading] === option ||
+                                                    user[heading].includes(option)
                                                 ) {
-                                                    if (added === 0) {
-                                                        setData((data) => [...data, user]);
-                                                        added++;
-                                                    }
+                                                    checked++
                                                 }
-                                            });
-                                        });
+                                            })
+                                        })
+                                        if (filterListLength === checked) {
+                                            setData(prevState => [...prevState, user])
+                                        }
                                     });
                                 }}
                             >

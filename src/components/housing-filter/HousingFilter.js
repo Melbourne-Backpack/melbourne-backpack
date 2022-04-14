@@ -189,7 +189,6 @@ const HousingFilter = ({
                                                 }
                                                 if (filterListLength === checked) {
                                                     setHousingData((housingData) => [...housingData, housing]);
-                                                    console.log(housing.id)
                                                 }
                                             });
                                         });
