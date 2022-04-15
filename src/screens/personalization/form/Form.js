@@ -8,6 +8,8 @@ import {
   TextInput,
   ScrollView,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
@@ -21,8 +23,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
-const Form = ({ route, navigation }) => {
-  const { campus, subjects } = route.params;
+const Form = ({ navigation }) => {
   const [image, setImage] = useState("");
 
   // Information
@@ -222,17 +223,23 @@ const Form = ({ route, navigation }) => {
                 <Text style={styles.errorImage}>{imageValidate.error}</Text>
               </View>
             </TouchableOpacity>
+            <View style={styles.textInput}>
+              <TextInput
+                style={styles.text}
+                placeholder={"Full Name"}
+                placeholderTextColor={PLACEHOLDER}
+                onChangeText={(text) => {
+                  setFullName(text);
+                }}
+                defaultValue={fullName}
+                multiline
+              />
+              <Image
+                style={{ width: 25, height: 25 }}
+                source={require("../../../../assets/full-name-icon.png")}
+              />
+            </View>
 
-            <TextInput
-              style={styles.textInput}
-              placeholder={"Full Name"}
-              placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => {
-                setFullName(text);
-              }}
-              defaultValue={fullName}
-              multiline
-            />
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{fullNameValidate.error}</Text>
             </View>
@@ -299,30 +306,39 @@ const Form = ({ route, navigation }) => {
               <Text style={styles.error}>{purposeValidate.error}</Text>
             </View>
 
-            <TextInput
-              style={styles.textInput}
-              placeholder={"Facebook Link"}
-              placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => {
-                setFacebook(text);
-              }}
-              defaultValue={facebook}
-              multiline
-            />
+            <View style={styles.textInput}>
+              <TextInput
+                style={styles.text}
+                placeholder={"Facebook Link"}
+                placeholderTextColor={PLACEHOLDER}
+                onChangeText={(text) => {
+                  setFacebook(text);
+                }}
+                defaultValue={facebook}
+                multiline
+              />
+              <Image
+                style={{ width: 25, height: 25 }}
+                source={require("../../../../assets/facebook.png")}
+              />
+            </View>
+
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{facebookValidate.error}</Text>
             </View>
+            <View style={styles.textInput}>
+              <TextInput
+                style={[styles.text, styles.introduction]}
+                placeholder={"Introduce yourself"}
+                placeholderTextColor={PLACEHOLDER}
+                onChangeText={(text) => {
+                  setBio(text);
+                }}
+                defaultValue={bio}
+                multiline
+              />
+            </View>
 
-            <TextInput
-              style={[styles.textInput, styles.introduction]}
-              placeholder={"Introduce yourself"}
-              placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => {
-                setBio(text);
-              }}
-              defaultValue={bio}
-              multiline
-            />
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{bioValidate.error}</Text>
             </View>
@@ -366,7 +382,7 @@ const Form = ({ route, navigation }) => {
               facebookValidate.valid &&
               bioValidate.valid
             ) && (
-              <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
+              <TouchableOpacity onPress={() => navigation.navigate("Campus")}>
                 <View style={styles.backButtonView}>
                   <Text style={styles.backButtonText}>Back</Text>
                 </View>
@@ -381,8 +397,8 @@ const Form = ({ route, navigation }) => {
                   onPress={() => {
                     pushData(
                       auth.currentUser.uid,
-                      campus,
-                      subjects,
+                      global.campus,
+                      global.subjects,
                       auth.currentUser?.email,
                       avatar,
                       fullName,

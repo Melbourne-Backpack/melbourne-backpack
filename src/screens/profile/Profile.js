@@ -105,7 +105,9 @@ const Profile = ({ navigation }) => {
               <Text style={styles.userContentHeading}>Interest in</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.subjects}</Text>
+              <Text style={styles.userContent}>
+                {data.subjects && data.subjects.join(" | ")}
+              </Text>
             </View>
           </View>
           <View style={styles.userContentRow}>

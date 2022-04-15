@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   userContentRow: {
     alignItems: "center",
     borderTopWidth: 1,
-    borderColor: GREY,
+    borderColor: LIGHT_BLUE,
     flexDirection: "row",
     minHeight: 50,
   },
