@@ -10,6 +10,7 @@ import {useNavigation} from "@react-navigation/native";
 import {GREY, YELLOW} from "../../../styles/colors";
 import {useFonts} from "expo-font";
 import {useEffect, useState} from "react";
+import Capitalize from "../../../utils/Capitalize";
 
 const RecommendationCard = ({data, housing}) => {
     const [address, setAddress] = useState("")
@@ -19,16 +20,9 @@ const RecommendationCard = ({data, housing}) => {
         PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     });
     useEffect(() => {
-        let temp = data.address
-
-        if (temp !== undefined) {
-            for (let i = 1; i < temp.length; i++) {
-                if (temp[i - 1] === " " || temp > 1 && temp.slice(i - 2, i) === ", ") {
-                    temp = temp.slice(0, i) + temp[i].toUpperCase() + temp.slice(i + 1, temp.length)
-                }
-            }
+        if (data.address !== undefined) {
+            setAddress(Capitalize(data.address))
         }
-        setAddress(temp)
     }, [data])
 
 
