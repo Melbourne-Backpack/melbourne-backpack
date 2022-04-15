@@ -20,7 +20,8 @@ const RecommendationCard = ({data, housing}) => {
     });
     useEffect(() => {
         let temp = data.address
-        if (data.address.length > 0) {
+
+        if (temp !== undefined) {
             for (let i = 1; i < temp.length; i++) {
                 if (temp[i - 1] === " " || temp > 1 && temp.slice(i - 2, i) === ", ") {
                     temp = temp.slice(0, i) + temp[i].toUpperCase() + temp.slice(i + 1, temp.length)
@@ -62,7 +63,7 @@ const RecommendationCard = ({data, housing}) => {
             <View style={styles.info}>
                 <TouchableOpacity onPress={() => navigation.navigate("Details")}>
                     <Text
-                        style={[styles.name, styles.text]}>{data.title[0].toUpperCase() + data.title.slice(1, data.title.length)}</Text>
+                        style={[styles.name, styles.text]}>{data.title ? data.title[0].toUpperCase() + data.title.slice(1, data.title.length) : data.title}</Text>
                 </TouchableOpacity>
                 {housing !== true ? (
                     <></>
