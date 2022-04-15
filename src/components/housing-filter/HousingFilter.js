@@ -12,31 +12,7 @@ import CommunityFilterBtn from "../community-filter/CommunityFilterBtn/Community
 import React, {useEffect, useState} from "react";
 import {useFonts} from "expo-font";
 import RecommendationCard from "../recommendation/card/RecommendationCard";
-
-const Distance = (addressList, origin) => {
-    const destination = origin;
-    const key =
-        "AhF8TK_HweNDznULWo2UdUeUVlbR8lWnH1YmkWH7QWzXs1B_AbA634cKcCvR2PtB";
-    const [distanceList, setDistanceList] = useState([]);
-    useEffect(() => {
-        addressList.map((address) => {
-            let url = `http://dev.virtualearth.net/REST/v1/Routes?wayPoint.1=${address}&wayPoint.2=${destination}&key=${key}`;
-            return fetch(url, {
-                method: "GET",
-            })
-                .then((res) => {
-                    return res.json();
-                })
-                .then((housingData) => {
-                    setDistanceList((prevState) => [
-                        ...prevState,
-                        housingData["resourceSets"][0]["resources"][0]["travelDistance"],
-                    ]);
-                });
-        });
-    }, []);
-    return distanceList;
-};
+import DistanceList from "../../utils/DistanceList";
 
 const HousingFilter = ({
                            headingList,
@@ -63,7 +39,7 @@ const HousingFilter = ({
         addresses.push(housing["address"]);
     });
     let distanceList = []
-    if (isHousing) distanceList = Distance(addresses, origin);
+    if (isHousing) distanceList = DistanceList(addresses, origin);
     const [submitted, setSubmitted] = useState(false);
     const [loaded, error] = useFonts({
         PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),

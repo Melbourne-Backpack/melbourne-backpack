@@ -62,7 +62,11 @@ const RecommendationCard = ({data, housing}) => {
                 {housing !== true ? (
                     <></>
                 ) : (
-                    <Text style={[styles.price, styles.text]}>${data.price}</Text>
+                    <Text
+                        style={[styles.price, styles.text]}>
+                        {typeof data.price !== "undefined" ? (data.price.length > 4 && data
+                                .price.substring(0, 4) === "from" ? "From $" + data.price.split(' ')[1] : "$" + data.price
+                        ) : null}</Text>
                 )}
                 <Text style={[styles.text, styles.location]}>
                     <Ionicons name="location-sharp" size={16} color="white"/>{" "}
