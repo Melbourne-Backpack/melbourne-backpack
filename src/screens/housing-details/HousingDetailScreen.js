@@ -25,12 +25,15 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const [myComment, setMyComment] = useState("");
   const [myRating, setMyRating] = useState();
   const [housingData, setHousingData] = useState({});
+  const [housingDesc, setHousingDesc] = useState("");
   const id = route.params.id;
 
   const getData = () => {
     getDoc(doc(db, "housing", id)).then((docSnap) => {
       if (docSnap.exists()) {
         setHousingData(docSnap.data());
+        setHousingDesc(formatData(docSnap.data().description));
+        console.log(housingDesc);
       } else {
         console.log("No such document!");
       }
@@ -39,7 +42,16 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
 
   useEffect(() => {
     getData();
+    console.log(housingDesc);
   }, []);
+
+  const formatData = (para) => {
+    if (para[para.length - 1] !== ".") {
+      return para.replace(/(^|[.!?]\s+)([a-z])/g, (c) => c.toUpperCase()) + ".";
+    } else {
+      return para.replace(/(^|[.!?]\s+)([a-z])/g, (c) => c.toUpperCase());
+    }
+  };
 
   const data = {
     name: "4 bedroom apartment deluxe",
@@ -126,8 +138,8 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         <View style={styles.sectionHeader}>
           <Text style={[styles.text, styles.sectionTitle]}>Description</Text>
         </View>
-        <Text style={[styles.text, styles.desc]}>{data.description}</Text>
 
+        <Text style={[styles.text, styles.desc]}>{housingDesc}</Text>
         <SectionInfo title="Add your review">
           <TextInput
             placeholder="Enter comment..."
