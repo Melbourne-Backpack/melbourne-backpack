@@ -1,6 +1,21 @@
 import RecommendationTemplate from "../../components/recommendation/template/RecommendationTemplate";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import { useState, useEffect } from "react";
 
 const ShoppingScreen = () => {
+  const [shoppingData, setShoppingData] = useState([]);
+
+  const fetchData = () => {
+    getDocs(collection(db, "shopping")).then((data) => {
+      setShoppingData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const data = [
     {
       id: 1,
@@ -23,9 +38,6 @@ const ShoppingScreen = () => {
       address: "Bourke Street Jodhpur Rajasthan, Melbourne, Victoria 3000",
     },
   ];
-
-  const firstData = data[0];
-  const otherData = data.slice(1, data.length);
 
   const categories = ["Distance from RMIT"];
 

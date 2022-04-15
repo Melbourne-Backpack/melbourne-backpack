@@ -26,7 +26,7 @@ const RecommendationCard = ({ data, housing }) => {
     <View style={styles.card}>
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => navigation.navigate("Details")}
+        onPress={() => navigation.navigate("Details", { id: data.id })}
       >
         <ImageBackground
           source={{ uri: data.image }}
@@ -47,7 +47,9 @@ const RecommendationCard = ({ data, housing }) => {
       </TouchableOpacity>
 
       <View style={styles.info}>
-        <TouchableOpacity onPress={() => navigation.navigate("Details")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Details", { id: data.id })}
+        >
           <Text style={[styles.name, styles.text]}>{data.title}</Text>
         </TouchableOpacity>
         {housing !== true ? (

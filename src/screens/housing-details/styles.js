@@ -40,9 +40,14 @@ const styles = StyleSheet.create({
     height: scaleSize(300),
   },
   name: {
-    fontFamily: "PoppinsBold",
+    fontFamily: "PoppinsSemiBold",
     fontSize: 25,
-    marginVertical: wp(5),
+    marginVertical: wp(2),
+  },
+  price: {
+    fontFamily: "PoppinsExtraBold",
+    fontSize: 28,
+    marginBottom: wp(4),
   },
   address: {
     fontFamily: "PoppinsRegular",

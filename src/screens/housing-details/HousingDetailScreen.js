@@ -21,13 +21,14 @@ import { postReview } from "../../api/handleReview";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
-const HousingDetailScreen = ({ navigation: { goBack } }) => {
+const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const [myComment, setMyComment] = useState("");
   const [myRating, setMyRating] = useState();
-
   const [housingData, setHousingData] = useState({});
+  const id = route.params.id;
+
   const getData = () => {
-    getDoc(doc(db, "housing", "2ikuQKCkBJkwSsMOtoO9")).then((docSnap) => {
+    getDoc(doc(db, "housing", id)).then((docSnap) => {
       if (docSnap.exists()) {
         setHousingData(docSnap.data());
       } else {
@@ -108,6 +109,7 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
       <ScrollView style={styles.wrapper}>
         <Image source={{ uri: housingData.image }} style={styles.img} />
         <Text style={[styles.text, styles.name]}>{housingData.title}</Text>
+        <Text style={[styles.text, styles.price]}>${housingData.price}</Text>
         <Text style={[styles.text, styles.address]}>{housingData.address}</Text>
 
         <View style={styles.starContainer}>
