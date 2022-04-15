@@ -19,7 +19,7 @@ import { PLACEHOLDER, SELECTED_BUTTON, WHITE } from "../../../styles/colors";
 import { pushData } from "../../../api/handleData";
 import { auth, storage } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+// import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
@@ -258,39 +258,39 @@ const Form = ({ navigation }) => {
                   style={{ width: 20, height: 20 }}
                   source={require("../../../../assets/date-of-birth.png")}
                 />
-                <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode="date"
-                  date={new Date()}
-                  value={dob}
-                  onConfirm={(date) => {
-                    setDob(date.toLocaleDateString("en-US"));
-                    hideDatePicker();
-                  }}
-                  onCancel={hideDatePicker}
-                  buttonTextColorIOS={SELECTED_BUTTON}
-                  customHeaderIOS={() => {
-                    return (
-                      <View
-                        style={{
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginTop: 15,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontSize: 16,
-                            fontFamily: "PoppinsSemiBold",
-                          }}
-                        >
-                          {"Date of birth"}
-                        </Text>
-                      </View>
-                    );
-                  }}
-                  display="spinner"
-                />
+                {/*<DateTimePickerModal*/}
+                {/*  isVisible={isDatePickerVisible}*/}
+                {/*  mode="date"*/}
+                {/*  date={new Date()}*/}
+                {/*  value={dob}*/}
+                {/*  onConfirm={(date) => {*/}
+                {/*    setDob(date.toLocaleDateString("en-US"));*/}
+                {/*    hideDatePicker();*/}
+                {/*  }}*/}
+                {/*  onCancel={hideDatePicker}*/}
+                {/*  buttonTextColorIOS={SELECTED_BUTTON}*/}
+                {/*  customHeaderIOS={() => {*/}
+                {/*    return (*/}
+                {/*      <View*/}
+                {/*        style={{*/}
+                {/*          justifyContent: "center",*/}
+                {/*          alignItems: "center",*/}
+                {/*          marginTop: 15,*/}
+                {/*        }}*/}
+                {/*      >*/}
+                {/*        <Text*/}
+                {/*          style={{*/}
+                {/*            fontSize: 16,*/}
+                {/*            fontFamily: "PoppinsSemiBold",*/}
+                {/*          }}*/}
+                {/*        >*/}
+                {/*          {"Date of birth"}*/}
+                {/*        </Text>*/}
+                {/*      </View>*/}
+                {/*    );*/}
+                {/*  }}*/}
+                {/*  display="spinner"*/}
+                {/*/>*/}
               </TouchableOpacity>
             </View>
             <View style={styles.errorHolder}>
