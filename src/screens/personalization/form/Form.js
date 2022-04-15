@@ -19,7 +19,7 @@ import { PLACEHOLDER, SELECTED_BUTTON, WHITE } from "../../../styles/colors";
 import { pushData } from "../../../api/handleData";
 import { auth, storage } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
-// import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
@@ -34,15 +34,8 @@ const Form = ({ navigation }) => {
   const [facebook, setFacebook] = useState("");
   const [bio, setBio] = useState("");
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
+  const [date, setDate] = useState(new Date(Date.now()));
+  const [open, setOpen] = useState(false);
 
   const [fullNameValidate, setFullNameValidate] = useState({
     error: "",
@@ -245,53 +238,51 @@ const Form = ({ navigation }) => {
             </View>
 
             <View style={styles.dobWrapper}>
-              <TouchableOpacity onPress={showDatePicker} style={styles.dob}>
+              <TouchableOpacity
+                onPress={() => setOpen(!open)}
+                style={styles.dob}
+              >
                 <Text
                   style={{
                     color: dob ? WHITE : PLACEHOLDER,
                     fontFamily: "PoppinsMedium",
                   }}
                 >
-                  {dob === "" ? "Date of birth" : dob}
+                  {dob ? dob : "Date of birth"}
                 </Text>
                 <Image
                   style={{ width: 20, height: 20 }}
                   source={require("../../../../assets/date-of-birth.png")}
                 />
-                {/*<DateTimePickerModal*/}
-                {/*  isVisible={isDatePickerVisible}*/}
-                {/*  mode="date"*/}
-                {/*  date={new Date()}*/}
-                {/*  value={dob}*/}
-                {/*  onConfirm={(date) => {*/}
-                {/*    setDob(date.toLocaleDateString("en-US"));*/}
-                {/*    hideDatePicker();*/}
-                {/*  }}*/}
-                {/*  onCancel={hideDatePicker}*/}
-                {/*  buttonTextColorIOS={SELECTED_BUTTON}*/}
-                {/*  customHeaderIOS={() => {*/}
-                {/*    return (*/}
-                {/*      <View*/}
-                {/*        style={{*/}
-                {/*          justifyContent: "center",*/}
-                {/*          alignItems: "center",*/}
-                {/*          marginTop: 15,*/}
-                {/*        }}*/}
-                {/*      >*/}
-                {/*        <Text*/}
-                {/*          style={{*/}
-                {/*            fontSize: 16,*/}
-                {/*            fontFamily: "PoppinsSemiBold",*/}
-                {/*          }}*/}
-                {/*        >*/}
-                {/*          {"Date of birth"}*/}
-                {/*        </Text>*/}
-                {/*      </View>*/}
-                {/*    );*/}
-                {/*  }}*/}
-                {/*  display="spinner"*/}
-                {/*/>*/}
               </TouchableOpacity>
+              {open && (
+                <DateTimePicker
+                  mode="date"
+                  display="spinner"
+                  value={date}
+                  onChange={(event, value) => {
+                    setDate(value);
+                    setDob(
+                      value.getUTCDate() +
+                        1 +
+                        "/" +
+                        (value.getUTCMonth() + 1) +
+                        "/" +
+                        value.getUTCFullYear()
+                    );
+                  }}
+                  style={{
+                    width: 320,
+                    height: 260,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    textColor: WHITE,
+                  }}
+                  textColor={WHITE}
+                  themeVariant="dark"
+                />
+              )}
             </View>
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{dobValidate.error}</Text>
