@@ -6,27 +6,41 @@ import {
 } from "@expo/vector-icons";
 
 import styles from "./styles";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import {GREY, YELLOW} from "../../../styles/colors";
 import {useFonts} from "expo-font";
+import {useEffect, useState} from "react";
 
 const RecommendationCard = ({data, housing}) => {
+    const [address, setAddress] = useState("")
     const [loaded, error] = useFonts({
         PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
         PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
         PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     });
+    useEffect(() => {
+        let temp = data.address
+        if (data.address.length > 0) {
+            for (let i = 1; i < temp.length; i++) {
+                if (temp[i - 1] === " " || temp > 1 && temp.slice(i - 2, i) === ", ") {
+                    temp = temp.slice(0, i) + temp[i].toUpperCase() + temp.slice(i + 1, temp.length)
+                }
+            }
+        }
+        setAddress(temp)
+    }, [data])
+
 
     if (!loaded) {
         return null;
     }
-  
+
     return (
         <View style={styles.card}>
             <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Details")}
-        >
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate("Details")}
+            >
                 <ImageBackground
                     source={{uri: data.image}}
                     style={styles.backgroundImg}
@@ -47,7 +61,8 @@ const RecommendationCard = ({data, housing}) => {
 
             <View style={styles.info}>
                 <TouchableOpacity onPress={() => navigation.navigate("Details")}>
-                    <Text style={[styles.name, styles.text]}>{data.title}</Text>
+                    <Text
+                        style={[styles.name, styles.text]}>{data.title[0].toUpperCase() + data.title.slice(1, data.title.length)}</Text>
                 </TouchableOpacity>
                 {housing !== true ? (
                     <></>
@@ -56,7 +71,7 @@ const RecommendationCard = ({data, housing}) => {
                 )}
                 <Text style={[styles.text, styles.location]}>
                     <Ionicons name="location-sharp" size={16} color="white"/>{" "}
-                    {data.address}
+                    {address}
                 </Text>
 
                 {housing !== true ? (
