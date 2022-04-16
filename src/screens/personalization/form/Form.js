@@ -264,7 +264,6 @@ const Form = ({ navigation }) => {
                     setDate(value);
                     setDob(
                       value.getUTCDate() +
-                        1 +
                         "/" +
                         (value.getUTCMonth() + 1) +
                         "/" +
@@ -281,6 +280,7 @@ const Form = ({ navigation }) => {
                   }}
                   textColor={WHITE}
                   themeVariant="dark"
+                  locale="en-ES"
                 />
               )}
             </View>
