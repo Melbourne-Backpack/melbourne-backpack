@@ -7,15 +7,19 @@ import HousingFilter from "../../housing-filter/HousingFilter";
 const type = [
     {
         index: 0,
-        name: "apartment",
+        name: "dwell",
     },
     {
         index: 1,
-        name: "house",
+        name: "unilodge victoria",
     },
     {
         index: 2,
-        name: "townhouse",
+        name: "570 swanston",
+    },
+    {
+        index: 3,
+        name: "unilodge carlton",
     },
 ];
 const price = [
@@ -161,7 +165,7 @@ const RecommendationTemplate = ({topic, data, housing, navigation}) => {
                         {data.length > 0 ? (
                             <HousingFilter
                                 headingList={[
-                                    "type",
+                                    "name",
                                     "price",
                                     "bed",
                                     "bath",
