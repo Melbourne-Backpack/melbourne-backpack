@@ -135,7 +135,7 @@ const SignUp = ({ navigation }) => {
               style={styles.textInput}
               placeholder={"Password"}
               placeholderTextColor={WHITE}
-              onChangeText={(text) => setPassword(text)}
+              onChangeText={(text) => handlePasswordChange(text)}
               defaultValue={password}
               secureTextEntry={true}
             />
@@ -152,7 +152,7 @@ const SignUp = ({ navigation }) => {
             style={styles.textInput}
             placeholder={"Confirm Password"}
             placeholderTextColor={WHITE}
-            onChangeText={(text) => setCfPassword(text)}
+            onChangeText={(text) => handleCfPasswordChange(text)}
             defaultValue={cfPassword}
             secureTextEntry={true}
           />
