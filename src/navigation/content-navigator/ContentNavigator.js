@@ -3,6 +3,7 @@ import TransportScreen from "../../screens/recommendation/TransportScreen";
 import ShoppingScreen from "../../screens/recommendation/ShoppingScreen";
 import CommunityScreen from "../../screens/community/CommunityScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState, useEffect } from "react";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -10,6 +11,8 @@ import styles from "./styles";
 import { LIGHT_PURPLE, LIGHTER_GREY } from "../../styles/colors";
 import Profile from "../../screens/profile/Profile";
 import { Image } from "react-native";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../config/firebase";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,6 +43,19 @@ const tabIcons = [
 ];
 
 const ContentNavigator = () => {
+  const [data, setData] = useState({});
+  const getData = () => {
+    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -52,7 +68,9 @@ const ContentNavigator = () => {
               if (route.name === "Profile") {
                 icon = (
                   <Image
-                    source={require("../../../assets/images/avatar-placeholder.jpg")}
+                    source={{
+                      uri: data.avatar,
+                    }}
                     style={
                       focused
                         ? {

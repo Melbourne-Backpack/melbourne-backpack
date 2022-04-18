@@ -27,6 +27,8 @@ const styles = StyleSheet.create({
   scrollView: {
     flexGrow: 1,
     justifyContent: "center",
+    alignItems: "center",
+    width: wp("100%"),
   },
   wrapper: {
     flex: 1,
@@ -71,9 +73,18 @@ const styles = StyleSheet.create({
     width: wp("80%"),
     paddingVertical: 15,
     paddingHorizontal: 30,
+    paddingTop: 15,
+    marginVertical: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  text: {
+    width: wp("60%"),
     color: WHITE,
     fontFamily: "PoppinsMedium",
-    marginVertical: 10,
+    paddingVertical: 2,
   },
   errorHolder: {
     width: wp("80%"),

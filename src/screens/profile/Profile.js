@@ -1,4 +1,12 @@
-import { Image, View, Text, TouchableOpacity, ScrollView } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Linking,
+  Pressable,
+} from "react-native";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
@@ -11,7 +19,7 @@ import { signOut } from "../../api/loginApi";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
-const Profile = ({ navigation: { goBack } }) => {
+const Profile = ({ navigation }) => {
   const [data, setData] = useState({});
   const getData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
@@ -36,7 +44,11 @@ const Profile = ({ navigation: { goBack } }) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.background}>
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={goBack}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Community");
+          }}
+        >
           <AntDesign
             name={"left"}
             size={24}
@@ -93,16 +105,23 @@ const Profile = ({ navigation: { goBack } }) => {
               <Text style={styles.userContentHeading}>Interest in</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.subjects}</Text>
+              <Text style={styles.userContent}>
+                {data.subjects && data.subjects.join(" | ")}
+              </Text>
             </View>
           </View>
           <View style={styles.userContentRow}>
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Facebook Link</Text>
             </View>
-            <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.facebook}</Text>
-            </View>
+            <Pressable style={styles.userContentWrapper}>
+              <Text
+                style={styles.hyperlink}
+                onPress={() => Linking.openURL("https://" + data.facebook)}
+              >
+                {data.facebook}
+              </Text>
+            </Pressable>
           </View>
           <View style={[styles.userContentRow, styles.userContentLastRow]}>
             <View style={styles.userContentHeadingWrapper}>
@@ -119,7 +138,7 @@ const Profile = ({ navigation: { goBack } }) => {
           <TouchableOpacity
             style={styles.logoutBtn}
             onPress={() => {
-              signOut();
+              signOut({ navigation });
             }}
           >
             <Text style={styles.logoutBtnText}>Logout</Text>
