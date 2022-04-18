@@ -72,75 +72,8 @@ const Profile = ({ navigation }) => {
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Display Name</Text>
             </View>
-            <View>
-              <View style={styles.profileImageWrapper}>
-                <Image
-                  source={{
-                    uri: data.avatar,
-                  }}
-                  style={styles.profileImage}
-                />
-              </View>
-              <View style={styles.userContentDisplay}>
-                <View style={styles.userContentRow}>
-                  <View style={styles.userContentHeadingWrapper}>
-                    <Text style={styles.userContentHeading}>Display Name</Text>
-                  </View>
-                  <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{data.fullName}</Text>
-                  </View>
-                </View>
-                <View style={styles.userContentRow}>
-                  <View style={styles.userContentHeadingWrapper}>
-                    <Text style={styles.userContentHeading}>Date of birth</Text>
-                  </View>
-                  <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{data.dob}</Text>
-                  </View>
-                </View>
-                <View style={styles.userContentRow}>
-                  <View style={styles.userContentHeadingWrapper}>
-                    <Text style={styles.userContentHeading}>E-mail</Text>
-                  </View>
-                  <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{data.email}</Text>
-                  </View>
-                </View>
-                <View style={styles.userContentRow}>
-                  <View style={styles.userContentHeadingWrapper}>
-                    <Text style={styles.userContentHeading}>Campus</Text>
-                  </View>
-                  <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{data.campus}</Text>
-                  </View>
-                </View>
-                <View style={styles.userContentRow}>
-                  <View style={styles.userContentHeadingWrapper}>
-                    <Text style={styles.userContentHeading}>Interest in</Text>
-                  </View>
-                  <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{data.subjects}</Text>
-                  </View>
-                </View>
-                <View style={styles.userContentRow}>
-                  <View style={styles.userContentHeadingWrapper}>
-                    <Text style={styles.userContentHeading}>Facebook Link</Text>
-                  </View>
-                  <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{data.facebook}</Text>
-                  </View>
-                </View>
-                <View
-                  style={[styles.userContentRow, styles.userContentLastRow]}
-                >
-                  <View style={styles.userContentHeadingWrapper}>
-                    <Text style={styles.userContentHeading}>Bio</Text>
-                  </View>
-                  <View style={styles.userContentWrapper}>
-                    <Text style={styles.userContent}>{data.bio}</Text>
-                  </View>
-                </View>
-              </View>
+            <View style={styles.userContentWrapper}>
+              <Text style={styles.userContent}>{data.fullName}</Text>
             </View>
           </View>
           <View style={styles.userContentRow}>
