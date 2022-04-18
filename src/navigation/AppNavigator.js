@@ -17,11 +17,19 @@ import Profile from "../screens/profile/Profile";
 const AppNavigator = () => {
   const Stack = createStackNavigator();
 
+  const forFade = ({ current }) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  });
+
   return (
     <Stack.Navigator
       name={"Root"}
       screenOptions={{
         headerShown: false,
+        gestureEnabled: false,
+        cardStyleInterpolator: forFade,
       }}
     >
       <Stack.Screen name="Splash" component={SplashScreen} />

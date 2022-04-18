@@ -45,23 +45,34 @@ const SignIn = ({ navigation }) => {
           />
           <View style={styles.loginField}>
             <Text style={styles.textOne}>Sign in to your account</Text>
-
-            <TextInput
-              style={styles.textInput}
-              placeholder={"Email"}
-              keyboardType={"email-address"}
-              placeholderTextColor={WHITE}
-              onChangeText={(text) => setEmail(text)}
-              defaultValue={email}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder={"Password"}
-              placeholderTextColor={WHITE}
-              onChangeText={(text) => setPassword(text)}
-              defaultValue={password}
-              secureTextEntry={true}
-            />
+            <View style={styles.textInput}>
+              <TextInput
+                style={styles.text}
+                placeholder={"Email"}
+                keyboardType={"email-address"}
+                placeholderTextColor={WHITE}
+                onChangeText={(text) => setEmail(text)}
+                defaultValue={email}
+              />
+              <Image
+                style={{ width: 20, height: 20 }}
+                source={require("../../../assets/email-icon.png")}
+              />
+            </View>
+            <View style={styles.textInput}>
+              <TextInput
+                style={styles.text}
+                placeholder={"Password"}
+                placeholderTextColor={WHITE}
+                onChangeText={(text) => setPassword(text)}
+                defaultValue={password}
+                secureTextEntry={true}
+              />
+              <Image
+                style={{ width: 20, height: 20 }}
+                source={require("../../../assets/password-icon.png")}
+              />
+            </View>
           </View>
           <View style={styles.midFlex}>
             <View style={styles.checkBox}>

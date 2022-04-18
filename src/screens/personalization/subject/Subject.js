@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   LogBox,
+  Image,
 } from "react-native";
 import styles from "./styles";
 import {
@@ -23,8 +24,7 @@ import _ from "lodash";
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
 
-const Subject = ({ route, navigation }) => {
-  const { campus } = route.params;
+const Subject = ({ navigation }) => {
   const subjects = [
     "Economics",
     "Business",
@@ -96,16 +96,22 @@ const Subject = ({ route, navigation }) => {
               Choose min.3 subjects you like, we will give you more often that
               relate to it.
             </Text>
+            <View style={styles.textInput}>
+              <TextInput
+                style={styles.text}
+                placeholder={"Programs | Subjects of interest"}
+                placeholderTextColor={PLACEHOLDER}
+                onChangeText={(text) => setText(text)}
+                defaultValue={text}
+              >
+                {_.join(selectedSubjects, " | ")}
+              </TextInput>
+              <Image
+                style={{ width: 20, height: 20 }}
+                source={require("../../../../assets/subject-icon.png")}
+              />
+            </View>
 
-            <TextInput
-              style={styles.textInput}
-              placeholder={"Programs | Subjects of interest"}
-              placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => setText(text)}
-              defaultValue={text}
-            >
-              {_.join(selectedSubjects, " | ")}
-            </TextInput>
             <View style={styles.buttonWrapper}>
               {subjects.map((subject, index) => {
                 return (
@@ -138,10 +144,8 @@ const Subject = ({ route, navigation }) => {
                 if (selectedSubjects.length < 3) {
                   setValid(false);
                 } else {
-                  navigation.navigate("Form", {
-                    campus: campus,
-                    subjects: selectedSubjects,
-                  });
+                  global.subjects = selectedSubjects;
+                  navigation.navigate("Form");
                 }
               }}
             >

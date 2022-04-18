@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   LogBox,
+  Image,
 } from "react-native";
 import styles from "./styles";
 import {
@@ -71,16 +72,22 @@ const Campus = ({ navigation }) => {
         <View style={styles.wrapper}>
           <Text style={styles.textOne}>Tell us more about yourself</Text>
           <Text style={styles.textTwo}>Choose your current campus</Text>
+          <View style={styles.textInput}>
+            <TextInput
+              style={styles.text}
+              placeholder={"Campus in Vietnam"}
+              placeholderTextColor={PLACEHOLDER}
+              onChangeText={(text) => setText(text)}
+              defaultValue={text}
+            >
+              {selectedCity}
+            </TextInput>
+            <Image
+              style={{ width: 20, height: 20 }}
+              source={require("../../../../assets/campus-icon.png")}
+            />
+          </View>
 
-          <TextInput
-            style={styles.textInput}
-            placeholder={"Campus in Vietnam"}
-            placeholderTextColor={PLACEHOLDER}
-            onChangeText={(text) => setText(text)}
-            defaultValue={text}
-          >
-            {selectedCity}
-          </TextInput>
           <View style={styles.buttonWrapper}>
             {city.map((campus) => {
               return (
@@ -115,7 +122,8 @@ const Campus = ({ navigation }) => {
               if (selectedCity === "") {
                 setValid(false);
               } else {
-                navigation.navigate("Subject", { campus: selectedCity });
+                global.campus = selectedCity;
+                navigation.navigate("Subject");
               }
             }}
           >

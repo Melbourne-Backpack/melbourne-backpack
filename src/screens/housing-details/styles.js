@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: wp(5),
-    paddingHorizontal: wp(3),
+    justifyContent: "center",
   },
   text: {
     color: WHITE,
@@ -34,16 +34,20 @@ const styles = StyleSheet.create({
   building: {
     fontSize: 18,
     fontFamily: "PoppinsMedium",
-    marginLeft: wp(12),
   },
   img: {
     width: "100%",
     height: scaleSize(300),
   },
   name: {
-    fontFamily: "PoppinsBold",
+    fontFamily: "PoppinsSemiBold",
     fontSize: 25,
-    marginVertical: wp(5),
+    marginVertical: wp(2),
+  },
+  price: {
+    fontFamily: "PoppinsExtraBold",
+    fontSize: 28,
+    marginBottom: wp(4),
   },
   address: {
     fontFamily: "PoppinsRegular",

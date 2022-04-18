@@ -6,14 +6,12 @@ import {
   Image,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView,
   SafeAreaView,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
-import React, { useEffect, useState } from "react";
-import { LIGHT_PURPLE, SELECTED_BUTTON, WHITE } from "../../styles/colors";
-import { auth, db } from "../../config/firebase";
+import React, { useState } from "react";
+import { WHITE } from "../../styles/colors";
 import { emailVerification, signIn } from "../../api/loginApi";
 
 const ForgotPassword = ({ navigation }) => {
@@ -41,14 +39,20 @@ const ForgotPassword = ({ navigation }) => {
               Please fill email or phone number and we'll send you a link to get
               back into your account.
             </Text>
-            <TextInput
-              style={styles.textInput}
-              keyboardType={"email-address"}
-              placeholder={"Email"}
-              placeholderTextColor={WHITE}
-              onChangeText={(text) => setEmail(text)}
-              defaultValue={email}
-            />
+            <View style={styles.textInput}>
+              <TextInput
+                style={styles.text}
+                placeholder={"Email"}
+                keyboardType={"email-address"}
+                placeholderTextColor={WHITE}
+                onChangeText={(text) => setEmail(text)}
+                defaultValue={email}
+              />
+              <Image
+                style={{ width: 20, height: 20 }}
+                source={require("../../../assets/email-icon.png")}
+              />
+            </View>
             <TouchableOpacity
               onPress={() => {
                 emailVerification({ navigation }, email);

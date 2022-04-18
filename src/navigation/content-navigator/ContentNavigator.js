@@ -2,16 +2,17 @@ import HousingScreen from "../../screens/recommendation/HousingScreen";
 import TransportScreen from "../../screens/recommendation/TransportScreen";
 import ShoppingScreen from "../../screens/recommendation/ShoppingScreen";
 import CommunityScreen from "../../screens/community/CommunityScreen";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState, useEffect } from "react";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "./styles";
 import {LIGHT_PURPLE, LIGHTER_GREY} from "../../styles/colors";
 import Profile from "../../screens/profile/Profile";
-import {Image} from "react-native";
-import {auth} from "../../config/firebase";
-import {TouchableHighlight} from "react-native";
+import { Image } from "react-native";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../config/firebase";
 
 const Tab = createBottomTabNavigator();
 
@@ -41,72 +42,76 @@ const tabIcons = [
     },
 ];
 
-const ContentNavigator = ({navigation}) => {
-    return (
-        <Tab.Navigator
-            screenOptions={({route}) => ({
-                tabBarIcon: ({focused}) => {
-                    let iconName, iconColor, icon;
-                    let iconSize = focused ? 38 : 28;
+const ContentNavigator = () => {
+  const [data, setData] = useState({});
+  const getData = () => {
+    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused }) => {
+          let iconName, iconColor, icon;
+          let iconSize = focused ? 38 : 28;
 
-                    tabIcons.map((tabIcon) => {
-                        if (route.name === tabIcon.route) {
-                            if (route.name === "Profile") {
-                                icon = (
-                                    <TouchableHighlight onPress={() => {
-                                        navigation.navigate('Profile', {
-                                            params: {user: auth.currentUser.uid},
-                                        })
-                                    }}>
-                                        <Image
-                                            source={require("../../../assets/images/avatar-placeholder.jpg")}
-                                            style={
-                                                // focused
-                                                //     ? {
-                                                //         width: iconSize,
-                                                //         height: iconSize,
-                                                //         borderRadius: 50,
-                                                //         borderColor: LIGHT_PURPLE,
-                                                //         borderWidth: 3,
-                                                //     }
-                                                //     : {
-                                                //         width: iconSize,
-                                                //         height: iconSize,
-                                                //         borderRadius: 50,
-                                                //     }
-                                                {
-                                                    width: 28,
-                                                    height: 28,
-                                                    borderRadius: 50,
-                                                }
-                                            }
-                                        />
-                                    </TouchableHighlight>
-                                );
-                            } else {
-                                iconName = focused ? tabIcon.iconFocus : tabIcon.iconName;
-                                iconColor = focused ? LIGHT_PURPLE : LIGHTER_GREY;
-                                icon = (
-                                    <Ionicons name={iconName} size={iconSize} color={iconColor}/>
-                                );
-                            }
-                            // }
-                        }
-                    });
-                    return icon;
-                },
-                headerShown: false,
-                tabBarStyle: styles.tabBar,
-                tabBarShowLabel: false,
-            })}
-        >
-            <Tab.Screen name="Housing" component={HousingScreen}/>
-            <Tab.Screen name="Transport" component={TransportScreen}/>
-            <Tab.Screen name="Shopping" component={ShoppingScreen}/>
-            <Tab.Screen name="Community" component={CommunityScreen}/>
-            <Tab.Screen name="Profile" component={Profile}/>
-        </Tab.Navigator>
-    );
+          tabIcons.map((tabIcon) => {
+            if (route.name === tabIcon.route) {
+              if (route.name === "Profile") {
+                icon = (
+                  <Image
+                    source={{
+                      uri: data.avatar,
+                    }}
+                    style={
+                      focused
+                        ? {
+                            width: iconSize,
+                            height: iconSize,
+                            borderRadius: 50,
+                            borderColor: LIGHT_PURPLE,
+                            borderWidth: 3,
+                          }
+                        : {
+                            width: iconSize,
+                            height: iconSize,
+                            borderRadius: 50,
+                          }
+                    }
+                  />
+                );
+              } else {
+                iconName = focused ? tabIcon.iconFocus : tabIcon.iconName;
+                iconColor = focused ? LIGHT_PURPLE : LIGHTER_GREY;
+                icon = (
+                  <Ionicons name={iconName} size={iconSize} color={iconColor} />
+                );
+              }
+              // }
+            }
+          });
+          return icon;
+        },
+        headerShown: false,
+        tabBarStyle: styles.tabBar,
+        tabBarShowLabel: false,
+      })}
+    >
+      <Tab.Screen name="Housing" component={HousingScreen} />
+      <Tab.Screen name="Transport" component={TransportScreen} />
+      <Tab.Screen name="Shopping" component={ShoppingScreen} />
+      <Tab.Screen name="Community" component={CommunityScreen} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  );
 };
 
 export default ContentNavigator;

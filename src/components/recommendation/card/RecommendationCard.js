@@ -1,8 +1,8 @@
-import {ImageBackground, Text, TouchableOpacity, View} from "react-native";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import {
-    AntDesign,
-    MaterialCommunityIcons,
-    Ionicons,
+  AntDesign,
+  MaterialCommunityIcons,
+  Ionicons,
 } from "@expo/vector-icons";
 
 import styles from "./styles";
@@ -12,85 +12,98 @@ import {useFonts} from "expo-font";
 import {useEffect, useState} from "react";
 import Capitalize from "../../../utils/Capitalize";
 
-const RecommendationCard = ({data, housing}) => {
-    const [address, setAddress] = useState("")
-    const [loaded, error] = useFonts({
-        PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
-        PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
-        PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
-    });
-    useEffect(() => {
+const RecommendationCard = ({ data, housing }) => {
+  const navigation = useNavigation();
+  const [address, setAddress] = useState("");
+  const [loaded, error] = useFonts({
+    PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
+  });
+  
+  useEffect(() => {
         if (data.address !== undefined) {
             setAddress(Capitalize(data.address))
         }
     }, [data])
 
+  if (!loaded) {
+    return null;
+  }
 
-    if (!loaded) {
-        return null;
-    }
+  return (
+    <View style={styles.card}>
+      {housing !== true ? (
+        <>
+          <ImageBackground
+            source={{ uri: data.image }}
+            style={styles.backgroundImg}
+            imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+            resizeMode="cover"
+          />
 
-    return (
-        <View style={styles.card}>
-            <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.navigate("Details")}
+          <View style={styles.info}>
+            <Text style={[styles.name, styles.text]}>{data.title}</Text>
+            <Text style={[styles.text, styles.location]}>
+              <Ionicons name="location-sharp" size={16} color="white" />{" "}
+              {data.address}
+            </Text>
+          </View>
+        </>
+      ) : (
+        <>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate("Details", { id: data.id })}
+          >
+            <ImageBackground
+              source={{ uri: data.image }}
+              style={styles.backgroundImg}
+              imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+              resizeMode="cover"
             >
-                <ImageBackground
-                    source={{uri: data.image}}
-                    style={styles.backgroundImg}
-                    imageStyle={{borderTopLeftRadius: 20, borderTopRightRadius: 20}}
-                    resizeMode="cover"
-                >
-                    <View style={styles.overlay}>
-                        {housing !== true ? (
-                            <></>
-                        ) : (
-                            <Text style={styles.rating}>
-                                {data.rating} <AntDesign name="star" size={30} color={YELLOW}/>
-                            </Text>
-                        )}
-                    </View>
-                </ImageBackground>
-            </TouchableOpacity>
+              <View style={styles.overlay}>          
+                  <Text style={styles.rating}>
+                    {data.rating}{" "}
+                    <AntDesign name="star" size={30} color={YELLOW} />
+                  </Text>
+              </View>
+            </ImageBackground>
+          </TouchableOpacity>
 
-            <View style={styles.info}>
-                <TouchableOpacity onPress={() => navigation.navigate("Details")}>
-                    <Text
+          <View style={styles.info}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Details", { id: data.id })}
+            >
+              <Text
                         style={[styles.name, styles.text]}>{data.title ? data.title[0].toUpperCase() + data.title.slice(1, data.title.length) : data.title}</Text>
-                </TouchableOpacity>
-                {housing !== true ? (
-                    <></>
-                ) : (
-                    <Text
+            </TouchableOpacity>
+             <Text
                         style={[styles.price, styles.text]}>
                         {typeof data.price !== "undefined" ? (data.price.length > 4 && data
                                 .price.substring(0, 4) === "from" ? "From $" + data.price.split(' ')[1] : "$" + data.price
                         ) : null}</Text>
-                )}
-                <Text style={[styles.text, styles.location]}>
+            <Text style={[styles.text, styles.location]}>
                     <Ionicons name="location-sharp" size={16} color="white"/>{" "}
                     {address}
                 </Text>
 
-                {housing !== true ? (
-                    <></>
-                ) : (
-                    <View style={styles.extraOuterContainer}>
-                        <View style={styles.extraContainer}>
-                            <Text style={styles.extra}>{data.bed}</Text>
-                            <Ionicons name="bed" size={35} color={GREY}/>
-                        </View>
+            <View style={styles.extraOuterContainer}>
+              <View style={styles.extraContainer}>
+                <Text style={styles.extra}>{data.bed}</Text>
+                <Ionicons name="bed" size={35} color={GREY} />
+              </View>
 
-                        <View style={styles.extraContainer}>
-                            <Text style={styles.extra}>{data.bath}</Text>
-                            <MaterialCommunityIcons name="shower" size={35} color={GREY}/>
-                        </View>
-                    </View>
-                )}
+              <View style={styles.extraContainer}>
+                <Text style={styles.extra}>{data.bath}</Text>
+                <MaterialCommunityIcons name="shower" size={35} color={GREY} />
+              </View>
             </View>
-        </View>
-    );
+          </View>
+        </>
+      )}
+    </View>
+  );
 };
 
 export default RecommendationCard;

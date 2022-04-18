@@ -91,23 +91,24 @@ const HomeScreen = ({navigation}) => {
                     </ImageBackground>
                 </TouchableOpacity>
             </View>
-            <View style={styles.furtherButton}>
-                <TouchableOpacity
-                    activeOpacity={0.5}
-                    onPress={() => navigation.navigate("Content", {screen: "Transport"})}
-                >
-                    <ImageBackground
-                        resizeMode={"cover"}
-                        source={require("../../../assets/images/profile.jpg")}
-                        style={styles.backgroundImage}
-                        imageStyle={{borderRadius: 20}}
-                    >
-                        <View style={styles.overlay}>
-                            <Text style={styles.subtitle}>Profile</Text>
-                        </View>
-                    </ImageBackground>
-                </TouchableOpacity>
+          
+      <View style={styles.furtherButton}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate("Content", { screen: "Profile" })}
+        >
+          <ImageBackground
+            resizeMode={"cover"}
+            source={require("../../../assets/images/profile.jpg")}
+            style={styles.backgroundImage}
+            imageStyle={{ borderRadius: 20 }}
+          >
+            <View style={styles.overlay}>
+              <Text style={styles.subtitle}>Profile</Text>
             </View>
+</ImageBackground>
+        </TouchableOpacity>
+      </View>
         </View>
     );
 };
