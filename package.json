@@ -23,6 +23,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-animatable": "^1.3.3",
     "react-native-check-box": "^2.1.7",
     "react-native-dotenv": "^3.3.1",
     "react-native-gesture-handler": "~2.1.0",
@@ -34,6 +35,7 @@
     "react-native-selectmultiple-button": "^0.1.105",
     "react-native-star-rating-view": "^0.0.12",
     "react-native-star-rating-widget": "^1.2.0",
+    "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
