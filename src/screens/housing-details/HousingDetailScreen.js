@@ -18,14 +18,42 @@ import SectionInfo from "../../components/housing-details/section-info/SectionIn
 import StarRatingView from "../../components/housing-details/StarRatingView";
 import StarRating from "react-native-star-rating-widget";
 import { postReview } from "../../api/handleReview";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
-const HousingDetailScreen = ({ navigation: { goBack } }) => {
+const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const [myComment, setMyComment] = useState("");
-  const [myRating, setMyRating] = useState();
+  const [myRating, setMyRating] = useState(null);
+  const [housingData, setHousingData] = useState({});
+  const [housingDesc, setHousingDesc] = useState("");
+  const [housingName, setHousingName] = useState("");
+  const id = route.params.id;
+
+  const getData = () => {
+    getDoc(doc(db, "housing", id)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setHousingData(docSnap.data());
+        setHousingDesc(formatData(docSnap.data().description));
+        setHousingName(docSnap.data().name.toUpperCase());
+        console.log(housingDesc);
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
 
   useEffect(() => {
-    console.log("Rating is: " + myRating);
-  }, [myRating]);
+    getData();
+    console.log(housingDesc);
+  }, []);
+
+  const formatData = (para) => {
+    if (para[para.length - 1] !== ".") {
+      return para.replace(/(^|[.!?]\s+)([a-z])/g, (c) => c.toUpperCase()) + ".";
+    } else {
+      return para.replace(/(^|[.!?]\s+)([a-z])/g, (c) => c.toUpperCase());
+    }
+  };
 
   const data = {
     name: "4 bedroom apartment deluxe",
@@ -89,16 +117,14 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
         <TouchableOpacity onPress={() => goBack()}>
           <Ionicons name="chevron-back" size={30} color={WHITE} />
         </TouchableOpacity>
-        <Text style={[styles.building, styles.text]}>{data.building}</Text>
+        <Text style={[styles.building, styles.text]}>{housingName}</Text>
       </View>
 
       <ScrollView style={styles.wrapper}>
-        <Image
-          source={require("../../../assets/images/student-room.jpg")}
-          style={styles.img}
-        />
-        <Text style={[styles.text, styles.name]}>{data.name}</Text>
-        <Text style={[styles.text, styles.address]}>{data.address}</Text>
+        <Image source={{ uri: housingData.image }} style={styles.img} />
+        <Text style={[styles.text, styles.name]}>{housingData.title}</Text>
+        <Text style={[styles.text, styles.price]}>${housingData.price}</Text>
+        <Text style={[styles.text, styles.address]}>{housingData.address}</Text>
 
         <View style={styles.starContainer}>
           <StarRatingView width={30} height={30} rating={data.rating} />
@@ -114,8 +140,8 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
         <View style={styles.sectionHeader}>
           <Text style={[styles.text, styles.sectionTitle]}>Description</Text>
         </View>
-        <Text style={[styles.text, styles.desc]}>{data.description}</Text>
 
+        <Text style={[styles.text, styles.desc]}>{housingDesc}</Text>
         <SectionInfo title="Add your review">
           <TextInput
             placeholder="Enter comment..."
@@ -140,7 +166,7 @@ const HousingDetailScreen = ({ navigation: { goBack } }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                postReview(1, myComment, myRating);
+                postReview(id, myComment, myRating);
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
