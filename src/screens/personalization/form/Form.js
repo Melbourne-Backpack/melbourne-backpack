@@ -8,26 +8,22 @@ import {
   TextInput,
   ScrollView,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
-import {
-  LIGHT_PURPLE,
-  PLACEHOLDER,
-  SELECTED_BUTTON,
-  WHITE,
-} from "../../../styles/colors";
+import { PLACEHOLDER, SELECTED_BUTTON, WHITE } from "../../../styles/colors";
 import { pushData } from "../../../api/handleData";
 import { auth, storage } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
-const Form = ({ route, navigation }) => {
-  const { campus, subjects } = route.params;
+const Form = ({ navigation }) => {
   const [image, setImage] = useState("");
 
   // Information
@@ -38,15 +34,8 @@ const Form = ({ route, navigation }) => {
   const [facebook, setFacebook] = useState("");
   const [bio, setBio] = useState("");
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
+  const [date, setDate] = useState(new Date(Date.now()));
+  const [open, setOpen] = useState(false);
 
   const [fullNameValidate, setFullNameValidate] = useState({
     error: "",
@@ -126,6 +115,24 @@ const Form = ({ route, navigation }) => {
     }
   };
 
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if (didMount.current) {
+      uploadImage(
+        image,
+        auth.currentUser.uid +
+          "." +
+          image
+            .substring(image.lastIndexOf("/") + 1)
+            .split(".")
+            .pop()
+      );
+    } else {
+      didMount.current = true;
+    }
+  }, [image]);
+
   // handle font
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -159,24 +166,28 @@ const Form = ({ route, navigation }) => {
     } else {
       setPurposeValidate({ error: "", valid: true });
     }
-    if (component === facebook && facebook === "") {
-      setFacebookValidate({
-        error: "*Facebook link is required",
-        valid: false,
-      });
-    } else if (!facebook.includes("facebook.com/")) {
-      setFacebookValidate({
-        error: "*Facebook link must be format facebook.com/...",
-        valid: false,
-      });
+    if (component === purpose && purpose === "") {
+      setPurposeValidate({ error: "*Purpose is required", valid: false });
     } else {
+      setPurposeValidate({ error: "", valid: true });
+    }
+    if (component === facebook && facebook !== "") {
+      if (!facebook.includes("facebook.com/")) {
+        setFacebookValidate({
+          error: "*Facebook link must be format facebook.com/...",
+          valid: false,
+        });
+      } else if (facebook === "" || facebook.includes("facebook.com/")) {
+        setFacebookValidate({ error: "", valid: true });
+      }
+    } else if (facebook === "") {
       setFacebookValidate({ error: "", valid: true });
     }
     if (component === bio && bio === "") {
       setBioValidate({ error: "*Introduction is required", valid: false });
-    } else if (bio.length < 1) {
+    } else if (bio.length < 1 || bio.length > 500) {
       setBioValidate({
-        error: "*Introduction must be more than 100 words",
+        error: "*Introduction must be between 50 and 500 characters.",
         valid: false,
       });
     } else {
@@ -205,72 +216,77 @@ const Form = ({ route, navigation }) => {
               </View>
 
               <View style={{ alignItems: "center" }}>
-                <Text style={styles.avatarText}>Upload avatar</Text>
+                <Text style={styles.avatarText}>Upload avatar*</Text>
                 <Text style={styles.errorImage}>{imageValidate.error}</Text>
               </View>
             </TouchableOpacity>
+            <View style={styles.textInput}>
+              <TextInput
+                style={styles.text}
+                placeholder={"Full Name*"}
+                placeholderTextColor={PLACEHOLDER}
+                onChangeText={(text) => {
+                  setFullName(text);
+                }}
+                defaultValue={fullName}
+                multiline
+              />
+              <Image
+                style={{ width: 25, height: 25 }}
+                source={require("../../../../assets/full-name-icon.png")}
+              />
+            </View>
 
-            <TextInput
-              style={styles.textInput}
-              placeholder={"Full Name"}
-              placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => {
-                setFullName(text);
-              }}
-              defaultValue={fullName}
-            />
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{fullNameValidate.error}</Text>
             </View>
 
             <View style={styles.dobWrapper}>
-              <TouchableOpacity onPress={showDatePicker} style={styles.dob}>
+              <TouchableOpacity
+                onPress={() => setOpen(!open)}
+                style={styles.dob}
+              >
                 <Text
                   style={{
                     color: dob ? WHITE : PLACEHOLDER,
                     fontFamily: "PoppinsMedium",
                   }}
                 >
-                  {dob === "" ? "Date of birth" : dob}
+                  {dob ? dob : "Date of birth*"}
                 </Text>
                 <Image
                   style={{ width: 20, height: 20 }}
                   source={require("../../../../assets/date-of-birth.png")}
                 />
-                <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
+              </TouchableOpacity>
+              {open && (
+                <DateTimePicker
                   mode="date"
-                  date={new Date()}
-                  value={dob}
-                  onConfirm={(date) => {
-                    setDob(date.toLocaleDateString("en-US"));
-                    hideDatePicker();
-                  }}
-                  onCancel={hideDatePicker}
-                  buttonTextColorIOS={SELECTED_BUTTON}
-                  customHeaderIOS={() => {
-                    return (
-                      <View
-                        style={{
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginTop: 15,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontSize: 16,
-                            fontFamily: "PoppinsSemiBold",
-                          }}
-                        >
-                          {"Date of birth"}
-                        </Text>
-                      </View>
+                  display="spinner"
+                  value={date}
+                  onChange={(event, value) => {
+                    setDate(value);
+                    setDob(
+                      value.getUTCDate() +
+                        "/" +
+                        (value.getUTCMonth() + 1) +
+                        "/" +
+                        value.getUTCFullYear()
                     );
                   }}
-                  display="spinner"
+                  style={{
+                    width: 320,
+                    height: 260,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    textColor: WHITE,
+                  }}
+                  textColor={WHITE}
+                  themeVariant="dark"
+                  locale="en-ES"
                 />
-              </TouchableOpacity>
+              )}
             </View>
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{dobValidate.error}</Text>
@@ -285,28 +301,39 @@ const Form = ({ route, navigation }) => {
               <Text style={styles.error}>{purposeValidate.error}</Text>
             </View>
 
-            <TextInput
-              style={styles.textInput}
-              placeholder={"Facebook Link"}
-              placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => {
-                setFacebook(text);
-              }}
-              defaultValue={facebook}
-            />
+            <View style={styles.textInput}>
+              <TextInput
+                style={styles.text}
+                placeholder={"Facebook Link"}
+                placeholderTextColor={PLACEHOLDER}
+                onChangeText={(text) => {
+                  setFacebook(text);
+                }}
+                defaultValue={facebook}
+                multiline
+              />
+              <Image
+                style={{ width: 25, height: 25 }}
+                source={require("../../../../assets/facebook.png")}
+              />
+            </View>
+
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{facebookValidate.error}</Text>
             </View>
+            <View style={styles.textInput}>
+              <TextInput
+                style={[styles.text, styles.introduction]}
+                placeholder={"Introduce yourself*"}
+                placeholderTextColor={PLACEHOLDER}
+                onChangeText={(text) => {
+                  setBio(text);
+                }}
+                defaultValue={bio}
+                multiline
+              />
+            </View>
 
-            <TextInput
-              style={[styles.textInput, styles.introduction]}
-              placeholder={"Introduce yourself"}
-              placeholderTextColor={PLACEHOLDER}
-              onChangeText={(text) => {
-                setBio(text);
-              }}
-              defaultValue={bio}
-            />
             <View style={styles.errorHolder}>
               <Text style={styles.error}>{bioValidate.error}</Text>
             </View>
@@ -350,7 +377,7 @@ const Form = ({ route, navigation }) => {
               facebookValidate.valid &&
               bioValidate.valid
             ) && (
-              <TouchableOpacity onPress={() => navigation.navigate("Subject")}>
+              <TouchableOpacity onPress={() => navigation.navigate("Campus")}>
                 <View style={styles.backButtonView}>
                   <Text style={styles.backButtonText}>Back</Text>
                 </View>
@@ -363,19 +390,10 @@ const Form = ({ route, navigation }) => {
               bioValidate.valid && (
                 <TouchableOpacity
                   onPress={() => {
-                    uploadImage(
-                      image,
-                      auth.currentUser.uid +
-                        "." +
-                        image
-                          .substring(image.lastIndexOf("/") + 1)
-                          .split(".")
-                          .pop()
-                    );
                     pushData(
                       auth.currentUser.uid,
-                      campus,
-                      subjects,
+                      global.campus,
+                      global.subjects,
                       auth.currentUser?.email,
                       avatar,
                       fullName,
@@ -384,9 +402,7 @@ const Form = ({ route, navigation }) => {
                       facebook,
                       bio
                     );
-                    if (avatar !== "") {
-                      navigation.navigate("Ready");
-                    }
+                    navigation.navigate("Ready");
                   }}
                 >
                   <View style={styles.nextButtonView}>

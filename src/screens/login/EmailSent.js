@@ -12,9 +12,6 @@ import {
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
-import { LIGHT_PURPLE, SELECTED_BUTTON, WHITE } from "../../styles/colors";
-import { auth, db } from "../../config/firebase";
-import { emailVerification, signIn } from "../../api/loginApi";
 
 const EmailSent = ({ route, navigation }) => {
   const { email } = route.params;

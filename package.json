@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.5",
+    "@react-native-community/datetimepicker": "^6.1.2",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/stack": "^6.1.1",
@@ -26,12 +27,9 @@
     "react-native-check-box": "^2.1.7",
     "react-native-dotenv": "^3.3.1",
     "react-native-gesture-handler": "~2.1.0",
-    "react-native-modal-datetime-picker": "^13.1.2",
-    "react-native-reanimated": "^2.5.0",
     "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
-    "react-native-selectmultiple-button": "^0.1.105",
     "react-native-star-rating-view": "^0.0.12",
     "react-native-star-rating-widget": "^1.2.0",
     "react-native-web": "0.17.1"

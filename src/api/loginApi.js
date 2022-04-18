@@ -8,7 +8,7 @@ const signIn = ({ navigation }, email, password) => {
     .then((userCredentials) => {
       const user = userCredentials.user;
       console.log("SignIn success");
-      navigation.replace("Welcome");
+      navigation.replace("Home");
     })
     .catch((error) => {
       if (error.code === "auth/invalid-email") {
@@ -33,7 +33,7 @@ const signUp = ({ navigation }, email, password, cfPassword) => {
         const user = userCredentials.user;
         console.log("Create user: ", email);
         window.alert("Sign up successful!");
-        navigation.replace("SignIn");
+        navigation.replace("Welcome");
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {

@@ -12,14 +12,24 @@ import SignUp from "../screens/login/SignUp";
 import ForgotPassword from "../screens/login/ForgotPassword";
 import EmailSent from "../screens/login/EmailSent";
 import HousingDetailScreen from "../screens/housing-details/HousingDetailScreen";
+import Profile from "../screens/profile/Profile";
 
 const AppNavigator = () => {
   const Stack = createStackNavigator();
 
+  const forFade = ({ current }) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  });
+
   return (
     <Stack.Navigator
+      name={"Root"}
       screenOptions={{
         headerShown: false,
+        gestureEnabled: false,
+        cardStyleInterpolator: forFade,
       }}
     >
       <Stack.Screen name="Splash" component={SplashScreen} />
@@ -35,6 +45,7 @@ const AppNavigator = () => {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Content" component={ContentNavigator} />
       <Stack.Screen name="Details" component={HousingDetailScreen} />
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
 };

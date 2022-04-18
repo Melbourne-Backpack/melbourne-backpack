@@ -1,6 +1,18 @@
 import RecommendationTemplate from "../../components/recommendation/template/RecommendationTemplate";
+import { useEffect, useState } from "react";
+
+import { DEVID, SIGNATURE } from "@env";
 
 const TransportScreen = () => {
+  const [transportData, setTransportData] = useState([]);
+  const url = `http://timetableapi.ptv.vic.gov.au/v3/stops/location/-37.808974,144.965272?devid=${DEVID}&signature=${SIGNATURE}`;
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => console.log(data.stops));
+  }, []);
+
   const data = [
     {
       id: 1,
@@ -24,9 +36,6 @@ const TransportScreen = () => {
       address: "Railway Ave & Henry Rd, Pakenham VIC 3810",
     },
   ];
-
-  const firstData = data[0];
-  const otherData = data.slice(1, data.length);
 
   const categories = ["Distance from RMIT"];
 
