@@ -9,12 +9,7 @@ import {
   Image,
 } from "react-native";
 import styles from "./styles";
-import {
-  WHITE,
-  DARK_BLUE,
-  SELECTED_BUTTON,
-  PLACEHOLDER,
-} from "../../../styles/colors";
+import { PLACEHOLDER } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
 

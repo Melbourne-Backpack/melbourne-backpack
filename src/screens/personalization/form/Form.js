@@ -166,17 +166,21 @@ const Form = ({ navigation }) => {
     } else {
       setPurposeValidate({ error: "", valid: true });
     }
-    if (component === facebook && facebook === "") {
-      setFacebookValidate({
-        error: "*Facebook link is required",
-        valid: false,
-      });
-    } else if (!facebook.includes("facebook.com/")) {
-      setFacebookValidate({
-        error: "*Facebook link must be format facebook.com/...",
-        valid: false,
-      });
+    if (component === purpose && purpose === "") {
+      setPurposeValidate({ error: "*Purpose is required", valid: false });
     } else {
+      setPurposeValidate({ error: "", valid: true });
+    }
+    if (component === facebook && facebook !== "") {
+      if (!facebook.includes("facebook.com/")) {
+        setFacebookValidate({
+          error: "*Facebook link must be format facebook.com/...",
+          valid: false,
+        });
+      } else if (facebook === "" || facebook.includes("facebook.com/")) {
+        setFacebookValidate({ error: "", valid: true });
+      }
+    } else if (facebook === "") {
       setFacebookValidate({ error: "", valid: true });
     }
     if (component === bio && bio === "") {
@@ -212,14 +216,14 @@ const Form = ({ navigation }) => {
               </View>
 
               <View style={{ alignItems: "center" }}>
-                <Text style={styles.avatarText}>Upload avatar</Text>
+                <Text style={styles.avatarText}>Upload avatar*</Text>
                 <Text style={styles.errorImage}>{imageValidate.error}</Text>
               </View>
             </TouchableOpacity>
             <View style={styles.textInput}>
               <TextInput
                 style={styles.text}
-                placeholder={"Full Name"}
+                placeholder={"Full Name*"}
                 placeholderTextColor={PLACEHOLDER}
                 onChangeText={(text) => {
                   setFullName(text);
@@ -248,7 +252,7 @@ const Form = ({ navigation }) => {
                     fontFamily: "PoppinsMedium",
                   }}
                 >
-                  {dob ? dob : "Date of birth"}
+                  {dob ? dob : "Date of birth*"}
                 </Text>
                 <Image
                   style={{ width: 20, height: 20 }}
@@ -320,7 +324,7 @@ const Form = ({ navigation }) => {
             <View style={styles.textInput}>
               <TextInput
                 style={[styles.text, styles.introduction]}
-                placeholder={"Introduce yourself"}
+                placeholder={"Introduce yourself*"}
                 placeholderTextColor={PLACEHOLDER}
                 onChangeText={(text) => {
                   setBio(text);
