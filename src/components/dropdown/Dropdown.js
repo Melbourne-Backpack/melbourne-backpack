@@ -22,7 +22,7 @@ const Dropdown = ({ data = [], value = {}, onSelected = () => {} }) => {
             fontFamily: "PoppinsMedium",
           }}
         >
-          {!!value ? value : "Why are you using this app"}
+          {!!value ? value : "Why are you using this app*"}
         </Text>
         <Image
           source={require("../../../assets/Chevron-down.png")}
