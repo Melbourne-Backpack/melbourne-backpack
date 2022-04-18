@@ -33,7 +33,7 @@ const SignUp = ({ navigation }) => {
   });
 
   const textInputChange = (val) => {
-    if (val.trim().regexp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    if (val.trim().email) {
       setData({
         ...data,
         email: val,
@@ -136,8 +136,8 @@ const SignUp = ({ navigation }) => {
               placeholder={"Password"}
               placeholderTextColor={WHITE}
               onChangeText={(text) => handlePasswordChange(text)}
+              secureTextEntry={data.secureTextEntry}
               defaultValue={password}
-              secureTextEntry={true}
             />
             <TouchableOpacity onPress={updateSecureTextEntry}>
               {data.secureTextEntry ? (
@@ -153,8 +153,8 @@ const SignUp = ({ navigation }) => {
             placeholder={"Confirm Password"}
             placeholderTextColor={WHITE}
             onChangeText={(text) => handleCfPasswordChange(text)}
+            secureTextEntry={data.confirm_secureTextEntry}
             defaultValue={cfPassword}
-            secureTextEntry={true}
           />
           <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
             {data.secureTextEntry ? (

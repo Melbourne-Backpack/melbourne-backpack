@@ -139,6 +139,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 15,
   },
+  feather: {
+    width: 20,
+    height: 20,
+    resizeMode: "contain",
+  },
 });
 
 export default styles;
