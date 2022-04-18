@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "./styles";
-import { LIGHT_PURPLE, LIGHTER_GREY } from "../../styles/colors";
+import {LIGHT_PURPLE, LIGHTER_GREY} from "../../styles/colors";
 import Profile from "../../screens/profile/Profile";
 import { Image } from "react-native";
 import { doc, getDoc } from "firebase/firestore";
@@ -17,29 +17,29 @@ import { auth, db } from "../../config/firebase";
 const Tab = createBottomTabNavigator();
 
 const tabIcons = [
-  {
-    route: "Housing",
-    iconName: "home-outline",
-    iconFocus: "home",
-  },
-  {
-    route: "Transport",
-    iconName: "train-outline",
-    iconFocus: "train",
-  },
-  {
-    route: "Shopping",
-    iconName: "md-cart-outline",
-    iconFocus: "md-cart",
-  },
-  {
-    route: "Community",
-    iconName: "md-people-outline",
-    iconFocus: "md-people",
-  },
-  {
-    route: "Profile",
-  },
+    {
+        route: "Housing",
+        iconName: "home-outline",
+        iconFocus: "home",
+    },
+    {
+        route: "Transport",
+        iconName: "train-outline",
+        iconFocus: "train",
+    },
+    {
+        route: "Shopping",
+        iconName: "md-cart-outline",
+        iconFocus: "md-cart",
+    },
+    {
+        route: "Community",
+        iconName: "md-people-outline",
+        iconFocus: "md-people",
+    },
+    {
+        route: "Profile",
+    },
 ];
 
 const ContentNavigator = () => {

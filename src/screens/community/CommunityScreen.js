@@ -31,7 +31,7 @@ const CommunityScreen = ({navigation}) => {
     }
 
     const mostLikeYouData = () => {
-        let temp = [];
+        let temp = []
         let myCampus = "";
         let myTopic = [];
         community.map((user) => {
@@ -45,41 +45,39 @@ const CommunityScreen = ({navigation}) => {
         for (let i = 0; i < community.length; i++) {
             let user = community[i];
             let id = user.id;
-
             if (
                 id !== self &&
-                user.campus === myCampus &&
-                !temp.includes(id)
+                user.campus === myCampus
             ) {
-                temp.push(user);
-            }
-
-            if (
-                community.indexOf(user) === community.length - 1 &&
-                temp.length !== mostLikeYouMaxCards
-            ) {
-                for (let i = 0; i < community.length; i++) {
-                    if (
-                        id !== self &&
-                        !temp.includes(id)
-                    ) {
-                        myTopic.map((topic) => {
-                            if (user.subjects.includes(topic)) {
-                                temp.push(user);
-                            }
-                        });
-                    }
-                }
+                console.log(id, " ", temp.includes(id))
+                temp.push(user)
             }
         }
-        return temp;
-    };
 
+        if (temp.length < mostLikeYouMaxCards)
+            for (let i = 0; i < community.length; i++) {
+                let user = community[i];
+                let id = user.id;
+                if (
+                    id !== self &&
+                    temp[i - 1] &&
+                    temp[i - 1] !== id
+                ) {
+                    myTopic.map((topic) => {
+                        if (user.subjects.includes(topic)) {
+                            console.log(id, " ", temp.includes(id))
+                            temp.push(user)
+                        }
+                    });
+                }
+            }
+        return temp
+    };
 
     const campus = [
         {
             id: 1,
-            name: "SGS",
+            name: "Saigon",
         },
         {
             id: 2,
@@ -133,13 +131,14 @@ const CommunityScreen = ({navigation}) => {
             name: "Digital Marketing",
         },
     ];
+
     let mostLikeYouDataForDisplay
     if (community.length > 0) {
-        mostLikeYouDataForDisplay = mostLikeYouData().splice(
+        mostLikeYouDataForDisplay = mostLikeYouData().slice(
             0,
             mostLikeYouMaxCards)
         if (mostLikeYouDataForDisplay.length === 0) {
-            mostLikeYouDataForDisplay = community.splice(0, mostLikeYouMaxCards)
+            mostLikeYouDataForDisplay = community.slice(0, mostLikeYouMaxCards)
         }
     }
 
