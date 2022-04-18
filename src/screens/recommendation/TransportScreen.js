@@ -10,7 +10,7 @@ const TransportScreen = () => {
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setTransportData(data.stops));
+      .then((data) => console.log(data.stops));
   }, []);
 
   const data = [

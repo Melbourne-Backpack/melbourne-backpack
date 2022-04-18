@@ -23,9 +23,10 @@ import { db } from "../../config/firebase";
 
 const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const [myComment, setMyComment] = useState("");
-  const [myRating, setMyRating] = useState();
+  const [myRating, setMyRating] = useState(null);
   const [housingData, setHousingData] = useState({});
   const [housingDesc, setHousingDesc] = useState("");
+  const [housingName, setHousingName] = useState("");
   const id = route.params.id;
 
   const getData = () => {
@@ -33,6 +34,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
       if (docSnap.exists()) {
         setHousingData(docSnap.data());
         setHousingDesc(formatData(docSnap.data().description));
+        setHousingName(docSnap.data().name.toUpperCase());
         console.log(housingDesc);
       } else {
         console.log("No such document!");
@@ -115,7 +117,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         <TouchableOpacity onPress={() => goBack()}>
           <Ionicons name="chevron-back" size={30} color={WHITE} />
         </TouchableOpacity>
-        <Text style={[styles.building, styles.text]}>{housingData.name}</Text>
+        <Text style={[styles.building, styles.text]}>{housingName}</Text>
       </View>
 
       <ScrollView style={styles.wrapper}>
@@ -164,7 +166,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                postReview(1, myComment, myRating);
+                postReview(id, myComment, myRating);
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
