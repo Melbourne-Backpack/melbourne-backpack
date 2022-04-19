@@ -29,9 +29,8 @@ const CommunityCardLarge = ({
             key={userID}
             style={styles.card}
             onPress={() => {
-                navigation.navigate('Content', {
-                    screen: "Profile",
-                    params: {user: userID},
+                navigation.getParent().navigate('Profile', {
+                    user: userID
                 })
             }}
         >
