@@ -19,9 +19,9 @@ import {signOut} from "../../api/loginApi";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
-const Profile = ({navigation, route}) => {
+const Profile = ({navigation}) => {
     const [data, setData] = useState({});
-    const getCurrentUserData = () => {
+    const getData = () => {
         getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
             if (docSnap.exists()) {
                 setData(docSnap.data());
@@ -30,19 +30,8 @@ const Profile = ({navigation, route}) => {
             }
         });
     };
-
-    const getOtherUserData = () => {
-        getDoc(doc(db, "users", route.params.user)).then((docSnap) => {
-            if (docSnap.exists()) {
-                setData(docSnap.data());
-            } else {
-                console.log("No such document!");
-            }
-        });
-    };
     useEffect(() => {
-        if (navigation.getParent()) getCurrentUserData()
-        else getOtherUserData()
+        getData();
     }, []);
     const [loaded, error] = useFonts({
         PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
