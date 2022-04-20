@@ -21,7 +21,6 @@ import {
 import CheckBox from "react-native-check-box";
 import { auth, db } from "../../config/firebase";
 import { signIn } from "../../api/loginApi";
-import Modal from "react-native-modal";
 import AlertModal from "../../components/alert-modal/AlertModal";
 
 const SignIn = ({ navigation }) => {
