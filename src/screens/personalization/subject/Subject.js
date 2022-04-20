@@ -11,7 +11,12 @@ import {
   Image,
 } from "react-native";
 import styles from "./styles";
-import { PLACEHOLDER } from "../../../styles/colors";
+import {
+  WHITE,
+  DARK_BLUE,
+  SELECTED_BUTTON,
+  PLACEHOLDER,
+} from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import _ from "lodash";
@@ -98,7 +103,6 @@ const Subject = ({ navigation }) => {
                 placeholderTextColor={PLACEHOLDER}
                 onChangeText={(text) => setText(text)}
                 defaultValue={text}
-                multiline
               >
                 {_.join(selectedSubjects, " | ")}
               </TextInput>
