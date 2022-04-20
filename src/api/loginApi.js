@@ -2,17 +2,6 @@ import { auth, db } from "../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 
-const signIn = ({ navigation }, email, password) => {
-  auth
-    .signInWithEmailAndPassword(email, password)
-    .then((userCredentials) => {
-      const user = userCredentials.user;
-      console.log("SignIn success");
-      navigation.replace("Home");
-    })
-    .catch((error) => {});
-};
-
 const signUp = ({ navigation }, email, password, cfPassword) => {
   if (password !== cfPassword) {
     window.alert("Password and confirm password does not match");
@@ -56,4 +45,4 @@ const emailVerification = ({ navigation }, email) => {
     });
 };
 
-export { signIn, signUp, signOut, emailVerification };
+export { signUp, signOut, emailVerification };

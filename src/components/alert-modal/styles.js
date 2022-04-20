@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: ALERT_PURPLE_BUTTON,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    marginTop: 10,
   },
   closeButtonText: {
     color: BLACK,

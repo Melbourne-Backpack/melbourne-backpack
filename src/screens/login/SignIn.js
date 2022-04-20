@@ -20,7 +20,6 @@ import {
 } from "../../styles/colors";
 import CheckBox from "react-native-check-box";
 import { auth, db } from "../../config/firebase";
-import { signIn } from "../../api/loginApi";
 import AlertModal from "../../components/alert-modal/AlertModal";
 
 const SignIn = ({ navigation }) => {
@@ -39,16 +38,48 @@ const SignIn = ({ navigation }) => {
     setShowAlert(showAlert);
   };
 
-  const checkValidate = (component) => {
-    if (component === email && email === "") {
+  const setError = (error) => {
+    setValidate({
+      error: error,
+      valid: false,
+    });
+  };
+  const signIn = ({ navigation, email = "", password = "" }) => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log("SignIn success");
+        navigation.replace("Home");
+      })
+      .catch((error) => {
+        if (error.code === "auth/wrong-password") {
+          setError("Wrong password!");
+          setShowAlert(true);
+        }
+        if (error.code === "auth/user-not-found") {
+          setError("User not found!");
+          setShowAlert(true);
+        }
+      });
+  };
+
+  const checkValidate = (email, password) => {
+    if (email === "") {
       setValidate({ error: "*Email is required", valid: false });
       setShowAlert(true);
-    } else if (
-      component === email &&
-      (!email.includes("@") || !email.includes(".com"))
-    ) {
+    } else if (!email.includes("@")) {
       setValidate({
         error: "*Email must be in format email@something.com",
+        valid: false,
+      });
+      setShowAlert(true);
+    } else if (password === "") {
+      setValidate({ error: "*Password is required", valid: false });
+      setShowAlert(true);
+    } else if (password.length < 6) {
+      setValidate({
+        error: "*Password length must be more than 6",
         valid: false,
       });
       setShowAlert(true);
@@ -56,20 +87,6 @@ const SignIn = ({ navigation }) => {
       setValidate({ error: "", valid: true });
       setShowAlert(false);
     }
-
-    // if (component === password && password === "") {
-    //   setValidate({ error: "*Password is required", valid: false });
-    //   setShowAlert(true);
-    // } else if (component === password && password.length < 6) {
-    //   setValidate({
-    //     error: "*Password length must be more than 6",
-    //     valid: false,
-    //   });
-    //   setShowAlert(true);
-    // } else {
-    //   setValidate({ error: "", valid: true });
-    //   setShowAlert(false);
-    // }
   };
 
   const [loaded, error] = useFonts({
@@ -151,9 +168,12 @@ const SignIn = ({ navigation }) => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            checkValidate(email);
-
-            signIn({ navigation }, email, password);
+            checkValidate(email, password);
+            signIn({
+              navigation,
+              email,
+              password,
+            });
           }}
         >
           <View style={styles.loginButtonView}>

@@ -63,7 +63,11 @@ const ForgotPassword = ({ navigation }) => {
                 <Text style={styles.loginButtonText}>Submit</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("SignIn");
+              }}
+            >
               <View style={styles.cancelButtonView}>
                 <Text style={styles.cancelButtonText}>Cancel</Text>
               </View>
