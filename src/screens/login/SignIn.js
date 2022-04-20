@@ -22,6 +22,7 @@ import CheckBox from "react-native-check-box";
 import { auth, db } from "../../config/firebase";
 import { signIn } from "../../api/loginApi";
 import Modal from "react-native-modal";
+import AlertModal from "../../components/alert-modal/AlertModal";
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -30,32 +31,46 @@ const SignIn = ({ navigation }) => {
 
   const [showAlert, setShowAlert] = useState(false);
 
-  const [emailValidate, setEmailValidate] = useState({
+  const [validate, setValidate] = useState({
     error: "",
     valid: false,
   });
 
-  const toggleModal = () => {
-    setShowAlert(!showAlert);
+  const setShowAlertFunction = (showAlert) => {
+    setShowAlert(showAlert);
   };
 
   const checkValidate = (component) => {
     if (component === email && email === "") {
-      setEmailValidate({ error: "*Email is required", valid: false });
+      setValidate({ error: "*Email is required", valid: false });
       setShowAlert(true);
     } else if (
       component === email &&
       (!email.includes("@") || !email.includes(".com"))
     ) {
-      setEmailValidate({
+      setValidate({
         error: "*Email must be in format email@something.com",
         valid: false,
       });
       setShowAlert(true);
     } else {
-      setEmailValidate({ error: "", valid: true });
+      setValidate({ error: "", valid: true });
       setShowAlert(false);
     }
+
+    // if (component === password && password === "") {
+    //   setValidate({ error: "*Password is required", valid: false });
+    //   setShowAlert(true);
+    // } else if (component === password && password.length < 6) {
+    //   setValidate({
+    //     error: "*Password length must be more than 6",
+    //     valid: false,
+    //   });
+    //   setShowAlert(true);
+    // } else {
+    //   setValidate({ error: "", valid: true });
+    //   setShowAlert(false);
+    // }
   };
 
   const [loaded, error] = useFonts({
@@ -63,6 +78,7 @@ const SignIn = ({ navigation }) => {
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
     PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
     PoppinsBlack: require("../../../assets/fonts/Poppins-Black.ttf"),
+    PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
   });
   if (!loaded) {
     return null;
@@ -79,44 +95,11 @@ const SignIn = ({ navigation }) => {
           source={require("../../../assets/adaptive-icon.png")}
           style={styles.icon}
         />
-        <Modal
-          isVisible={showAlert}
-          onBackdropPress={() => setShowAlert(false)}
-          animationIn={"fadeInLeftBig"}
-          animationOut={"fadeOutRightBig"}
-        >
-          <View style={styles.alertContainer}>
-            <View style={styles.alertModal}>
-              <View
-                style={{
-                  width: "100%",
-                  borderBottomWidth: 2,
-                  borderBottomColor: GREY,
-                }}
-              >
-                <Text
-                  style={{
-                    color: "#FAC800",
-                    paddingTop: 20,
-                    fontFamily: "PoppinsBlack",
-                    fontSize: 17,
-                    textAlign: "center",
-                  }}
-                >
-                  ALERT
-                </Text>
-                <Text style={styles.errorMessage}>{emailValidate.error}</Text>
-              </View>
-
-              <TouchableOpacity
-                onPress={toggleModal}
-                style={styles.closeButton}
-              >
-                <Text style={styles.closeButtonText}>Close</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+        <AlertModal
+          showModal={showAlert}
+          setShowModalFunction={setShowAlertFunction}
+          message={validate.error}
+        />
         <View style={styles.loginField}>
           <Text style={styles.textOne}>Sign in to your account</Text>
           <View style={styles.textInput}>
@@ -170,7 +153,8 @@ const SignIn = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => {
             checkValidate(email);
-            // signIn({ navigation }, email, password);
+
+            signIn({ navigation }, email, password);
           }}
         >
           <View style={styles.loginButtonView}>

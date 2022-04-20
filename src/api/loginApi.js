@@ -10,17 +10,7 @@ const signIn = ({ navigation }, email, password) => {
       console.log("SignIn success");
       navigation.replace("Home");
     })
-    .catch((error) => {
-      if (error.code === "auth/invalid-email") {
-        alert("That email address is invalid!");
-      }
-      if (error.code === "auth/wrong-password") {
-        alert("Wrong password!");
-      }
-      if (error.code === "auth/user-not-found") {
-        alert("User not found!");
-      }
-    });
+    .catch((error) => {});
 };
 
 const signUp = ({ navigation }, email, password, cfPassword) => {

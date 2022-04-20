@@ -10,6 +10,10 @@ import {
   BLACK,
   PURPLE_BLUE,
   GREY,
+  DARK_BLUE_PURPLE,
+  PLACEHOLDER,
+  ALERT_PURPLE_BUTTON,
+  ALERT_PURPLE_MESSAGE,
 } from "../../styles/colors";
 import {
   widthPercentageToDP as wp,
@@ -150,37 +154,6 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsMedium",
     textAlign: "center",
     paddingVertical: 15,
-  },
-  alertContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  alertModal: {
-    backgroundColor: "#9991D0",
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    width: wp("80%"),
-  },
-  errorMessage: {
-    textAlign: "center",
-    color: BLACK,
-    fontFamily: "PoppinsMedium",
-    fontSize: 15,
-    paddingVertical: 10,
-  },
-  closeButton: {
-    width: wp("80%"),
-    backgroundColor: "#BBB1FA",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
-  closeButtonText: {
-    color: BLACK,
-    fontFamily: "PoppinsSemiBold",
-    fontSize: 15,
-    textAlign: "center",
-    paddingVertical: 10,
   },
 });
 
