@@ -79,7 +79,12 @@ const SignIn = ({ navigation }) => {
           source={require("../../../assets/adaptive-icon.png")}
           style={styles.icon}
         />
-        <Modal isVisible={showAlert}>
+        <Modal
+          isVisible={showAlert}
+          onBackdropPress={() => setShowAlert(false)}
+          animationIn={"fadeInLeftBig"}
+          animationOut={"fadeOutRightBig"}
+        >
           <View style={styles.alertContainer}>
             <View style={styles.alertModal}>
               <View
