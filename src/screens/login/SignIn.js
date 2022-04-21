@@ -77,7 +77,7 @@ const SignIn = ({ navigation }) => {
     setTimeout(() => {
       setShowAlert(false);
       navigation.navigate("Home");
-    }, 5000);
+    }, 3000);
   };
 
   const checkValidate = (email, password) => {
