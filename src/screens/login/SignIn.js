@@ -29,6 +29,10 @@ const SignIn = ({ navigation }) => {
 
   const [showAlert, setShowAlert] = useState(false);
 
+  const [icon, setIcon] = useState("alert");
+  const [doNavigate, setDoNavigate] = useState(false);
+  const [toPage, setToPage] = useState("");
+
   const [validate, setValidate] = useState({
     error: "",
     valid: false,
@@ -50,7 +54,11 @@ const SignIn = ({ navigation }) => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("SignIn success");
-        navigation.replace("Home");
+        setError("Sign in successful");
+        setIcon("success");
+        setDoNavigate(true);
+        setToPage("Home");
+        showModal();
       })
       .catch((error) => {
         if (error.code === "auth/wrong-password") {
@@ -62,6 +70,13 @@ const SignIn = ({ navigation }) => {
           setShowAlert(true);
         }
       });
+  };
+
+  const showModal = () => {
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
   };
 
   const checkValidate = (email, password) => {
@@ -95,6 +110,7 @@ const SignIn = ({ navigation }) => {
     PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
     PoppinsBlack: require("../../../assets/fonts/Poppins-Black.ttf"),
     PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
+    PoppinsItalic: require("../../../assets/fonts/Poppins-Italic.ttf"),
   });
   if (!loaded) {
     return null;
@@ -112,9 +128,13 @@ const SignIn = ({ navigation }) => {
           style={styles.icon}
         />
         <AlertModal
+          navigation={navigation}
           showModal={showAlert}
           setShowModalFunction={setShowAlertFunction}
           message={validate.error}
+          icon={icon}
+          doNavigate={doNavigate}
+          toPage={toPage}
         />
         <View style={styles.loginField}>
           <Text style={styles.textOne}>Sign in to your account</Text>

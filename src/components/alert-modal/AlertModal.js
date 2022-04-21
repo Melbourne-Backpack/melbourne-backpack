@@ -5,19 +5,28 @@ import { PLACEHOLDER, WHITE } from "../../styles/colors";
 import Modal from "react-native-modal";
 
 const AlertModal = ({
+  navigation,
   showModal = false,
   setShowModalFunction = () => {},
   message = "",
+  icon = "",
+  doNavigate = false,
+  toPage = "",
 }) => {
   const toggleModal = () => {
     setShowModalFunction(!showModal);
+  };
+
+  const navigate = () => {
+    setShowModalFunction(!showModal);
+    navigation.navigate(toPage);
   };
   return (
     <Modal
       isVisible={showModal}
       onBackdropPress={() => setShowModalFunction(false)}
-      animationIn={"fadeInLeftBig"}
-      animationOut={"fadeOutRightBig"}
+      animationIn={"slideInUp"}
+      animationOut={"slideOutDown"}
     >
       <View style={styles.alertContainer}>
         <View style={styles.alertModal}>
@@ -26,22 +35,68 @@ const AlertModal = ({
               width: "100%",
             }}
           >
-            <Text
+            <View
               style={{
-                color: "#FAC800",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
                 paddingTop: 20,
-                fontFamily: "PoppinsBlack",
-                fontSize: 17,
-                textAlign: "center",
               }}
             >
-              ALERT
-            </Text>
+              {icon === "alert" && (
+                <Image
+                  source={require("../../../assets/alert-icon.png")}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              )}
+              {icon === "success" && (
+                <Image
+                  source={require("../../../assets/success-icon.png")}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              )}
+              {icon === "alert" && (
+                <Text
+                  style={{
+                    color: "#FAC800",
+                    fontFamily: "PoppinsBlack",
+                    fontSize: 17,
+                    marginHorizontal: 5,
+                  }}
+                >
+                  ALERT
+                </Text>
+              )}
+
+              {icon === "success" && (
+                <Text
+                  style={{
+                    color: "#12622F",
+                    fontFamily: "PoppinsBlack",
+                    fontSize: 17,
+                    marginHorizontal: 5,
+                  }}
+                >
+                  SUCCESS
+                </Text>
+              )}
+            </View>
             <Text style={styles.errorMessage}>{message}</Text>
           </View>
 
-          <TouchableOpacity onPress={toggleModal} style={styles.closeButton}>
-            <Text style={styles.closeButtonText}>Close</Text>
+          <TouchableOpacity
+            onPress={doNavigate ? navigate : toggleModal}
+            style={styles.closeButton}
+          >
+            <Text style={styles.closeButtonText}>
+              {doNavigate ? "Continue" : "Close"}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

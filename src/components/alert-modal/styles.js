@@ -26,16 +26,16 @@ const styles = StyleSheet.create({
   errorMessage: {
     textAlign: "center",
     color: BLACK,
-    fontFamily: "PoppinsMedium",
+    fontFamily: "PoppinsItalic",
     fontSize: 15,
-    paddingVertical: 10,
+    paddingVertical: 15,
   },
   closeButton: {
     width: wp("80%"),
     backgroundColor: ALERT_PURPLE_BUTTON,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    marginTop: 10,
+    marginTop: 5,
   },
   closeButtonText: {
     color: BLACK,
