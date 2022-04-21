@@ -25,6 +25,8 @@ const SignUp = ({ navigation }) => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [icon, setIcon] = useState("alert");
+  const [doNavigate, setDoNavigate] = useState(false);
+  const [toPage, setToPage] = useState("");
 
   const [validate, setValidate] = useState({
     error: "",
@@ -42,13 +44,25 @@ const SignUp = ({ navigation }) => {
     });
   };
 
+  const showModal = () => {
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+      navigation.navigate("SignIn");
+    }, 4000);
+  };
+
   const signUp = ({ navigation }, email, password, cfPassword) => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Create user: ", email);
-        navigation.replace("Welcome");
+        setError("Sign Up successful");
+        setIcon("success");
+        setDoNavigate(true);
+        setToPage("SignIn");
+        showModal();
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
@@ -112,10 +126,13 @@ const SignUp = ({ navigation }) => {
               style={styles.icon}
             />
             <AlertModal
+              navigation={navigation}
               showModal={showAlert}
               setShowModalFunction={setShowAlertFunction}
               message={validate.error}
               icon={icon}
+              doNavigate={doNavigate}
+              toPage={toPage}
             />
             <View style={styles.loginField}>
               <Text style={styles.textOne}>Sign up your account</Text>
