@@ -13,6 +13,7 @@ import ForgotPassword from "../screens/login/ForgotPassword";
 import EmailSent from "../screens/login/EmailSent";
 import HousingDetailScreen from "../screens/housing-details/HousingDetailScreen";
 import Profile from "../screens/profile/Profile";
+import EditProfile from "../screens/edit-profile/EditProfile";
 
 const AppNavigator = () => {
   const Stack = createStackNavigator();
@@ -46,6 +47,7 @@ const AppNavigator = () => {
       <Stack.Screen name="Content" component={ContentNavigator} />
       <Stack.Screen name="Details" component={HousingDetailScreen} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
     </Stack.Navigator>
   );
 };

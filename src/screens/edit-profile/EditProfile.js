@@ -6,6 +6,7 @@ import {
   ScrollView,
   Linking,
   Pressable,
+  TextInput,
 } from "react-native";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
@@ -16,10 +17,11 @@ import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
 import AlertModal from "../../components/alert-modal/AlertModal";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
-const Profile = ({ navigation, route }) => {
+const EditProfile = ({ navigation }) => {
   const [data, setData] = useState({});
   const [currentDocId, setCurrentDocId] = useState("");
 
@@ -36,19 +38,8 @@ const Profile = ({ navigation, route }) => {
     });
   };
 
-  const getOtherUserData = () => {
-    getDoc(doc(db, "users", route.params.user)).then((docSnap) => {
-      if (docSnap.exists()) {
-        setData(docSnap.data());
-        setCurrentDocId(docSnap.id);
-      } else {
-        console.log("No such document!");
-      }
-    });
-  };
   useEffect(() => {
-    if (navigation.getParent()) getCurrentUserData();
-    else getOtherUserData();
+    getCurrentUserData();
   }, []);
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
@@ -86,18 +77,8 @@ const Profile = ({ navigation, route }) => {
             style={styles.backBtn}
           />
         </TouchableOpacity>
-        <Text style={styles.title}>Profile</Text>
-        <TouchableOpacity
-          style={styles.editProfile}
-          onPress={() => {
-            navigation.navigate("EditProfile");
-          }}
-        >
-          <Image
-            source={require("../../../assets/edit-profile.png")}
-            style={{ width: 25, height: 25 }}
-          />
-        </TouchableOpacity>
+        <Text style={styles.title}>Edit Profile</Text>
+        <View style={{ marginRight: wp(10) }}>{null}</View>
       </View>
       <View>
         <View style={styles.profileImageWrapper}>
@@ -185,22 +166,8 @@ const Profile = ({ navigation, route }) => {
           </View>
         </View>
       </View>
-      {currentDocId === auth.currentUser.uid ? (
-        <View style={styles.logoutBtnWrapper}>
-          <TouchableOpacity
-            style={styles.logoutBtn}
-            onPress={() => {
-              setShowAlertFunction(true);
-            }}
-          >
-            <Text style={styles.logoutBtnText}>Logout</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        console.log("id: " + auth.currentUser.uid)
-      )}
     </ScrollView>
   );
 };
 
-export default Profile;
+export default EditProfile;
