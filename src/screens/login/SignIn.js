@@ -54,6 +54,8 @@ const SignIn = ({ navigation }) => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("SignIn success");
+        setEmail(null);
+        setPassword(null);
         setError("Sign in successful");
         setIcon("success");
         setDoNavigate(true);

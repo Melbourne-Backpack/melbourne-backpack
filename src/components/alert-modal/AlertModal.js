@@ -12,6 +12,7 @@ const AlertModal = ({
   icon = "",
   doNavigate = false,
   toPage = "",
+  signOut,
 }) => {
   const toggleModal = () => {
     setShowModalFunction(!showModal);
@@ -61,6 +62,15 @@ const AlertModal = ({
                   }}
                 />
               )}
+              {icon === "logout" && (
+                <Image
+                  source={require("../../../assets/logout-icon.png")}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              )}
               {icon === "alert" && (
                 <Text
                   style={{
@@ -86,18 +96,44 @@ const AlertModal = ({
                   SUCCESS
                 </Text>
               )}
+              {icon === "logout" && (
+                <Text
+                  style={{
+                    color: "#CB363F",
+                    fontFamily: "PoppinsBlack",
+                    fontSize: 18,
+                    marginHorizontal: 5,
+                  }}
+                >
+                  LOG OUT
+                </Text>
+              )}
             </View>
             <Text style={styles.errorMessage}>{message}</Text>
           </View>
 
-          <TouchableOpacity
-            onPress={doNavigate ? navigate : toggleModal}
-            style={styles.closeButton}
-          >
-            <Text style={styles.closeButtonText}>
-              {doNavigate ? "Continue" : "Close"}
-            </Text>
-          </TouchableOpacity>
+          {icon === "alert" && (
+            <TouchableOpacity onPress={toggleModal} style={styles.closeButton}>
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          )}
+
+          {icon === "logout" && (
+            <View>
+              <TouchableOpacity
+                onPress={() => signOut({ navigation })}
+                style={styles.logoutButton}
+              >
+                <Text style={styles.logoutButtonText}>Yes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={toggleModal}
+                style={styles.cancelButton}
+              >
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
     </Modal>

@@ -15,13 +15,16 @@ import { auth, db } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
-import { signOut } from "../../api/loginApi";
+import AlertModal from "../../components/alert-modal/AlertModal";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
 const Profile = ({ navigation, route }) => {
   const [data, setData] = useState({});
   const [currentDocId, setCurrentDocId] = useState("");
+
+  const [showAlert, setShowAlert] = useState(false);
+
   const getCurrentUserData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
       if (docSnap.exists()) {
@@ -55,6 +58,19 @@ const Profile = ({ navigation, route }) => {
     return null;
   }
 
+  const setShowAlertFunction = (showAlert) => {
+    setShowAlert(showAlert);
+  };
+
+  const signOut = ({ navigation }) => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("SignIn");
+      })
+      .catch((error) => window.alert(error.message));
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.background}>
       <View style={styles.topBar}>
@@ -81,7 +97,18 @@ const Profile = ({ navigation, route }) => {
             style={styles.profileImage}
           />
         </View>
+
         <View style={styles.userContentDisplay}>
+          <AlertModal
+            navigation={navigation}
+            showModal={showAlert}
+            setShowModalFunction={setShowAlertFunction}
+            message={"Are you sure you want to log out?"}
+            icon={"logout"}
+            doNavigate={true}
+            toPage={"SignIn"}
+            signOut={signOut}
+          />
           <View style={styles.userContentRow}>
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Display Name</Text>
@@ -152,7 +179,7 @@ const Profile = ({ navigation, route }) => {
           <TouchableOpacity
             style={styles.logoutBtn}
             onPress={() => {
-              signOut({ navigation });
+              setShowAlertFunction(true);
             }}
           >
             <Text style={styles.logoutBtnText}>Logout</Text>
