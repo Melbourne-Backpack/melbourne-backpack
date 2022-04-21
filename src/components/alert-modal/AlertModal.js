@@ -79,7 +79,7 @@ const AlertModal = ({
                   style={{
                     color: "#12622F",
                     fontFamily: "PoppinsBlack",
-                    fontSize: 17,
+                    fontSize: 18,
                     marginHorizontal: 5,
                   }}
                 >
