@@ -7,15 +7,18 @@ import {
 
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { GREY, YELLOW } from "../../../styles/colors";
+import { GREY, WHITE, YELLOW } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
 import Capitalize from "../../../utils/Capitalize";
 
-const RecommendationCard = ({ data, housing, routeType }) => {
+const busImg = require("../../../../assets/images/bus.jpg");
+const tramImg = require("../../../../assets/images/tram.jpg");
+const trainImg = require("../../../../assets/images/train.jpg");
+
+const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
   const [address, setAddress] = useState("");
-  console.log(routeType);
 
   const [loaded, error] = useFonts({
     PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
@@ -36,22 +39,28 @@ const RecommendationCard = ({ data, housing, routeType }) => {
   return (
     <View style={styles.card}>
       {housing !== true ? (
-        <>
-          <ImageBackground
-            source={{ uri: data.image }}
-            style={styles.backgroundImg}
-            imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-            resizeMode="cover"
-          />
+        transport ? (
+          data ? (
+            <Text style={{ color: WHITE }}>{data["stopName"]}</Text>
+          ) : null
+        ) : (
+          <>
+            <ImageBackground
+              source={{ uri: data.image }}
+              style={styles.backgroundImg}
+              imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+              resizeMode="cover"
+            />
 
-          <View style={styles.info}>
-            <Text style={[styles.name, styles.text]}>{data.title}</Text>
-            <Text style={[styles.text, styles.location]}>
-              <Ionicons name="location-sharp" size={16} color="white" />{" "}
-              {data.address}
-            </Text>
-          </View>
-        </>
+            <View style={styles.info}>
+              <Text style={[styles.name, styles.text]}>{data.title}</Text>
+              <Text style={[styles.text, styles.location]}>
+                <Ionicons name="location-sharp" size={16} color="white" />{" "}
+                {data.address}
+              </Text>
+            </View>
+          </>
+        )
       ) : (
         <>
           <TouchableOpacity

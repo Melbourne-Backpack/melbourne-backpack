@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
     marginTop: "2%",
     marginBottom: "5%",
   },
+  heading3: {
+    fontSize: 20,
+    fontFamily: "PoppinsMedium",
+    color: WHITE,
+  },
   secondHeader: {
     flexDirection: "row",
     marginVertical: scaleSize(22),

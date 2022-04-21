@@ -130,7 +130,13 @@ const distanceFromRMIT = [
   },
 ];
 
-const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
+const RecommendationTemplate = ({
+  topic,
+  data,
+  housing,
+  navigation,
+  transport,
+}) => {
   let highestRating = 0;
   let trendingCard = {};
 
@@ -153,8 +159,15 @@ const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
       <ScrollView>
         <View style={styles.wrapper}>
           <Text style={styles.heading1}>Trending {topic}</Text>
+          {transport ? (
+            <Text style={styles.heading3}>Transportation stops near RMIT</Text>
+          ) : null}
           {data !== [] ? (
-            <RecommendationCard data={trendingCard} housing={housing} />
+            <RecommendationCard
+              data={trendingCard}
+              housing={housing}
+              transport={transport}
+            />
           ) : null}
 
           <View style={styles.secondHeader}>
@@ -175,6 +188,7 @@ const RecommendationTemplate = ({ topic, data, housing, navigation }) => {
                 navigation={navigation}
                 housingList={data}
                 isHousing={housing}
+                transport={transport}
               />
             ) : null}
           </View>

@@ -6,7 +6,6 @@ import { DEVID, ROUTE_TYPE_SIGNATURE, TRANSPORT_SIGNATURE } from "@env";
 const TransportScreen = () => {
   const [rawData, setRawData] = useState([]);
   const [routeType, setRouteType] = useState([]);
-  const [transportData, setTransportData] = useState([]);
   const typeUrl = `http://timetableapi.ptv.vic.gov.au/v3/route_types?devid=${DEVID}&signature=${ROUTE_TYPE_SIGNATURE}`;
 
   const lat = "-37.8080770201347";
@@ -65,39 +64,14 @@ const TransportScreen = () => {
     getRawData();
   }, []);
 
-  console.log(processRawData());
-
-  const data = [
-    {
-      id: 1,
-      name: "Cranbourne Line",
-      address:
-        "Departure: Cranbourne Railway Station, Station St, Cranbourne 3977",
-    },
-    {
-      id: 2,
-      name: "Bus 234",
-      address: "Departure: 11 Centre Ave, Port Melbourne VIC 3207",
-    },
-    {
-      id: 3,
-      name: "Yarra Trams line 16",
-      address: "Melbourne University, Swanston St #1, Carlton VIC 3053",
-    },
-    {
-      id: 4,
-      name: "Pakenham Line",
-      address: "Railway Ave & Henry Rd, Pakenham VIC 3810",
-    },
-  ];
-
   const categories = ["Distance from RMIT"];
 
   return (
     <RecommendationTemplate
-      data={data}
+      data={processRawData()}
       topic="Transportation"
       categories={categories}
+      transport
     />
   );
 };
