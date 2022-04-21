@@ -30,7 +30,7 @@ const CommunityCardSmall = ({userID, name, navigation, picture}) => {
         >
             <ImageBackground
                 resizeMode={"cover"}
-                source={typeof (picture) === "string" && picture !== "" ? {uri: picture} : require("../../../../assets/icon.png")}
+                source={typeof (picture) === "string" && picture !== "" ? {uri: picture} : require("../../../../assets/images/avatar-300x300.jpg")}
                 style={styles.userImg}
             >
                 <View style={styles.userContent}>

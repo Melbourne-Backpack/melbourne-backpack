@@ -62,7 +62,7 @@ const Profile = ({navigation}) => {
                 <View style={styles.profileImageWrapper}>
                     <Image
                         source={{
-                            uri: data.avatar,
+                            uri: typeof data.avatar === "string" && data.avatar !== "" ? data.avatar : require("../../../../assets/images/avatar-300x300.jpg"),
                         }}
                         style={styles.profileImage}
                     />
