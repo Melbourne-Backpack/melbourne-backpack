@@ -13,8 +13,7 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
 
-const EmailSent = ({ route, navigation }) => {
-  const { email } = route.params;
+const EmailSent = ({ navigation }) => {
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
@@ -37,7 +36,7 @@ const EmailSent = ({ route, navigation }) => {
             <View style={styles.textGroup}>
               <Text style={styles.textTwo}>We sent an email to {""}</Text>
               <Text style={styles.textEmail}>
-                {JSON.stringify(email).slice(1, -1)} {""}
+                {JSON.stringify(global.emailSent).slice(1, -1)} {""}
               </Text>
               <Text style={styles.textTwo}>with {""}</Text>
               <Text style={styles.textTwo}>a {""}</Text>

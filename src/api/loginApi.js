@@ -11,15 +11,4 @@ const signOut = ({ navigation }) => {
     .catch((error) => window.alert(error.message));
 };
 
-const emailVerification = ({ navigation }, email) => {
-  auth
-    .sendPasswordResetEmail(email)
-    .then(() => {
-      console.log("Password reset email sent!");
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-};
-
-export { signOut, emailVerification };
+export { signOut };
