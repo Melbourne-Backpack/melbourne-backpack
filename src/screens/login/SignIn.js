@@ -76,6 +76,7 @@ const SignIn = ({ navigation }) => {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
+      navigation.navigate("Home");
     }, 5000);
   };
 
