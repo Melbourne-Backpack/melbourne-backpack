@@ -95,7 +95,7 @@ const Profile = ({ navigation, route }) => {
         >
           <Image
             source={require("../../../assets/edit-profile.png")}
-            style={{ width: 25, height: 25 }}
+            style={{ width: 24, height: 24 }}
           />
         </TouchableOpacity>
       </View>

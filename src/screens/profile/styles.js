@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
 
   title: {
     color: WHITE,
-    fontSize: 24,
+    fontSize: 20,
+    fontFamily: "PoppinsMedium",
   },
 
   editProfile: {

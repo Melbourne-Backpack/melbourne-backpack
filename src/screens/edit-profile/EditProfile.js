@@ -7,17 +7,18 @@ import {
   Linking,
   Pressable,
   TextInput,
+  Keyboard,
 } from "react-native";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
 
 import { auth, db } from "../../config/firebase";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
 import AlertModal from "../../components/alert-modal/AlertModal";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import Modal from "react-native-modal";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
@@ -26,6 +27,20 @@ const EditProfile = ({ navigation }) => {
   const [currentDocId, setCurrentDocId] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
+
+  const [displayNameTI, setDisplayNameTI] = useState("");
+  const [dobTI, setDobTI] = useState("");
+  const [campusTI, setCampusTI] = useState("");
+  const [subjectsTI, setSubjectsTI] = useState("");
+  const [facebookTI, setFacebookTI] = useState("");
+  const [bioTI, setBioTI] = useState("");
+
+  const [displayNameAlert, setDisplayNameAlert] = useState(false);
+  const [dobAlert, setDobAlert] = useState(false);
+  const [campusAlert, setCampusAlert] = useState(false);
+  const [subjectsAlert, setSubjectsAlert] = useState(false);
+  const [facebookAlert, setFacebookAlert] = useState(false);
+  const [bioAlert, setBioAlert] = useState(false);
 
   const getCurrentUserData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
@@ -41,6 +56,18 @@ const EditProfile = ({ navigation }) => {
   useEffect(() => {
     getCurrentUserData();
   }, []);
+
+  useEffect(() => {
+    setDisplayNameTI(data.fullName);
+    setDobTI(data.dob);
+    setCampusTI(data.campus);
+    {
+      data.subjects && setSubjectsTI(data.subjects.join(" | "));
+    }
+    setFacebookTI(data.facebook);
+    setBioTI(data.bio);
+  }, [data]);
+
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
     PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
@@ -105,39 +132,196 @@ const EditProfile = ({ navigation }) => {
             toPage={"SignIn"}
             signOut={signOut}
           />
-          <View style={styles.userContentRow}>
+          <TouchableOpacity
+            style={styles.userContentRow}
+            onPress={() => {
+              setDisplayNameAlert(true);
+            }}
+          >
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Display Name</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.fullName}</Text>
+              <Text style={styles.userContent}>{displayNameTI}</Text>
             </View>
-          </View>
-          <View style={styles.userContentRow}>
+            <Image
+              source={require("../../../assets/edit-icon.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+          <Modal
+            isVisible={displayNameAlert}
+            animationIn={"slideInUp"}
+            animationOut={"slideOutDown"}
+            onBackdropPress={() => setDisplayNameAlert(false)}
+          >
+            <View style={styles.alertContainer}>
+              <View style={styles.alertBody}>
+                <Text style={styles.alertText}>Display Name</Text>
+              </View>
+              <View style={styles.editInfoContain}>
+                <TextInput
+                  style={styles.editInfo}
+                  autoFocus={true}
+                  onSubmitEditing={Keyboard.dismiss}
+                  onChangeText={(text) => {
+                    setDisplayNameTI(text);
+                  }}
+                >
+                  {displayNameTI}
+                </TextInput>
+                <TouchableOpacity
+                  onPress={() => {
+                    setDisplayNameTI("");
+                  }}
+                  style={styles.clearBtn}
+                >
+                  <Image
+                    source={require("../../../assets/clear-text-input.png")}
+                    style={styles.clearIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setDisplayNameAlert(false);
+                }}
+                style={styles.closeButton}
+              >
+                <Text style={styles.closeButtonText}>Done</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+
+          <TouchableOpacity
+            style={styles.userContentRow}
+            onPress={() => {
+              setDobAlert(true);
+            }}
+          >
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Date of birth</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.dob}</Text>
+              <Text style={styles.userContent}>{dobTI}</Text>
             </View>
-          </View>
-          <View style={styles.userContentRow}>
-            <View style={styles.userContentHeadingWrapper}>
-              <Text style={styles.userContentHeading}>E-mail</Text>
+            <Image
+              source={require("../../../assets/edit-icon.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+          <Modal
+            isVisible={dobAlert}
+            animationIn={"slideInUp"}
+            animationOut={"slideOutDown"}
+            onBackdropPress={() => setDobAlert(false)}
+          >
+            <View style={styles.alertContainer}>
+              <View style={styles.alertBody}>
+                <Text style={styles.alertText}>Date of birth</Text>
+              </View>
+              <View style={styles.editInfoContain}>
+                <TextInput
+                  style={styles.editInfo}
+                  autoFocus={true}
+                  onSubmitEditing={Keyboard.dismiss}
+                  onChangeText={(text) => {
+                    setDobTI(text);
+                  }}
+                >
+                  {dobTI}
+                </TextInput>
+                <TouchableOpacity
+                  onPress={() => {
+                    setDobTI("");
+                  }}
+                  style={styles.clearBtn}
+                >
+                  <Image
+                    source={require("../../../assets/clear-text-input.png")}
+                    style={styles.clearIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setDobAlert(false);
+                }}
+                style={styles.closeButton}
+              >
+                <Text style={styles.closeButtonText}>Done</Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.email}</Text>
-            </View>
-          </View>
-          <View style={styles.userContentRow}>
+          </Modal>
+
+          <TouchableOpacity
+            style={styles.userContentRow}
+            onPress={() => {
+              setCampusAlert(true);
+            }}
+          >
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Campus</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.campus}</Text>
+              <Text style={styles.userContent}>{campusTI}</Text>
             </View>
-          </View>
-          <View style={styles.userContentRow}>
+            <Image
+              source={require("../../../assets/edit-icon.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+
+          <Modal
+            isVisible={campusAlert}
+            animationIn={"slideInUp"}
+            animationOut={"slideOutDown"}
+            onBackdropPress={() => setCampusAlert(false)}
+          >
+            <View style={styles.alertContainer}>
+              <View style={styles.alertBody}>
+                <Text style={styles.alertText}>Campus</Text>
+              </View>
+              <View style={styles.editInfoContain}>
+                <TextInput
+                  style={styles.editInfo}
+                  autoFocus={true}
+                  onSubmitEditing={Keyboard.dismiss}
+                  onChangeText={(text) => {
+                    setCampusTI(text);
+                  }}
+                >
+                  {campusTI}
+                </TextInput>
+                <TouchableOpacity
+                  onPress={() => {
+                    setCampusTI("");
+                  }}
+                  style={styles.clearBtn}
+                >
+                  <Image
+                    source={require("../../../assets/clear-text-input.png")}
+                    style={styles.clearIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setCampusAlert(false);
+                }}
+                style={styles.closeButton}
+              >
+                <Text style={styles.closeButtonText}>Done</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+
+          <TouchableOpacity
+            style={styles.userContentRow}
+            onPress={() => {
+              setSubjectsAlert(true);
+            }}
+          >
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Interest in</Text>
             </View>
@@ -146,28 +330,179 @@ const EditProfile = ({ navigation }) => {
                 {data.subjects && data.subjects.join(" | ")}
               </Text>
             </View>
-          </View>
-          <View style={styles.userContentRow}>
+            <Image
+              source={require("../../../assets/edit-icon.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+
+          <Modal
+            isVisible={subjectsAlert}
+            animationIn={"slideInUp"}
+            animationOut={"slideOutDown"}
+            onBackdropPress={() => setSubjectsAlert(false)}
+          >
+            <View style={styles.alertContainer}>
+              <View style={styles.alertBody}>
+                <Text style={styles.alertText}>Interest in</Text>
+              </View>
+              <View style={styles.editInfoContain}>
+                <TextInput
+                  style={styles.editInfo}
+                  autoFocus={true}
+                  onSubmitEditing={Keyboard.dismiss}
+                  onChangeText={(text) => {
+                    setSubjectsAlert(text);
+                  }}
+                >
+                  {subjectsAlert}
+                </TextInput>
+                <TouchableOpacity
+                  onPress={() => {
+                    setSubjectsTI("");
+                  }}
+                  style={styles.clearBtn}
+                >
+                  <Image
+                    source={require("../../../assets/clear-text-input.png")}
+                    style={styles.clearIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setSubjectsAlert(false);
+                }}
+                style={styles.closeButton}
+              >
+                <Text style={styles.closeButtonText}>Done</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+
+          <TouchableOpacity
+            style={styles.userContentRow}
+            onPress={() => {
+              setFacebookAlert(true);
+            }}
+          >
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Facebook Link</Text>
             </View>
-            <Pressable style={styles.userContentWrapper}>
-              <Text
-                style={styles.hyperlink}
-                onPress={() => Linking.openURL("https://" + data.facebook)}
+            <View style={styles.userContentWrapper}>
+              <Text style={styles.userContent}>{facebookTI}</Text>
+            </View>
+            <Image
+              source={require("../../../assets/edit-icon.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+
+          <Modal
+            isVisible={facebookAlert}
+            animationIn={"slideInUp"}
+            animationOut={"slideOutDown"}
+            onBackdropPress={() => setFacebookAlert(false)}
+          >
+            <View style={styles.alertContainer}>
+              <View style={styles.alertBody}>
+                <Text style={styles.alertText}>Facebook</Text>
+              </View>
+              <View style={styles.editInfoContain}>
+                <TextInput
+                  style={styles.editInfo}
+                  autoFocus={true}
+                  onSubmitEditing={Keyboard.dismiss}
+                  onChangeText={(text) => {
+                    setFacebookTI(text);
+                  }}
+                >
+                  {facebookTI}
+                </TextInput>
+                <TouchableOpacity
+                  onPress={() => {
+                    setFacebookTI("");
+                  }}
+                  style={styles.clearBtn}
+                >
+                  <Image
+                    source={require("../../../assets/clear-text-input.png")}
+                    style={styles.clearIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setFacebookAlert(false);
+                }}
+                style={styles.closeButton}
               >
-                {data.facebook}
-              </Text>
-            </Pressable>
-          </View>
-          <View style={[styles.userContentRow, styles.userContentLastRow]}>
+                <Text style={styles.closeButtonText}>Done</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+
+          <TouchableOpacity
+            style={[styles.userContentRow, styles.userContentLastRow]}
+            onPress={() => {
+              setBioAlert(true);
+            }}
+          >
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Bio</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{data.bio}</Text>
+              <Text style={styles.userContent}>{bioTI}</Text>
             </View>
-          </View>
+            <Image
+              source={require("../../../assets/edit-icon.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+
+          <Modal
+            isVisible={bioAlert}
+            animationIn={"slideInUp"}
+            animationOut={"slideOutDown"}
+            onBackdropPress={() => setBioAlert(false)}
+          >
+            <View style={styles.alertContainer}>
+              <View style={styles.alertBody}>
+                <Text style={styles.alertText}>Bio</Text>
+              </View>
+              <View style={styles.editInfoContain}>
+                <TextInput
+                  style={styles.editInfo}
+                  autoFocus={true}
+                  onSubmitEditing={Keyboard.dismiss}
+                  onChangeText={(text) => {
+                    setBioTI(text);
+                  }}
+                >
+                  {bioTI}
+                </TextInput>
+                <TouchableOpacity
+                  onPress={() => {
+                    setBioTI("");
+                  }}
+                  style={styles.clearBtn}
+                >
+                  <Image
+                    source={require("../../../assets/clear-text-input.png")}
+                    style={styles.clearIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setBioAlert(false);
+                }}
+                style={styles.closeButton}
+              >
+                <Text style={styles.closeButtonText}>Done</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
         </View>
       </View>
     </ScrollView>

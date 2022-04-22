@@ -1,12 +1,15 @@
 import { StyleSheet } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import {
+  ALERT_PURPLE_BUTTON,
   BACKGROUND,
+  BLACK,
   DARK_BLUE_PURPLE,
   GREY,
   LIGHT_BLUE,
   PURPLE_BLUE,
   RED,
+  SELECTED_BUTTON,
   WHITE,
 } from "../../styles/colors";
 
@@ -19,14 +22,14 @@ const styles = StyleSheet.create({
     marginLeft: wp(7),
     marginRight: 0,
     color: WHITE,
-    fontFamily: "PoppinsSemiBold",
+    fontFamily: "PoppinsMedium",
     fontSize: 17,
   },
 
   doneBtn: {
     marginRight: wp(7),
     color: LIGHT_BLUE,
-    fontFamily: "PoppinsSemiBold",
+    fontFamily: "PoppinsMedium",
     fontSize: 17,
   },
 
@@ -56,7 +59,8 @@ const styles = StyleSheet.create({
 
   title: {
     color: WHITE,
-    fontSize: 24,
+    fontSize: 20,
+    fontFamily: "PoppinsMedium",
   },
 
   editProfile: {
@@ -101,21 +105,26 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontFamily: "PoppinsBold",
   },
-
   userContent: {
     color: WHITE,
     marginTop: 10,
     marginBottom: 10,
-    marginLeft: wp(5),
+    marginLeft: wp(8),
     marginRight: wp(5),
     fontFamily: "PoppinsRegular",
+  },
+
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 15,
   },
 
   hyperlink: {
     color: LIGHT_BLUE,
     marginTop: 10,
     marginBottom: 10,
-    marginLeft: wp(5),
+    marginLeft: wp(8),
     marginRight: wp(5),
     fontFamily: "PoppinsRegular",
     textDecorationLine: "underline",
@@ -147,6 +156,59 @@ const styles = StyleSheet.create({
   logoutBtnText: {
     color: WHITE,
     textAlign: "center",
+  },
+
+  alertContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  alertBody: {
+    width: wp("80%"),
+    backgroundColor: BACKGROUND,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+  },
+  alertText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    textAlign: "center",
+    fontSize: 15,
+    paddingVertical: 10,
+  },
+  editInfoContain: {
+    width: wp("80%"),
+    backgroundColor: BACKGROUND,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  editInfo: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    marginLeft: 20,
+    fontSize: 15,
+    paddingVertical: 10,
+    width: wp("60%"),
+  },
+  closeButton: {
+    width: wp("80%"),
+    backgroundColor: SELECTED_BUTTON,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  closeButtonText: {
+    color: WHITE,
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 16,
+    textAlign: "center",
+    paddingVertical: 10,
+  },
+  clearBtn: {
+    marginRight: 10,
+  },
+  clearIcon: {
+    width: 25,
+    height: 25,
   },
 });
 export default styles;
