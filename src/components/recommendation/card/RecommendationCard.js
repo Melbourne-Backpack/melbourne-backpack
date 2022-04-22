@@ -3,18 +3,15 @@ import {
   AntDesign,
   MaterialCommunityIcons,
   Ionicons,
+  Feather,
 } from "@expo/vector-icons";
 
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { GREY, WHITE, YELLOW } from "../../../styles/colors";
+import { GREY, YELLOW } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
 import Capitalize from "../../../utils/Capitalize";
-
-const busImg = require("../../../../assets/images/bus.jpg");
-const tramImg = require("../../../../assets/images/tram.jpg");
-const trainImg = require("../../../../assets/images/train.jpg");
 
 const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
@@ -24,6 +21,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
     PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
+    PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
   });
 
   useEffect(() => {
@@ -41,7 +39,35 @@ const RecommendationCard = ({ data, housing, transport }) => {
       {housing !== true ? (
         transport ? (
           data ? (
-            <Text style={{ color: WHITE }}>{data["stopName"]}</Text>
+            <>
+              <ImageBackground
+                source={data["img"]}
+                style={styles.backgroundImg}
+                imageStyle={{
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                }}
+                resizeMode="cover"
+              />
+
+              <View style={styles.info}>
+                <Text style={[styles.name, styles.text]}>
+                  Stop: {data["stopName"]}
+                </Text>
+                <Text style={[styles.text, styles.location]}>
+                  Transportation mode: {data["transportType"]}
+                </Text>
+
+                <Text style={[styles.clickMore]}>
+                  View routes that go through this stop
+                  <Feather name="chevron-down" size={16} color={YELLOW} />
+                </Text>
+                {/*<Text style={[styles.text, styles.location]}>*/}
+                {/*  <Ionicons name="location-sharp" size={16} color="white" />{" "}*/}
+                {/*  {data.address}*/}
+                {/*</Text>*/}
+              </View>
+            </>
           ) : null
         ) : (
           <>

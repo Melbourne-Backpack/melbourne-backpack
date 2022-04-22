@@ -39,6 +39,12 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsSemiBold",
     fontSize: 20,
   },
+  clickMore: {
+    fontSize: 16,
+    color: YELLOW,
+    textDecorationLine: "underline",
+    marginBottom: scaleSize(5),
+  },
   price: {
     fontFamily: "PoppinsExtraBold",
     fontSize: 26,

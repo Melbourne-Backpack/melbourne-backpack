@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 
 import { DEVID, ROUTE_TYPE_SIGNATURE, TRANSPORT_SIGNATURE } from "@env";
 
+const busImg = require("../../../assets/images/bus.jpg");
+const tramImg = require("../../../assets/images/tram.jpg");
+const trainImg = require("../../../assets/images/train.jpg");
+
 const TransportScreen = () => {
   const [rawData, setRawData] = useState([]);
   const [routeType, setRouteType] = useState([]);
@@ -34,6 +38,19 @@ const TransportScreen = () => {
     return routeName;
   };
 
+  const addImg = (type) => {
+    let img;
+    const transportMode = defineRouteType(type);
+    if (transportMode === "Tram") {
+      img = tramImg;
+    } else if (transportMode === "Train") {
+      img = trainImg;
+    } else {
+      img = busImg;
+    }
+    return img;
+  };
+
   const getRouteNumAndName = (routes) => {
     const routeInfo = [];
     routes.map((route) => {
@@ -52,7 +69,8 @@ const TransportScreen = () => {
         stopName: data["stop_name"],
         stopLat: data["stop_latitude"],
         stopLong: data["stop_longitude"],
-        transportationType: defineRouteType(data["route_type"]),
+        transportType: defineRouteType(data["route_type"]),
+        img: addImg(data["route_type"]),
         route: getRouteNumAndName(data["routes"]),
       });
     });
