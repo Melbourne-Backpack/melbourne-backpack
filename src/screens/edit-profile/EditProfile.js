@@ -70,15 +70,16 @@ const EditProfile = ({ navigation }) => {
             navigation.navigate("Community");
           }}
         >
-          <AntDesign
-            name={"left"}
-            size={24}
-            color={WHITE}
-            style={styles.backBtn}
-          />
+          <Text style={styles.backBtn}>Back</Text>
         </TouchableOpacity>
         <Text style={styles.title}>Edit Profile</Text>
-        <View style={{ marginRight: wp(10) }}>{null}</View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Community");
+          }}
+        >
+          <Text style={styles.doneBtn}>Done</Text>
+        </TouchableOpacity>
       </View>
       <View>
         <View style={styles.profileImageWrapper}>
@@ -88,6 +89,9 @@ const EditProfile = ({ navigation }) => {
             }}
             style={styles.profileImage}
           />
+          <TouchableOpacity>
+            <Text style={styles.changeBtn}>Change profile photo</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.userContentDisplay}>

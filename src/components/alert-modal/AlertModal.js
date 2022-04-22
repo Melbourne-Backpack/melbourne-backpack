@@ -25,7 +25,9 @@ const AlertModal = ({
   return (
     <Modal
       isVisible={showModal}
-      onBackdropPress={() => setShowModalFunction(false)}
+      onBackdropPress={
+        icon === "success" ? null : () => setShowModalFunction(false)
+      }
       animationIn={"slideInUp"}
       animationOut={"slideOutDown"}
     >

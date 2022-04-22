@@ -16,8 +16,18 @@ const styles = StyleSheet.create({
   },
 
   backBtn: {
-    marginLeft: wp(10),
+    marginLeft: wp(7),
     marginRight: 0,
+    color: WHITE,
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 17,
+  },
+
+  doneBtn: {
+    marginRight: wp(7),
+    color: LIGHT_BLUE,
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 17,
   },
 
   cellWrapper: {
@@ -27,13 +37,21 @@ const styles = StyleSheet.create({
 
   profileImage: {
     borderRadius: 20,
-    height: 160,
-    width: 160,
+    height: 120,
+    width: 120,
   },
 
   profileImageWrapper: {
     alignItems: "center",
+    justifyContent: "center",
     marginTop: 80,
+  },
+
+  changeBtn: {
+    marginTop: 20,
+    color: "#1897F6",
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 15,
   },
 
   title: {
