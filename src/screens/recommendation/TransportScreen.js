@@ -56,7 +56,7 @@ const TransportScreen = () => {
     routes.map((route) => {
       routeInfo.push({
         routeName: route["route_name"],
-        routNum: route["route_number"],
+        routeNum: route["route_number"],
       });
     });
     return routeInfo;
@@ -71,7 +71,7 @@ const TransportScreen = () => {
         stopLong: data["stop_longitude"],
         transportType: defineRouteType(data["route_type"]),
         img: addImg(data["route_type"]),
-        route: getRouteNumAndName(data["routes"]),
+        routes: getRouteNumAndName(data["routes"]),
       });
     });
     return processedData;

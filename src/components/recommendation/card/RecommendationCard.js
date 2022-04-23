@@ -19,6 +19,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
   const [address, setAddress] = useState("");
   const [distance, setDistance] = useState("");
+  const [routeVisible, setRouteVisible] = useState(false);
   const lat = "-37.8080770201347";
   const long = "144.96268921184907";
 
@@ -92,14 +93,25 @@ const RecommendationCard = ({ data, housing, transport }) => {
                   </Text>
                 </View>
 
-                <Text style={[styles.clickMore]}>
-                  View routes that go through this stop
-                  <Feather name="chevron-down" size={16} color={YELLOW} />
-                </Text>
-                {/*<Text style={[styles.text, styles.location]}>*/}
-                {/*  <Ionicons name="location-sharp" size={16} color="white" />{" "}*/}
-                {/*  {data.address}*/}
-                {/*</Text>*/}
+                <TouchableOpacity
+                  onPress={() => setRouteVisible(!routeVisible)}
+                >
+                  <Text style={[styles.clickMore]}>
+                    View routes that go through this stop
+                    <Feather name="chevron-down" size={16} color={YELLOW} />
+                  </Text>
+                </TouchableOpacity>
+
+                {routeVisible
+                  ? data["routes"].map((route, id) => (
+                      <Text key={id} style={[styles.text]}>
+                        Route
+                        {route["routeNum"] === ""
+                          ? `${route["routeNum"]}: ${route["routeName"]}`
+                          : ` ${route["routeNum"]}: ${route["routeName"]}`}
+                      </Text>
+                    ))
+                  : null}
               </View>
             </>
           ) : null

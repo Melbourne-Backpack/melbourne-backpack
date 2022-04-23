@@ -1,5 +1,11 @@
 import { StyleSheet } from "react-native";
-import { DARK_BLUE_PURPLE, GREY, WHITE, YELLOW } from "../../../styles/colors";
+import {
+  DARK_BLUE_PURPLE,
+  GREY,
+  PURPLE_BLUE,
+  WHITE,
+  YELLOW,
+} from "../../../styles/colors";
 import { scaleSize } from "../../../styles/scale";
 
 const styles = StyleSheet.create({
@@ -47,6 +53,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 20,
     alignSelf: "flex-start",
+    backgroundColor: PURPLE_BLUE,
   },
   distanceContainer: {
     marginBottom: 20,
@@ -54,7 +61,7 @@ const styles = StyleSheet.create({
   },
   distance: {
     color: WHITE,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "PoppinsRegular",
   },
   distanceText: {
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: YELLOW,
     textDecorationLine: "underline",
-    marginBottom: scaleSize(10),
+    marginBottom: scaleSize(15),
     textAlign: "center",
   },
   price: {
