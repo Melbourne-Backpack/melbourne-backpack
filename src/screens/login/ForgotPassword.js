@@ -12,7 +12,6 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import { WHITE } from "../../styles/colors";
-import { emailVerification } from "../../api/loginApi";
 import AlertModal from "../../components/alert-modal/AlertModal";
 import { auth } from "../../config/firebase";
 

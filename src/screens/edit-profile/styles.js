@@ -237,5 +237,48 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+  buttonWrapper: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    paddingVertical: 20,
+  },
+  buttonViewStyle: {
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: WHITE,
+    marginHorizontal: 5,
+    marginVertical: 5,
+  },
+  buttonSelectedStyle: {
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    marginHorizontal: 5,
+    backgroundColor: SELECTED_BUTTON,
+    marginVertical: 5,
+  },
+  textStyle: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+  },
+  selectedText: {
+    fontFamily: "PoppinsRegular",
+    color: WHITE,
+  },
+  errorText: {
+    fontFamily: "PoppinsRegular",
+    color: RED,
+    marginTop: 5,
+  },
+  selectedSubWrapper: {
+    width: wp("80%"),
+    backgroundColor: BACKGROUND,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: GREY,
+  },
 });
 export default styles;

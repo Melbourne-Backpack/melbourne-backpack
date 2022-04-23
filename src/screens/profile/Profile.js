@@ -87,15 +87,16 @@ const Profile = ({ navigation, route }) => {
           />
         </TouchableOpacity>
         <Text style={styles.title}>Profile</Text>
+
         <TouchableOpacity
-          style={styles.editProfile}
+          style={styles.refresh}
           onPress={() => {
-            navigation.navigate("EditProfile");
+            getCurrentUserData();
           }}
         >
           <Image
-            source={require("../../../assets/edit-profile.png")}
-            style={{ width: 24, height: 24 }}
+            source={require("../../../assets/refresh.png")}
+            style={{ width: 22, height: 22 }}
           />
         </TouchableOpacity>
       </View>
@@ -107,6 +108,14 @@ const Profile = ({ navigation, route }) => {
             }}
             style={styles.profileImage}
           />
+          <TouchableOpacity
+            style={styles.editProfile}
+            onPress={() => {
+              navigation.navigate("EditProfile");
+            }}
+          >
+            <Text style={styles.editProfileText}>Edit Profile</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.userContentDisplay}>

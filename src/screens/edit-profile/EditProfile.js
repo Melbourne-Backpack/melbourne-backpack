@@ -10,8 +10,6 @@ import {
   Keyboard,
 } from "react-native";
 import styles from "./styles";
-import { AntDesign } from "@expo/vector-icons";
-import { WHITE } from "../../styles/colors";
 
 import { auth, db } from "../../config/firebase";
 import React, { useEffect, useState } from "react";
@@ -19,6 +17,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
 import AlertModal from "../../components/alert-modal/AlertModal";
 import Modal from "react-native-modal";
+import _ from "lodash";
+import { pushData } from "../../api/handleData";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
@@ -28,12 +28,10 @@ const EditProfile = ({ navigation }) => {
 
   const [showAlert, setShowAlert] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
-  const [openSubDropDown, setOpenSubDropDown] = useState(false);
 
   const [displayNameTI, setDisplayNameTI] = useState("");
   const [dobTI, setDobTI] = useState("");
   const [campusTI, setCampusTI] = useState("");
-  const [subjectsTI, setSubjectsTI] = useState("");
   const [facebookTI, setFacebookTI] = useState("");
   const [bioTI, setBioTI] = useState("");
 
@@ -59,6 +57,38 @@ const EditProfile = ({ navigation }) => {
     "Digital Marketing",
   ];
 
+  let fList = [];
+
+  for (let i = 0; i < subjects.length; i++) {
+    fList.push(false);
+  }
+  // handle Selected button
+  const [subjectList, setSubjectList] = useState(subjects);
+  const [falseList, setFalseList] = useState(fList);
+  const [selectedSubjects, setSelectedSubjects] = useState([]);
+
+  const handleList = (subject) => {
+    for (let i = 0; i < subjectList.length; i++) {
+      if (subjectList[i] === subject) {
+        if (selectedSubjects.includes(subject)) {
+          _.remove(selectedSubjects, (ele) => {
+            return ele === subject;
+          });
+          let newArr = [...falseList];
+          newArr[i] = false;
+          setFalseList(newArr);
+        } else {
+          let newList = [...selectedSubjects];
+          newList.push(subject);
+          setSelectedSubjects(newList);
+          let newArr = [...falseList];
+          newArr[i] = true;
+          setFalseList(newArr);
+        }
+      }
+    }
+  };
+
   const getCurrentUserData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
       if (docSnap.exists()) {
@@ -79,7 +109,7 @@ const EditProfile = ({ navigation }) => {
     setDobTI(data.dob);
     setCampusTI(data.campus);
     {
-      data.subjects && setSubjectsTI(data.subjects.join(" | "));
+      data.subjects && setSelectedSubjects(data.subjects);
     }
     setFacebookTI(data.facebook);
     setBioTI(data.bio);
@@ -119,6 +149,18 @@ const EditProfile = ({ navigation }) => {
         <Text style={styles.title}>Edit Profile</Text>
         <TouchableOpacity
           onPress={() => {
+            pushData(
+              auth.currentUser.uid,
+              campusTI,
+              selectedSubjects,
+              auth.currentUser?.email,
+              data.avatar,
+              displayNameTI,
+              dobTI,
+              data.purpose,
+              facebookTI,
+              bioTI
+            );
             navigation.navigate("Community");
           }}
         >
@@ -346,13 +388,17 @@ const EditProfile = ({ navigation }) => {
             style={styles.userContentRow}
             onPress={() => {
               setSubjectsAlert(true);
+              setSelectedSubjects([]);
+              setFalseList(fList);
             }}
           >
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Interest in</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>{subjectsTI}</Text>
+              <Text style={styles.userContent}>
+                {selectedSubjects.join(" | ")}
+              </Text>
             </View>
             <Image
               source={require("../../../assets/edit-icon.png")}
@@ -364,47 +410,54 @@ const EditProfile = ({ navigation }) => {
             isVisible={subjectsAlert}
             animationIn={"slideInUp"}
             animationOut={"slideOutDown"}
-            onBackdropPress={() => setSubjectsAlert(false)}
+            onBackdropPress={() => {
+              if (selectedSubjects.length >= 3) setSubjectsAlert(false);
+            }}
           >
             <View style={styles.alertContainer}>
               <View style={styles.alertBody}>
                 <Text style={styles.alertText}>Interest in</Text>
               </View>
+              <View style={styles.selectedSubWrapper}>
+                <Text style={styles.text} multiline>
+                  {_.join(selectedSubjects, " | ")}
+                </Text>
+              </View>
+
               <View style={styles.editInfoContainExtra}>
-                <TouchableOpacity
-                  style={styles.editInfoExtra}
-                  onPress={() => {
-                    setOpenSubDropDown(!openSubDropDown);
-                  }}
-                >
-                  <Text style={styles.text}>{subjectsTI}</Text>
-                  <Image
-                    source={require("../../../assets/dropdown.png")}
-                    style={styles.dropdown}
-                  />
-                </TouchableOpacity>
-                {openSubDropDown && (
-                  <View>
-                    {subjects.map((val) => {
+                <View style={styles.editInfoExtra}>
+                  <View style={styles.buttonWrapper}>
+                    {subjects.map((subject, index) => {
                       return (
                         <TouchableOpacity
-                          key={val}
-                          style={styles.editInfoExtra}
+                          key={subject}
+                          style={
+                            falseList[index]
+                              ? styles.buttonSelectedStyle
+                              : styles.buttonViewStyle
+                          }
                           onPress={() => {
-                            setSubjectsTI(val);
-                            setOpenSubDropDown(false);
+                            handleList(subject);
                           }}
                         >
-                          <Text style={styles.text}>{val}</Text>
+                          <Text style={styles.textStyle}>{subject}</Text>
                         </TouchableOpacity>
                       );
                     })}
+                    {selectedSubjects.length < 3 && (
+                      <Text style={styles.errorText}>
+                        *Please select minimum 3 subjects
+                      </Text>
+                    )}
                   </View>
-                )}
+                </View>
               </View>
               <TouchableOpacity
                 onPress={() => {
-                  setSubjectsAlert(false);
+                  if (selectedSubjects.length < 3) {
+                  } else {
+                    setSubjectsAlert(false);
+                  }
                 }}
                 style={styles.closeButton}
               >

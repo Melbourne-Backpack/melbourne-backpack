@@ -42,8 +42,21 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsMedium",
   },
 
-  editProfile: {
+  refresh: {
     marginRight: wp(10),
+  },
+
+  editProfile: {
+    marginTop: 20,
+    borderWidth: 2,
+    borderColor: WHITE,
+    borderRadius: 10,
+  },
+  editProfileText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
   },
 
   topBar: {
@@ -62,7 +75,7 @@ const styles = StyleSheet.create({
   },
 
   userContentDisplay: {
-    marginTop: 70,
+    marginTop: 40,
   },
 
   userContentRow: {
