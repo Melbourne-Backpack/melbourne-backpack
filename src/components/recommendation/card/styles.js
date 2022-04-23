@@ -39,11 +39,33 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsSemiBold",
     fontSize: 20,
   },
+  modeContainer: {
+    borderColor: WHITE,
+    borderWidth: 1,
+    borderRadius: 50,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    marginBottom: 20,
+    alignSelf: "flex-start",
+  },
+  distanceContainer: {
+    marginBottom: 20,
+    flexDirection: "row",
+  },
+  distance: {
+    color: WHITE,
+    fontSize: 16,
+    fontFamily: "PoppinsRegular",
+  },
+  distanceText: {
+    marginLeft: 10,
+  },
   clickMore: {
     fontSize: 16,
     color: YELLOW,
     textDecorationLine: "underline",
-    marginBottom: scaleSize(5),
+    marginBottom: scaleSize(10),
+    textAlign: "center",
   },
   price: {
     fontFamily: "PoppinsExtraBold",

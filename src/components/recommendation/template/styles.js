@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "PoppinsMedium",
     color: WHITE,
+    marginBottom: 12,
   },
   secondHeader: {
     flexDirection: "row",

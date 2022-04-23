@@ -4,11 +4,12 @@ import {
   MaterialCommunityIcons,
   Ionicons,
   Feather,
+  FontAwesome5,
 } from "@expo/vector-icons";
 
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { GREY, YELLOW } from "../../../styles/colors";
+import { GREY, WHITE, YELLOW } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
 import Capitalize from "../../../utils/Capitalize";
@@ -17,7 +18,7 @@ import { DISTANCE_CALCULATOR_KEY } from "@env";
 const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
   const [address, setAddress] = useState("");
-  const [distance, setDistance] = useState();
+  const [distance, setDistance] = useState("");
   const lat = "-37.8080770201347";
   const long = "144.96268921184907";
 
@@ -80,12 +81,16 @@ const RecommendationCard = ({ data, housing, transport }) => {
                 <Text style={[styles.name, styles.text]}>
                   Stop: {data["stopName"]}
                 </Text>
-                <Text style={[styles.text, styles.location]}>
-                  Transportation mode: {data["transportType"]}
-                </Text>
-                <Text style={[styles.text, styles.location]}>
-                  Distance: {distance * 1000}m
-                </Text>
+                <View style={styles.modeContainer}>
+                  <Text style={[styles.distance]}>{data["transportType"]}</Text>
+                </View>
+
+                <View style={styles.distanceContainer}>
+                  <FontAwesome5 name="walking" size={24} color={WHITE} />
+                  <Text style={[styles.distance, styles.distanceText]}>
+                    approx. {distance * 1000}m from RMIT
+                  </Text>
+                </View>
 
                 <Text style={[styles.clickMore]}>
                   View routes that go through this stop
