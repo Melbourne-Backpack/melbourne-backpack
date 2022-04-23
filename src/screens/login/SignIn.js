@@ -78,7 +78,7 @@ const SignIn = ({ navigation }) => {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
-      navigation.navigate("Home");
+      navigation.navigate("Chat");
     }, 4000);
   };
 

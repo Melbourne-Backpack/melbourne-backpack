@@ -14,6 +14,7 @@ import EmailSent from "../screens/login/EmailSent";
 import HousingDetailScreen from "../screens/housing-details/HousingDetailScreen";
 import Profile from "../screens/profile/Profile";
 import EditProfile from "../screens/edit-profile/EditProfile";
+import Chat from "../screens/chat/Chat";
 
 const AppNavigator = () => {
   const Stack = createStackNavigator();
@@ -48,6 +49,7 @@ const AppNavigator = () => {
       <Stack.Screen name="Details" component={HousingDetailScreen} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="Chat" component={Chat} />
     </Stack.Navigator>
   );
 };
