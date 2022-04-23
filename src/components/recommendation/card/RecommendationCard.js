@@ -57,6 +57,9 @@ const RecommendationCard = ({ data, housing, transport }) => {
                 <Text style={[styles.text, styles.location]}>
                   Transportation mode: {data["transportType"]}
                 </Text>
+                <Text style={[styles.text, styles.location]}>
+                  Distance: {data["distance"]}
+                </Text>
 
                 <Text style={[styles.clickMore]}>
                   View routes that go through this stop
