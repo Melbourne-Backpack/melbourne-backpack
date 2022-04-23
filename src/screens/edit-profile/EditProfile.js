@@ -27,6 +27,8 @@ const EditProfile = ({ navigation }) => {
   const [currentDocId, setCurrentDocId] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
+  const [openDropDown, setOpenDropDown] = useState(false);
+  const [openSubDropDown, setOpenSubDropDown] = useState(false);
 
   const [displayNameTI, setDisplayNameTI] = useState("");
   const [dobTI, setDobTI] = useState("");
@@ -41,6 +43,21 @@ const EditProfile = ({ navigation }) => {
   const [subjectsAlert, setSubjectsAlert] = useState(false);
   const [facebookAlert, setFacebookAlert] = useState(false);
   const [bioAlert, setBioAlert] = useState(false);
+
+  const campus = ["Hanoi", "Danang", "Saigon"];
+  const subjects = [
+    "Economics",
+    "Business",
+    "Engineer",
+    "Robotics",
+    "Management",
+    "Aviation",
+    "Education",
+    "Design",
+    "ProfComm",
+    "Information Technology",
+    "Digital Marketing",
+  ];
 
   const getCurrentUserData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
@@ -282,28 +299,37 @@ const EditProfile = ({ navigation }) => {
               <View style={styles.alertBody}>
                 <Text style={styles.alertText}>Campus</Text>
               </View>
-              <View style={styles.editInfoContain}>
-                <TextInput
-                  style={styles.editInfo}
-                  autoFocus={true}
-                  onSubmitEditing={Keyboard.dismiss}
-                  onChangeText={(text) => {
-                    setCampusTI(text);
-                  }}
-                >
-                  {campusTI}
-                </TextInput>
+              <View style={styles.editInfoContainExtra}>
                 <TouchableOpacity
+                  style={styles.editInfoExtra}
                   onPress={() => {
-                    setCampusTI("");
+                    setOpenDropDown(!openDropDown);
                   }}
-                  style={styles.clearBtn}
                 >
+                  <Text style={styles.text}>{campusTI}</Text>
                   <Image
-                    source={require("../../../assets/clear-text-input.png")}
-                    style={styles.clearIcon}
+                    source={require("../../../assets/dropdown.png")}
+                    style={styles.dropdown}
                   />
                 </TouchableOpacity>
+                {openDropDown && (
+                  <View>
+                    {campus.map((val) => {
+                      return (
+                        <TouchableOpacity
+                          key={val}
+                          style={styles.editInfoExtra}
+                          onPress={() => {
+                            setCampusTI(val);
+                            setOpenDropDown(false);
+                          }}
+                        >
+                          <Text style={styles.text}>{val}</Text>
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </View>
+                )}
               </View>
               <TouchableOpacity
                 onPress={() => {
@@ -326,9 +352,7 @@ const EditProfile = ({ navigation }) => {
               <Text style={styles.userContentHeading}>Interest in</Text>
             </View>
             <View style={styles.userContentWrapper}>
-              <Text style={styles.userContent}>
-                {data.subjects && data.subjects.join(" | ")}
-              </Text>
+              <Text style={styles.userContent}>{subjectsTI}</Text>
             </View>
             <Image
               source={require("../../../assets/edit-icon.png")}
@@ -346,28 +370,37 @@ const EditProfile = ({ navigation }) => {
               <View style={styles.alertBody}>
                 <Text style={styles.alertText}>Interest in</Text>
               </View>
-              <View style={styles.editInfoContain}>
-                <TextInput
-                  style={styles.editInfo}
-                  autoFocus={true}
-                  onSubmitEditing={Keyboard.dismiss}
-                  onChangeText={(text) => {
-                    setSubjectsAlert(text);
-                  }}
-                >
-                  {subjectsAlert}
-                </TextInput>
+              <View style={styles.editInfoContainExtra}>
                 <TouchableOpacity
+                  style={styles.editInfoExtra}
                   onPress={() => {
-                    setSubjectsTI("");
+                    setOpenSubDropDown(!openSubDropDown);
                   }}
-                  style={styles.clearBtn}
                 >
+                  <Text style={styles.text}>{subjectsTI}</Text>
                   <Image
-                    source={require("../../../assets/clear-text-input.png")}
-                    style={styles.clearIcon}
+                    source={require("../../../assets/dropdown.png")}
+                    style={styles.dropdown}
                   />
                 </TouchableOpacity>
+                {openSubDropDown && (
+                  <View>
+                    {subjects.map((val) => {
+                      return (
+                        <TouchableOpacity
+                          key={val}
+                          style={styles.editInfoExtra}
+                          onPress={() => {
+                            setSubjectsTI(val);
+                            setOpenSubDropDown(false);
+                          }}
+                        >
+                          <Text style={styles.text}>{val}</Text>
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </View>
+                )}
               </View>
               <TouchableOpacity
                 onPress={() => {

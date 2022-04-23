@@ -190,6 +190,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     width: wp("60%"),
   },
+  text: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    marginLeft: 20,
+  },
   closeButton: {
     width: wp("80%"),
     backgroundColor: SELECTED_BUTTON,
@@ -204,11 +209,33 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   clearBtn: {
-    marginRight: 10,
+    marginRight: 15,
   },
   clearIcon: {
     width: 25,
     height: 25,
+  },
+  dropdown: {
+    width: 20,
+    height: 20,
+    marginRight: 15,
+  },
+  editInfoExtra: {
+    flexDirection: "row",
+    fontSize: 15,
+    paddingVertical: 10,
+    width: wp("80%"),
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderBottomColor: PURPLE_BLUE,
+  },
+  editInfoContainExtra: {
+    width: wp("80%"),
+    backgroundColor: BACKGROUND,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 export default styles;
