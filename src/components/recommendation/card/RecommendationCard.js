@@ -12,10 +12,14 @@ import { GREY, YELLOW } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
 import Capitalize from "../../../utils/Capitalize";
+import { DISTANCE_CALCULATOR_KEY } from "@env";
 
 const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
   const [address, setAddress] = useState("");
+  const [distance, setDistance] = useState();
+  const lat = "-37.8080770201347";
+  const long = "144.96268921184907";
 
   const [loaded, error] = useFonts({
     PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
@@ -24,9 +28,31 @@ const RecommendationCard = ({ data, housing, transport }) => {
     PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
   });
 
+  const calculateDistanceFromCoordinates = (lat2, long2) => {
+    const distanceUrl = `http://dev.virtualearth.net/REST/v1/Routes/Walking?wayPoint.1=${lat},${long}&wayPoint.2=${lat2},${long2}&key=${DISTANCE_CALCULATOR_KEY}`;
+    try {
+      fetch(distanceUrl, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setDistance(
+            data["resourceSets"][0]["resources"][0]["travelDistance"]
+          );
+        });
+    } catch (e) {
+      console.log(e.message());
+    }
+  };
+
   useEffect(() => {
     if (data.address !== undefined) {
       setAddress(Capitalize(data.address));
+    }
+    if (transport) {
+      if (data) {
+        calculateDistanceFromCoordinates(data["stopLat"], data["stopLong"]);
+      }
     }
   }, [data]);
 
@@ -58,7 +84,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
                   Transportation mode: {data["transportType"]}
                 </Text>
                 <Text style={[styles.text, styles.location]}>
-                  Distance: {data["distance"]}
+                  Distance: {distance * 1000}m
                 </Text>
 
                 <Text style={[styles.clickMore]}>

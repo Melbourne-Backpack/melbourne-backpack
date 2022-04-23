@@ -2,7 +2,6 @@ import RecommendationTemplate from "../../components/recommendation/template/Rec
 import { useEffect, useState } from "react";
 
 import { DEVID, ROUTE_TYPE_SIGNATURE, TRANSPORT_SIGNATURE } from "@env";
-import { calculateDistanceFromCoordinates } from "../../utils/DistanceCalculator";
 
 const busImg = require("../../../assets/images/bus.jpg");
 const tramImg = require("../../../assets/images/tram.jpg");
@@ -70,22 +69,10 @@ const TransportScreen = () => {
         stopName: data["stop_name"],
         stopLat: data["stop_latitude"],
         stopLong: data["stop_longitude"],
-        // distance: calculateDistanceFromCoordinates(
-        //   lat,
-        //   long,
-        //   data["stop_latitude"],
-        //   data["stop_longitude"]
-        // ),
         transportType: defineRouteType(data["route_type"]),
         img: addImg(data["route_type"]),
         route: getRouteNumAndName(data["routes"]),
       });
-      // console.log(calculateDistanceFromCoordinates(
-      //   lat,
-      //   long,
-      //   data["stop_latitude"],
-      //   data["stop_longitude"]
-      // ));
     });
     return processedData;
   };

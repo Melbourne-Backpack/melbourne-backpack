@@ -25,15 +25,4 @@ const calculateDistanceWithAddress = (addressList, origin) => {
   return distanceList;
 };
 
-const calculateDistanceFromCoordinates = (lat1, long1, lat2, long2) => {
-  const distanceUrl = `http://dev.virtualearth.net/REST/v1/Routes/Walking?wayPoint.1=${lat1},${long1}&wayPoint.2=${lat2},${long2}&key=${DISTANCE_CALCULATOR_KEY}`;
-  fetch(distanceUrl, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      return data["resourceSets"][0]["resources"][0]["travelDistance"];
-    });
-};
-
-export { calculateDistanceWithAddress, calculateDistanceFromCoordinates };
+export { calculateDistanceWithAddress };
