@@ -10,6 +10,7 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE } from "../../styles/colors";
+import { auth } from "../../config/firebase";
 
 const Chat = ({ navigation }) => {
   const [loaded, error] = useFonts({
@@ -27,7 +28,7 @@ const Chat = ({ navigation }) => {
         <View style={styles.topBar}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Community");
+              navigation.navigate("Profile", { user: auth.currentUser.uid });
             }}
           >
             <AntDesign
