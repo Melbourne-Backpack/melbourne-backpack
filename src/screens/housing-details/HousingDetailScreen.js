@@ -22,9 +22,9 @@ import {
   collection,
   doc,
   getDoc,
-  getDocs,
   query,
   where,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
@@ -56,12 +56,19 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
       where("category_id", "==", categoryId)
     );
     try {
-      const querySnapshot = await getDocs(q);
-      const reviews = [];
-      querySnapshot.forEach((doc) => {
-        reviews.push(doc.data());
+      onSnapshot(q, (querySnapshot) => {
+        const reviews = [];
+        querySnapshot.forEach((doc) => {
+          reviews.push(doc.data());
+        });
+        setUserReviews(reviews);
       });
-      setUserReviews(reviews);
+      // const querySnapshot = await getDocs(q);
+      // const reviews = [];
+      // querySnapshot.forEach((doc) => {
+      //   reviews.push(doc.data());
+      // });
+      // setUserReviews(reviews);
     } catch (e) {
       console.log(e);
     }
@@ -191,6 +198,8 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
               style={styles.btn}
               onPress={() => {
                 postReview(housingData["category_id"], myComment, myRating);
+                setMyComment("");
+                setMyRating(0);
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
