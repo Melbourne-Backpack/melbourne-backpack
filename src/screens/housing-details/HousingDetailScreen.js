@@ -43,16 +43,17 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         setHousingData(docSnap.data());
         setHousingDesc(formatData(docSnap.data().description));
         setHousingName(docSnap.data().name.toUpperCase());
+        getReview(docSnap.data()["category_id"]);
       } else {
         console.log("No such document!");
       }
     });
   };
 
-  const getReview = async () => {
+  const getReview = async (categoryId) => {
     const q = query(
       collection(db, "reviews"),
-      where("category_id", "==", housingData["category_id"])
+      where("category_id", "==", categoryId)
     );
     try {
       const querySnapshot = await getDocs(q);
@@ -68,7 +69,6 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
 
   useEffect(() => {
     getData();
-    getReview();
   }, []);
 
   const formatData = (para) => {
@@ -201,7 +201,6 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         <View style={styles.reviewContainer}>
           <SectionInfo title="RMIT students' reviews">
             {userReviews.map((review, id) => {
-              console.log(review);
               return <Review key={id} review={review} />;
             })}
           </SectionInfo>
