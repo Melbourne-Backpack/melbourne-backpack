@@ -144,8 +144,6 @@ const RecommendationTemplate = ({
     trendingCard = data[0];
   }
 
-  console.log(data);
-
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),

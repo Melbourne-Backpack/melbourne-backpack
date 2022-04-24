@@ -24,7 +24,7 @@ const Review = ({ review }) => {
         />
 
         <View>
-          <Text style={styles.username}>{review.username}</Text>
+          <Text style={styles.username}>Go Junho</Text>
           <View style={styles.ratingContainer}>
             <StarRatingView width={18} height={18} rating={review.rating} />
             <Text style={styles.rating}>{review.rating}</Text>
