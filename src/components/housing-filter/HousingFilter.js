@@ -114,12 +114,27 @@ const HousingFilter = ({
                   housingList.map((housing) => {
                     let added = 0;
                     let checked = 0;
+                    let fromText = "";
                     headings.map((heading) => {
                       filter[heading].map((option) => {
                         if (
                           heading !== "distance from RMIT (km)" &&
                           added === 0
                         ) {
+                          if (
+                            heading === "price" &&
+                            housing[heading].toString() &&
+                            housing[heading]
+                              .toString()
+                              .split(" ")[0]
+                              .toLowerCase() === "from"
+                          ) {
+                            fromText = "from";
+                            console.log(housing["id"], housing[heading]);
+                            housing[heading] = housing[heading]
+                              .toString()
+                              .split(" ")[1];
+                          }
                           if (
                             option.includes("-") &&
                             option.slice(0, option.indexOf("-")) <=
@@ -138,6 +153,10 @@ const HousingFilter = ({
                             checked++;
                           } else if (housing[heading] === option) {
                             checked++;
+                          }
+                          if (heading === "price" && fromText === "from") {
+                            housing[heading] =
+                              fromText + " " + housing[heading].toString();
                           }
                         }
 
