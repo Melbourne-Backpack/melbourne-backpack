@@ -11,6 +11,7 @@ import {
   TEXT_INPUT,
   RED,
 } from "../../styles/colors";
+import { useFonts } from "expo-font";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: WHITE,
-    fontSize: 13,
+    fontFamily: "PoppinsRegular",
     marginTop: 10,
     maxWidth: "70%",
     textAlign: "center",
@@ -32,8 +33,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: WHITE,
-    fontSize: 22,
-    fontWeight: "bold",
+    fontFamily: "PoppinsExtraBold",
+    fontSize: 30,
     marginTop: 20,
     textAlign: "center",
   },
