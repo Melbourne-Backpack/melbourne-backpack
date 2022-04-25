@@ -1,12 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
-import TermsAndConditions from "./Terms";
-import {
-  WHITE,
-  BACKGROUND,
-  SELECTED_BUTTON,
-  TEXT_INPUT,
-  RED,
-} from "../../styles/colors";
+import { WHITE, BACKGROUND, SELECTED_BUTTON } from "../../styles/colors";
 
 const { width, height } = Dimensions.get("window");
 

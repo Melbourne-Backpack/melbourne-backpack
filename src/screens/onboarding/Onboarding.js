@@ -101,6 +101,7 @@ const Onboarding = ({ navigation }) => {
           style={{
             flexDirection: "row",
             justifyContent: "center",
+            alignItems: "center",
             marginTop: 20,
           }}
         >
@@ -127,9 +128,7 @@ const Onboarding = ({ navigation }) => {
                 style={styles.btn}
                 onPress={() => navigation.replace("SignIn")}
               >
-                <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-                  GET STARTED
-                </Text>
+                <Text style={{ fontFamily: "PoppinsMedium" }}>GET STARTED</Text>
               </TouchableOpacity>
             </View>
           ) : (
@@ -182,7 +181,7 @@ const Onboarding = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={COLORS.primary} />
       <FlatList
-        contentContainerStyle={{ paddingBottom: 10, paddingTop: 100 }}
+        contentContainerStyle={styles.flatList}
         ref={ref}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
