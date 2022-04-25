@@ -3,8 +3,31 @@ import { Image, Text, View } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import StarRatingView from "../StarRatingView";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../../config/firebase";
+import { useEffect, useState } from "react";
 
 const Review = ({ review }) => {
+  const [user, setUser] = useState({});
+  const getUser = async () => {
+    const q = query(
+      collection(db, "users"),
+      where("__name__", "==", review["user_id"])
+    );
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setUser(doc.data());
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, [review["user_id"]]);
+
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -18,13 +41,13 @@ const Review = ({ review }) => {
     <View style={styles.container}>
       <View style={styles.userContainer}>
         <Image
-          source={require("../../../../assets/images/Junho.png")}
+          source={{ uri: user.avatar }}
           style={styles.img}
           resizeMode="cover"
         />
 
         <View>
-          <Text style={styles.username}>{review.username}</Text>
+          <Text style={styles.username}>{user.fullName}</Text>
           <View style={styles.ratingContainer}>
             <StarRatingView width={18} height={18} rating={review.rating} />
             <Text style={styles.rating}>{review.rating}</Text>

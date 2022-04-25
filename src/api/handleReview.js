@@ -1,11 +1,11 @@
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../config/firebase";
 
-const postReview = async (housingId, comment, rating) => {
+const postReview = async (categoryId, comment, rating) => {
   try {
-    await setDoc(doc(db, "reviews", auth.currentUser.uid), {
+    await addDoc(collection(db, "reviews"), {
       user_id: auth.currentUser.uid,
-      housing_id: housingId,
+      category_id: categoryId,
       comment: comment,
       rating: rating,
     });

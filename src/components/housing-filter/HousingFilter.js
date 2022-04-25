@@ -12,7 +12,7 @@ import CommunityFilterBtn from "../community-filter/CommunityFilterBtn/Community
 import React, {useEffect, useState} from "react";
 import {useFonts} from "expo-font";
 import RecommendationCard from "../recommendation/card/RecommendationCard";
-import DistanceList from "../../utils/DistanceList";
+import {calculateDistanceWithAddress} from "../../utils/DistanceCalculator";
 
 const HousingFilter = ({
                            headingList,
@@ -20,6 +20,7 @@ const HousingFilter = ({
                            navigation,
                            housingList,
                            isHousing,
+                           transport,
                        }) => {
     /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding housingData in 1 view*/
     const origin = "124 La Trobe St, Melbourne VIC 3000";
@@ -38,8 +39,8 @@ const HousingFilter = ({
     housingList.map((housing) => {
         addresses.push(housing["address"]);
     });
-    let distanceList = []
-    if (isHousing) distanceList = DistanceList(addresses, origin);
+    let distanceList = [];
+    if (isHousing) distanceList = calculateDistanceWithAddress(addresses, origin);
     const [submitted, setSubmitted] = useState(false);
     const [loaded, error] = useFonts({
         PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
@@ -49,7 +50,6 @@ const HousingFilter = ({
     if (!loaded) {
         return null;
     }
-
 
     /* start at -1 instead of 0 because i++ is put before return (in toggle function for filter btn */
     let i = -1;
@@ -106,18 +106,18 @@ const HousingFilter = ({
                                 onPress={() => {
                                     setSubmitted((prev) => !prev);
                                     setHousingData([]);
-                                    let filterListLength = 0
+                                    let filterListLength = 0;
                                     headings.map((heading) => {
                                         if (filter[heading].length > 0) {
-                                            filterListLength++
+                                            filterListLength++;
                                         }
-                                    })
+                                    });
                                     housingList.map((housing) => {
                                         let added = 0;
                                         let checked = 0;
                                         headings.map((heading) => {
                                             filter[heading].map((option) => {
-                                                if (heading !== "distance from RMIT" && added === 0) {
+                                                if (heading !== "distance from RMIT (km)" && added === 0) {
                                                     if (
                                                         option.includes("-") &&
                                                         option.slice(0, option.indexOf("-")) <=
@@ -127,22 +127,19 @@ const HousingFilter = ({
                                                             option.length
                                                         ) >= housing[heading]
                                                     ) {
-
-                                                        checked++
+                                                        checked++;
                                                     } else if (
                                                         option[option.length - 1] === "+" &&
                                                         option.slice(0, option.length - 1) <=
                                                         housing[heading]
                                                     ) {
-
-                                                        checked++
+                                                        checked++;
                                                     } else if (housing[heading].toString() === option) {
-
-                                                        checked++
+                                                        checked++;
                                                     }
                                                 }
 
-                                                if (heading === "distance from RMIT" && added === 0) {
+                                                if (heading === "distance from RMIT (km)" && added === 0) {
                                                     let distance =
                                                         distanceList[housingList.indexOf(housing)];
                                                     if (
@@ -153,18 +150,19 @@ const HousingFilter = ({
                                                             option.length
                                                         ) >= distance
                                                     ) {
-
-                                                        checked++
+                                                        checked++;
                                                     } else if (
                                                         option[option.length - 1] === "+" &&
                                                         option.slice(0, option.length - 1) <= distance
                                                     ) {
-
-                                                        checked++
+                                                        checked++;
                                                     }
                                                 }
                                                 if (filterListLength === checked) {
-                                                    setHousingData((housingData) => [...housingData, housing]);
+                                                    setHousingData((housingData) => [
+                                                        ...housingData,
+                                                        housing,
+                                                    ]);
                                                 }
                                             });
                                         });
@@ -177,7 +175,6 @@ const HousingFilter = ({
                     </View>
                 ) : null}
                 <SafeAreaView style={styles.communityList}>
-
                     <FlatList
                         extraData={housingData}
                         data={housingData.slice(0, filterMaxCards)}
@@ -190,6 +187,7 @@ const HousingFilter = ({
                                         key={info.index}
                                         data={info.item}
                                         housing={true}
+                                        transport={transport}
                                     />
                                 );
                             } else
@@ -198,11 +196,11 @@ const HousingFilter = ({
                                         key={info.index}
                                         data={info.item}
                                         housing={false}
+                                        transport={transport}
                                     />
                                 );
                         }}
                     />
-
                 </SafeAreaView>
 
                 <View style={styles.seeMoreBtnContainer}>
