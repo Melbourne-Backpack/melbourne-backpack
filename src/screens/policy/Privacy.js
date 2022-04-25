@@ -10,7 +10,7 @@ import Form from "../personalization/form/Form";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 
-const Privacy = ({ navigation }) => {
+const Privacy = ({ navigation: { goBack } }) => {
   const [accepted, setAccepted] = React.useState(false);
   const isCloseToBottom = ({
     layoutMeasurement,
@@ -35,8 +35,10 @@ const Privacy = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>PRIVACY POLICY</Text>
       <ScrollView
         style={styles.tcContainer}
+        showsVerticalScrollIndicator={false}
         onScroll={({ nativeEvent }) => {
           if (isCloseToBottom(nativeEvent)) {
             setAccepted({
@@ -45,7 +47,6 @@ const Privacy = ({ navigation }) => {
           }
         }}
       >
-        <Text style={styles.title}>PRIVACY POLICY</Text>
         <Text style={styles.tcP}>
           Welcome to our website. If you continue to browse and use this
           website, you are agreeing to comply with and be bound by the following
@@ -56,8 +57,8 @@ const Privacy = ({ navigation }) => {
         </Text>
         <Text style={styles.tcP}>
           The term ‘Melbourne Backpack’ or ‘us’ or ‘we’ refers to the owner of
-          the website whose registered office is 702 Nguyễn Văn Linh, District
-          7, Hồ Chí Minh 700000, Vietnam. The term ‘you’ refers to the user or
+          the website whose registered office is 702 Nguyen Van Linh, District
+          7, Ho Chi Minh 700000, Vietnam. The term ‘you’ refers to the user or
           viewer of our website.
         </Text>
         <Text style={styles.tcL}>
@@ -113,10 +114,7 @@ const Privacy = ({ navigation }) => {
 
       <TouchableOpacity
         disabled={!accepted}
-        onPress={() => {
-          alert("Terms and conditions accepted");
-          navigation.navigate("Form");
-        }}
+        onPress={() => goBack()}
         style={accepted ? styles.button : styles.buttonDisabled}
       >
         <Text style={styles.buttonLabel}>Accept</Text>

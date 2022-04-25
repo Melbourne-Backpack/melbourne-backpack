@@ -9,11 +9,8 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
     alignItems: "center",
     justifyContent: "center",
-    bottom: 0,
-    top: 0,
-    left: 0,
-    right: 0,
     padding: 20,
+    paddingTop: 70,
   },
   title: {
     fontFamily: "PoppinsExtraBold",

@@ -9,7 +9,7 @@ import {
 import styles from "./styles";
 import { useFonts } from "expo-font";
 
-const Terms = ({ navigation }) => {
+const Terms = ({ navigation: { goBack } }) => {
   const [accepted, setAccepted] = React.useState(false);
   const isCloseToBottom = ({
     layoutMeasurement,
@@ -34,8 +34,10 @@ const Terms = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>TERMS and CONDITIONS</Text>
       <ScrollView
         style={styles.tcContainer}
+        showsVerticalScrollIndicator={false}
         onScroll={({ nativeEvent }) => {
           if (isCloseToBottom(nativeEvent)) {
             setAccepted({
@@ -44,7 +46,6 @@ const Terms = ({ navigation }) => {
           }
         }}
       >
-        <Text style={styles.title}>TERMS and CONDITIONS</Text>
         <Text style={styles.tcP}>
           Welcome to our website. If you continue to browse and use this
           website, you are agreeing to comply with and be bound by the following
@@ -112,10 +113,7 @@ const Terms = ({ navigation }) => {
 
       <TouchableOpacity
         disabled={!accepted}
-        onPress={() => {
-          alert("Terms and conditions accepted");
-          navigation.navigate("Form");
-        }}
+        onPress={() => goBack()}
         style={accepted ? styles.button : styles.buttonDisabled}
       >
         <Text style={styles.buttonLabel}>Accept</Text>

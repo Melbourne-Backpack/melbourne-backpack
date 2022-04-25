@@ -194,27 +194,28 @@ const SignIn = ({ navigation }) => {
             />
             <Text style={styles.checkBoxText}>Remember me</Text>
           </View>
-          <View style={styles.textController}>
-            <Text style={styles.normalText}>
-              By submitting, you agree to our{" "}
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate("Terms");
-              }}
-            >
-              <Text style={styles.yellowText}>Terms </Text>
-            </TouchableOpacity>
-            <Text style={styles.normalText}>and </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Privacy")}>
-              <Text style={styles.yellowText}>Privacy Policy</Text>
-            </TouchableOpacity>
-          </View>
 
           <TouchableOpacity
             onPress={() => navigation.navigate("ForgotPassword")}
           >
             <Text style={styles.registerButtonText}>Reset Password</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.textController}>
+          <Text style={styles.normalText}>
+            By submitting, you agree to our{" "}
+          </Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Terms");
+            }}
+          >
+            <Text style={styles.yellowText}>Terms </Text>
+          </TouchableOpacity>
+          <Text style={styles.normalText}>and </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Privacy")}>
+            <Text style={styles.yellowText}>Privacy Policy</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity

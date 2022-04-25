@@ -20,6 +20,7 @@ const HousingFilter = ({
   navigation,
   housingList,
   isHousing,
+  transport,
 }) => {
   /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding housingData in 1 view*/
   const origin = "124 La Trobe St, Melbourne VIC 3000";
@@ -130,7 +131,6 @@ const HousingFilter = ({
                               .toLowerCase() === "from"
                           ) {
                             fromText = "from";
-                            console.log(housing["id"], housing[heading]);
                             housing[heading] = housing[heading]
                               .toString()
                               .split(" ")[1];
@@ -166,7 +166,6 @@ const HousingFilter = ({
                         ) {
                           let distance =
                             distanceList[housingList.indexOf(housing)];
-                          console.log(distance);
                           if (
                             option.includes("-") &&
                             option.slice(0, option.indexOf("-")) <= distance &&
@@ -212,6 +211,7 @@ const HousingFilter = ({
                     key={info.index}
                     data={info.item}
                     housing={true}
+                    transport={transport}
                   />
                 );
               } else
@@ -220,6 +220,7 @@ const HousingFilter = ({
                     key={info.index}
                     data={info.item}
                     housing={false}
+                    transport={transport}
                   />
                 );
             }}
