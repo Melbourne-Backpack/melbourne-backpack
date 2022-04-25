@@ -4,13 +4,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import {
-  WHITE,
-  BACKGROUND,
-  SELECTED_BUTTON,
-  TEXT_INPUT,
-  RED,
-} from "../../styles/colors";
+import { WHITE, BACKGROUND, PURPLE_BLUE } from "../../styles/colors";
 import { useFonts } from "expo-font";
 
 let width = Dimensions.get("window").width; //full width
@@ -54,7 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     borderRadius: 20,
-    backgroundColor: WHITE,
+    backgroundColor: PURPLE_BLUE,
     justifyContent: "center",
     alignItems: "center",
   },
