@@ -342,10 +342,17 @@ const Form = ({ navigation }) => {
               <Text style={styles.normalText}>
                 By submitting, you agree to our{" "}
               </Text>
-              <Text style={styles.yellowText}>Terms, Data </Text>
-              <Text style={styles.yellowText}>Policy </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Terms");
+                }}
+              >
+                <Text style={styles.yellowText}>Terms </Text>
+              </TouchableOpacity>
               <Text style={styles.normalText}>and </Text>
-              <Text style={styles.yellowText}>Cookies Policy</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Privacy")}>
+                <Text style={styles.yellowText}>Privacy Policy</Text>
+              </TouchableOpacity>
             </View>
             {!(
               imageValidate.valid &&
