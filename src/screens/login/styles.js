@@ -7,6 +7,13 @@ import {
   TEXT_INPUT,
   LIGHT_PURPLE,
   LIGHT_BLUE,
+  BLACK,
+  PURPLE_BLUE,
+  GREY,
+  DARK_BLUE_PURPLE,
+  PLACEHOLDER,
+  ALERT_PURPLE_BUTTON,
+  ALERT_PURPLE_MESSAGE,
 } from "../../styles/colors";
 import {
   widthPercentageToDP as wp,
