@@ -35,7 +35,7 @@ const Privacy = ({ navigation }) => {
           }
         }}
       >
-        <Text style={styles.title}>Privacy Policy</Text>
+        <Text style={styles.title}>PRIVACY POLICY</Text>
         <Text style={styles.tcP}>
           Welcome to our website. If you continue to browse and use this
           website, you are agreeing to comply with and be bound by the following
