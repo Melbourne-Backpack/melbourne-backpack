@@ -35,7 +35,7 @@ const AppNavigator = () => {
         cardStyleInterpolator: forFade,
       }}
     >
-      <Stack.Screen name="Splash" component={SplashScreen} />
+      {/*<Stack.Screen name="Splash" component={SplashScreen} />*/}
       <Stack.Screen name="Onboarding" component={Onboarding} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />

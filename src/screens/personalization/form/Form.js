@@ -342,7 +342,11 @@ const Form = ({ navigation }) => {
               <Text style={styles.normalText}>
                 By submitting, you agree to our{" "}
               </Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Terms")}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Terms");
+                }}
+              >
                 <Text style={styles.yellowText}>Terms </Text>
               </TouchableOpacity>
               <Text style={styles.normalText}>and </Text>

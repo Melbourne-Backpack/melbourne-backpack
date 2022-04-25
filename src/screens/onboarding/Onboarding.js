@@ -2,7 +2,6 @@ import React from "react";
 import {
   SafeAreaView,
   Image,
-  StyleSheet,
   FlatList,
   View,
   Text,
@@ -19,14 +18,14 @@ const COLORS = { primary: "#282534", white: "#fff" };
 const slides = [
   {
     id: "1",
-    image: require("../../../assets/icon.png"),
+    image: require("../../../assets/adaptive-icon.png"),
     title: "Step 1",
     subtitle:
       "Register by filling all the fields for us to offer better experiences",
   },
   {
     id: "2",
-    image: require("../../../assets/icon.png"),
+    image: require("../../../assets/adaptive-icon.png"),
     title: "Step 2",
     subtitle:
       "Pick a topic:\n" +
@@ -37,7 +36,7 @@ const slides = [
   },
   {
     id: "3",
-    image: require("../../../assets/icon.png"),
+    image: require("../../../assets/adaptive-icon.png"),
     title: "Voilà!",
     subtitle: "Connect to your desired option using the provided information",
   },
@@ -48,7 +47,7 @@ const Slide = ({ item }) => {
     <View style={{ alignItems: "center" }}>
       <Image
         source={item?.image}
-        style={{ height: "75%", width, resizeMode: "contain" }}
+        style={{ height: "25%", width, resizeMode: "contain" }}
       />
       <View>
         <Text style={styles.title}>{item?.title}</Text>
@@ -69,7 +68,7 @@ const Onboarding = ({ navigation }) => {
 
   const goToNextSlide = () => {
     const nextSlideIndex = currentSlideIndex + 1;
-    if (nextSlideIndex != slides.length) {
+    if (nextSlideIndex !== slides.length) {
       const offset = nextSlideIndex * width;
       ref?.current.scrollToOffset({ offset });
       setCurrentSlideIndex(currentSlideIndex + 1);
@@ -108,7 +107,7 @@ const Onboarding = ({ navigation }) => {
                 styles.indicator,
                 currentSlideIndex === index && {
                   backgroundColor: COLORS.white,
-                  width: 25,
+                  width: 100,
                 },
               ]}
             />
@@ -116,12 +115,12 @@ const Onboarding = ({ navigation }) => {
         </View>
 
         {/* Render buttons */}
-        <View style={{ marginBottom: 20 }}>
+        <View style={{ marginBottom: 100 }}>
           {currentSlideIndex === slides.length - 1 ? (
             <View style={{ height: 50 }}>
               <TouchableOpacity
                 style={styles.btn}
-                onPress={() => navigation.replace("HomeScreen")}
+                onPress={() => navigation.replace("SignIn")}
               >
                 <Text style={{ fontWeight: "bold", fontSize: 15 }}>
                   GET STARTED
@@ -179,9 +178,9 @@ const Onboarding = ({ navigation }) => {
       <StatusBar backgroundColor={COLORS.primary} />
       <FlatList
         ref={ref}
-        onMomentumScrollEnd={updateCurrentSlideIndex}
-        contentContainerStyle={{ height: height * 0.75 }}
+        contentContainerStyle={{ height: height * 1.75 }}
         showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         horizontal
         data={slides}
         pagingEnabled

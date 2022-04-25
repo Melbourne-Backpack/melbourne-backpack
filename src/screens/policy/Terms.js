@@ -1,4 +1,3 @@
-import styles from "./styles";
 import React, { Component } from "react";
 import {
   View,
@@ -7,9 +6,10 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import Form from "../personalization/form/Form";
+import styles from "./styles";
 
 const Terms = ({ navigation }) => {
+  const [accepted, setAccepted] = React.useState(false);
   const isCloseToBottom = ({
     layoutMeasurement,
     contentOffset,
@@ -22,10 +22,6 @@ const Terms = ({ navigation }) => {
     );
   };
 
-  const handleAccept = () => {
-    this.setState({ accepted: true });
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Terms and conditions</Text>
@@ -33,7 +29,7 @@ const Terms = ({ navigation }) => {
         style={styles.tcContainer}
         onScroll={({ nativeEvent }) => {
           if (isCloseToBottom(nativeEvent)) {
-            this.setState({
+            setAccepted({
               accepted: true,
             });
           }
@@ -106,13 +102,12 @@ const Terms = ({ navigation }) => {
       </ScrollView>
 
       <TouchableOpacity
-        disabled={!this.state.accepted}
+        disabled={!accepted}
         onPress={() => {
           alert("Terms and conditions accepted");
           navigation.navigate("Form");
-          handleAccept();
         }}
-        style={this.state.accepted ? styles.button : styles.buttonDisabled}
+        style={accepted ? styles.button : styles.buttonDisabled}
       >
         <Text style={styles.buttonLabel}>Accept</Text>
       </TouchableOpacity>

@@ -21,27 +21,32 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     alignSelf: "center",
+    color: WHITE,
+  },
+  text: {
+    color: WHITE,
   },
   tcP: {
     marginTop: 10,
     marginBottom: 10,
     fontSize: 12,
+    color: WHITE,
   },
   tcL: {
     marginLeft: 10,
     marginTop: 10,
     marginBottom: 10,
     fontSize: 12,
+    color: WHITE,
   },
   tcContainer: {
     marginTop: 15,
     marginBottom: 15,
     height: height * 0.7,
   },
-
   button: {
-    backgroundColor: "#136AC7",
-    borderRadius: 5,
+    backgroundColor: SELECTED_BUTTON,
+    borderRadius: 20,
     padding: 10,
   },
 
@@ -53,9 +58,9 @@ const styles = StyleSheet.create({
 
   buttonLabel: {
     fontSize: 14,
-    color: "#FFF",
+    color: WHITE,
     alignSelf: "center",
   },
 });
 
-export default TermsAndConditions;
+export default styles;

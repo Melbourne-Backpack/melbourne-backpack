@@ -1,4 +1,3 @@
-import styles from "./styles";
 import React, { Component } from "react";
 import {
   View,
@@ -8,8 +7,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Form from "../personalization/form/Form";
+import styles from "./styles";
 
 const Privacy = ({ navigation }) => {
+  const [accepted, setAccepted] = React.useState(false);
   const isCloseToBottom = ({
     layoutMeasurement,
     contentOffset,
@@ -22,18 +23,14 @@ const Privacy = ({ navigation }) => {
     );
   };
 
-  const handleAccept = () => {
-    this.setState({ accepted: true });
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Privacy and conditions</Text>
+      <Text style={styles.title}>Terms and conditions</Text>
       <ScrollView
         style={styles.tcContainer}
         onScroll={({ nativeEvent }) => {
           if (isCloseToBottom(nativeEvent)) {
-            this.setState({
+            setAccepted({
               accepted: true,
             });
           }
@@ -42,10 +39,10 @@ const Privacy = ({ navigation }) => {
         <Text style={styles.tcP}>
           Welcome to our website. If you continue to browse and use this
           website, you are agreeing to comply with and be bound by the following
-          Privacy and conditions of use, which together with our privacy policy
+          terms and conditions of use, which together with our privacy policy
           govern Melbourne Backpack’s relationship with you in relation to this
-          website. If you disagree with any part of these Privacy and
-          conditions, please do not use our website.
+          website. If you disagree with any part of these terms and conditions,
+          please do not use our website.
         </Text>
         <Text style={styles.tcP}>
           The term ‘Melbourne Backpack’ or ‘us’ or ‘we’ refers to the owner of
@@ -80,7 +77,7 @@ const Privacy = ({ navigation }) => {
           licensed to us. This material includes, but is not limited to, the
           design, layout, look, appearance and graphics. Reproduction is
           prohibited other than in accordance with the copyright notice, which
-          forms part of these Privacy and conditions.
+          forms part of these terms and conditions.
         </Text>
         <Text style={styles.tcL}>
           {"\u2022"} All trademarks reproduced in this website, which are not
@@ -101,18 +98,17 @@ const Privacy = ({ navigation }) => {
           Ireland, Scotland and Wales.
         </Text>
         <Text style={styles.tcP}>
-          The use of this website is subject to the following Privacy of use
+          The use of this website is subject to the following terms of use
         </Text>
       </ScrollView>
 
       <TouchableOpacity
-        disabled={!this.state.accepted}
+        disabled={!accepted}
         onPress={() => {
-          alert("Privacy and conditions accepted");
+          alert("Terms and conditions accepted");
           navigation.navigate("Form");
-          handleAccept();
         }}
-        style={this.state.accepted ? styles.button : styles.buttonDisabled}
+        style={accepted ? styles.button : styles.buttonDisabled}
       >
         <Text style={styles.buttonLabel}>Accept</Text>
       </TouchableOpacity>
