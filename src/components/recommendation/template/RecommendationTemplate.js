@@ -146,7 +146,7 @@ const RecommendationTemplate = ({
               </Text>
             ) : null}
 
-            {data !== [] && housing ? (
+            {data !== [] ? (
               <RecommendationCard
                 data={trendingCard}
                 housing={housing}
@@ -172,6 +172,7 @@ const RecommendationTemplate = ({
                   navigation={navigation}
                   housingList={data}
                   isHousing={housing}
+                  transport={transport}
                 />
               ) : null}
             </View>

@@ -218,6 +218,7 @@ const HousingFilter = ({
                     key={info.index}
                     data={info.item}
                     housing={false}
+                    transport
                   />
                 );
             }}
