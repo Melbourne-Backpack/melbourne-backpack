@@ -98,7 +98,11 @@ const RecommendationCard = ({ data, housing, transport }) => {
                 >
                   <Text style={[styles.clickMore]}>
                     View routes that go through this stop
-                    <Feather name="chevron-down" size={16} color={YELLOW} />
+                    {routeVisible ? (
+                      <Feather name="chevron-up" size={16} color={YELLOW} />
+                    ) : (
+                      <Feather name="chevron-down" size={16} color={YELLOW} />
+                    )}
                   </Text>
                 </TouchableOpacity>
 
