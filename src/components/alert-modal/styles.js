@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   alertModal: {
-    backgroundColor: ALERT_PURPLE_MESSAGE,
+    backgroundColor: TEXT_INPUT,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -27,19 +27,19 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     textAlign: "center",
-    color: BLACK,
+    color: WHITE,
     fontFamily: "PoppinsRegular",
     fontSize: 15,
     paddingVertical: 15,
   },
   closeButton: {
     width: wp("80%"),
-    backgroundColor: ALERT_PURPLE_BUTTON,
+    backgroundColor: TEXT_INPUT,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
   closeButtonText: {
-    color: BLACK,
+    color: WHITE,
     fontFamily: "PoppinsBlack",
     fontSize: 17,
     textAlign: "center",

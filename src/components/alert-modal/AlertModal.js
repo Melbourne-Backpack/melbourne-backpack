@@ -89,7 +89,7 @@ const AlertModal = ({
               {icon === "success" && (
                 <Text
                   style={{
-                    color: "#12622F",
+                    color: "#25AE88",
                     fontFamily: "PoppinsBlack",
                     fontSize: 18,
                     marginHorizontal: 5,

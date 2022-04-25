@@ -9,8 +9,8 @@ import {
   RefreshControl,
 } from "react-native";
 import styles from "./styles";
-import { AntDesign } from "@expo/vector-icons";
-import { LIGHT_PURPLE, WHITE } from "../../styles/colors";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { LIGHT_PURPLE, PURPLE_BLUE, WHITE } from "../../styles/colors";
 
 import { auth, db } from "../../config/firebase";
 import { useCallback, useEffect, useState } from "react";
@@ -125,10 +125,7 @@ const Profile = ({ navigation, route }) => {
             navigation.navigate("Chat");
           }}
         >
-          <Image
-            source={require("../../../assets/messenger.png")}
-            style={{ width: 27, height: 27 }}
-          />
+          <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
         </TouchableOpacity>
       </View>
       <ScrollView

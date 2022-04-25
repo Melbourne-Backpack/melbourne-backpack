@@ -10,8 +10,6 @@ export const RED = "#E61E2A";
 export const SELECTED_BUTTON = "#4838D1";
 export const TEXT_INPUT = "#1C1C4D";
 export const PLACEHOLDER = "#6A6A8B";
-export const ALERT_PURPLE_BUTTON = "#a79af1";
-export const ALERT_PURPLE_MESSAGE = "#8273F8FF";
 
 /* WHITE, GREY, BLACK */
 export const WHITE = "#FFFFFF";
