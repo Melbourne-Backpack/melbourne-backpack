@@ -24,7 +24,6 @@ const Terms = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Terms and conditions</Text>
       <ScrollView
         style={styles.tcContainer}
         onScroll={({ nativeEvent }) => {
@@ -35,6 +34,7 @@ const Terms = ({ navigation }) => {
           }
         }}
       >
+        <Text style={styles.title}>Terms and conditions</Text>
         <Text style={styles.tcP}>
           Welcome to our website. If you continue to browse and use this
           website, you are agreeing to comply with and be bound by the following

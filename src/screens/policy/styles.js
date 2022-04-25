@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     right: 0,
     padding: 20,
   },
-
   title: {
     fontFamily: "PoppinsExtraBold",
     alignSelf: "center",
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: WHITE,
-    fontFamily: "PoppinsMedium",
+    fontFamily: "PoppinsRegular",
   },
   tcP: {
     marginTop: 10,
