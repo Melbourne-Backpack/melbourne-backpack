@@ -147,15 +147,14 @@ const Onboarding = ({ navigation }) => {
               >
                 <Text
                   style={{
-                    fontWeight: "bold",
-                    fontSize: 15,
+                    fontFamily: "PoppinsMedium",
                     color: COLORS.white,
                   }}
                 >
                   SKIP
                 </Text>
               </TouchableOpacity>
-              <View style={{ width: 15 }} />
+              <View style={{ width: 20 }} />
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={goToNextSlide}
@@ -163,8 +162,7 @@ const Onboarding = ({ navigation }) => {
               >
                 <Text
                   style={{
-                    fontWeight: "bold",
-                    fontSize: 15,
+                    fontFamily: "PoppinsMedium",
                   }}
                 >
                   NEXT
