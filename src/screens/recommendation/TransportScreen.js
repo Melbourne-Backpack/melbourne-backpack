@@ -1,49 +1,100 @@
 import RecommendationTemplate from "../../components/recommendation/template/RecommendationTemplate";
 import { useEffect, useState } from "react";
 
-import { DEVID, SIGNATURE } from "@env";
+import { DEVID, ROUTE_TYPE_SIGNATURE, TRANSPORT_SIGNATURE } from "@env";
+
+const busImg = require("../../../assets/images/bus.jpg");
+const tramImg = require("../../../assets/images/tram.jpg");
+const trainImg = require("../../../assets/images/train.jpg");
 
 const TransportScreen = () => {
-  const [transportData, setTransportData] = useState([]);
-  const url = `http://timetableapi.ptv.vic.gov.au/v3/stops/location/-37.808974,144.965272?devid=${DEVID}&signature=${SIGNATURE}`;
+  const [rawData, setRawData] = useState([]);
+  const [routeType, setRouteType] = useState([]);
+  const typeUrl = `http://timetableapi.ptv.vic.gov.au/v3/route_types?devid=${DEVID}&signature=${ROUTE_TYPE_SIGNATURE}`;
+
+  const lat = "-37.8080770201347";
+  const long = "144.96268921184907";
+  const dataUrl = `http://timetableapi.ptv.vic.gov.au/v3/stops/location/${lat},${long}?devid=${DEVID}&signature=${TRANSPORT_SIGNATURE}`;
+
+  const getRouteType = () => {
+    fetch(typeUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        setRouteType(data["route_types"]);
+      });
+  };
+
+  const getRawData = () => {
+    fetch(dataUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        setRawData(data["stops"]);
+      });
+  };
+
+  const defineRouteType = (type) => {
+    let routeName = "";
+    routeType.map((route) => {
+      if (route["route_type"] === type) {
+        routeName = route["route_type_name"];
+      }
+    });
+    return routeName;
+  };
+
+  const addImg = (type) => {
+    let img;
+    const transportMode = defineRouteType(type);
+    if (transportMode === "Tram") {
+      img = tramImg;
+    } else if (transportMode === "Train") {
+      img = trainImg;
+    } else {
+      img = busImg;
+    }
+    return img;
+  };
+
+  const getRouteNumAndName = (routes) => {
+    const routeInfo = [];
+    routes.map((route) => {
+      routeInfo.push({
+        routeName: route["route_name"],
+        routeNum: route["route_number"],
+      });
+    });
+    return routeInfo;
+  };
+
+  const processRawData = () => {
+    const processedData = [];
+    rawData.map((data) => {
+      processedData.push({
+        stopName: data["stop_name"],
+        stopLat: data["stop_latitude"],
+        stopLong: data["stop_longitude"],
+        transportType: defineRouteType(data["route_type"]),
+        img: addImg(data["route_type"]),
+        routes: getRouteNumAndName(data["routes"]),
+      });
+    });
+    return processedData;
+  };
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => console.log(data.stops));
+    getRouteType();
+    getRawData();
   }, []);
 
-  const data = [
-    {
-      id: 1,
-      name: "Cranbourne Line",
-      address:
-        "Departure: Cranbourne Railway Station, Station St, Cranbourne 3977",
-    },
-    {
-      id: 2,
-      name: "Bus 234",
-      address: "Departure: 11 Centre Ave, Port Melbourne VIC 3207",
-    },
-    {
-      id: 3,
-      name: "Yarra Trams line 16",
-      address: "Melbourne University, Swanston St #1, Carlton VIC 3053",
-    },
-    {
-      id: 4,
-      name: "Pakenham Line",
-      address: "Railway Ave & Henry Rd, Pakenham VIC 3810",
-    },
-  ];
-
+  // getDistance();
   const categories = ["Distance from RMIT"];
 
   return (
     <RecommendationTemplate
-      data={data}
+      data={processRawData()}
       topic="Transportation"
       categories={categories}
+      transport
     />
   );
 };
