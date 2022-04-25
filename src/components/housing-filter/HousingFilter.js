@@ -20,6 +20,7 @@ const HousingFilter = ({
   navigation,
   housingList,
   isHousing,
+  transport,
 }) => {
   /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding housingData in 1 view*/
   const origin = "124 La Trobe St, Melbourne VIC 3000";
@@ -210,6 +211,7 @@ const HousingFilter = ({
                     key={info.index}
                     data={info.item}
                     housing={true}
+                    transport={transport}
                   />
                 );
               } else
@@ -218,7 +220,7 @@ const HousingFilter = ({
                     key={info.index}
                     data={info.item}
                     housing={false}
-                    transport
+                    transport={transport}
                   />
                 );
             }}
