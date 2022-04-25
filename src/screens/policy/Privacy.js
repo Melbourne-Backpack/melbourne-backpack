@@ -25,7 +25,7 @@ const Privacy = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Terms and conditions</Text>
+      <Text style={styles.title}>Privacy Policy</Text>
       <ScrollView
         style={styles.tcContainer}
         onScroll={({ nativeEvent }) => {
