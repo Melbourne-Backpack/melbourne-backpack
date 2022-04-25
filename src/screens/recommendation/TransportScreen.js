@@ -19,13 +19,17 @@ const TransportScreen = () => {
   const getRouteType = () => {
     fetch(typeUrl)
       .then((res) => res.json())
-      .then((data) => setRouteType(data["route_types"]));
+      .then((data) => {
+        setRouteType(data["route_types"]);
+      });
   };
 
   const getRawData = () => {
     fetch(dataUrl)
       .then((res) => res.json())
-      .then((data) => setRawData(data["stops"]));
+      .then((data) => {
+        setRawData(data["stops"]);
+      });
   };
 
   const defineRouteType = (type) => {

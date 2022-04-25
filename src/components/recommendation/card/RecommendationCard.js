@@ -89,7 +89,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
                 <View style={styles.distanceContainer}>
                   <FontAwesome5 name="walking" size={24} color={WHITE} />
                   <Text style={[styles.distance, styles.distanceText]}>
-                    approx. {distance * 1000}m from RMIT
+                    approx. {distance === "" ? 0 : distance * 1000}m from RMIT
                   </Text>
                 </View>
 
