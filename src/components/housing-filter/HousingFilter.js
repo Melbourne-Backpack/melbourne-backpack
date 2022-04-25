@@ -130,7 +130,6 @@ const HousingFilter = ({
                               .toLowerCase() === "from"
                           ) {
                             fromText = "from";
-                            console.log(housing["id"], housing[heading]);
                             housing[heading] = housing[heading]
                               .toString()
                               .split(" ")[1];
@@ -166,7 +165,6 @@ const HousingFilter = ({
                         ) {
                           let distance =
                             distanceList[housingList.indexOf(housing)];
-                          console.log(distance);
                           if (
                             option.includes("-") &&
                             option.slice(0, option.indexOf("-")) <= distance &&
