@@ -177,8 +177,9 @@ const Onboarding = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={COLORS.primary} />
       <FlatList
+        contentContainerStyle={{ paddingBottom: 10 }}
         ref={ref}
-        contentContainerStyle={{ height: height * 1.75 }}
+        // contentContainerStyle={{ height: height * 1.75}}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         horizontal
