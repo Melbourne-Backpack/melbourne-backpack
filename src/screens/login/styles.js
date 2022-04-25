@@ -7,6 +7,7 @@ import {
   TEXT_INPUT,
   LIGHT_PURPLE,
   LIGHT_BLUE,
+  YELLOW,
 } from "../../styles/colors";
 import {
   widthPercentageToDP as wp,
@@ -31,6 +32,20 @@ const styles = StyleSheet.create({
   scrollView: {
     flexGrow: 1,
     justifyContent: "center",
+  },
+  textController: {
+    width: wp("80%"),
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: 20,
+  },
+  normalText: {
+    fontFamily: "PoppinsRegular",
+    color: WHITE,
+  },
+  yellowText: {
+    fontFamily: "PoppinsRegular",
+    color: YELLOW,
   },
   icon: {
     width: 180,

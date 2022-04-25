@@ -10,7 +10,7 @@ import {
   SELECTED_BUTTON,
   TEXT_INPUT,
   RED,
-} from "../../../styles/colors";
+} from "../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   subtitle: {
-    color: COLORS.white,
+    color: WHITE,
     fontSize: 13,
     marginTop: 10,
     maxWidth: "70%",
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
   },
   title: {
-    color: COLORS.white,
+    color: WHITE,
     fontSize: 22,
     fontWeight: "bold",
     marginTop: 20,
