@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
   },
   cancelButtonText: {
-    color: BLACK,
+    color: WHITE,
     fontFamily: "PoppinsBlack",
     fontSize: 17,
     textAlign: "center",
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderBottomColor: BLACK,
   },
   logoutButtonText: {
-    color: BLACK,
+    color: WHITE,
     fontFamily: "PoppinsBlack",
     fontSize: 17,
     textAlign: "center",
