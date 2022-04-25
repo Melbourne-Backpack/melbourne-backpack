@@ -18,7 +18,14 @@ import SectionInfo from "../../components/housing-details/section-info/SectionIn
 import StarRatingView from "../../components/housing-details/StarRatingView";
 import StarRating from "react-native-star-rating-widget";
 import { postReview } from "../../api/handleReview";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
@@ -27,6 +34,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const [housingData, setHousingData] = useState({});
   const [housingDesc, setHousingDesc] = useState("");
   const [housingName, setHousingName] = useState("");
+  const [userReviews, setUserReviews] = useState([]);
   const id = route.params.id;
 
   const getData = () => {
@@ -35,16 +43,39 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         setHousingData(docSnap.data());
         setHousingDesc(formatData(docSnap.data().description));
         setHousingName(docSnap.data().name.toUpperCase());
-        console.log(housingDesc);
+        getReview(docSnap.data()["category_id"]);
       } else {
         console.log("No such document!");
       }
     });
   };
 
+  const getReview = async (categoryId) => {
+    const q = query(
+      collection(db, "reviews"),
+      where("category_id", "==", categoryId)
+    );
+    try {
+      onSnapshot(q, (querySnapshot) => {
+        const reviews = [];
+        querySnapshot.forEach((doc) => {
+          reviews.push(doc.data());
+        });
+        setUserReviews(reviews);
+      });
+      // const querySnapshot = await getDocs(q);
+      // const reviews = [];
+      // querySnapshot.forEach((doc) => {
+      //   reviews.push(doc.data());
+      // });
+      // setUserReviews(reviews);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     getData();
-    console.log(housingDesc);
   }, []);
 
   const formatData = (para) => {
@@ -166,7 +197,9 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                postReview(id, myComment, myRating);
+                postReview(housingData["category_id"], myComment, myRating);
+                setMyComment("");
+                setMyRating(0);
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
@@ -176,9 +209,9 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
 
         <View style={styles.reviewContainer}>
           <SectionInfo title="RMIT students' reviews">
-            {data.reviews.map((review, id) => (
-              <Review key={id} review={review} />
-            ))}
+            {userReviews.map((review, id) => {
+              return <Review key={id} review={review} />;
+            })}
           </SectionInfo>
         </View>
       </ScrollView>

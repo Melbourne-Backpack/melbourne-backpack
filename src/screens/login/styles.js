@@ -6,15 +6,9 @@ import {
   SELECTED_BUTTON,
   TEXT_INPUT,
   LIGHT_PURPLE,
-  LIGHT_BLUE,
+  YELLOW,
 } from "../../styles/colors";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-
-let width = Dimensions.get("window").width; //full width
-let height = Dimensions.get("window").height; //full height
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,6 +25,21 @@ const styles = StyleSheet.create({
   scrollView: {
     flexGrow: 1,
     justifyContent: "center",
+  },
+  textController: {
+    width: wp("80%"),
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: 7,
+    marginBottom: 15,
+  },
+  normalText: {
+    fontFamily: "PoppinsRegular",
+    color: WHITE,
+  },
+  yellowText: {
+    fontFamily: "PoppinsRegular",
+    color: YELLOW,
   },
   icon: {
     width: 180,

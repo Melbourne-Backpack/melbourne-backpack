@@ -6,32 +6,80 @@ import {
   ScrollView,
   Linking,
   Pressable,
+  RefreshControl,
 } from "react-native";
 import styles from "./styles";
-import { AntDesign } from "@expo/vector-icons";
-import { WHITE } from "../../styles/colors";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { LIGHT_PURPLE, PURPLE_BLUE, WHITE } from "../../styles/colors";
 
 import { auth, db } from "../../config/firebase";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
-import { signOut } from "../../api/loginApi";
+import AlertModal from "../../components/alert-modal/AlertModal";
+import { SafeAreaView } from "react-native-web";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
-const Profile = ({ navigation }) => {
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
+
+const Profile = ({ navigation, route }) => {
   const [data, setData] = useState({});
-  const getData = () => {
+  const [currentDocId, setCurrentDocId] = useState("");
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
+  const getCurrentUserData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
       if (docSnap.exists()) {
         setData(docSnap.data());
+        setCurrentDocId(docSnap.id);
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+
+  const getCurrentUserDataOnRefresh = () => {
+    getDoc(
+      doc(
+        db,
+        "users",
+        navigation.getParent() ? auth.currentUser.uid : route.params.user
+      )
+    ).then((docSnap) => {
+      if (docSnap.exists()) {
+        setData(docSnap.data());
+        setCurrentDocId(docSnap.id);
+        onRefresh();
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+
+  const getOtherUserData = () => {
+    getDoc(doc(db, "users", route.params.user)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setData(docSnap.data());
+        setCurrentDocId(docSnap.id);
       } else {
         console.log("No such document!");
       }
     });
   };
   useEffect(() => {
-    getData();
+    if (navigation.getParent()) getCurrentUserData();
+    else getOtherUserData();
   }, []);
   const [loaded, error] = useFonts({
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
@@ -41,8 +89,21 @@ const Profile = ({ navigation }) => {
     return null;
   }
 
+  const setShowAlertFunction = (showAlert) => {
+    setShowAlert(showAlert);
+  };
+
+  const signOut = ({ navigation }) => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("SignIn");
+      })
+      .catch((error) => window.alert(error.message));
+  };
+
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.background}>
+    <View style={styles.background}>
       <View style={styles.topBar}>
         <TouchableOpacity
           onPress={() => {
@@ -57,8 +118,28 @@ const Profile = ({ navigation }) => {
           />
         </TouchableOpacity>
         <Text style={styles.title}>Profile</Text>
+
+        <TouchableOpacity
+          style={styles.messenger}
+          onPress={() => {
+            navigation.navigate("Chat");
+          }}
+        >
+          <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
+        </TouchableOpacity>
       </View>
-      <View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={getCurrentUserDataOnRefresh}
+            style={styles.refreshing}
+            title={"Refreshing"}
+            titleColor={WHITE}
+          />
+        }
+      >
         <View style={styles.profileImageWrapper}>
           <Image
             source={{
@@ -66,8 +147,29 @@ const Profile = ({ navigation }) => {
             }}
             style={styles.profileImage}
           />
+          {navigation.getParent() && (
+            <TouchableOpacity
+              style={styles.editProfile}
+              onPress={() => {
+                navigation.navigate("EditProfile");
+              }}
+            >
+              <Text style={styles.editProfileText}>Edit Profile</Text>
+            </TouchableOpacity>
+          )}
         </View>
+
         <View style={styles.userContentDisplay}>
+          <AlertModal
+            navigation={navigation}
+            showModal={showAlert}
+            setShowModalFunction={setShowAlertFunction}
+            message={"Are you sure you want to log out?"}
+            icon={"logout"}
+            doNavigate={true}
+            toPage={"SignIn"}
+            signOut={signOut}
+          />
           <View style={styles.userContentRow}>
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Display Name</Text>
@@ -132,22 +234,22 @@ const Profile = ({ navigation }) => {
             </View>
           </View>
         </View>
-      </View>
-      {auth.currentUser.uid ? (
-        <View style={styles.logoutBtnWrapper}>
-          <TouchableOpacity
-            style={styles.logoutBtn}
-            onPress={() => {
-              signOut({ navigation });
-            }}
-          >
-            <Text style={styles.logoutBtnText}>Logout</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        console.log("id: " + auth.currentUser.uid)
-      )}
-    </ScrollView>
+        {currentDocId === auth.currentUser.uid ? (
+          <View style={styles.logoutBtnWrapper}>
+            <TouchableOpacity
+              style={styles.logoutBtn}
+              onPress={() => {
+                setShowAlertFunction(true);
+              }}
+            >
+              <Text style={styles.logoutBtnText}>Logout</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          console.log("id: " + auth.currentUser.uid)
+        )}
+      </ScrollView>
+    </View>
   );
 };
 

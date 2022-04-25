@@ -5,6 +5,7 @@ import {
   DARK_BLUE_PURPLE,
   GREY,
   LIGHT_BLUE,
+  LIGHT_PURPLE,
   PURPLE_BLUE,
   RED,
   WHITE,
@@ -13,8 +14,14 @@ import {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: BACKGROUND,
+    flex: 1,
   },
-
+  refreshing: {
+    color: LIGHT_PURPLE,
+    tintColor: LIGHT_PURPLE,
+    marginVertical: 20,
+    backgroundColor: "transparent",
+  },
   backBtn: {
     marginLeft: wp(10),
     marginRight: 0,
@@ -33,20 +40,38 @@ const styles = StyleSheet.create({
 
   profileImageWrapper: {
     alignItems: "center",
-    marginTop: 80,
+    marginTop: 20,
   },
 
   title: {
     color: WHITE,
-    fontSize: 24,
-    marginLeft: wp(25),
-    marginTop: -5,
+    fontSize: 20,
+    fontFamily: "PoppinsMedium",
+  },
+
+  messenger: {
+    marginRight: wp(10),
+  },
+
+  editProfile: {
+    marginTop: 20,
+    borderWidth: 2,
+    borderColor: WHITE,
+    borderRadius: 10,
+  },
+  editProfileText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
   },
 
   topBar: {
     flexDirection: "row",
     marginTop: 75,
     width: wp(100),
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 
   userInfoGrid: {
@@ -57,7 +82,7 @@ const styles = StyleSheet.create({
   },
 
   userContentDisplay: {
-    marginTop: 70,
+    marginTop: 40,
   },
 
   userContentRow: {
