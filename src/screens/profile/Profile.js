@@ -50,7 +50,13 @@ const Profile = ({ navigation, route }) => {
   };
 
   const getCurrentUserDataOnRefresh = () => {
-    getDoc(doc(db, "users", route.params.user)).then((docSnap) => {
+    getDoc(
+      doc(
+        db,
+        "users",
+        navigation.getParent() ? auth.currentUser.uid : route.params.user
+      )
+    ).then((docSnap) => {
       if (docSnap.exists()) {
         setData(docSnap.data());
         setCurrentDocId(docSnap.id);
