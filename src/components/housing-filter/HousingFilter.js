@@ -12,7 +12,7 @@ import CommunityFilterBtn from "../community-filter/CommunityFilterBtn/Community
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import RecommendationCard from "../recommendation/card/RecommendationCard";
-import DistanceList from "../../utils/DistanceList";
+import {calculateDistanceWithAddress} from "../../utils/DistanceCalculator";
 
 const HousingFilter = ({
   headingList,
@@ -45,6 +45,7 @@ const HousingFilter = ({
     PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
   });
+
 
   if (!loaded) {
     return null;

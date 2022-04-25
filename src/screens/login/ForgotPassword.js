@@ -12,10 +12,23 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import { WHITE } from "../../styles/colors";
-import { emailVerification, signIn } from "../../api/loginApi";
+import AlertModal from "../../components/alert-modal/AlertModal";
+import { auth } from "../../config/firebase";
 
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState("");
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  const [icon, setIcon] = useState("alert");
+  const [doNavigate, setDoNavigate] = useState(false);
+  const [toPage, setToPage] = useState("");
+
+  const [validate, setValidate] = useState({
+    error: "",
+    valid: false,
+  });
+
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
@@ -25,6 +38,59 @@ const ForgotPassword = ({ navigation }) => {
     return null;
   }
 
+  const setShowAlertFunction = (showAlert) => {
+    setShowAlert(showAlert);
+  };
+
+  const setError = (error) => {
+    setValidate({
+      error: error,
+      valid: false,
+    });
+  };
+
+  const checkValidate = (email) => {
+    if (email === "") {
+      setValidate({ error: "*Email is required", valid: false });
+      setShowAlert(true);
+    } else if (!email.includes("@")) {
+      setValidate({
+        error: "*Email must be in format email@something.com",
+        valid: false,
+      });
+      setShowAlert(true);
+    } else {
+      setValidate({ error: "", valid: true });
+      setShowAlert(false);
+    }
+  };
+
+  const showModal = () => {
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+      navigation.navigate("EmailSent");
+    }, 4000);
+  };
+
+  const emailVerification = ({ navigation }, email) => {
+    auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        console.log("Password reset email sent!");
+        setError("Password reset email sent");
+        setIcon("success");
+        setDoNavigate(true);
+        setToPage("EmailSent");
+        global.emailSent = email;
+        showModal();
+      })
+      .catch((error) => {
+        setError(error.toString());
+        setShowAlert(true);
+      });
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -32,6 +98,15 @@ const ForgotPassword = ({ navigation }) => {
           <Image
             source={require("../../../assets/adaptive-icon.png")}
             style={styles.icon}
+          />
+          <AlertModal
+            navigation={navigation}
+            showModal={showAlert}
+            setShowModalFunction={setShowAlertFunction}
+            message={validate.error}
+            icon={icon}
+            doNavigate={doNavigate}
+            toPage={toPage}
           />
           <View style={styles.loginField}>
             <Text style={styles.textOne}>Forget Password</Text>
@@ -56,14 +131,19 @@ const ForgotPassword = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => {
                 emailVerification({ navigation }, email);
-                navigation.navigate("EmailSent", { email: email });
+                checkValidate(email);
+                // navigation.navigate("EmailSent", { email: email });
               }}
             >
               <View style={styles.loginButtonView}>
                 <Text style={styles.loginButtonText}>Submit</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("SignIn");
+              }}
+            >
               <View style={styles.cancelButtonView}>
                 <Text style={styles.cancelButtonText}>Cancel</Text>
               </View>

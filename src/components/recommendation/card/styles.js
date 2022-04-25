@@ -1,5 +1,11 @@
 import { StyleSheet } from "react-native";
-import { DARK_BLUE_PURPLE, GREY, WHITE, YELLOW } from "../../../styles/colors";
+import {
+  DARK_BLUE_PURPLE,
+  GREY,
+  PURPLE_BLUE,
+  WHITE,
+  YELLOW,
+} from "../../../styles/colors";
 import { scaleSize } from "../../../styles/scale";
 
 const styles = StyleSheet.create({
@@ -38,6 +44,35 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: "PoppinsSemiBold",
     fontSize: 20,
+  },
+  modeContainer: {
+    borderColor: WHITE,
+    borderWidth: 1,
+    borderRadius: 50,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    marginBottom: 20,
+    alignSelf: "flex-start",
+    backgroundColor: PURPLE_BLUE,
+  },
+  distanceContainer: {
+    marginBottom: 20,
+    flexDirection: "row",
+  },
+  distance: {
+    color: WHITE,
+    fontSize: 18,
+    fontFamily: "PoppinsRegular",
+  },
+  distanceText: {
+    marginLeft: 10,
+  },
+  clickMore: {
+    fontSize: 16,
+    color: YELLOW,
+    textDecorationLine: "underline",
+    marginBottom: scaleSize(15),
+    textAlign: "center",
   },
   price: {
     fontFamily: "PoppinsExtraBold",

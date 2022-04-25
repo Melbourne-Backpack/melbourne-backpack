@@ -37,6 +37,7 @@ const CommunityCardLarge = ({
       <ImageBackground
         resizeMode={"cover"}
         source={{ uri: picture }}
+
         style={styles.userImg}
       >
         <View style={styles.userContent}>

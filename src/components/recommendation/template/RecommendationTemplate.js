@@ -108,9 +108,15 @@ const distanceFromRMIT = [
     },
 ];
 
-const RecommendationTemplate = ({topic, data, housing, navigation}) => {
-    let highestRating = 0;
-    let trendingCard = {};
+const RecommendationTemplate = ({
+  topic,
+  data,
+  housing,
+  navigation,
+  transport,
+}) => {
+  let highestRating = 0;
+  let trendingCard = {};
 
     if (data.length > 0) {
         trendingCard = data[0];
@@ -126,14 +132,23 @@ const RecommendationTemplate = ({topic, data, housing, navigation}) => {
         return null;
     }
 
-    return (
-        <FlatList data={[1]} style={styles.container} renderItem={() => {
+  return (
+    <SafeAreaView style={styles.container}>
+    <FlatList data={[1]} style={styles.container} renderItem={() => {
             return (
                 <View style={styles.wrapper}>
                     <Text style={styles.heading1}>Trending {topic}</Text>
-                    {data !== [] ? (
-                        <RecommendationCard data={trendingCard} housing={housing}/>
-                    ) : null}
+{transport ? (
+            <Text style={styles.heading3}>Transportation stops near RMIT</Text>
+          ) : null}
+           
+          {data !== [] ? (
+            <RecommendationCard
+              data={trendingCard}
+              housing={housing}
+              transport={transport}
+            />
+          ) : null}
 
                     <View style={styles.secondHeader}>
                         <Text style={styles.heading2}>All</Text>
@@ -160,6 +175,29 @@ const RecommendationTemplate = ({topic, data, housing, navigation}) => {
             )
         }}/>
     );
+
+          <View style={styles.filterOptions}>
+            {data.length > 0 ? (
+              <HousingFilter
+                headingList={[
+                  "name",
+                  "price",
+                  "bed",
+                  "bath",
+                  "distance from RMIT (km)",
+                ]}
+                optionList={[type, price, bed, bath, distanceFromRMIT]}
+                navigation={navigation}
+                housingList={data}
+                isHousing={housing}
+                transport={transport}
+              />
+            ) : null}
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 export default RecommendationTemplate;
