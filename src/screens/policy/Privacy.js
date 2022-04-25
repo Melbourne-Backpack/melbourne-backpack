@@ -46,10 +46,9 @@ const Privacy = ({ navigation }) => {
         </Text>
         <Text style={styles.tcP}>
           The term ‘Melbourne Backpack’ or ‘us’ or ‘we’ refers to the owner of
-          the website whose registered office is [address]. Our company
-          registration number is 702 Nguyễn Văn Linh, District 7, Hồ Chí Minh
-          700000, Vietnam. The term ‘you’ refers to the user or viewer of our
-          website.
+          the website whose registered office is 702 Nguyễn Văn Linh, District
+          7, Hồ Chí Minh 700000, Vietnam. The term ‘you’ refers to the user or
+          viewer of our website.
         </Text>
         <Text style={styles.tcL}>
           {"\u2022"} The content of the pages of this website is for your

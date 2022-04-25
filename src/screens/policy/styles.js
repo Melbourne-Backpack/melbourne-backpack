@@ -16,27 +16,33 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
     alignItems: "center",
     justifyContent: "center",
+    bottom: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+    padding: 20,
   },
 
   title: {
-    fontSize: 22,
+    fontFamily: "PoppinsExtraBold",
     alignSelf: "center",
     color: WHITE,
   },
   text: {
     color: WHITE,
+    fontFamily: "PoppinsMedium",
   },
   tcP: {
     marginTop: 10,
     marginBottom: 10,
-    fontSize: 12,
+    fontFamily: "PoppinsRegular",
     color: WHITE,
   },
   tcL: {
     marginLeft: 10,
     marginTop: 10,
     marginBottom: 10,
-    fontSize: 12,
+    fontFamily: "PoppinsRegular",
     color: WHITE,
   },
   tcContainer: {
@@ -47,17 +53,19 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: SELECTED_BUTTON,
     borderRadius: 20,
+    width: width * 0.6,
     padding: 10,
   },
 
   buttonDisabled: {
     backgroundColor: "#999",
-    borderRadius: 5,
+    borderRadius: 20,
+    width: width * 0.6,
     padding: 10,
   },
 
   buttonLabel: {
-    fontSize: 14,
+    fontFamily: "PoppinsMedium",
     color: WHITE,
     alignSelf: "center",
   },
