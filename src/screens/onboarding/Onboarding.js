@@ -29,10 +29,10 @@ const slides = [
     title: "Step 2",
     subtitle:
       "Pick a topic:\n" +
-      "Community\n" +
-      "Housing\n" +
-      "Shopping\n" +
-      "Transportation\n",
+      "+ Community\n" +
+      "+ Housing\n" +
+      "+ Shopping\n" +
+      "+ Transportation\n",
   },
   {
     id: "3",
@@ -47,7 +47,7 @@ const Slide = ({ item }) => {
     <View style={{ alignItems: "center" }}>
       <Image
         source={item?.image}
-        style={{ height: "25%", width, resizeMode: "contain" }}
+        style={{ height: "50%", width, resizeMode: "contain" }}
       />
       <View>
         <Text style={styles.title}>{item?.title}</Text>
@@ -107,7 +107,7 @@ const Onboarding = ({ navigation }) => {
                 styles.indicator,
                 currentSlideIndex === index && {
                   backgroundColor: COLORS.white,
-                  width: 100,
+                  width: 200,
                 },
               ]}
             />
@@ -177,9 +177,8 @@ const Onboarding = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={COLORS.primary} />
       <FlatList
-        contentContainerStyle={{ paddingBottom: 10 }}
+        contentContainerStyle={{ paddingBottom: 10, paddingTop: 100 }}
         ref={ref}
-        // contentContainerStyle={{ height: height * 1.75}}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         horizontal
