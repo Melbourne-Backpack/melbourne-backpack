@@ -134,7 +134,6 @@ const Profile = ({ navigation, route }) => {
             style={styles.refreshing}
             title={"Refreshing"}
             titleColor={WHITE}
-            colors={LIGHT_PURPLE}
           />
         }
       >

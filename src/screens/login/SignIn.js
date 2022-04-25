@@ -21,6 +21,7 @@ import {
 import CheckBox from "react-native-check-box";
 import { auth, db } from "../../config/firebase";
 import AlertModal from "../../components/alert-modal/AlertModal";
+import { doc, getDoc } from "firebase/firestore";
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -74,11 +75,21 @@ const SignIn = ({ navigation }) => {
       });
   };
 
+  const getData = () => {
+    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        navigation.navigate("Home");
+      } else {
+        navigation.navigate("Welcome");
+      }
+    });
+  };
+
   const showModal = () => {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
-      navigation.navigate("Home");
+      getData();
     }, 4000);
   };
 
