@@ -147,14 +147,16 @@ const Profile = ({ navigation, route }) => {
             }}
             style={styles.profileImage}
           />
-          <TouchableOpacity
-            style={styles.editProfile}
-            onPress={() => {
-              navigation.navigate("EditProfile");
-            }}
-          >
-            <Text style={styles.editProfileText}>Edit Profile</Text>
-          </TouchableOpacity>
+          {navigation.getParent() && (
+            <TouchableOpacity
+              style={styles.editProfile}
+              onPress={() => {
+                navigation.navigate("EditProfile");
+              }}
+            >
+              <Text style={styles.editProfileText}>Edit Profile</Text>
+            </TouchableOpacity>
+          )}
         </View>
 
         <View style={styles.userContentDisplay}>

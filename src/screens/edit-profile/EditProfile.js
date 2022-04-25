@@ -141,7 +141,7 @@ const EditProfile = ({ navigation }) => {
       <View style={styles.topBar}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Profile", { user: auth.currentUser.uid });
+            navigation.navigate("Content", { screen: "Profile" });
           }}
         >
           <Text style={styles.backBtn}>Back</Text>
@@ -161,7 +161,7 @@ const EditProfile = ({ navigation }) => {
               facebookTI,
               bioTI
             );
-            navigation.navigate("Profile", { user: auth.currentUser.uid });
+            navigation.navigate("Content", { screen: "Profile" });
           }}
         >
           <Text style={styles.doneBtn}>Done</Text>
