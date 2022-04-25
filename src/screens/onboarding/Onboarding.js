@@ -59,15 +59,6 @@ const Slide = ({ item }) => {
 };
 
 const Onboarding = ({ navigation }) => {
-  const [loaded, error] = useFonts({
-    PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
-    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
-    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
-  });
-  if (!loaded) {
-    return null;
-  }
-
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
   const ref = React.useRef();
 
@@ -86,6 +77,15 @@ const Onboarding = ({ navigation }) => {
     ref?.current.scrollToOffset({ offset });
     setCurrentSlideIndex(lastSlideIndex);
   };
+
+  const [loaded, error] = useFonts({
+    PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
 
   const Footer = () => {
     return (

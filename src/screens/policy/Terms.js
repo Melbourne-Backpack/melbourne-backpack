@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
+import { useFonts } from "expo-font";
 
 const Terms = ({ navigation }) => {
   const [accepted, setAccepted] = React.useState(false);
@@ -21,6 +22,15 @@ const Terms = ({ navigation }) => {
       contentSize.height - paddingToBottom
     );
   };
+
+  const [loaded, error] = useFonts({
+    PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
