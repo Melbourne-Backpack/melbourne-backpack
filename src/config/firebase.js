@@ -19,12 +19,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAGZzJlhVESFpwkUbZgj4PDVUFnakbJ24U",
-  authDomain: "kronicle-app.firebaseapp.com",
-  projectId: "kronicle-app",
-  storageBucket: "kronicle-app.appspot.com",
-  messagingSenderId: "951341387272",
-  appId: "1:951341387272:web:7cdeaba3bd6b6649088bbd",
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APPID,
 };
 
 // Initialize Firebase
