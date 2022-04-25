@@ -9,10 +9,10 @@ import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { LIGHT_BLUE } from "../../styles/colors";
 import CommunityFilterBtn from "../community-filter/CommunityFilterBtn/CommunityFilterBtn";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import RecommendationCard from "../recommendation/card/RecommendationCard";
-import {calculateDistanceWithAddress} from "../../utils/DistanceCalculator";
+import { calculateDistanceWithAddress } from "../../utils/DistanceCalculator";
 
 const HousingFilter = ({
   headingList,
@@ -39,13 +39,12 @@ const HousingFilter = ({
     addresses.push(housing["address"]);
   });
   let distanceList = [];
-  if (isHousing) distanceList = DistanceList(addresses, origin);
+  if (isHousing) distanceList = calculateDistanceWithAddress(addresses, origin);
   const [submitted, setSubmitted] = useState(false);
   const [loaded, error] = useFonts({
     PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
   });
-
 
   if (!loaded) {
     return null;
