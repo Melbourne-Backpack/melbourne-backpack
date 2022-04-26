@@ -17,6 +17,7 @@ import Terms from "../screens/policy/Terms";
 import Privacy from "../screens/policy/Privacy";
 import Onboarding from "../screens/onboarding/Onboarding";
 import EditProfile from "../screens/edit-profile/EditProfile";
+import Messages from "../screens/messages/Messages";
 import Chat from "../screens/chat/Chat";
 
 const AppNavigator = () => {
@@ -37,8 +38,8 @@ const AppNavigator = () => {
         cardStyleInterpolator: forFade,
       }}
     >
-      <Stack.Screen name="Splash" component={SplashScreen} />
-      <Stack.Screen name="Onboarding" component={Onboarding} />
+      {/*<Stack.Screen name="Splash" component={SplashScreen} />*/}
+      {/*<Stack.Screen name="Onboarding" component={Onboarding} />*/}
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
@@ -55,7 +56,8 @@ const AppNavigator = () => {
       <Stack.Screen name="Details" component={HousingDetailScreen} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
-      <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="Messages" component={Messages} />
+      <Stack.Screen name={"Chat"} component={Chat} />
     </Stack.Navigator>
   );
 };
