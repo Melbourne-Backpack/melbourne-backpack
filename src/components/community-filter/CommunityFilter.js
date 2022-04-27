@@ -12,6 +12,7 @@ import CommunityFilterBtn from "./CommunityFilterBtn/CommunityFilterBtn";
 import React, {useState} from "react";
 import CommunityCardSmall from "../community-card/community-card-small/CommunityCardSmall";
 import {useFonts} from "expo-font";
+import CommunityDisplayByFilter from "../communit-display/CommunityDisplayByFilter";
 
 const CommunityFilter = ({headingList, optionList, navigation, userList}) => {
     /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding data in 1 view*/
@@ -40,131 +41,113 @@ const CommunityFilter = ({headingList, optionList, navigation, userList}) => {
     /* start at -1 instead of 0 because i++ is put before return (in toggle function for filter btn */
     let i = -1;
     return (
-        <View>
-            <View style={styles.filterBtnWrapper}>
-                <TouchableOpacity
-                    style={styles.filterBtn}
-                    onPress={() => setShow(!show)}
-                >
-                    <Ionicons
-                        name="filter"
-                        size={24}
-                        color={LIGHT_BLUE}
-                        style={styles.filterIcon}
-                    />
-                </TouchableOpacity>
-            </View>
+        <View style={styles.communityFilterContainer}>
+            {/*<View style={styles.filterBtnWrapper}>*/}
+            {/*    <TouchableOpacity*/}
+            {/*        style={styles.filterBtn}*/}
+            {/*        onPress={() => setShow(!show)}*/}
+            {/*    >*/}
+            {/*        <Ionicons*/}
+            {/*            name="filter"*/}
+            {/*            size={24}*/}
+            {/*            color={LIGHT_BLUE}*/}
+            {/*            style={styles.filterIcon}*/}
+            {/*        />*/}
+            {/*    </TouchableOpacity>*/}
+            {/*</View>*/}
             <View>
                 {/* filter toggle btn */}
-                {show ? (
-                    <View>
-                        {headings.map((heading) => {
-                            i++;
-                            let optionList = options[i];
-                            filter[heading] = [];
+                <View>
+                    {headings.map((heading) => {
+                        i++;
+                        let optionList = options[i];
+                        filter[heading] = [];
+                        if (data.length > 0)
                             return (
-                                <View key={heading} style={styles.filterSingleWrapper}>
-                                    <Text style={styles.filterText}>
-                                        {heading.slice(0, 1).toUpperCase() +
-                                            heading.slice(1, heading.length)}
-                                    </Text>
-                                    <View style={styles.optionWrapper}>
-                                        {optionList.map((option) => {
-                                            return (
-                                                <CommunityFilterBtn
-                                                    key={option.index}
-                                                    value={option.name}
-                                                    filter={filter}
-                                                    heading={heading}
-                                                    submitted={submitted}
-                                                />
-                                            );
-                                        })}
-                                    </View>
-                                </View>
+                                // <View key={heading} style={styles.filterSingleWrapper}>
+                                //     <Text style={styles.filterText}>
+                                //         {"Filtered by " + heading.slice(0, 1).toUpperCase() +
+                                //             heading.slice(1, heading.length)}
+                                //     </Text>
+                                //     <View style={styles.optionWrapper}>
+                                //         {optionList.map((option) => {
+                                //             return (
+                                //                 <CommunityFilterBtn
+                                //                     key={option.index}
+                                //                     value={option.name}
+                                //                     filter={filter}
+                                //                     heading={heading}
+                                //                     submitted={submitted}
+                                //                 />
+                                //             );
+                                //         })}
+                                //     </View>
+                                // </View>
+                                <CommunityDisplayByFilter userList={userList} heading={heading}
+                                                          filterMaxCards={filterMaxCards}
+                                                          optionList={optionList}
+                                                          navigation={navigation}/>
                             );
-                        })}
-                        <View style={styles.submitBtnWrapper}>
-                            <TouchableOpacity
-                                style={styles.submitBtn}
-                                onPress={() => {
-                                    setSubmitted((prev) => !prev);
-                                    setData([]);
-                                    let filterListLength = 0
-                                    headings.map((heading) => {
-                                        if (filter[heading].length > 0) {
-                                            filterListLength++
-                                        }
-                                    })
-                                    userList.map((user) => {
-                                        let checked = 0
-                                        headings.map((heading) => {
-                                            let count = 0
-                                            filter[heading].map((option) => {
-                                                count++
-                                                if (
-                                                    user[heading] === option ||
-                                                    user[heading].includes(option)
-                                                ) {
-                                                    checked++
-                                                }
-                                            })
-                                        })
-                                        if (filterListLength === checked) {
-                                            setData(prevState => [...prevState, user])
-                                        }
-                                    });
-                                }}
-                            >
-                                <Text style={styles.submitBtnText}>Apply</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                ) : null}
-                <SafeAreaView style={styles.communityList}>
-                    {
-                        data.length > 0 ?
-                            <FlatList
-                                extraData={data}
-                                data={data.slice(0, filterMaxCards)}
-                                horizontal={false}
-                                numColumns={3}
-                                renderItem={(user) => {
-                                    return (
-                                        <CommunityCardSmall
-                                            userID={user.item.id}
-                                            name={user.item.fullName}
-                                            picture={user.item.avatar}
-                                            navigation={navigation}
-                                        />
-                                    );
-                                }}
-                            /> : null
-                    }
-                </SafeAreaView>
-
-                <View style={styles.seeMoreBtnContainer}>
-                    {filterMaxCards >= data.length &&
-                    data.length >= filterMaxCardsPerPageInitial ? (
-                        <TouchableOpacity
-                            onPress={() => {
-                                setFilterMaxCards(filterMaxCardsPerPageInitial);
-                            }}
-                        >
-                            <Text style={styles.seeMoreBtn}>See less</Text>
-                        </TouchableOpacity>
-                    ) : (
-                        <TouchableOpacity
-                            onPress={() => {
-                                setFilterMaxCards(
-                                    (prevState) => prevState + filterMaxCardsPerPage
-                                );
-                            }}
-                        >
-                            <Text style={styles.seeMoreBtn}>See more</Text>
-                        </TouchableOpacity>
-                    )}
+                    })}
+                    {/*<View style={styles.submitBtnWrapper}>*/}
+                    {/*    <TouchableOpacity*/}
+                    {/*        style={styles.submitBtn}*/}
+                    {/*        onPress={() => {*/}
+                    {/*            setSubmitted((prev) => !prev);*/}
+                    {/*            setData([]);*/}
+                    {/*            let filterListLength = 0*/}
+                    {/*            headings.map((heading) => {*/}
+                    {/*                if (filter[heading].length > 0) {*/}
+                    {/*                    filterListLength++*/}
+                    {/*                }*/}
+                    {/*            })*/}
+                    {/*            userList.map((user) => {*/}
+                    {/*                let checked = 0*/}
+                    {/*                headings.map((heading) => {*/}
+                    {/*                    let count = 0*/}
+                    {/*                    filter[heading].map((option) => {*/}
+                    {/*                        count++*/}
+                    {/*                        if (*/}
+                    {/*                            user[heading] === option ||*/}
+                    {/*                            user[heading].includes(option)*/}
+                    {/*                        ) {*/}
+                    {/*                            checked++*/}
+                    {/*                        }*/}
+                    {/*                    })*/}
+                    {/*                })*/}
+                    {/*                if (filterListLength === checked) {*/}
+                    {/*                    setData(prevState => [...prevState, user])*/}
+                    {/*                }*/}
+                    {/*            });*/}
+                    {/*        }}*/}
+                    {/*    >*/}
+                    {/*        <Text style={styles.submitBtnText}>Apply</Text>*/}
+                    {/*    </TouchableOpacity>*/}
+                    {/*</View>*/}
                 </View>
+
+                {/*<SafeAreaView style={styles.communityList}>*/}
+                {/*    {*/}
+                {/*        data.length > 0 ?*/}
+                {/*            <FlatList*/}
+                {/*                extraData={data}*/}
+                {/*                data={data.slice(0, filterMaxCards)}*/}
+                {/*                horizontal={false}*/}
+                {/*                numColumns={3}*/}
+                {/*                renderItem={(user) => {*/}
+                {/*                    return (*/}
+                {/*                        <CommunityCardSmall*/}
+                {/*                            userID={user.item.id}*/}
+                {/*                            name={user.item.fullName}*/}
+                {/*                            picture={user.item.avatar}*/}
+                {/*                            navigation={navigation}*/}
+                {/*                        />*/}
+                {/*                    );*/}
+                {/*                }}*/}
+                {/*            /> : null*/}
+                {/*    }*/}
+                {/*</SafeAreaView>*/}
+
             </View>
         </View>
     );

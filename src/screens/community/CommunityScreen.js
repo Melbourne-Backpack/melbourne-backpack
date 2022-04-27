@@ -170,18 +170,15 @@ const CommunityScreen = ({navigation}) => {
                             />
                         </SafeAreaView>
                     </View>
-                    <View style={styles.communityListContainer}>
-                        <Text style={styles.communityListText}>Community</Text>
-                        <View>
-                            {community.length > 0 ?
-                                <CommunityFilter
-                                    headingList={["campus", "subjects"]}
-                                    optionList={[campus, topic]}
-                                    navigation={navigation}
-                                    userList={community}
-                                /> : null}
-                        </View>
-                    </View>
+
+                    {community.length > 0 ?
+                        <CommunityFilter
+                            headingList={["campus", "subjects"]}
+                            optionList={[campus, topic]}
+                            navigation={navigation}
+                            userList={community}
+                        /> : null}
+
                 </View>
             )
         }}/>
