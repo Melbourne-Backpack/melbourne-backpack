@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
-import {BLACK, DARK_BLUE, GREY, LIGHT_BLUE, PURPLE_BLUE, WHITE} from "../../styles/colors";
-import {heightPercentageToDP as hp} from "react-native-responsive-screen";
+import {BACKGROUND, BLACK, DARK_BLUE, GREY, LIGHT_BLUE, PURPLE_BLUE, WHITE} from "../../styles/colors";
+import {heightPercentageToDP, heightPercentageToDP as hp, widthPercentageToDP} from "react-native-responsive-screen";
 
 const styles = StyleSheet.create({
     headingRow: {
@@ -36,6 +36,14 @@ const styles = StyleSheet.create({
         height: 35,
     },
 
+    modal: {
+        backgroundColor: BACKGROUND,
+        position: "absolute",
+        margin: 0,
+        width: widthPercentageToDP(100),
+        height: heightPercentageToDP(100)
+    },
+
     seeMoreText: {
         fontSize: 12,
         fontFamily: "PoppinsBold",
@@ -46,6 +54,12 @@ const styles = StyleSheet.create({
         marginLeft: "auto",
         marginRight: 15,
         marginTop: 8,
+    },
+
+    communitySeeMorePopup: {
+        position: "absolute",
+        width: widthPercentageToDP("100"),
+        height: heightPercentageToDP("100"),
     }
 })
 

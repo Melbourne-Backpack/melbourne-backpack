@@ -12,7 +12,7 @@ import CommunityFilterBtn from "./CommunityFilterBtn/CommunityFilterBtn";
 import React, {useState} from "react";
 import CommunityCardSmall from "../community-card/community-card-small/CommunityCardSmall";
 import {useFonts} from "expo-font";
-import CommunityDisplayByFilter from "../communit-display/CommunityDisplayByFilter";
+import CommunityDisplayByFilter from "../community-display/CommunityDisplayByFilter";
 
 const CommunityFilter = ({headingList, optionList, navigation, userList}) => {
     /*read 2 arrays, 1 for headings, 1 for options, each heading will be displayed with the corresponding data in 1 view*/
