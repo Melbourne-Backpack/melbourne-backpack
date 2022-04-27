@@ -13,6 +13,10 @@ import {BACKGROUND} from "../../../styles/colors";
 
 const styles = StyleSheet.create({
 
+    cardContainer: {
+        alignItems: "center"
+    },
+
     heading: {
         fontFamily: "PoppinsBold",
         fontSize: 20,

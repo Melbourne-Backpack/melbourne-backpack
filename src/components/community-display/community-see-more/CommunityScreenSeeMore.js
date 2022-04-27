@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, FlatList, SafeAreaView} from "react-native";
+import {View, Text, TouchableOpacity, FlatList, Dimensions} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import {WHITE} from "../../../styles/colors";
 import styles from "./styles";
@@ -9,6 +9,8 @@ const CommunityScreenSeeMore = ({heading, option, data, show, navigation}) => {
     const [filterMaxCards, setFilterMaxCards] = useState(6)
     const filterMaxCardsPerPageInitial = 6
     const filterMaxCardsPerPage = 6
+    const windowHeight = Dimensions.get('window').height;
+    const numColumns = Math.floor(windowHeight / 300)
     return (
         <FlatList data={[1]} renderItem={
             () => {
@@ -39,7 +41,8 @@ const CommunityScreenSeeMore = ({heading, option, data, show, navigation}) => {
                         <FlatList
                             extraData={data}
                             data={data.slice(0, filterMaxCards)}
-                            numColumns={2}
+                            numColumns={numColumns}
+                            style={styles.cardContainer}
                             renderItem={(user) => {
                                 return (
                                     <TouchableOpacity onPress={async () => await show(false)}>
