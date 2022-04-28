@@ -187,9 +187,7 @@ const Onboarding = ({ navigation }) => {
             // Get Started Button
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() =>
-                navigation.navigate("Content", { screen: "SignIn" })
-              }
+              onPress={() => navigation.replace("SignIn")}
               style={{
                 paddingHorizontal: SIZES.base * 2,
                 height: 60,
