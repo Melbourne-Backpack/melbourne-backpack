@@ -26,6 +26,7 @@ const Messages = ({ navigation, route }) => {
   const [userToAdd, setUserToAdd] = useState(null);
   const [selectedUser, setSelectedUser] = useState({});
   const [myData, setMyData] = useState({});
+  const [myMessagesData, setMyMessagesData] = useState([]);
 
   const getUserData = async (uid) => {
     await getDoc(doc(db, "users", uid)).then((docSnap) => {
@@ -43,6 +44,18 @@ const Messages = ({ navigation, route }) => {
       if (user) {
         setMyData(user);
         console.log("old user");
+        for (let i = 0; i < user.friends.length; i++) {
+          let snapshot = await get(
+            ref(database, `chatrooms/${user.friends[i].chatRoomId}`)
+          );
+          let holdData = snapshot.val().messages;
+          for (let k = 0; k < holdData.length; k++) {
+            let holdText = holdData[k].text;
+            if (k === holdData.length - 1) {
+              setMyMessagesData((oldArray) => [...oldArray, holdText]);
+            }
+          }
+        }
       } else {
         const newUserObj = {
           uid: auth.currentUser.uid,
@@ -76,6 +89,11 @@ const Messages = ({ navigation, route }) => {
 
   const findUser = async (uid) => {
     const mySnapshot = await get(ref(database, `users/${uid}`));
+    return mySnapshot.val();
+  };
+
+  const findChatroom = async (uid) => {
+    const mySnapshot = await get(ref(database, `chatrooms/${uid}`));
     return mySnapshot.val();
   };
 
@@ -213,7 +231,7 @@ const Messages = ({ navigation, route }) => {
           showsVerticalScrollIndicator={false}
         >
           {myData.friends &&
-            myData.friends.map((item) => {
+            myData.friends.map((item, index) => {
               return (
                 <TouchableOpacity
                   key={item.uid}
@@ -240,7 +258,7 @@ const Messages = ({ navigation, route }) => {
                         numberOfLines={1}
                         ellipsizeMode="tail"
                       >
-                        {null}
+                        {myMessagesData[index]}
                       </Text>
                     </View>
                   </View>
