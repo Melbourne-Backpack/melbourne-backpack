@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/storage";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
 
 import {
   API_KEY,
@@ -12,6 +12,7 @@ import {
   STORAGE_BUCKET,
   MESSAGING_SENDER_ID,
   APPID,
+  DATABASE_URL,
 } from "@env";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,6 +22,7 @@ import {
 const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
+  databaseURL: DATABASE_URL,
   projectId: PROJECT_ID,
   storageBucket: STORAGE_BUCKET,
   messagingSenderId: MESSAGING_SENDER_ID,
@@ -34,5 +36,6 @@ app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = getFirestore(app);
 const storage = firebase.storage();
+const database = getDatabase();
 
-export { auth, db, storage };
+export { auth, db, storage, database };

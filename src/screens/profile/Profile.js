@@ -122,7 +122,7 @@ const Profile = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.messenger}
           onPress={() => {
-            navigation.navigate("Messages");
+            navigation.navigate("Messages", { user: data });
           }}
         >
           <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
@@ -245,9 +245,7 @@ const Profile = ({ navigation, route }) => {
               <Text style={styles.logoutBtnText}>Logout</Text>
             </TouchableOpacity>
           </View>
-        ) : (
-          console.log("id: " + auth.currentUser.uid)
-        )}
+        ) : null}
       </ScrollView>
     </View>
   );

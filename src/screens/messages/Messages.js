@@ -11,46 +11,130 @@ import styles from "./styles";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE } from "../../styles/colors";
-import { auth } from "../../config/firebase";
-import { useState } from "react";
+import { auth, database, db } from "../../config/firebase";
+import { useEffect, useRef, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { get, set, ref, onValue, push, update } from "firebase/database";
 
-const Messages = ({ navigation }) => {
+const Messages = ({ navigation, route }) => {
   const [search, setSearch] = useState("");
 
-  const messages = [
-    {
-      id: "1",
-      userName: "Nguyen Hoang Linh",
-      userImg:
-        "https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.6435-9/122171718_2825005767824010_341372418345064282_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=1hBc_EFBtngAX8gwu7F&_nc_ht=scontent.fsgn2-2.fna&oh=00_AT8o26Qby1goNccYImGUc4f2kVBkmi3ylg621pfSctJ3QQ&oe=628F116F",
-      messageTime: "3:44 PM",
-      messageText: "Hi, this is Melbourne Backpack!",
-    },
-    {
-      id: "2",
-      userName: "Doan Yen Nhi",
-      userImg:
-        "https://github.com/kuri-team/yabe-online-mall/blob/main/public/media/image/nhi.jpg?raw=true",
-      messageTime: "9:00 AM",
-      messageText: "Hi, this is Melbourne Backpack!",
-    },
-    {
-      id: "3",
-      userName: "Do Duc Manh",
-      userImg:
-        "https://github.com/kuri-team/yabe-online-mall/blob/main/public/media/image/manh.jpg?raw=true",
-      messageTime: "Friday   ",
-      messageText: "Hi, this is Melbourne Backpack!",
-    },
-    {
-      id: "4",
-      userName: "Tran Ngoc Anh Thu",
-      userImg:
-        "https://github.com/kuri-team/yabe-online-mall/blob/main/public/media/image/thu.jpg?raw=true",
-      messageTime: "8:31 AM",
-      messageText: "Hi, this is Melbourne Backpack!",
-    },
-  ];
+  const [data, setData] = useState([]);
+
+  const [uid, setUid] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [userToAdd, setUserToAdd] = useState(null);
+  const [selectedUser, setSelectedUser] = useState({});
+  const [myData, setMyData] = useState({});
+
+  const getUserData = async (uid) => {
+    await getDoc(doc(db, "users", uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+
+  const onLogin = async () => {
+    try {
+      const user = await findUser(auth.currentUser.uid);
+      if (user) {
+        setMyData(user);
+        console.log("old user");
+      } else {
+        const newUserObj = {
+          uid: auth.currentUser.uid,
+          avatar: route.params.user.avatar,
+          fullName: route.params.user.fullName,
+          friends: [],
+          email: route.params.user.email,
+        };
+
+        await set(ref(database, `users/${auth.currentUser.uid}`), newUserObj);
+        console.log("new user");
+        setMyData(newUserObj);
+      }
+      const myUserRef = ref(database, `users/${auth.currentUser.uid}`);
+      onValue(myUserRef, (snapshot) => {
+        const userData = snapshot.val();
+        setUsers(userData.friends);
+        setMyData((prevData) => ({
+          ...prevData,
+          friends: userData.friends,
+        }));
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    onLogin();
+  }, []);
+
+  const findUser = async (uid) => {
+    const mySnapshot = await get(ref(database, `users/${uid}`));
+    return mySnapshot.val();
+  };
+
+  const onAddFriend = async (uid) => {
+    const user = await findUser(uid);
+
+    if (user) {
+      if (user.uid === myData.uid) {
+        console.log("Cant add yourself");
+        return;
+      }
+
+      if (myData.friends) {
+        for (let i = 0; i < myData.friends.length; i++) {
+          if (myData.friends[i].uid === user.uid) {
+            console.log("Cant add this user twice");
+            return;
+          }
+        }
+      }
+
+      const newChatRoomRef = push(ref(database, `chatrooms`), {
+        firstUser: myData.uid,
+        secondUser: user.uid,
+        messages: [],
+      });
+
+      const newChatRoomId = newChatRoomRef.key;
+
+      const userFriends = user.friends || [];
+      const myFriend = myData.friends || [];
+      getUserData(uid);
+      await update(ref(database, `users/${uid}`), {
+        friends: [
+          ...userFriends,
+          {
+            uid: myData.uid,
+            avatar: myData.avatar,
+            fullName: myData.fullName,
+            chatRoomId: newChatRoomId,
+          },
+        ],
+      });
+
+      await update(ref(database, `users/${myData.uid}`), {
+        friends: [
+          ...myFriend,
+          {
+            uid: user.uid,
+            avatar: user.avatar,
+            fullName: user.fullName,
+            chatRoomId: newChatRoomId,
+          },
+        ],
+      });
+      console.log("Add friend success");
+    }
+  };
+
   const [loaded, error] = useFonts({
     PoppinsThin: require("../../../assets/fonts/Poppins-Thin.ttf"),
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -60,6 +144,7 @@ const Messages = ({ navigation }) => {
   if (!loaded) {
     return null;
   }
+
   return (
     <View style={styles.background}>
       <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -89,7 +174,10 @@ const Messages = ({ navigation }) => {
           <TouchableOpacity>
             <Text style={styles.editText}>Edit</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.newWrapper}>
+          <TouchableOpacity
+            style={styles.newWrapper}
+            onPress={() => onAddFriend("vbhmalnK0GXZZkKN792xRj3KqVt1")}
+          >
             <Image
               source={require("../../../assets/plus-icon.png")}
               style={{ width: 16, height: 16, marginLeft: 5 }}
@@ -97,6 +185,7 @@ const Messages = ({ navigation }) => {
             <Text style={styles.newText}>New</Text>
           </TouchableOpacity>
         </View>
+
         <View style={styles.textInput}>
           <View style={styles.searchHolder}>
             <Image
@@ -123,44 +212,49 @@ const Messages = ({ navigation }) => {
           style={styles.messageWrapper}
           showsVerticalScrollIndicator={false}
         >
-          {messages.map((item) => {
-            return (
-              <TouchableOpacity
-                key={item.id}
-                style={styles.userWrapper}
-                onPress={() => {
-                  navigation.navigate("Chat", { userName: item.userName });
-                }}
-              >
-                <View style={styles.imageNameMessWrapper}>
-                  <Image
-                    source={{
-                      uri: item.userImg,
-                    }}
-                    style={styles.userImg}
-                  />
-                  <View style={styles.textWrapper}>
-                    <Text style={styles.userName}>{item.userName}</Text>
-                    <Text
-                      style={styles.messageText}
-                      numberOfLines={1}
-                      ellipsizeMode="tail"
-                    >
-                      {item.messageText}
-                    </Text>
+          {myData.friends &&
+            myData.friends.map((item) => {
+              return (
+                <TouchableOpacity
+                  key={item.uid}
+                  style={styles.userWrapper}
+                  onPress={() => {
+                    navigation.navigate("Chat", {
+                      user: item,
+                      myData: myData,
+                      selectedUser: item,
+                    });
+                  }}
+                >
+                  <View style={styles.imageNameMessWrapper}>
+                    <Image
+                      source={{
+                        uri: item.avatar,
+                      }}
+                      style={styles.userImg}
+                    />
+                    <View style={styles.textWrapper}>
+                      <Text style={styles.userName}>{item.fullName}</Text>
+                      <Text
+                        style={styles.messageText}
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                      >
+                        {null}
+                      </Text>
+                    </View>
                   </View>
-                </View>
 
-                <View style={styles.dotTimeWrapper}>
-                  <Image
-                    source={require("../../../assets/available-dot.png")}
-                    style={styles.dot}
-                  />
-                  <Text style={styles.messageTime}>{item.messageTime}</Text>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
+                  <View style={styles.dotTimeWrapper}>
+                    <Image
+                      source={require("../../../assets/available-dot.png")}
+                      style={styles.dot}
+                    />
+                    <Text style={styles.messageTime}>{null}</Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
         </ScrollView>
       </View>
     </View>
