@@ -35,6 +35,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const [housingDesc, setHousingDesc] = useState("");
   const [housingName, setHousingName] = useState("");
   const [userReviews, setUserReviews] = useState([]);
+  const [onlineReviews, setOnlineReviews] = useState([]);
   const id = route.params.id;
 
   const getData = () => {
@@ -44,13 +45,14 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         setHousingDesc(formatData(docSnap.data().description));
         setHousingName(docSnap.data().name.toUpperCase());
         getReview(docSnap.data()["category_id"]);
+        getOnlineReview(docSnap.data()["category_id"]);
       } else {
         console.log("No such document!");
       }
     });
   };
 
-  const getReview = async (categoryId) => {
+  const getReview = (categoryId) => {
     const q = query(
       collection(db, "reviews"),
       where("category_id", "==", categoryId)
@@ -63,12 +65,24 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         });
         setUserReviews(reviews);
       });
-      // const querySnapshot = await getDocs(q);
-      // const reviews = [];
-      // querySnapshot.forEach((doc) => {
-      //   reviews.push(doc.data());
-      // });
-      // setUserReviews(reviews);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getOnlineReview = (categoryId) => {
+    const q = query(
+      collection(db, "external_reviews"),
+      where("category_id", "==", parseInt(categoryId))
+    );
+    try {
+      onSnapshot(q, (querySnapshot) => {
+        const reviews = [];
+        querySnapshot.forEach((doc) => {
+          reviews.push(doc.data());
+        });
+        setOnlineReviews(reviews);
+      });
     } catch (e) {
       console.log(e);
     }
@@ -207,9 +221,17 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
           </View>
         </SectionInfo>
 
-        <View style={styles.reviewContainer}>
+        <View>
           <SectionInfo title="RMIT students' reviews">
             {userReviews.map((review, id) => {
+              return <Review key={id} review={review} />;
+            })}
+          </SectionInfo>
+        </View>
+
+        <View style={styles.reviewContainer}>
+          <SectionInfo title="Online reviews">
+            {onlineReviews.map((review, id) => {
               return <Review key={id} review={review} />;
             })}
           </SectionInfo>
