@@ -232,7 +232,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         <View style={styles.reviewContainer}>
           <SectionInfo title="Online reviews">
             {onlineReviews.map((review, id) => {
-              return <Review key={id} review={review} />;
+              return <Review key={id} review={review} anonymous />;
             })}
           </SectionInfo>
         </View>

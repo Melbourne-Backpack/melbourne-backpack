@@ -7,7 +7,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import { useEffect, useState } from "react";
 
-const Review = ({ review }) => {
+const Review = ({ review, anonymous }) => {
   const [user, setUser] = useState({});
   const getUser = async () => {
     const q = query(
@@ -25,7 +25,9 @@ const Review = ({ review }) => {
   };
 
   useEffect(() => {
-    getUser();
+    if (!anonymous) {
+      getUser();
+    }
   }, [review["user_id"]]);
 
   const [loaded, error] = useFonts({
@@ -40,14 +42,17 @@ const Review = ({ review }) => {
   return (
     <View style={styles.container}>
       <View style={styles.userContainer}>
-        <Image
-          source={{ uri: user.avatar }}
-          style={styles.img}
-          resizeMode="cover"
-        />
-
+        {!anonymous ? (
+          <Image
+            source={{ uri: user.avatar }}
+            style={styles.img}
+            resizeMode="cover"
+          />
+        ) : null}
         <View>
-          <Text style={styles.username}>{user.fullName}</Text>
+          {!anonymous ? (
+            <Text style={styles.username}>{user.fullName}</Text>
+          ) : null}
           <View style={styles.ratingContainer}>
             <StarRatingView width={18} height={18} rating={review.rating} />
             <Text style={styles.rating}>{review.rating}</Text>

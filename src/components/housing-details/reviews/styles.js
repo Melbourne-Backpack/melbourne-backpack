@@ -3,7 +3,9 @@ import { WHITE, YELLOW } from "../../../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: "12%",
+    marginBottom: "7%",
+    borderBottomWidth: 1,
+    borderBottomColor: WHITE,
   },
   userContainer: {
     flexDirection: "row",
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     color: WHITE,
     fontFamily: "PoppinsRegular",
     fontSize: 15,
+    marginBottom: "5%",
   },
 });
 
