@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { GiftedChat } from "react-native-gifted-chat";
+import { Bubble, GiftedChat } from "react-native-gifted-chat";
 import { auth, db } from "../../../config/firebase";
 import {
   addDoc,
@@ -9,7 +9,9 @@ import {
   query,
   orderBy,
   onSnapshot,
+  where,
 } from "firebase/firestore";
+import { LIGHT_PURPLE } from "../../../styles/colors";
 
 const ChatMessageScreen = () => {
   const [messages, setMessages] = useState([]);
@@ -25,22 +27,31 @@ const ChatMessageScreen = () => {
     });
   };
 
+  function renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: LIGHT_PURPLE,
+          },
+        }}
+      />
+    );
+  }
+
+  const chat_members_id = `75tcRQjWS9QFxQ8mKwldvBeGCPC3_MfBKhf8jULR6Ws8akG6fSVzxfLs2`;
+
   useEffect(() => {
     getCurrentUserData();
+  }, []);
 
-    const q = query(collection(db, "chat"), orderBy("createdAt", "desc"));
-    // setMessages([
-    //   {
-    //     _id: 1,
-    //     text: "Hello developer",
-    //     createdAt: new Date(),
-    //     user: {
-    //       _id: 2,
-    //       name: "React Native",
-    //       avatar: require("../../../../assets/images/Junho.png"),
-    //     },
-    //   },
-    // ]);
+  useEffect(() => {
+    const q = query(
+      collection(db, "chat"),
+      where("chat_members", "==", chat_members_id),
+      orderBy("createdAt", "desc")
+    );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       setMessages(
@@ -66,6 +77,7 @@ const ChatMessageScreen = () => {
       createdAt,
       text,
       user,
+      chat_members: chat_members_id,
     });
   }, []);
 
@@ -73,10 +85,11 @@ const ChatMessageScreen = () => {
     <GiftedChat
       messages={messages}
       onSend={(messages) => onSend(messages)}
-      showAvatarForEveryMessage={true}
       user={{
         _id: auth?.currentUser?.uid,
+        avatar: currentUser.avatar,
       }}
+      renderBubble={renderBubble}
     />
   );
 };
