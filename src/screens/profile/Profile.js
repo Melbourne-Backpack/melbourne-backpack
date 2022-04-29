@@ -10,14 +10,13 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import { LIGHT_PURPLE, PURPLE_BLUE, WHITE } from "../../styles/colors";
+import { WHITE } from "../../styles/colors";
 
 import { auth, db } from "../../config/firebase";
 import { useCallback, useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
 import AlertModal from "../../components/alert-modal/AlertModal";
-import { SafeAreaView } from "react-native-web";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
@@ -122,7 +121,7 @@ const Profile = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.messenger}
           onPress={() => {
-            navigation.navigate("Chat");
+            navigation.navigate("ChatMessage");
           }}
         >
           <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />

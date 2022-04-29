@@ -18,6 +18,7 @@ import Privacy from "../screens/policy/Privacy";
 import Onboarding from "../screens/onboarding/Onboarding";
 import EditProfile from "../screens/edit-profile/EditProfile";
 import Chat from "../screens/chat/Chat";
+import ChatMessageScreen from "../screens/chat/chat-messages/ChatMessageScreen";
 
 const AppNavigator = () => {
   const Stack = createStackNavigator();
@@ -56,6 +57,7 @@ const AppNavigator = () => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="ChatMessage" component={ChatMessageScreen} />
     </Stack.Navigator>
   );
 };
