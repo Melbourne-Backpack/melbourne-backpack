@@ -6,15 +6,26 @@ import { WHITE } from "../../styles/colors";
 import { useCallback, useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import { auth, database, db } from "../../config/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { get, set, ref, onValue, push, update, off } from "firebase/database";
 
 const Chat = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
+  const [data, setData] = useState({});
 
   const user = route.params.user;
   const myData = route.params.myData;
   const selectedUser = route.params.selectedUser;
+
+  useEffect(() => {
+    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const loadData = async () => {
@@ -56,6 +67,17 @@ const Chat = ({ navigation, route }) => {
       : [];
   };
 
+  const formatAMPM = (date) => {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    let strTime = hours + ":" + minutes + " " + ampm;
+    return strTime;
+  };
+
   const fetchMessages = useCallback(async () => {
     const snapshot = await get(
       ref(database, `chatrooms/${selectedUser.chatRoomId}`)
@@ -76,6 +98,7 @@ const Chat = ({ navigation, route }) => {
             text: msg[0].text,
             sender: myData.uid,
             createdAt: new Date(),
+            time: formatAMPM(new Date()),
           },
         ],
       });
@@ -107,7 +130,7 @@ const Chat = ({ navigation, route }) => {
         <View style={styles.topBar}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Messages");
+              navigation.navigate("Messages", { user: data });
             }}
           >
             <AntDesign

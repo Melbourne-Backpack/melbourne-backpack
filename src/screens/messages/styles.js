@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
     flex: 1,
   },
+  refreshing: {
+    color: LIGHT_PURPLE,
+    tintColor: LIGHT_PURPLE,
+    backgroundColor: "transparent",
+  },
   topBar: {
     flexDirection: "row",
     marginTop: 75,
@@ -127,6 +132,12 @@ const styles = StyleSheet.create({
   messageText: {
     color: PLACEHOLDER,
     fontFamily: "PoppinsRegular",
+    paddingVertical: 5,
+    width: wp(40),
+  },
+  friendMessageText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
     paddingVertical: 5,
     width: wp(40),
   },

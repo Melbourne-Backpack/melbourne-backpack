@@ -6,15 +6,21 @@ import {
   Image,
   TextInput,
   FlatList,
+  RefreshControl,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE } from "../../styles/colors";
 import { auth, database, db } from "../../config/firebase";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { get, set, ref, onValue, push, update } from "firebase/database";
+import { useIsFocused } from "@react-navigation/native";
+
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
 
 const Messages = ({ navigation, route }) => {
   const [search, setSearch] = useState("");
@@ -24,9 +30,19 @@ const Messages = ({ navigation, route }) => {
   const [uid, setUid] = useState(null);
   const [users, setUsers] = useState([]);
   const [userToAdd, setUserToAdd] = useState(null);
-  const [selectedUser, setSelectedUser] = useState({});
   const [myData, setMyData] = useState({});
   const [myMessagesData, setMyMessagesData] = useState([]);
+  const [myTimeData, setMyTimeData] = useState([]);
+  const [friendText, setFriendText] = useState([]);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const isFocused = useIsFocused();
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   const getUserData = async (uid) => {
     await getDoc(doc(db, "users", uid)).then((docSnap) => {
@@ -38,12 +54,13 @@ const Messages = ({ navigation, route }) => {
     });
   };
 
-  const onLogin = async () => {
+  const getFriendsData = async () => {
     try {
       const user = await findUser(auth.currentUser.uid);
+      setMyMessagesData([]);
+      setMyTimeData([]);
+      setFriendText([]);
       if (user) {
-        setMyData(user);
-        console.log("old user");
         for (let i = 0; i < user.friends.length; i++) {
           let snapshot = await get(
             ref(database, `chatrooms/${user.friends[i].chatRoomId}`)
@@ -51,11 +68,33 @@ const Messages = ({ navigation, route }) => {
           let holdData = snapshot.val().messages;
           for (let k = 0; k < holdData.length; k++) {
             let holdText = holdData[k].text;
+            let holdTime = holdData[k].time;
             if (k === holdData.length - 1) {
-              setMyMessagesData((oldArray) => [...oldArray, holdText]);
+              setMyMessagesData((myMessageData) => [
+                ...myMessageData,
+                holdText,
+              ]);
+              setMyTimeData((myTimeData) => [...myTimeData, holdTime]);
+              if (holdData[k].sender === user.uid) {
+                setFriendText((friendText) => [...friendText, false]);
+              } else {
+                setFriendText((friendText) => [...friendText, true]);
+              }
             }
           }
         }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onLogin = async () => {
+    try {
+      const user = await findUser(auth.currentUser.uid);
+      if (user) {
+        setMyData(user);
+        // console.log("old user");
       } else {
         const newUserObj = {
           uid: auth.currentUser.uid,
@@ -66,7 +105,7 @@ const Messages = ({ navigation, route }) => {
         };
 
         await set(ref(database, `users/${auth.currentUser.uid}`), newUserObj);
-        console.log("new user");
+        // console.log("new user");
         setMyData(newUserObj);
       }
       const myUserRef = ref(database, `users/${auth.currentUser.uid}`);
@@ -84,8 +123,11 @@ const Messages = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    onLogin();
-  }, []);
+    if (isFocused) {
+      getFriendsData();
+      onLogin();
+    }
+  }, [isFocused]);
 
   const findUser = async (uid) => {
     const mySnapshot = await get(ref(database, `users/${uid}`));
@@ -229,6 +271,15 @@ const Messages = ({ navigation, route }) => {
         <ScrollView
           style={styles.messageWrapper}
           showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={getFriendsData}
+              style={styles.refreshing}
+              title={"Refreshing"}
+              titleColor={WHITE}
+            />
+          }
         >
           {myData.friends &&
             myData.friends.map((item, index) => {
@@ -254,11 +305,17 @@ const Messages = ({ navigation, route }) => {
                     <View style={styles.textWrapper}>
                       <Text style={styles.userName}>{item.fullName}</Text>
                       <Text
-                        style={styles.messageText}
+                        style={
+                          friendText[index]
+                            ? styles.friendMessageText
+                            : styles.messageText
+                        }
                         numberOfLines={1}
                         ellipsizeMode="tail"
                       >
-                        {myMessagesData[index]}
+                        {friendText[index]
+                          ? item.fullName + ": " + myMessagesData[index]
+                          : "You: " + myMessagesData[index]}
                       </Text>
                     </View>
                   </View>
@@ -268,7 +325,7 @@ const Messages = ({ navigation, route }) => {
                       source={require("../../../assets/available-dot.png")}
                       style={styles.dot}
                     />
-                    <Text style={styles.messageTime}>{null}</Text>
+                    <Text style={styles.messageTime}>{myTimeData[index]}</Text>
                   </View>
                 </TouchableOpacity>
               );
