@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { Bubble, GiftedChat } from "react-native-gifted-chat";
 import { auth, db } from "../../../config/firebase";
 import {
@@ -13,14 +13,25 @@ import {
 } from "firebase/firestore";
 import { LIGHT_PURPLE } from "../../../styles/colors";
 
-const ChatMessageScreen = () => {
+const ChatMessageScreen = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const [chatUsername, setChatUsername] = useState("");
 
   const getCurrentUserData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
       if (docSnap.exists()) {
         setCurrentUser(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+
+  const getChatUserName = () => {
+    getDoc(doc(db, "users", "75tcRQjWS9QFxQ8mKwldvBeGCPC3")).then((docSnap) => {
+      if (docSnap.exists()) {
+        setChatUsername(docSnap.data().fullName);
       } else {
         console.log("No such document!");
       }
@@ -44,7 +55,12 @@ const ChatMessageScreen = () => {
 
   useEffect(() => {
     getCurrentUserData();
+    getChatUserName();
   }, []);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ title: chatUsername });
+  }, [navigation, chatUsername]);
 
   useEffect(() => {
     const q = query(

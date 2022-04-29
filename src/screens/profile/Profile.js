@@ -121,7 +121,7 @@ const Profile = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.messenger}
           onPress={() => {
-            navigation.navigate("ChatMessage");
+            navigation.navigate("ChatStack");
           }}
         >
           <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
