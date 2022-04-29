@@ -1,12 +1,16 @@
 import { StyleSheet } from "react-native";
 import {
   BACKGROUND,
+  LIGHT_PURPLE,
   PURPLE_BLUE,
   TEXT_INPUT,
   WHITE,
   YELLOW,
 } from "../../styles/colors";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "react-native-responsive-screen";
 import { scaleSize } from "../../styles/scale";
 
 const styles = StyleSheet.create({
@@ -127,6 +131,17 @@ const styles = StyleSheet.create({
   },
   reviewContainer: {
     marginBottom: "15%",
+  },
+  seeMoreBtn: {
+    color: LIGHT_PURPLE,
+    fontSize: hp("1.7%"),
+    fontFamily: "PoppinsBold",
+  },
+
+  seeMoreBtnContainer: {
+    marginBottom: hp("7.3%"),
+    marginLeft: "auto",
+    marginTop: hp("2%"),
   },
 });
 

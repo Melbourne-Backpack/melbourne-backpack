@@ -37,6 +37,14 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const [userReviews, setUserReviews] = useState([]);
   const [onlineReviews, setOnlineReviews] = useState([]);
   const id = route.params.id;
+  const filterMaxCardsPerPageInitial = 5;
+  const filterMaxCardsPerPage = 5;
+  const [filterMaxCards, setFilterMaxCards] = useState(
+    filterMaxCardsPerPageInitial
+  );
+  const [filterMaxCards2, setFilterMaxCards2] = useState(
+    filterMaxCardsPerPageInitial
+  );
 
   const getData = () => {
     getDoc(doc(db, "housing", id)).then((docSnap) => {
@@ -223,17 +231,62 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
 
         <View>
           <SectionInfo title="RMIT students' reviews">
-            {userReviews.map((review, id) => {
+            {userReviews.slice(0, filterMaxCards).map((review, id) => {
               return <Review key={id} review={review} />;
             })}
+            <View style={styles.seeMoreBtnContainer}>
+              {filterMaxCards >= userReviews.length &&
+              userReviews.length >= filterMaxCardsPerPageInitial ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    setFilterMaxCards(filterMaxCardsPerPageInitial);
+                  }}
+                >
+                  <Text style={styles.seeMoreBtn}>See less</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    setFilterMaxCards(
+                      (prevState) => prevState + filterMaxCardsPerPage
+                    );
+                  }}
+                >
+                  <Text style={styles.seeMoreBtn}>See more</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </SectionInfo>
         </View>
 
         <View style={styles.reviewContainer}>
           <SectionInfo title="Online reviews">
-            {onlineReviews.map((review, id) => {
+            {onlineReviews.slice(0, filterMaxCards2).map((review, id) => {
               return <Review key={id} review={review} anonymous />;
             })}
+            <View style={styles.seeMoreBtnContainer}>
+              {filterMaxCards2 >= onlineReviews.length &&
+              onlineReviews.length >= filterMaxCardsPerPageInitial ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    setFilterMaxCards2(filterMaxCardsPerPageInitial);
+                  }}
+                >
+                  <Text style={styles.seeMoreBtn}>See less</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    setFilterMaxCards2(
+                      (prevState) => prevState + filterMaxCardsPerPage
+                    );
+                    console.log(filterMaxCards2);
+                  }}
+                >
+                  <Text style={styles.seeMoreBtn}>See more</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </SectionInfo>
         </View>
       </ScrollView>
