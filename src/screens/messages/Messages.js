@@ -223,12 +223,22 @@ const Messages = ({ navigation, route }) => {
           </TouchableOpacity>
           <Text style={styles.title}>Chat now</Text>
 
-          <TouchableOpacity style={styles.threeDots}>
-            <Image
-              source={require("../../../assets/three-dots.png")}
-              style={{ width: 22, height: 22 }}
-            />
-          </TouchableOpacity>
+          <View style={styles.basic}>
+            <TouchableOpacity style={styles.threeDots}>
+              <Image
+                source={require("../../../assets/three-dots.png")}
+                style={{ width: 22, height: 22 }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.threeDots}
+              onPress={() => {
+                Clipboard.setString(auth.currentUser.uid);
+              }}
+            >
+              <AntDesign name={"copy1"} size={22} color={WHITE} />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.secondTopBar}>
           <TouchableOpacity>

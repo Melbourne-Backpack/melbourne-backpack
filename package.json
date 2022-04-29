@@ -35,7 +35,8 @@
     "react-native-star-rating-view": "^0.0.12",
     "react-native-star-rating-widget": "^1.2.0",
     "react-native-svg": "12.1.1",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "expo-clipboard": "~2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

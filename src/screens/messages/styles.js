@@ -150,6 +150,11 @@ const styles = StyleSheet.create({
   dot: {
     marginVertical: 5,
   },
+  basic: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 export default styles;

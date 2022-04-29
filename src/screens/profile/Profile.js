@@ -17,7 +17,6 @@ import { useCallback, useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
 import AlertModal from "../../components/alert-modal/AlertModal";
-import { SafeAreaView } from "react-native-web";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
