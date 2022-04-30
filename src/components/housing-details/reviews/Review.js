@@ -55,7 +55,7 @@ const Review = ({ review, anonymous }) => {
           ) : null}
           <View style={styles.ratingContainer}>
             <StarRatingView width={18} height={18} rating={review.rating} />
-            <Text style={styles.rating}>{review.rating}</Text>
+            <Text style={styles.rating}>{review.rating.toFixed(1)}</Text>
           </View>
         </View>
       </View>

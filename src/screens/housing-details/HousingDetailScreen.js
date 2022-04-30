@@ -17,20 +17,20 @@ import Review from "../../components/housing-details/reviews/Review";
 import SectionInfo from "../../components/housing-details/section-info/SectionInfo";
 import StarRatingView from "../../components/housing-details/StarRatingView";
 import StarRating from "react-native-star-rating-widget";
-import { postReview } from "../../api/handleReview";
+import { updateRating, postReview } from "../../api/handleReview";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { formatPara } from "../../utils/Formatting";
 
 const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const housingData = route.params.data;
+  console.log(housingData.rating);
 
   const [myComment, setMyComment] = useState("");
   const [myRating, setMyRating] = useState(null);
   const [userReviews, setUserReviews] = useState([]);
   const [onlineReviews, setOnlineReviews] = useState([]);
   const [housingRating, setHousingRating] = useState();
-
   const [ratingStat, setRatingStat] = useState({});
 
   const filterMaxCardsPerPageInitial = 5;
@@ -81,7 +81,6 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         });
         setUserReviews(reviews);
         setHousingRating(sum / (ratingStat.length + reviews.length));
-        console.log(housingRating);
       });
     } catch (e) {
       console.log(e);
@@ -91,6 +90,11 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   useEffect(() => {
     getReview(housingData.category_id);
     getOnlineReview(housingData.category_id);
+
+    return () => {
+      getReview(housingData.category_id);
+      getOnlineReview(housingData.category_id);
+    };
   }, [housingRating]);
 
   const [loaded, error] = useFonts({
@@ -124,7 +128,9 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         {housingRating ? (
           <View style={styles.starContainer}>
             <StarRatingView width={25} height={25} rating={housingRating} />
-            <Text style={[styles.text, styles.rating]}>{housingRating}</Text>
+            <Text style={[styles.text, styles.rating]}>
+              {housingRating.toFixed(2)}
+            </Text>
           </View>
         ) : null}
 
@@ -165,6 +171,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
               style={styles.btn}
               onPress={() => {
                 postReview(housingData["category_id"], myComment, myRating);
+                updateRating(housingData.id, housingRating);
                 setMyComment("");
                 setMyRating(0);
               }}
