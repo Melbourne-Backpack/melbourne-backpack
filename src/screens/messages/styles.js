@@ -155,6 +155,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  toast: {
+    backgroundColor: TEXT_INPUT,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    width: wp("60%"),
+  },
 });
 
 export default styles;

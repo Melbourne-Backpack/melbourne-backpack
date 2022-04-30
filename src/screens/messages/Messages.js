@@ -19,10 +19,14 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { get, set, ref, onValue, push, update } from "firebase/database";
 import { useIsFocused } from "@react-navigation/native";
+import * as Clipboard from "expo-clipboard";
+import Modal from "react-native-modal";
+import { Dimensions } from "react-native";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
+const windowHeight = Dimensions.get("window").height;
 
 const Messages = ({ navigation, route }) => {
   const [search, setSearch] = useState("");
@@ -38,6 +42,7 @@ const Messages = ({ navigation, route }) => {
   const [friendText, setFriendText] = useState([]);
 
   const [refreshing, setRefreshing] = useState(false);
+  const [toast, setToast] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -45,6 +50,13 @@ const Messages = ({ navigation, route }) => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   }, []);
+
+  const showModal = () => {
+    setToast(true);
+    setTimeout(() => {
+      setToast(false);
+    }, 1200);
+  };
 
   const getUserData = async (uid) => {
     await getDoc(doc(db, "users", uid)).then((docSnap) => {
@@ -227,20 +239,42 @@ const Messages = ({ navigation, route }) => {
             <Text style={styles.title}>Chat now</Text>
 
             <View style={styles.basic}>
-              <TouchableOpacity style={styles.threeDots}>
-                <Image
-                  source={require("../../../assets/three-dots.png")}
-                  style={{ width: 22, height: 22 }}
-                />
-              </TouchableOpacity>
               <TouchableOpacity
                 style={styles.threeDots}
                 onPress={() => {
                   Clipboard.setString(auth.currentUser.uid);
+                  showModal();
                 }}
               >
                 <AntDesign name={"copy1"} size={22} color={WHITE} />
               </TouchableOpacity>
+              <Modal
+                isVisible={toast}
+                onBackdropPress={() => setToast(false)}
+                animationIn={"fadeIn"}
+                animationOut={"fadeOut"}
+              >
+                <View
+                  style={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: windowHeight - 200,
+                  }}
+                >
+                  <View style={styles.toast}>
+                    <Text
+                      style={{
+                        color: WHITE,
+                        fontFamily: "PoppinsMedium",
+                        paddingHorizontal: 20,
+                        paddingVertical: 15,
+                      }}
+                    >
+                      Copied your UID to clipboard
+                    </Text>
+                  </View>
+                </View>
+              </Modal>
             </View>
           </View>
           <View style={styles.secondTopBar}>
