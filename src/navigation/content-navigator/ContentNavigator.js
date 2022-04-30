@@ -13,7 +13,7 @@ import Profile from "../../screens/profile/Profile";
 import {Image} from "react-native";
 import {doc, getDoc} from "firebase/firestore";
 import {auth, db} from "../../config/firebase";
-import CommunityScreenSeeMore from "../../components/community-display/community-see-more/CommunityScreenSeeMore";
+import CommunityScreenSeeMore from "../../screens/community-see-more/CommunityScreenSeeMore";
 
 const Tab = createBottomTabNavigator();
 

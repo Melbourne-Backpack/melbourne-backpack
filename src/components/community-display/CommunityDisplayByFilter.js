@@ -2,7 +2,7 @@ import {FlatList, Text, View, TouchableOpacity, SafeAreaView, TouchableOpacityCo
 import styles from "./styles";
 import {useEffect, useRef, useState} from "react";
 import CommunityCardLarge from "../community-card/community-card-large/CommunityCardLarge";
-import CommunityScreenSeeMore from "./community-see-more/CommunityScreenSeeMore";
+import CommunityScreenSeeMore from "../../screens/community-see-more/CommunityScreenSeeMore";
 import Modal from "react-native-modal";
 import {useIsFocused} from "@react-navigation/native";
 
@@ -29,11 +29,6 @@ const CommunityDisplayByFilter = ({heading, optionList, userList, filterMaxCards
 
     return (
         <View key={heading}>
-            <Modal isVisible={showMore} transparent={false} propagateSwipe={true}
-                   style={styles.modal}>
-                <CommunityScreenSeeMore option={selectedOption} data={temp} heading={heading} show={setShowMore}
-                                        navigation={navigation} style={styles.communitySeeMorePopup}/>
-            </Modal>
             <View style={styles.headingRow}>
                 <View>
                     <Text style={styles.filterText}>
@@ -42,10 +37,12 @@ const CommunityDisplayByFilter = ({heading, optionList, userList, filterMaxCards
                     </Text>
                 </View>
                 <View style={styles.seeMoreWrapper}>
-                    <TouchableOpacity onPress={() => {
-                        setShowMore(true)
-                        setFirstTime(false)
-                    }}>
+                    <TouchableOpacity onPress={() => navigation.navigate("CommunitySeeMore", {
+                        heading: heading,
+                        option: selectedOption,
+                        data: temp,
+                        show: setShowMore,
+                    })}>
                         <Text style={styles.seeMoreText}>
                             See more
                         </Text>

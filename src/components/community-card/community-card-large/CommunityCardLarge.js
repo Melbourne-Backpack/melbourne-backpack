@@ -16,6 +16,7 @@ const CommunityCardLarge = ({
                                 topic,
                                 campus,
                                 navigation,
+                                prevPage,
                             }) => {
     const [loaded, error] = useFonts({
         PoppinsExtraBold: require("../../../../assets/fonts/Poppins-ExtraBold.ttf"),
@@ -29,7 +30,11 @@ const CommunityCardLarge = ({
         <TouchableOpacity
             key={userID}
             style={styles.card}
-            onPress={() => {
+            onPress={prevPage === "CommunitySeeMore" ? () => {
+                navigation.navigate("Profile", {
+                    user: userID,
+                })
+            } : () => {
                 navigation.getParent().navigate("Profile", {
                     user: userID,
                 });

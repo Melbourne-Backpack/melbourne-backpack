@@ -1,18 +1,24 @@
 import {View, Text, TouchableOpacity, FlatList, Dimensions} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
-import {WHITE} from "../../../styles/colors";
+import {WHITE} from "../../styles/colors";
 import styles from "./styles";
-import CommunityCardLarge from "../../community-card/community-card-large/CommunityCardLarge";
+import CommunityCardLarge from "../../components/community-card/community-card-large/CommunityCardLarge";
 import {useState} from "react";
 
-const CommunityScreenSeeMore = ({heading, option, data, show, navigation}) => {
+const CommunityScreenSeeMore = ({navigation, route}) => {
+    // heading, option, data, show, navigation
+    const heading = route.params.heading
+    const option = route.params.option
+    const data = route.params.data
+    const show = route.params.show
+
     const [filterMaxCards, setFilterMaxCards] = useState(6)
     const filterMaxCardsPerPageInitial = 6
     const filterMaxCardsPerPage = 6
     const windowHeight = Dimensions.get('window').height;
     const numColumns = Math.floor(windowHeight / 300)
     return (
-        <FlatList data={[1]} renderItem={
+        <FlatList data={[1]} style={styles.container} renderItem={
             () => {
                 return (
                     <View styles={styles.container}>
@@ -20,7 +26,9 @@ const CommunityScreenSeeMore = ({heading, option, data, show, navigation}) => {
                             <View>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        show(false)
+                                        navigation.navigate("Content", {
+                                            screen: "Community",
+                                        })
                                     }}
                                 >
                                     <AntDesign
@@ -53,6 +61,7 @@ const CommunityScreenSeeMore = ({heading, option, data, show, navigation}) => {
                                             picture={user.item.avatar}
                                             topic={user.item.subjects ? user.item.subjects[Math.floor(Math.random() * 2)] : null}
                                             navigation={navigation}
+                                            prevPage={"CommunitySeeMore"}
                                         />
                                     </TouchableOpacity>
                                 );

@@ -4,12 +4,12 @@ import {
     LIGHT_PURPLE,
     SELECTED_BUTTON,
     WHITE,
-} from "../../../styles/colors";
+} from "../../styles/colors";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import {BACKGROUND} from "../../../styles/colors";
+import {BACKGROUND} from "../../styles/colors";
 
 const styles = StyleSheet.create({
 
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
 
     seeMoreBtnContainer: {
         marginBottom: hp("7.3%"),
-        marginLeft: wp("53%"),
+        marginLeft: "auto",
+        marginRight: 12,
         marginTop: hp("2%"),
     },
 })
