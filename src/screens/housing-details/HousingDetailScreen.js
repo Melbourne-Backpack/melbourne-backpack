@@ -29,9 +29,9 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const [myRating, setMyRating] = useState(null);
   const [userReviews, setUserReviews] = useState([]);
   const [onlineReviews, setOnlineReviews] = useState([]);
-  const [housingRating, setHousingRating] = useState(
-    parseFloat(housingData.rating)
-  );
+  const [housingRating, setHousingRating] = useState();
+
+  const [ratingStat, setRatingStat] = useState({});
 
   const filterMaxCardsPerPageInitial = 5;
   const filterMaxCardsPerPage = 5;
@@ -42,24 +42,6 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
     filterMaxCardsPerPageInitial
   );
 
-  const getReview = (categoryId) => {
-    const q = query(
-      collection(db, "reviews"),
-      where("category_id", "==", categoryId)
-    );
-    try {
-      onSnapshot(q, (querySnapshot) => {
-        const reviews = [];
-        querySnapshot.forEach((doc) => {
-          reviews.push(doc.data());
-        });
-        setUserReviews(reviews);
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const getOnlineReview = (categoryId) => {
     const q = query(
       collection(db, "external_reviews"),
@@ -68,10 +50,38 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
     try {
       onSnapshot(q, (querySnapshot) => {
         const reviews = [];
+        let total = 0;
         querySnapshot.forEach((doc) => {
           reviews.push(doc.data());
+          total += doc.data().rating;
         });
         setOnlineReviews(reviews);
+        setRatingStat({ total: total, length: reviews.length });
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getReview = (categoryId) => {
+    getOnlineReview(categoryId);
+    console.log(ratingStat);
+
+    const q = query(
+      collection(db, "reviews"),
+      where("category_id", "==", categoryId)
+    );
+    try {
+      onSnapshot(q, (querySnapshot) => {
+        const reviews = [];
+        let sum = ratingStat.total;
+        querySnapshot.forEach((doc) => {
+          reviews.push(doc.data());
+          sum += doc.data().rating;
+        });
+        setUserReviews(reviews);
+        setHousingRating(sum / (ratingStat.length + reviews.length));
+        console.log(housingRating);
       });
     } catch (e) {
       console.log(e);
@@ -81,7 +91,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   useEffect(() => {
     getReview(housingData.category_id);
     getOnlineReview(housingData.category_id);
-  }, []);
+  }, [housingRating]);
 
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -111,10 +121,12 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         <Text style={[styles.text, styles.price]}>${housingData.price}</Text>
         <Text style={[styles.text, styles.address]}>{housingData.address}</Text>
 
-        <View style={styles.starContainer}>
-          <StarRatingView width={30} height={30} rating={housingRating} />
-          <Text style={[styles.text, styles.rating]}>{housingRating}</Text>
-        </View>
+        {housingRating ? (
+          <View style={styles.starContainer}>
+            <StarRatingView width={25} height={25} rating={housingRating} />
+            <Text style={[styles.text, styles.rating]}>{housingRating}</Text>
+          </View>
+        ) : null}
 
         <View style={styles.tagContainer}>
           <Tag text={`${housingData.bed} bedroom`} />

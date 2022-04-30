@@ -20,16 +20,12 @@ const HousingScreen = () => {
       console.log(e);
     }
   };
-  // const fetchData = () => {
-  //     getDocs(housingRef).then((data) => {
-  //         setHousing(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
-  //     })
-  // }
 
   useEffect(() => {
     fetchData();
   }, []);
   const categories = ["Type", "Price", "Distance from RMIT"];
+
   if (housing !== []) {
     return (
       <RecommendationTemplate

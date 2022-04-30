@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   starContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    marginVertical: "4%",
   },
   star: {
     marginRight: wp(2),
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   rating: {
     fontFamily: "PoppinsSemiBold",
     color: YELLOW,
-    fontSize: 30,
+    fontSize: 25,
     marginLeft: 10,
   },
   tagContainer: {
