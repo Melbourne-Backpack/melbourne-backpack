@@ -7,6 +7,8 @@ import {
   TextInput,
   FlatList,
   RefreshControl,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
@@ -206,143 +208,147 @@ const Messages = ({ navigation, route }) => {
   }
 
   return (
-    <View style={styles.background}>
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <View style={styles.topBar}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Content", { screen: "Profile" });
-            }}
-          >
-            <AntDesign
-              name={"left"}
-              size={24}
-              color={WHITE}
-              style={styles.backBtn}
-            />
-          </TouchableOpacity>
-          <Text style={styles.title}>Chat now</Text>
-
-          <View style={styles.basic}>
-            <TouchableOpacity style={styles.threeDots}>
-              <Image
-                source={require("../../../assets/three-dots.png")}
-                style={{ width: 22, height: 22 }}
-              />
-            </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.background}>
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <View style={styles.topBar}>
             <TouchableOpacity
-              style={styles.threeDots}
               onPress={() => {
-                Clipboard.setString(auth.currentUser.uid);
+                navigation.navigate("Content", { screen: "Profile" });
               }}
             >
-              <AntDesign name={"copy1"} size={22} color={WHITE} />
+              <AntDesign
+                name={"left"}
+                size={24}
+                color={WHITE}
+                style={styles.backBtn}
+              />
+            </TouchableOpacity>
+            <Text style={styles.title}>Chat now</Text>
+
+            <View style={styles.basic}>
+              <TouchableOpacity style={styles.threeDots}>
+                <Image
+                  source={require("../../../assets/three-dots.png")}
+                  style={{ width: 22, height: 22 }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.threeDots}
+                onPress={() => {
+                  Clipboard.setString(auth.currentUser.uid);
+                }}
+              >
+                <AntDesign name={"copy1"} size={22} color={WHITE} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.secondTopBar}>
+            <TouchableOpacity>
+              <Text style={styles.editText}>Edit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.newWrapper}
+              onPress={() => onAddFriend("vbhmalnK0GXZZkKN792xRj3KqVt1")}
+            >
+              <Image
+                source={require("../../../assets/plus-icon.png")}
+                style={{ width: 16, height: 16, marginLeft: 5 }}
+              />
+              <Text style={styles.newText}>New</Text>
             </TouchableOpacity>
           </View>
-        </View>
-        <View style={styles.secondTopBar}>
-          <TouchableOpacity>
-            <Text style={styles.editText}>Edit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.newWrapper}
-            onPress={() => onAddFriend("vbhmalnK0GXZZkKN792xRj3KqVt1")}
-          >
-            <Image
-              source={require("../../../assets/plus-icon.png")}
-              style={{ width: 16, height: 16, marginLeft: 5 }}
-            />
-            <Text style={styles.newText}>New</Text>
-          </TouchableOpacity>
-        </View>
 
-        <View style={styles.textInput}>
-          <View style={styles.searchHolder}>
-            <Image
-              source={require("../../../assets/search-icon.png")}
-              style={{ width: 16, height: 16, marginRight: 10 }}
-            />
-            <TextInput
-              style={styles.searchText}
-              placeholder={"Search"}
-              placeholderTextColor={PLACEHOLDER}
-              onTextChange={(text) => setSearch(text)}
-            >
-              {search}
-            </TextInput>
+          <View style={styles.textInput}>
+            <View style={styles.searchHolder}>
+              <Image
+                source={require("../../../assets/search-icon.png")}
+                style={{ width: 16, height: 16, marginRight: 10 }}
+              />
+              <TextInput
+                style={styles.searchText}
+                placeholder={"Search"}
+                placeholderTextColor={PLACEHOLDER}
+                onTextChange={(text) => setSearch(text)}
+              >
+                {search}
+              </TextInput>
+            </View>
+            <TouchableOpacity>
+              <Image
+                source={require("../../../assets/voice-icon.png")}
+                style={{ width: 16, height: 16 }}
+              />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity>
-            <Image
-              source={require("../../../assets/voice-icon.png")}
-              style={{ width: 16, height: 16 }}
-            />
-          </TouchableOpacity>
-        </View>
-        <ScrollView
-          style={styles.messageWrapper}
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={getFriendsData}
-              style={styles.refreshing}
-              title={"Refreshing"}
-              titleColor={WHITE}
-            />
-          }
-        >
-          {myData.friends &&
-            myData.friends.map((item, index) => {
-              return (
-                <TouchableOpacity
-                  key={item.uid}
-                  style={styles.userWrapper}
-                  onPress={() => {
-                    navigation.navigate("Chat", {
-                      user: item,
-                      myData: myData,
-                      selectedUser: item,
-                    });
-                  }}
-                >
-                  <View style={styles.imageNameMessWrapper}>
-                    <Image
-                      source={{
-                        uri: item.avatar,
-                      }}
-                      style={styles.userImg}
-                    />
-                    <View style={styles.textWrapper}>
-                      <Text style={styles.userName}>{item.fullName}</Text>
-                      <Text
-                        style={
-                          friendText[index]
-                            ? styles.friendMessageText
-                            : styles.messageText
-                        }
-                        numberOfLines={1}
-                        ellipsizeMode="tail"
-                      >
-                        {friendText[index]
-                          ? item.fullName + ": " + myMessagesData[index]
-                          : "You: " + myMessagesData[index]}
+          <ScrollView
+            style={styles.messageWrapper}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={getFriendsData}
+                style={styles.refreshing}
+                title={"Refreshing"}
+                titleColor={WHITE}
+              />
+            }
+          >
+            {myData.friends &&
+              myData.friends.map((item, index) => {
+                return (
+                  <TouchableOpacity
+                    key={item.uid}
+                    style={styles.userWrapper}
+                    onPress={() => {
+                      navigation.navigate("Chat", {
+                        user: item,
+                        myData: myData,
+                        selectedUser: item,
+                      });
+                    }}
+                  >
+                    <View style={styles.imageNameMessWrapper}>
+                      <Image
+                        source={{
+                          uri: item.avatar,
+                        }}
+                        style={styles.userImg}
+                      />
+                      <View style={styles.textWrapper}>
+                        <Text style={styles.userName}>{item.fullName}</Text>
+                        <Text
+                          style={
+                            friendText[index]
+                              ? styles.friendMessageText
+                              : styles.messageText
+                          }
+                          numberOfLines={1}
+                          ellipsizeMode="tail"
+                        >
+                          {friendText[index]
+                            ? item.fullName + ": " + myMessagesData[index]
+                            : "You: " + myMessagesData[index]}
+                        </Text>
+                      </View>
+                    </View>
+
+                    <View style={styles.dotTimeWrapper}>
+                      <Image
+                        source={require("../../../assets/available-dot.png")}
+                        style={styles.dot}
+                      />
+                      <Text style={styles.messageTime}>
+                        {myTimeData[index]}
                       </Text>
                     </View>
-                  </View>
-
-                  <View style={styles.dotTimeWrapper}>
-                    <Image
-                      source={require("../../../assets/available-dot.png")}
-                      style={styles.dot}
-                    />
-                    <Text style={styles.messageTime}>{myTimeData[index]}</Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            })}
-        </ScrollView>
+                  </TouchableOpacity>
+                );
+              })}
+          </ScrollView>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
