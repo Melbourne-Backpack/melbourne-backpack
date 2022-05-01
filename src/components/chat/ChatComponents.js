@@ -6,13 +6,11 @@ import {
   Message,
   MessageText,
   Send,
-  SystemMessage,
 } from "react-native-gifted-chat";
 
 import styles from "./styles";
-import { Text, View } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { BACKGROUND, LIGHT_PURPLE, PLACEHOLDER } from "../../styles/colors";
+import { LIGHT_PURPLE, YELLOW } from "../../styles/colors";
 
 const renderBubble = (props) => {
   return (
@@ -66,7 +64,7 @@ const renderActions = (props) => {
           console.log("Cancel");
         },
       }}
-      optionTintColor="#222B45"
+      optionTintColor={YELLOW}
     />
   );
 };

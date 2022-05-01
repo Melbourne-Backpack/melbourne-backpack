@@ -18,8 +18,6 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: BACKGROUND,
     flex: 1,
-    borderBottomColor: WHITE,
-    borderBottomWidth: 2,
   },
   topBar: {
     flexDirection: "row",

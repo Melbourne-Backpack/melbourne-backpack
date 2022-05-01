@@ -21,7 +21,6 @@ import KeyboardSpacer from "react-native-keyboard-spacer";
 const Chat = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
   const [data, setData] = useState({});
-  const [text, setText] = useState("");
 
   const user = route.params.user;
   const myData = route.params.myData;
@@ -163,8 +162,6 @@ const Chat = ({ navigation, route }) => {
       </View>
       <GiftedChat
         messages={messages}
-        text={text}
-        onInputTextChanged={setText}
         renderBubble={renderBubble}
         renderMessageText={renderMessageText}
         renderInputToolbar={renderInputToolbar}
