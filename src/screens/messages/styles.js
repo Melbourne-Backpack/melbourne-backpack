@@ -8,6 +8,8 @@ import {
   TEXT_INPUT,
   GREY,
   PLACEHOLDER,
+  BLACK,
+  SELECTED_BUTTON,
 } from "../../styles/colors";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
@@ -39,9 +41,7 @@ const styles = StyleSheet.create({
   backBtn: {
     marginLeft: 15,
   },
-  threeDots: {
-    marginRight: 15,
-  },
+
   secondTopBar: {
     marginTop: 30,
     width: wp(95),
@@ -151,9 +151,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   basic: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
   },
   toast: {
     backgroundColor: TEXT_INPUT,
@@ -161,6 +160,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: wp("60%"),
+  },
+  menuContainer: {
+    backgroundColor: TEXT_INPUT,
+    width: wp(25),
+    borderTopLeftRadius: 50,
+    paddingHorizontal: 5,
+    marginRight: 15,
+    marginTop: 3,
+  },
+  menuItem: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    borderBottomColor: GREY,
+    borderBottomWidth: 1,
+  },
+  menuItemText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    marginHorizontal: 2,
+    fontSize: 12,
+  },
+  threeDots: {
+    marginRight: 15,
   },
 });
 

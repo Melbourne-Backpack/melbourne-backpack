@@ -43,6 +43,7 @@ const Messages = ({ navigation, route }) => {
 
   const [refreshing, setRefreshing] = useState(false);
   const [toast, setToast] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -53,8 +54,10 @@ const Messages = ({ navigation, route }) => {
 
   const showModal = () => {
     setToast(true);
+
     setTimeout(() => {
       setToast(false);
+      setOpenMenu(false);
     }, 1200);
   };
 
@@ -241,42 +244,59 @@ const Messages = ({ navigation, route }) => {
             <View style={styles.basic}>
               <TouchableOpacity
                 style={styles.threeDots}
-                onPress={() => {
-                  Clipboard.setString(auth.currentUser.uid);
-                  showModal();
+                onPress={() => setOpenMenu(!openMenu)}
+              >
+                <Image
+                  source={require("../../../assets/three-dots.png")}
+                  style={{ width: 22, height: 22 }}
+                />
+              </TouchableOpacity>
+              {openMenu && (
+                <View style={styles.menuContainer}>
+                  <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => {
+                      Clipboard.setString(auth.currentUser.uid);
+                      showModal();
+                    }}
+                  >
+                    <View style={{ flexDirection: "row" }}>
+                      <AntDesign name={"copy1"} size={15} color={WHITE} />
+                      <Text style={styles.menuItemText}>Copy user ID</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+            <Modal
+              isVisible={toast}
+              onBackdropPress={() => setToast(false)}
+              animationIn={"fadeIn"}
+              animationOut={"fadeOut"}
+            >
+              <View
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: windowHeight - 200,
                 }}
               >
-                <AntDesign name={"copy1"} size={22} color={WHITE} />
-              </TouchableOpacity>
-              <Modal
-                isVisible={toast}
-                onBackdropPress={() => setToast(false)}
-                animationIn={"fadeIn"}
-                animationOut={"fadeOut"}
-              >
-                <View
-                  style={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginTop: windowHeight - 200,
-                  }}
-                >
-                  <View style={styles.toast}>
-                    <Text
-                      style={{
-                        color: WHITE,
-                        fontFamily: "PoppinsMedium",
-                        paddingHorizontal: 20,
-                        paddingVertical: 15,
-                      }}
-                    >
-                      Copied your UID to clipboard
-                    </Text>
-                  </View>
+                <View style={styles.toast}>
+                  <Text
+                    style={{
+                      color: WHITE,
+                      fontFamily: "PoppinsMedium",
+                      paddingHorizontal: 20,
+                      paddingVertical: 15,
+                    }}
+                  >
+                    Copied your UID to clipboard
+                  </Text>
                 </View>
-              </Modal>
-            </View>
+              </View>
+            </Modal>
           </View>
+
           <View style={styles.secondTopBar}>
             <TouchableOpacity>
               <Text style={styles.editText}>Edit</Text>
