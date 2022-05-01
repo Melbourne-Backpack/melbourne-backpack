@@ -4,10 +4,14 @@ import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
 import { useCallback, useEffect, useState } from "react";
-import { Bubble, GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat } from "react-native-gifted-chat";
 import { auth, database, db } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { get, set, ref, onValue, push, update, off } from "firebase/database";
+import {
+  renderBubble,
+  renderMessageText,
+} from "../../components/chat/ChatComponents";
 
 const Chat = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
@@ -46,18 +50,6 @@ const Chat = ({ navigation, route }) => {
       off(chatRoomRef);
     };
   }, [fetchMessages, renderMessages, selectedUser.chatRoomId]);
-
-  const renderBubble = (props) => {
-    return (
-      <Bubble
-        {...props}
-        wrapperStyle={{
-          left: { backgroundColor: "#555555" },
-          right: { backgroundColor: "#4838D1" },
-        }}
-      />
-    );
-  };
 
   const renderMessages = (msg) => {
     return msg
@@ -136,6 +128,7 @@ const Chat = ({ navigation, route }) => {
   if (!loaded) {
     return null;
   }
+
   return (
     <View style={styles.background}>
       <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -165,6 +158,7 @@ const Chat = ({ navigation, route }) => {
       <GiftedChat
         messages={messages}
         renderBubble={renderBubble}
+        renderMessageText={renderMessageText}
         onSend={(newMessage) => onSend(newMessage)}
         user={{
           _id: myData.uid,
