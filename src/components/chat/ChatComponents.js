@@ -5,16 +5,14 @@ import {
   InputToolbar,
   Message,
   MessageText,
+  Send,
   SystemMessage,
 } from "react-native-gifted-chat";
 
 import styles from "./styles";
 import { Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { BACKGROUND, PLACEHOLDER } from "../../styles/colors";
-
-// composer: rgba(250, 250, 250, 0.05)
-// input bar: rgba(55, 55, 55, 0.8)
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { BACKGROUND, LIGHT_PURPLE, PLACEHOLDER } from "../../styles/colors";
 
 const renderBubble = (props) => {
   return (
@@ -59,9 +57,7 @@ const renderActions = (props) => {
     <Actions
       {...props}
       containerStyle={styles.action}
-      icon={() => (
-        <Ionicons name="image" size={28} color={"rgba(250, 250, 250, 0.6)"} />
-      )}
+      icon={() => <Ionicons name="image" size={28} color={LIGHT_PURPLE} />}
       options={{
         "Choose From Library": () => {
           console.log("Choose From Library");
@@ -79,10 +75,23 @@ const renderComposer = (props) => {
   return <Composer {...props} textInputStyle={styles.composer} />;
 };
 
+const renderSend = (props) => {
+  return (
+    <Send {...props} disabled={!props.text} containerStyle={styles.sendBtn}>
+      <MaterialCommunityIcons
+        name="send-circle"
+        size={28}
+        color={LIGHT_PURPLE}
+      />
+    </Send>
+  );
+};
+
 export {
   renderBubble,
   renderMessageText,
   renderInputToolbar,
   renderActions,
   renderComposer,
+  renderSend,
 };

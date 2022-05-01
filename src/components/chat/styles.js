@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+
 import {
   BACKGROUND,
   PLACEHOLDER,
@@ -29,26 +30,34 @@ const styles = StyleSheet.create({
   inputToolBar: {
     backgroundColor: BACKGROUND,
     borderTopColor: "transparent",
-    paddingRight: 10,
   },
   action: {
     width: "10%",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: "3%",
+    marginLeft: "2%",
     marginRight: 4,
     marginBottom: 0,
   },
   composer: {
     backgroundColor: PLACEHOLDER,
+    fontFamily: "PoppinsMedium",
     borderRadius: 50,
     borderColor: "transparent",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
+    marginRight: 4,
     marginLeft: 0,
     fontSize: 12,
+  },
+  sendBtn: {
+    width: "10%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 4,
   },
 });
 
