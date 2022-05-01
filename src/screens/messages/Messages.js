@@ -44,6 +44,8 @@ const Messages = ({ navigation, route }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [toast, setToast] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [addNew, setAddNew] = useState(false);
+  const [uidToAdd, setUidToAdd] = useState("");
 
   const isFocused = useIsFocused();
 
@@ -83,19 +85,21 @@ const Messages = ({ navigation, route }) => {
             ref(database, `chatrooms/${user.friends[i].chatRoomId}`)
           );
           let holdData = snapshot.val().messages;
-          for (let k = 0; k < holdData.length; k++) {
-            let holdText = holdData[k].text;
-            let holdTime = holdData[k].time;
-            if (k === holdData.length - 1) {
-              setMyMessagesData((myMessageData) => [
-                ...myMessageData,
-                holdText,
-              ]);
-              setMyTimeData((myTimeData) => [...myTimeData, holdTime]);
-              if (holdData[k].sender === user.uid) {
-                setFriendText((friendText) => [...friendText, false]);
-              } else {
-                setFriendText((friendText) => [...friendText, true]);
+          if (holdData) {
+            for (let k = 0; k < holdData.length; k++) {
+              let holdText = holdData[k].text;
+              let holdTime = holdData[k].time;
+              if (k === holdData.length - 1) {
+                setMyMessagesData((myMessageData) => [
+                  ...myMessageData,
+                  holdText,
+                ]);
+                setMyTimeData((myTimeData) => [...myTimeData, holdTime]);
+                if (holdData[k].sender === user.uid) {
+                  setFriendText((friendText) => [...friendText, false]);
+                } else {
+                  setFriendText((friendText) => [...friendText, true]);
+                }
               }
             }
           }
@@ -303,14 +307,56 @@ const Messages = ({ navigation, route }) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.newWrapper}
-              onPress={() => onAddFriend("vbhmalnK0GXZZkKN792xRj3KqVt1")}
+              onPress={() => setAddNew(true)}
             >
               <Image
                 source={require("../../../assets/plus-icon.png")}
                 style={{ width: 16, height: 16, marginLeft: 5 }}
               />
-              <Text style={styles.newText}>New</Text>
+              <Text style={styles.newText}>New user</Text>
             </TouchableOpacity>
+            <Modal
+              isVisible={addNew}
+              onBackdropPress={() => setAddNew(false)}
+              animationIn={"fadeIn"}
+              animationOut={"fadeOut"}
+            >
+              <View style={{ alignItems: "center", justifyContent: "center" }}>
+                <View style={styles.addNewUserContainer}>
+                  <View style={styles.addNewUserHolder}>
+                    <TextInput
+                      style={styles.addNewUserText}
+                      placeholder={"User ID"}
+                      placeholderTextColor={PLACEHOLDER}
+                      onChangeText={(newText) => setUidToAdd(newText)}
+                    >
+                      {uidToAdd}
+                    </TextInput>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setUidToAdd("");
+                      }}
+                      style={styles.clearBtn}
+                    >
+                      <Image
+                        source={require("../../../assets/clear-text-input.png")}
+                        style={styles.clearIcon}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  style={styles.addButton}
+                  onPress={() => {
+                    onAddFriend(uidToAdd);
+                    setAddNew(false);
+                    setUidToAdd("");
+                  }}
+                >
+                  <Text style={styles.addButtonText}>Add</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
           </View>
 
           <View style={styles.textInput}>

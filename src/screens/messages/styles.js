@@ -185,6 +185,43 @@ const styles = StyleSheet.create({
   threeDots: {
     marginRight: 15,
   },
+  addNewUserContainer: {
+    backgroundColor: TEXT_INPUT,
+    width: wp(60),
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+  },
+  addNewUserHolder: {
+    width: wp(60),
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+  },
+  addNewUserText: {
+    fontFamily: "PoppinsMedium",
+    width: wp(48),
+    color: WHITE,
+  },
+  addButton: {
+    backgroundColor: PURPLE_BLUE,
+    width: wp(60),
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+  },
+  addButtonText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    textAlign: "center",
+  },
+  clearBtn: {},
+  clearIcon: {
+    width: 20,
+    height: 20,
+  },
 });
 
 export default styles;
