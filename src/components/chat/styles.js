@@ -1,12 +1,16 @@
 import { StyleSheet } from "react-native";
-import { PURPLE_BLUE, WHITE, YELLOW } from "../../styles/colors";
+import {
+  BACKGROUND,
+  PLACEHOLDER,
+  PURPLE_BLUE,
+  WHITE,
+  YELLOW,
+} from "../../styles/colors";
 
 const styles = StyleSheet.create({
-  messageContainer: {
-    marginBottom: "1.5%",
-  },
   bubble: {
     padding: "1%",
+    marginBottom: "1.5%",
   },
   bubbleLeft: {
     backgroundColor: "#555555",
@@ -23,10 +27,28 @@ const styles = StyleSheet.create({
     color: YELLOW,
   },
   inputToolBar: {
-    backgroundColor: "rgba(55, 55, 55, 0.8)",
+    backgroundColor: BACKGROUND,
     borderTopColor: "transparent",
-    position: "absolute",
-    bottom: 0,
+    paddingRight: 10,
+  },
+  action: {
+    width: "10%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: "3%",
+    marginRight: 4,
+    marginBottom: 0,
+  },
+  composer: {
+    backgroundColor: PLACEHOLDER,
+    borderRadius: 50,
+    borderColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+    marginLeft: 0,
+    fontSize: 12,
   },
 });
 

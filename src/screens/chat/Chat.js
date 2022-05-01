@@ -11,10 +11,9 @@ import { get, set, ref, onValue, push, update, off } from "firebase/database";
 import {
   renderActions,
   renderBubble,
+  renderComposer,
   renderInputToolbar,
-  renderMessage,
   renderMessageText,
-  renderSystemMessage,
 } from "../../components/chat/ChatComponents";
 
 const Chat = ({ navigation, route }) => {
@@ -161,12 +160,13 @@ const Chat = ({ navigation, route }) => {
       </View>
       <GiftedChat
         messages={messages}
-        renderSystemMessage={renderSystemMessage}
         renderBubble={renderBubble}
-        renderMessage={renderMessage}
         renderMessageText={renderMessageText}
         renderInputToolbar={renderInputToolbar}
         renderActions={renderActions}
+        renderComposer={renderComposer}
+        loadEarlier={true}
+        infiniteScroll={true}
         onSend={(newMessage) => onSend(newMessage)}
         user={{
           _id: myData.uid,

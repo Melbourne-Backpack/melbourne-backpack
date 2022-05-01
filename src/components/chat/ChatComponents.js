@@ -1,6 +1,7 @@
 import {
   Actions,
   Bubble,
+  Composer,
   InputToolbar,
   Message,
   MessageText,
@@ -8,15 +9,12 @@ import {
 } from "react-native-gifted-chat";
 
 import styles from "./styles";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { BACKGROUND, PLACEHOLDER } from "../../styles/colors";
 
 // composer: rgba(250, 250, 250, 0.05)
 // input bar: rgba(55, 55, 55, 0.8)
-
-const renderSystemMessage = (props) => (
-  <SystemMessage {...props} containerStyle={{ marginBottom: 50 }} />
-);
 
 const renderBubble = (props) => {
   return (
@@ -25,18 +23,6 @@ const renderBubble = (props) => {
       wrapperStyle={{
         left: [styles.bubbleLeft, styles.bubble],
         right: [styles.bubbleRight, styles.bubble],
-      }}
-    />
-  );
-};
-
-const renderMessage = (props) => {
-  return (
-    <Message
-      {...props}
-      containerStyle={{
-        left: styles.messageContainer,
-        right: styles.messageContainer,
       }}
     />
   );
@@ -72,19 +58,9 @@ const renderActions = (props) => {
   return (
     <Actions
       {...props}
-      containerStyle={{
-        alignItems: "center",
-        justifyContent: "center",
-        marginLeft: 4,
-        marginRight: 4,
-        marginBottom: 0,
-      }}
+      containerStyle={styles.action}
       icon={() => (
-        <Ionicons
-          name="image-outline"
-          size={24}
-          color={"rgba(250, 250, 250, 0.6)"}
-        />
+        <Ionicons name="image" size={28} color={"rgba(250, 250, 250, 0.6)"} />
       )}
       options={{
         "Choose From Library": () => {
@@ -99,11 +75,14 @@ const renderActions = (props) => {
   );
 };
 
+const renderComposer = (props) => {
+  return <Composer {...props} textInputStyle={styles.composer} />;
+};
+
 export {
   renderBubble,
-  renderMessage,
   renderMessageText,
   renderInputToolbar,
   renderActions,
-  renderSystemMessage,
+  renderComposer,
 };
