@@ -4,7 +4,7 @@ import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
 import { useCallback, useEffect, useState } from "react";
-import { GiftedChat } from "react-native-gifted-chat";
+import { Bubble, GiftedChat } from "react-native-gifted-chat";
 import { auth, database, db } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { get, set, ref, onValue, push, update, off } from "firebase/database";
@@ -46,6 +46,18 @@ const Chat = ({ navigation, route }) => {
       off(chatRoomRef);
     };
   }, [fetchMessages, renderMessages, selectedUser.chatRoomId]);
+
+  const renderBubble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          left: { backgroundColor: "#555555" },
+          right: { backgroundColor: "#4838D1" },
+        }}
+      />
+    );
+  };
 
   const renderMessages = (msg) => {
     return msg
@@ -152,6 +164,7 @@ const Chat = ({ navigation, route }) => {
       </View>
       <GiftedChat
         messages={messages}
+        renderBubble={renderBubble}
         onSend={(newMessage) => onSend(newMessage)}
         user={{
           _id: myData.uid,
