@@ -26,7 +26,6 @@ const wait = (timeout) => {
 };
 
 const Profile = ({navigation, route}) => {
-    const prevScreen = route.params.thisScreen
     const [data, setData] = useState({});
     const [currentDocId, setCurrentDocId] = useState("");
 
