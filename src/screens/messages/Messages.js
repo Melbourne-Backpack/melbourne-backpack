@@ -426,9 +426,11 @@ const Messages = ({ navigation, route }) => {
                           numberOfLines={1}
                           ellipsizeMode="tail"
                         >
-                          {friendText[index]
-                            ? item.fullName + ": " + myMessagesData[index]
-                            : "You: " + myMessagesData[index]}
+                          {myMessagesData[index]
+                            ? friendText[index]
+                              ? item.fullName + ": " + myMessagesData[index]
+                              : "You: " + myMessagesData[index]
+                            : ""}
                         </Text>
                       </View>
                     </View>
