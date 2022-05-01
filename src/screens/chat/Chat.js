@@ -9,8 +9,12 @@ import { auth, database, db } from "../../config/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { get, set, ref, onValue, push, update, off } from "firebase/database";
 import {
+  renderActions,
   renderBubble,
+  renderInputToolbar,
+  renderMessage,
   renderMessageText,
+  renderSystemMessage,
 } from "../../components/chat/ChatComponents";
 
 const Chat = ({ navigation, route }) => {
@@ -157,8 +161,12 @@ const Chat = ({ navigation, route }) => {
       </View>
       <GiftedChat
         messages={messages}
+        renderSystemMessage={renderSystemMessage}
         renderBubble={renderBubble}
+        renderMessage={renderMessage}
         renderMessageText={renderMessageText}
+        renderInputToolbar={renderInputToolbar}
+        renderActions={renderActions}
         onSend={(newMessage) => onSend(newMessage)}
         user={{
           _id: myData.uid,
