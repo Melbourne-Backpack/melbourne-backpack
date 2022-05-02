@@ -1,4 +1,11 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Keyboard,
+  Text,
+  TouchableOpacity,
+  View,
+  TouchableWithoutFeedback,
+} from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
@@ -135,48 +142,50 @@ const Chat = ({ navigation, route }) => {
   }
 
   return (
-    <View style={styles.background}>
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <View style={styles.topBar}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Messages", { user: data });
-            }}
-          >
-            <AntDesign
-              name={"left"}
-              size={24}
-              color={WHITE}
-              style={styles.backBtn}
-            />
-          </TouchableOpacity>
-          <Text style={styles.title}>{user.fullName}</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.background}>
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <View style={styles.topBar}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Messages", { user: data });
+              }}
+            >
+              <AntDesign
+                name={"left"}
+                size={24}
+                color={WHITE}
+                style={styles.backBtn}
+              />
+            </TouchableOpacity>
+            <Text style={styles.title}>{user.fullName}</Text>
 
-          <TouchableOpacity style={styles.threeDots}>
-            <Image
-              source={require("../../../assets/three-dots.png")}
-              style={{ width: 22, height: 22 }}
-            />
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.threeDots}>
+              <Image
+                source={require("../../../assets/three-dots.png")}
+                style={{ width: 22, height: 22 }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
+        <GiftedChat
+          messages={messages}
+          renderBubble={renderBubble}
+          renderMessageText={renderMessageText}
+          renderInputToolbar={renderInputToolbar}
+          renderActions={renderActions}
+          renderComposer={renderComposer}
+          renderSend={renderSend}
+          loadEarlier={true}
+          infiniteScroll={true}
+          onSend={(newMessage) => onSend(newMessage)}
+          user={{
+            _id: myData.uid,
+          }}
+        />
+        <KeyboardSpacer />
       </View>
-      <GiftedChat
-        messages={messages}
-        renderBubble={renderBubble}
-        renderMessageText={renderMessageText}
-        renderInputToolbar={renderInputToolbar}
-        renderActions={renderActions}
-        renderComposer={renderComposer}
-        renderSend={renderSend}
-        loadEarlier={true}
-        infiniteScroll={true}
-        onSend={(newMessage) => onSend(newMessage)}
-        user={{
-          _id: myData.uid,
-        }}
-      />
-      <KeyboardSpacer />
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

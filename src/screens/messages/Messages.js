@@ -143,13 +143,6 @@ const Messages = ({ navigation, route }) => {
     }
   };
 
-  useEffect(() => {
-    if (isFocused) {
-      getFriendsData();
-      onLogin();
-    }
-  }, [isFocused]);
-
   const findUser = async (uid) => {
     const mySnapshot = await get(ref(database, `users/${uid}`));
     return mySnapshot.val();
@@ -215,6 +208,13 @@ const Messages = ({ navigation, route }) => {
       console.log("Add friend success");
     }
   };
+
+  useEffect(() => {
+    if (isFocused) {
+      getFriendsData();
+      onLogin();
+    }
+  }, [isFocused]);
 
   const [loaded, error] = useFonts({
     PoppinsThin: require("../../../assets/fonts/Poppins-Thin.ttf"),
