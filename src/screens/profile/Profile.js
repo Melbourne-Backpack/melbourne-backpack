@@ -184,7 +184,8 @@ const Profile = ({ navigation, route }) => {
               onPress={() => {
                 navigation.navigate("Messages", {
                   user: myData,
-                  selectedUser: currentDocId,
+                  selectedUser: data,
+                  currentDocId: currentDocId,
                 });
               }}
             >
