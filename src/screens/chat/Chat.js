@@ -1,4 +1,10 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  KeyboardAvoidingView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
@@ -16,7 +22,6 @@ import {
   renderMessageText,
   renderSend,
 } from "../../components/chat/ChatComponents";
-import KeyboardSpacer from "react-native-keyboard-spacer";
 
 const Chat = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
@@ -160,22 +165,30 @@ const Chat = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <GiftedChat
-        messages={messages}
-        renderBubble={renderBubble}
-        renderMessageText={renderMessageText}
-        renderInputToolbar={renderInputToolbar}
-        renderActions={renderActions}
-        renderComposer={renderComposer}
-        renderSend={renderSend}
-        loadEarlier={true}
-        infiniteScroll={true}
-        onSend={(newMessage) => onSend(newMessage)}
-        user={{
-          _id: myData.uid,
-        }}
-      />
-      <KeyboardSpacer />
+      <KeyboardAvoidingView
+        behavior={"padding"}
+        keyboardVerticalOffset={50}
+        style={{ flex: 1 }}
+      >
+        <GiftedChat
+          messages={messages}
+          minInputToolbarHeight={60}
+          minComposerHeight={50}
+          isKeyboardInternallyHandled={false}
+          renderBubble={renderBubble}
+          renderMessageText={renderMessageText}
+          renderInputToolbar={renderInputToolbar}
+          renderActions={renderActions}
+          renderComposer={renderComposer}
+          renderSend={renderSend}
+          loadEarlier={true}
+          infiniteScroll={true}
+          onSend={(newMessage) => onSend(newMessage)}
+          user={{
+            _id: myData.uid,
+          }}
+        />
+      </KeyboardAvoidingView>
     </View>
   );
 };

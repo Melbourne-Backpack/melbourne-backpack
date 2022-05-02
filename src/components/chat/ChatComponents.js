@@ -3,7 +3,6 @@ import {
   Bubble,
   Composer,
   InputToolbar,
-  Message,
   MessageText,
   Send,
 } from "react-native-gifted-chat";
@@ -55,7 +54,7 @@ const renderActions = (props) => {
     <Actions
       {...props}
       containerStyle={styles.action}
-      icon={() => <Ionicons name="image" size={28} color={LIGHT_PURPLE} />}
+      icon={() => <Ionicons name="image" size={32} color={LIGHT_PURPLE} />}
       options={{
         "Choose From Library": () => {
           console.log("Choose From Library");
@@ -78,7 +77,7 @@ const renderSend = (props) => {
     <Send {...props} disabled={!props.text} containerStyle={styles.sendBtn}>
       <MaterialCommunityIcons
         name="send-circle"
-        size={28}
+        size={36}
         color={LIGHT_PURPLE}
       />
     </Send>

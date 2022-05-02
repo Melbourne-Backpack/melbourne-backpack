@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   inputToolBar: {
     backgroundColor: BACKGROUND,
     borderTopColor: "transparent",
+    paddingTop: 10,
   },
   action: {
     width: "10%",
@@ -45,18 +46,17 @@ const styles = StyleSheet.create({
     color: WHITE,
     borderRadius: 50,
     borderColor: "transparent",
-    alignItems: "center",
-    justifyContent: "center",
     paddingHorizontal: 12,
     marginRight: 10,
     fontSize: 12,
+    paddingTop: 12,
   },
   sendBtn: {
     width: "10%",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 4,
+    marginRight: "2%",
   },
 });
 
