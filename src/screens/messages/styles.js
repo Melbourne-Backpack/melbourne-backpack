@@ -10,6 +10,7 @@ import {
   PLACEHOLDER,
   BLACK,
   SELECTED_BUTTON,
+  RED,
 } from "../../styles/colors";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 15,
+    paddingVertical: 10,
     paddingHorizontal: 10,
   },
   addNewUserText: {
@@ -209,10 +210,21 @@ const styles = StyleSheet.create({
     width: wp(60),
     paddingVertical: 10,
     paddingHorizontal: 10,
+  },
+  addButtonText: {
+    color: WHITE,
+    fontFamily: "PoppinsMedium",
+    textAlign: "center",
+  },
+  cancelButton: {
+    backgroundColor: TEXT_INPUT,
+    width: wp(60),
+    paddingVertical: 10,
+    paddingHorizontal: 10,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
   },
-  addButtonText: {
+  cancelButtonText: {
     color: WHITE,
     fontFamily: "PoppinsMedium",
     textAlign: "center",
@@ -221,6 +233,30 @@ const styles = StyleSheet.create({
   clearIcon: {
     width: 20,
     height: 20,
+  },
+  errorHolder: {
+    width: wp(60),
+    backgroundColor: TEXT_INPUT,
+    paddingVertical: 5,
+  },
+  errorText: {
+    color: RED,
+    fontFamily: "PoppinsMedium",
+    marginLeft: 5,
+  },
+  profileImage: {
+    borderRadius: 80,
+    height: 130,
+    width: 130,
+  },
+  fullName: {
+    color: WHITE,
+    fontFamily: "PoppinsSemiBold",
+  },
+  content: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
   },
 });
 

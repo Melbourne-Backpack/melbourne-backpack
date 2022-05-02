@@ -1,9 +1,11 @@
 import {
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   Text,
   TouchableOpacity,
   View,
+  TouchableWithoutFeedback,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
@@ -140,56 +142,58 @@ const Chat = ({ navigation, route }) => {
   }
 
   return (
-    <View style={styles.background}>
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <View style={styles.topBar}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Messages", { user: data });
-            }}
-          >
-            <AntDesign
-              name={"left"}
-              size={24}
-              color={WHITE}
-              style={styles.backBtn}
-            />
-          </TouchableOpacity>
-          <Text style={styles.title}>{user.fullName}</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.background}>
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <View style={styles.topBar}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Messages", { user: data });
+              }}
+            >
+              <AntDesign
+                name={"left"}
+                size={24}
+                color={WHITE}
+                style={styles.backBtn}
+              />
+            </TouchableOpacity>
+            <Text style={styles.title}>{user.fullName}</Text>
 
-          <TouchableOpacity style={styles.threeDots}>
-            <Image
-              source={require("../../../assets/three-dots.png")}
-              style={{ width: 22, height: 22 }}
-            />
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.threeDots}>
+              <Image
+                source={require("../../../assets/three-dots.png")}
+                style={{ width: 22, height: 22 }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
       <KeyboardAvoidingView
-        behavior={"padding"}
-        keyboardVerticalOffset={50}
-        style={{ flex: 1 }}
+          behavior={"padding"}
+          keyboardVerticalOffset={50}
+          style={{ flex: 1 }}
       >
         <GiftedChat
-          messages={messages}
-          minInputToolbarHeight={60}
-          minComposerHeight={50}
-          isKeyboardInternallyHandled={false}
-          renderBubble={renderBubble}
-          renderMessageText={renderMessageText}
-          renderInputToolbar={renderInputToolbar}
-          renderActions={renderActions}
-          renderComposer={renderComposer}
-          renderSend={renderSend}
-          loadEarlier={true}
-          infiniteScroll={true}
-          onSend={(newMessage) => onSend(newMessage)}
-          user={{
-            _id: myData.uid,
-          }}
+            messages={messages}
+            minInputToolbarHeight={60}
+            minComposerHeight={50}
+            isKeyboardInternallyHandled={false}
+            renderBubble={renderBubble}
+            renderMessageText={renderMessageText}
+            renderInputToolbar={renderInputToolbar}
+            renderActions={renderActions}
+            renderComposer={renderComposer}
+            renderSend={renderSend}
+            loadEarlier={true}
+            infiniteScroll={true}
+            onSend={(newMessage) => onSend(newMessage)}
+            user={{
+              _id: myData.uid,
+            }}
         />
       </KeyboardAvoidingView>
-    </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

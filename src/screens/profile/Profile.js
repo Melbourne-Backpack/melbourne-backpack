@@ -26,6 +26,7 @@ const wait = (timeout) => {
 
 const Profile = ({ navigation, route }) => {
   const [data, setData] = useState({});
+  const [myData, setMyData] = useState({});
   const [currentDocId, setCurrentDocId] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
@@ -42,6 +43,16 @@ const Profile = ({ navigation, route }) => {
       if (docSnap.exists()) {
         setData(docSnap.data());
         setCurrentDocId(docSnap.id);
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+
+  const getMyData = () => {
+    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setMyData(docSnap.data());
       } else {
         console.log("No such document!");
       }
@@ -77,6 +88,7 @@ const Profile = ({ navigation, route }) => {
     });
   };
   useEffect(() => {
+    getMyData();
     if (navigation.getParent()) getCurrentUserData();
     else getOtherUserData();
   }, []);
@@ -118,14 +130,25 @@ const Profile = ({ navigation, route }) => {
         </TouchableOpacity>
         <Text style={styles.title}>Profile</Text>
 
-        <TouchableOpacity
-          style={styles.messenger}
-          onPress={() => {
-            navigation.navigate("Messages", { user: data });
-          }}
-        >
-          <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
-        </TouchableOpacity>
+        {navigation.getParent() ? (
+          <TouchableOpacity
+            style={styles.messenger}
+            onPress={() => {
+              navigation.navigate("Messages", {
+                user: myData,
+              });
+            }}
+          >
+            <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.messenger}>
+            <Image
+              source={require("../../../assets/three-dots.png")}
+              style={{ width: 22, height: 22 }}
+            />
+          </TouchableOpacity>
+        )}
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -146,7 +169,7 @@ const Profile = ({ navigation, route }) => {
             }}
             style={styles.profileImage}
           />
-          {navigation.getParent() && (
+          {navigation.getParent() ? (
             <TouchableOpacity
               style={styles.editProfile}
               onPress={() => {
@@ -154,6 +177,19 @@ const Profile = ({ navigation, route }) => {
               }}
             >
               <Text style={styles.editProfileText}>Edit Profile</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.editProfile}
+              onPress={() => {
+                navigation.navigate("Messages", {
+                  user: myData,
+                  selectedUser: data,
+                  currentDocId: currentDocId,
+                });
+              }}
+            >
+              <Text style={styles.editProfileText}>Send Message</Text>
             </TouchableOpacity>
           )}
         </View>

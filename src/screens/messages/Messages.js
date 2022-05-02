@@ -22,6 +22,7 @@ import { useIsFocused } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import Modal from "react-native-modal";
 import { Dimensions } from "react-native";
+import AlertModal from "../../components/alert-modal/AlertModal";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -46,6 +47,7 @@ const Messages = ({ navigation, route }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [addNew, setAddNew] = useState(false);
   const [uidToAdd, setUidToAdd] = useState("");
+  const [error, setError] = useState(null);
 
   const isFocused = useIsFocused();
 
@@ -143,13 +145,6 @@ const Messages = ({ navigation, route }) => {
     }
   };
 
-  useEffect(() => {
-    if (isFocused) {
-      getFriendsData();
-      onLogin();
-    }
-  }, [isFocused]);
-
   const findUser = async (uid) => {
     const mySnapshot = await get(ref(database, `users/${uid}`));
     return mySnapshot.val();
@@ -166,6 +161,7 @@ const Messages = ({ navigation, route }) => {
     if (user) {
       if (user.uid === myData.uid) {
         console.log("Cant add yourself");
+        setError("Cannot add yourself");
         return;
       }
 
@@ -173,6 +169,7 @@ const Messages = ({ navigation, route }) => {
         for (let i = 0; i < myData.friends.length; i++) {
           if (myData.friends[i].uid === user.uid) {
             console.log("Cant add this user twice");
+            setError("*User is already in chat list");
             return;
           }
         }
@@ -213,10 +210,23 @@ const Messages = ({ navigation, route }) => {
         ],
       });
       console.log("Add friend success");
+      setAddNew(false);
+      setUidToAdd("");
     }
   };
 
-  const [loaded, error] = useFonts({
+  useEffect(() => {
+    if (isFocused) {
+      getFriendsData();
+      onLogin();
+      if (route.params.currentDocId) {
+        setAddNew(true);
+        setUidToAdd(route.params.currentDocId);
+      }
+    }
+  }, [isFocused]);
+
+  const [loaded, errorFont] = useFonts({
     PoppinsThin: require("../../../assets/fonts/Poppins-Thin.ttf"),
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
@@ -317,12 +327,33 @@ const Messages = ({ navigation, route }) => {
             </TouchableOpacity>
             <Modal
               isVisible={addNew}
-              onBackdropPress={() => setAddNew(false)}
+              onBackdropPress={() => {
+                if (route.params.selectedUser === null) {
+                  setAddNew(false);
+                  setError(null);
+                  setUidToAdd("");
+                }
+              }}
               animationIn={"fadeIn"}
               animationOut={"fadeOut"}
             >
               <View style={{ alignItems: "center", justifyContent: "center" }}>
                 <View style={styles.addNewUserContainer}>
+                  {route.params.selectedUser && (
+                    <View style={styles.content}>
+                      <Image
+                        source={{ uri: route.params.selectedUser.avatar }}
+                        style={styles.profileImage}
+                      />
+                    </View>
+                  )}
+                  {route.params.selectedUser && (
+                    <View style={styles.content}>
+                      <Text style={styles.fullName}>
+                        {route.params.selectedUser.fullName}
+                      </Text>
+                    </View>
+                  )}
                   <View style={styles.addNewUserHolder}>
                     <TextInput
                       style={styles.addNewUserText}
@@ -345,15 +376,36 @@ const Messages = ({ navigation, route }) => {
                     </TouchableOpacity>
                   </View>
                 </View>
+                {error === null ? null : (
+                  <View style={styles.errorHolder}>
+                    <Text style={styles.errorText}>{error}</Text>
+                  </View>
+                )}
                 <TouchableOpacity
                   style={styles.addButton}
                   onPress={() => {
                     onAddFriend(uidToAdd);
-                    setAddNew(false);
-                    setUidToAdd("");
+                    if (uidToAdd === "") {
+                      setError("*User ID is required");
+                    }
                   }}
                 >
                   <Text style={styles.addButtonText}>Add</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.cancelButton}
+                  onPress={() => {
+                    if (
+                      route.params.selectedUser &&
+                      route.params.currentDocId
+                    ) {
+                      navigation.navigate("Content", { screen: "Community" });
+                    } else {
+                      setAddNew(false);
+                    }
+                  }}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
                 </TouchableOpacity>
               </View>
             </Modal>
