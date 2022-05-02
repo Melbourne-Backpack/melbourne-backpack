@@ -17,6 +17,7 @@ const CommunityScreen = ({navigation}) => {
     }
     useEffect(() => {
         fetchData()
+        setCommunity([])
     }, [])
     const mostLikeYouMaxCards = 4;
     const self = auth.currentUser.uid;
@@ -154,6 +155,7 @@ const CommunityScreen = ({navigation}) => {
                                 extraData={community}
                                 data={mostLikeYouDataForDisplay}
                                 horizontal={true}
+                                keyExtractor={user => user.id}
                                 showsHorizontalScrollIndicator={false}
                                 renderItem={(user) => {
                                     return (

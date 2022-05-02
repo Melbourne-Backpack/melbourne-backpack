@@ -78,6 +78,7 @@ const CommunityDisplayByFilter = ({heading, optionList, userList, filterMaxCards
                         data={temp.slice(0, filterMaxCards)}
                         horizontal={true}
                         numColumns={1}
+                        keyExtractor={user => user.id}
                         renderItem={(user) => {
                             return (
                                 <CommunityCardLarge

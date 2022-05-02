@@ -86,6 +86,7 @@ const CommunityFilter = ({headingList, optionList, navigation, userList}) => {
                                 <CommunityDisplayByFilter userList={userList} heading={heading}
                                                           filterMaxCards={filterMaxCards}
                                                           optionList={optionList}
+                                                          key={heading}
                                                           navigation={navigation}/>
                             );
                     })}
