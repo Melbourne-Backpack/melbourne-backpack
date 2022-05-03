@@ -8,7 +8,7 @@ import {
   FlatList,
   ImageBackground,
 } from "react-native";
-import AntDesignIcons from "react-native-vector-icons/AntDesign";
+import { AntDesign } from "@expo/vector-icons";
 
 import { Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
@@ -96,7 +96,7 @@ const Onboarding = ({ navigation }) => {
           >
             {/* Back icon */}
             {/* Hide back button on 1st screen */}
-            <AntDesignIcons
+            <AntDesign
               name="left"
               style={{
                 fontSize: 25,
@@ -174,11 +174,11 @@ const Onboarding = ({ navigation }) => {
               }}
               activeOpacity={0.5}
             >
-              <AntDesignIcons
+              <AntDesign
                 name="right"
                 style={{ fontSize: 18, color: COLORS.white, opacity: 0.3 }}
               />
-              <AntDesignIcons
+              <AntDesign
                 name="right"
                 style={{ fontSize: 25, color: COLORS.white, marginLeft: -15 }}
               />
@@ -207,7 +207,7 @@ const Onboarding = ({ navigation }) => {
               >
                 Get Started
               </Text>
-              <AntDesignIcons
+              <AntDesign
                 name="right"
                 style={{
                   fontSize: 18,
@@ -216,7 +216,7 @@ const Onboarding = ({ navigation }) => {
                   marginLeft: SIZES.base,
                 }}
               />
-              <AntDesignIcons
+              <AntDesign
                 name="right"
                 style={{ fontSize: 25, color: COLORS.white, marginLeft: -15 }}
               />
