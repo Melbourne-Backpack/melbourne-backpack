@@ -17,17 +17,15 @@ import {useCallback, useEffect, useState} from "react";
 import {doc, getDoc} from "firebase/firestore";
 import {useFonts} from "expo-font";
 import AlertModal from "../../components/alert-modal/AlertModal";
-import {SafeAreaView} from "react-native-web";
-
-// const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
 const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
-const Profile = ({navigation, route}) => {
-    const [data, setData] = useState({});
-    const [currentDocId, setCurrentDocId] = useState("");
+const Profile = ({ navigation, route }) => {
+  const [data, setData] = useState({});
+  const [myData, setMyData] = useState({});
+  const [currentDocId, setCurrentDocId] = useState("");
 
     const [showAlert, setShowAlert] = useState(false);
 
@@ -49,23 +47,33 @@ const Profile = ({navigation, route}) => {
         });
     };
 
-    const getCurrentUserDataOnRefresh = () => {
-        getDoc(
-            doc(
-                db,
-                "users",
-                navigation.getParent() ? auth.currentUser.uid : route.params.user
-            )
-        ).then((docSnap) => {
-            if (docSnap.exists()) {
-                setData(docSnap.data());
-                setCurrentDocId(docSnap.id);
-                onRefresh();
-            } else {
-                console.log("No such document!");
-            }
-        });
-    };
+  const getMyData = () => {
+    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setMyData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+
+  const getCurrentUserDataOnRefresh = () => {
+    getDoc(
+      doc(
+        db,
+        "users",
+        navigation.getParent() ? auth.currentUser.uid : route.params.user
+      )
+    ).then((docSnap) => {
+      if (docSnap.exists()) {
+        setData(docSnap.data());
+        setCurrentDocId(docSnap.id);
+        onRefresh();
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
 
     const getOtherUserData = () => {
         getDoc(doc(db, "users", route.params.user)).then((docSnap) => {
@@ -85,9 +93,20 @@ const Profile = ({navigation, route}) => {
         PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
         PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
     });
-    if (!loaded) {
-        return null;
-    }
+  };
+
+  useEffect(() => {
+    getMyData();
+    if (navigation.getParent()) getCurrentUserData();
+    else getOtherUserData();
+  }, []);
+  const [loaded, error] = useFonts({
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsBold: require("../../../assets/fonts/Poppins-Bold.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
 
     const setShowAlertFunction = (showAlert) => {
         setShowAlert(showAlert);
@@ -119,45 +138,69 @@ const Profile = ({navigation, route}) => {
                 </TouchableOpacity>
                 <Text style={styles.title}>Profile</Text>
 
-                <TouchableOpacity
-                    style={styles.messenger}
-                    onPress={() => {
-                        navigation.navigate("Chat");
-                    }}
-                >
-                    <Ionicons name="chatbubble-ellipses" size={27} color={WHITE}/>
-                </TouchableOpacity>
-            </View>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={getCurrentUserDataOnRefresh}
-                        style={styles.refreshing}
-                        title={"Refreshing"}
-                        titleColor={WHITE}
-                    />
-                }
+        {navigation.getParent() ? (
+          <TouchableOpacity
+            style={styles.messenger}
+            onPress={() => {
+              navigation.navigate("Messages", {
+                user: myData,
+              });
+            }}
+          >
+            <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.messenger}>
+            <Image
+              source={require("../../../assets/three-dots.png")}
+              style={{ width: 22, height: 22 }}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={getCurrentUserDataOnRefresh}
+            style={styles.refreshing}
+            title={"Refreshing"}
+            titleColor={WHITE}
+          />
+        }
+      >
+        <View style={styles.profileImageWrapper}>
+          <Image
+            source={{
+              uri: data.avatar,
+            }}
+            style={styles.profileImage}
+          />
+          {navigation.getParent() ? (
+            <TouchableOpacity
+              style={styles.editProfile}
+              onPress={() => {
+                navigation.navigate("EditProfile");
+              }}
             >
-                <View style={styles.profileImageWrapper}>
-                    <Image
-                        source={{
-                            uri: data.avatar,
-                        }}
-                        style={styles.profileImage}
-                    />
-                    {navigation.getParent() && (
-                        <TouchableOpacity
-                            style={styles.editProfile}
-                            onPress={() => {
-                                navigation.navigate("EditProfile");
-                            }}
-                        >
-                            <Text style={styles.editProfileText}>Edit Profile</Text>
-                        </TouchableOpacity>
-                    )}
-                </View>
+              <Text style={styles.editProfileText}>Edit Profile</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.editProfile}
+              onPress={() => {
+                navigation.navigate("Messages", {
+                  user: myData,
+                  selectedUser: data,
+                  currentDocId: currentDocId,
+                });
+              }}
+            >
+              <Text style={styles.editProfileText}>Send Message</Text>
+            </TouchableOpacity>
+          )}
+        </View>
 
                 <View style={styles.userContentDisplay}>
                     <AlertModal
@@ -250,7 +293,21 @@ const Profile = ({navigation, route}) => {
                 )}
             </ScrollView>
         </View>
-    );
+        {currentDocId === auth.currentUser.uid ? (
+          <View style={styles.logoutBtnWrapper}>
+            <TouchableOpacity
+              style={styles.logoutBtn}
+              onPress={() => {
+                setShowAlertFunction(true);
+              }}
+            >
+              <Text style={styles.logoutBtnText}>Logout</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+      </ScrollView>
+    </View>
+  );
 };
 
 export default Profile;

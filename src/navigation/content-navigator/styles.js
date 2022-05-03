@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { BLACK, GREY, WHITE } from "../../styles/colors";
+import { BLACK } from "../../styles/colors";
 
 const styles = StyleSheet.create({
   tabBar: {

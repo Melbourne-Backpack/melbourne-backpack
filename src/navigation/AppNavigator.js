@@ -17,6 +17,7 @@ import Terms from "../screens/policy/Terms";
 import Privacy from "../screens/policy/Privacy";
 import Onboarding from "../screens/onboarding/Onboarding";
 import EditProfile from "../screens/edit-profile/EditProfile";
+import Messages from "../screens/messages/Messages";
 import Chat from "../screens/chat/Chat";
 import CommunityScreenSeeMore from "../screens/community-see-more/CommunityScreenSeeMore";
 
@@ -57,6 +58,7 @@ const AppNavigator = () => {
             <Stack.Screen name="Profile" component={Profile}/>
             <Stack.Screen name="CommunitySeeMore" component={CommunityScreenSeeMore}/>
             <Stack.Screen name="EditProfile" component={EditProfile}/>
+               <Stack.Screen name="Messages" component={Messages} />
             <Stack.Screen name="Chat" component={Chat}/>
         </Stack.Navigator>
     );
