@@ -17,40 +17,56 @@ import Review from "../../components/housing-details/reviews/Review";
 import SectionInfo from "../../components/housing-details/section-info/SectionInfo";
 import StarRatingView from "../../components/housing-details/StarRatingView";
 import StarRating from "react-native-star-rating-widget";
-import { postReview } from "../../api/handleReview";
-import {
-  collection,
-  doc,
-  getDoc,
-  query,
-  where,
-  onSnapshot,
-} from "firebase/firestore";
+import { updateRating, postReview } from "../../api/handleReview";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { formatPara } from "../../utils/Formatting";
 
 const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
+  const housingData = route.params.data;
+  console.log(housingData.rating);
+
   const [myComment, setMyComment] = useState("");
   const [myRating, setMyRating] = useState(null);
-  const [housingData, setHousingData] = useState({});
-  const [housingDesc, setHousingDesc] = useState("");
-  const [housingName, setHousingName] = useState("");
   const [userReviews, setUserReviews] = useState([]);
-  const id = route.params.id;
+  const [onlineReviews, setOnlineReviews] = useState([]);
+  const [housingRating, setHousingRating] = useState();
+  const [ratingStat, setRatingStat] = useState({});
 
-  const getData = () => {
-    getDoc(doc(db, "housing", id)).then((docSnap) => {
-      if (docSnap.exists()) {
-        setHousingData(docSnap.data());
-        setHousingDesc(formatData(docSnap.data().description));
-        setHousingName(docSnap.data().name.toUpperCase());
-        getReview(docSnap.data()["category_id"]);
-      } else {
-        console.log("No such document!");
-      }
-    });
+  const filterMaxCardsPerPageInitial = 5;
+  const filterMaxCardsPerPage = 5;
+  const [filterMaxCards, setFilterMaxCards] = useState(
+    filterMaxCardsPerPageInitial
+  );
+  const [filterMaxCards2, setFilterMaxCards2] = useState(
+    filterMaxCardsPerPageInitial
+  );
+
+  const getOnlineReview = (categoryId) => {
+    const q = query(
+      collection(db, "external_reviews"),
+      where("category_id", "==", parseInt(categoryId))
+    );
+    try {
+      onSnapshot(q, (querySnapshot) => {
+        const reviews = [];
+        let total = 0;
+        querySnapshot.forEach((doc) => {
+          reviews.push(doc.data());
+          total += doc.data().rating;
+        });
+        setOnlineReviews(reviews);
+        setRatingStat({ total: total, length: reviews.length });
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const getReview = async (categoryId) => {
+  const getReview = (categoryId) => {
+    getOnlineReview(categoryId);
+    console.log(ratingStat);
+
     const q = query(
       collection(db, "reviews"),
       where("category_id", "==", categoryId)
@@ -58,78 +74,28 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
     try {
       onSnapshot(q, (querySnapshot) => {
         const reviews = [];
+        let sum = ratingStat.total;
         querySnapshot.forEach((doc) => {
           reviews.push(doc.data());
+          sum += doc.data().rating;
         });
         setUserReviews(reviews);
+        setHousingRating(sum / (ratingStat.length + reviews.length));
       });
-      // const querySnapshot = await getDocs(q);
-      // const reviews = [];
-      // querySnapshot.forEach((doc) => {
-      //   reviews.push(doc.data());
-      // });
-      // setUserReviews(reviews);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    getReview(housingData.category_id);
+    getOnlineReview(housingData.category_id);
 
-  const formatData = (para) => {
-    if (para[para.length - 1] !== ".") {
-      return para.replace(/(^|[.!?]\s+)([a-z])/g, (c) => c.toUpperCase()) + ".";
-    } else {
-      return para.replace(/(^|[.!?]\s+)([a-z])/g, (c) => c.toUpperCase());
-    }
-  };
-
-  const data = {
-    name: "4 bedroom apartment deluxe",
-    building: "Dwell Student Housing",
-    address: "250 Spencer Street, Melbourne VIC 3000",
-    rating: 4.3,
-    tags: ["Northwest", "Apartment", "Student Housing"],
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an " +
-      "unknown printer took a galley of type and scrambled it to make a type specimen book. It " +
-      "has survived not only five centuries, but also the leap into electronic typesetting, " +
-      "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset " +
-      "sheets containing Lorem Ipsum passages, and more recently with desktop publishing software " +
-      "like Aldus PageMaker including versions of Lorem Ipsum. \n\nContrary to popular belief, Lorem " +
-      "Ipsum is not simply random text. It has roots in a piece of classical Latin literature from " +
-      "45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney " +
-      "College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem " +
-      "Ipsum passage, and going through the cites of the word in classical literature, discovered the " +
-      'undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum ' +
-      'et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise ' +
-      "on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, " +
-      '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
-    reviews: [
-      {
-        username: "Go Junho",
-        avatar: "",
-        rating: 4.5,
-        comment:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet lacinia aliquam. " +
-          "Integer non augue dui. Proin a odio rhoncus, fermentum magna ac, maximus quam. Curabitur eget " +
-          "risus ex. Maecenas egestas bibendum urna iaculis ullamcorper. Cras sed egestas velit, eget " +
-          "facilisis tellus. Curabitur ac ipsum eu ex pharetra bibendum.",
-      },
-      {
-        username: "Han Sooyoung",
-        avatar: "",
-        rating: 4.2,
-        comment:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet lacinia aliquam. " +
-          "Integer non augue dui. Proin a odio rhoncus, fermentum magna ac, maximus quam. Curabitur eget " +
-          "risus ex. Maecenas egestas bibendum urna iaculis ullamcorper.",
-      },
-    ],
-  };
+    return () => {
+      getReview(housingData.category_id);
+      getOnlineReview(housingData.category_id);
+    };
+  }, [housingRating]);
 
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
@@ -148,7 +114,9 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         <TouchableOpacity onPress={() => goBack()}>
           <Ionicons name="chevron-back" size={30} color={WHITE} />
         </TouchableOpacity>
-        <Text style={[styles.building, styles.text]}>{housingName}</Text>
+        <Text style={[styles.building, styles.text]}>
+          {housingData.name.toUpperCase()}
+        </Text>
       </View>
 
       <ScrollView style={styles.wrapper}>
@@ -157,22 +125,27 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         <Text style={[styles.text, styles.price]}>${housingData.price}</Text>
         <Text style={[styles.text, styles.address]}>{housingData.address}</Text>
 
-        <View style={styles.starContainer}>
-          <StarRatingView width={30} height={30} rating={data.rating} />
-          <Text style={[styles.text, styles.rating]}>{data.rating}</Text>
-        </View>
+        {housingRating ? (
+          <View style={styles.starContainer}>
+            <StarRatingView width={25} height={25} rating={housingRating} />
+            <Text style={[styles.text, styles.rating]}>
+              {housingRating.toFixed(2)}
+            </Text>
+          </View>
+        ) : null}
 
         <View style={styles.tagContainer}>
-          {data.tags.map((tag, id) => {
-            return <Tag key={id} text={tag} />;
-          })}
+          <Tag text={`${housingData.bed} bedroom`} />
+          <Tag text={`${housingData.bath} bathroom`} />
         </View>
 
         <View style={styles.sectionHeader}>
           <Text style={[styles.text, styles.sectionTitle]}>Description</Text>
         </View>
 
-        <Text style={[styles.text, styles.desc]}>{housingDesc}</Text>
+        <Text style={[styles.text, styles.desc]}>
+          {formatPara(housingData.description)}
+        </Text>
         <SectionInfo title="Add your review">
           <TextInput
             placeholder="Enter comment..."
@@ -198,6 +171,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
               style={styles.btn}
               onPress={() => {
                 postReview(housingData["category_id"], myComment, myRating);
+                updateRating(housingData.id, housingRating);
                 setMyComment("");
                 setMyRating(0);
               }}
@@ -207,11 +181,63 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
           </View>
         </SectionInfo>
 
-        <View style={styles.reviewContainer}>
+        <View>
           <SectionInfo title="RMIT students' reviews">
-            {userReviews.map((review, id) => {
+            {userReviews.slice(0, filterMaxCards).map((review, id) => {
               return <Review key={id} review={review} />;
             })}
+            <View style={styles.seeMoreBtnContainer}>
+              {filterMaxCards >= userReviews.length &&
+              userReviews.length >= filterMaxCardsPerPageInitial ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    setFilterMaxCards(filterMaxCardsPerPageInitial);
+                  }}
+                >
+                  <Text style={styles.seeMoreBtn}>See less</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    setFilterMaxCards(
+                      (prevState) => prevState + filterMaxCardsPerPage
+                    );
+                  }}
+                >
+                  <Text style={styles.seeMoreBtn}>See more</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </SectionInfo>
+        </View>
+
+        <View style={styles.reviewContainer}>
+          <SectionInfo title="Online reviews">
+            {onlineReviews.slice(0, filterMaxCards2).map((review, id) => {
+              return <Review key={id} review={review} anonymous />;
+            })}
+            <View style={styles.seeMoreBtnContainer}>
+              {filterMaxCards2 >= onlineReviews.length &&
+              onlineReviews.length >= filterMaxCardsPerPageInitial ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    setFilterMaxCards2(filterMaxCardsPerPageInitial);
+                  }}
+                >
+                  <Text style={styles.seeMoreBtn}>See less</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    setFilterMaxCards2(
+                      (prevState) => prevState + filterMaxCardsPerPage
+                    );
+                  }}
+                >
+                  <Text style={styles.seeMoreBtn}>See more</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </SectionInfo>
         </View>
       </ScrollView>
