@@ -219,7 +219,7 @@ const Onboarding = ({ navigation }) => {
               <AntDesign
                 name="right"
                 style={{
-                  fontSize: 18,
+                  fontFamily: "PoppinsExtraBold",
                   color: COLORS.white,
                   opacity: 0.3,
                   marginLeft: SIZES.base,
