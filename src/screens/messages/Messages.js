@@ -22,7 +22,6 @@ import { useIsFocused } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import Modal from "react-native-modal";
 import { Dimensions } from "react-native";
-import AlertModal from "../../components/alert-modal/AlertModal";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
