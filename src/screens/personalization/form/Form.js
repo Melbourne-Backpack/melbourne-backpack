@@ -58,6 +58,7 @@ const Form = ({ navigation }) => {
     error: "",
     valid: false,
   });
+
   const [hasPermission, setHasPermission] = useState(null);
 
   const [selectedItem, setSelectedItem] = useState(null);
@@ -85,7 +86,9 @@ const Form = ({ navigation }) => {
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 1,
+        maxWidth: 500,
+        maxHeight: 500,
+        quality: 0.5,
       });
 
       // console.log(result);
