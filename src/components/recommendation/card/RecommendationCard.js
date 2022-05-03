@@ -38,49 +38,50 @@ const RecommendationCard = ({ data, housing, transport }) => {
     PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
   });
 
-  const calculateDistanceFromCoordinates = (lat2, long2) => {
-    const distanceUrl = `http://dev.virtualearth.net/REST/v1/Routes/Walking?wayPoint.1=${lat},${long}&wayPoint.2=${lat2},${long2}&key=${DISTANCE_CALCULATOR_KEY}`;
-    try {
-      fetch(distanceUrl, {
-        method: "GET",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setDistance(
-            data["resourceSets"][0]["resources"][0]["travelDistance"]
-          );
-        });
-    } catch (e) {
-      console.log(e.message());
-    }
-  };
+    const calculateDistanceFromCoordinates = (lat2, long2) => {
+        const distanceUrl = `http://dev.virtualearth.net/REST/v1/Routes/Walking?wayPoint.1=${lat},${long}&wayPoint.2=${lat2},${long2}&key=${DISTANCE_CALCULATOR_KEY}`;
+        try {
+            fetch(distanceUrl, {
+                method: "GET",
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    setDistance(
+                        data["resourceSets"][0]["resources"][0]["travelDistance"]
+                    );
+                });
+        } catch (e) {
+            console.log(e.message());
+        }
+    };
 
-  useEffect(() => {
-    if (data.address !== undefined) {
-      setAddress(Capitalize(data.address));
-      const query = address;
-      const url = Platform.select({
-        ios: `maps:0,0?q=${query}`,
-        android: `geo:0,0?q=${query}`,
-      });
-      setAddressLink(url);
-    }
-    if (transport) {
-      if (data) {
-        calculateDistanceFromCoordinates(data["stopLat"], data["stopLong"]);
-      }
-      if (data.stopName !== undefined && data.stopName.length > 0) {
-        const type = data.transportType;
-        const name = data.stopName;
-        const query = type + " stop " + name;
-        const url = Platform.select({
-          ios: `maps:0,0?q=${query}`,
-          android: `geo:0,0?q=${query}`,
-        });
-        setAddressLink(url);
-      }
-    }
-  }, [data]);
+    useEffect(() => {
+        if (data.address !== undefined) {
+            setAddress(Capitalize(data.address));
+            const query = Capitalize(data.address)
+            const url = Platform.select({
+                ios: `maps:0,0?q=${query}`,
+                android: `geo:0,0?q=${query}`,
+            })
+            setAddressLink(url)
+        }
+        if (transport) {
+            if (data) {
+                calculateDistanceFromCoordinates(data["stopLat"], data["stopLong"]);
+            }
+            if (data.stopName !== undefined && data.stopName.length > 0) {
+                const type = data.transportType
+                const name = data.stopName
+                const query = (type + " stop " + name)
+                const url = Platform.select({
+                    ios: `maps:0,0?q=${query}`,
+                    android: `geo:0,0?q=${query}`,
+                })
+                setAddressLink(url)
+                console.log(url)
+            }
+        }
+    }, [data]);
 
   if (!loaded) {
     return null;

@@ -90,7 +90,7 @@ const SignIn = ({ navigation }) => {
     setTimeout(() => {
       setShowAlert(false);
       getData();
-    }, 4000);
+    }, 1000);
   };
 
   const checkValidate = (email, password) => {
