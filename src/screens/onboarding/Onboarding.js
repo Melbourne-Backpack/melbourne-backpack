@@ -109,6 +109,7 @@ const Onboarding = ({ navigation }) => {
               name="left"
               style={{
                 fontFamily: "PoppinsExtraBold",
+                fontSize: 40,
                 color: COLORS.white,
                 opacity: currentPage === 0 ? 0 : 1,
               }}
@@ -120,7 +121,7 @@ const Onboarding = ({ navigation }) => {
           <TouchableOpacity onPress={handleSkipToEnd}>
             <Text
               style={{
-                fontSize: 18,
+                fontFamily: "PoppinsRegular",
                 color: COLORS.white,
                 opacity: currentPage === data.length - 1 ? 0 : 1,
               }}
@@ -185,11 +186,20 @@ const Onboarding = ({ navigation }) => {
             >
               <AntDesign
                 name="right"
-                style={{ fontSize: 18, color: COLORS.white, opacity: 0.3 }}
+                style={{
+                  fontFamily: "PoppinsRegular",
+                  color: COLORS.white,
+                  opacity: 0.3,
+                }}
               />
               <AntDesign
                 name="right"
-                style={{ fontSize: 25, color: COLORS.white, marginLeft: -15 }}
+                style={{
+                  fontFamily: "PoppinsExtraBold",
+                  fontSize: 40,
+                  color: COLORS.white,
+                  marginLeft: -15,
+                }}
               />
             </TouchableOpacity>
           ) : (
@@ -210,7 +220,7 @@ const Onboarding = ({ navigation }) => {
               <Text
                 style={{
                   color: COLORS.white,
-                  fontSize: 18,
+                  fontFamily: "PoppinsRegular",
                   marginLeft: SIZES.base,
                 }}
               >
@@ -220,6 +230,7 @@ const Onboarding = ({ navigation }) => {
                 name="right"
                 style={{
                   fontFamily: "PoppinsExtraBold",
+                  fontSize: 40,
                   color: COLORS.white,
                   opacity: 0.3,
                   marginLeft: SIZES.base,
@@ -227,7 +238,12 @@ const Onboarding = ({ navigation }) => {
               />
               <AntDesign
                 name="right"
-                style={{ fontSize: 25, color: COLORS.white, marginLeft: -15 }}
+                style={{
+                  fontFamily: "PoppinsExtraBold",
+                  fontSize: 40,
+                  color: COLORS.white,
+                  marginLeft: -15,
+                }}
               />
             </TouchableOpacity>
           )}
@@ -266,9 +282,9 @@ const Onboarding = ({ navigation }) => {
           <Text
             style={{
               color: COLORS.white,
-              fontSize: 30,
+              fontFamily: "PoppinsExtraBold",
+              fontSize: 40,
               textAlign: "center",
-              fontWeight: "bold",
             }}
           >
             {item.title}

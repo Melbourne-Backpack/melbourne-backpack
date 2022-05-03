@@ -1,8 +1,18 @@
 import { Image, ImageBackground, Text, View } from "react-native";
 import styles from "./styles";
+import { useFonts } from "expo-font";
 
 // use replace instead of navigate to avoid the back button on Android
 const SplashScreen = ({ navigation }) => {
+  const [loaded, error] = useFonts({
+    PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
   setTimeout(() => {
     navigation.replace("Onboarding");
   }, 3000);
