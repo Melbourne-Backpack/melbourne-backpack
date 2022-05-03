@@ -2,11 +2,8 @@ import { Text, View, ImageBackground } from "react-native";
 import styles from "./styles";
 import { TouchableOpacity } from "react-native";
 import { useFonts } from "expo-font";
-import { useContext } from "react";
-import { AuthContext } from "../../../AuthProvider";
 
 const HomeScreen = ({ navigation }) => {
-  const { setIsLoggedIn } = useContext(AuthContext);
   // handle font
   const [loaded, error] = useFonts({
     PoppinsSemiBold: require("../../../assets/fonts/Poppins-SemiBold.ttf"),
