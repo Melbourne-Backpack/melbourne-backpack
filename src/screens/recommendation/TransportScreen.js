@@ -14,7 +14,7 @@ const TransportScreen = () => {
 
     const lat = "-37.8080770201347";
     const long = "144.96268921184907";
-    const dataUrl = `http://timetableapi.ptv.vic.gov.au/v3/stops/location/${lat},${long}?devid=${String(DEVID)}&signature=${String(TRANSPORT_SIGNATURE)}`;
+    const dataUrl = `http://timetableapi.ptv.vic.gov.au/v3/stops/location/${lat},${long}?devid=${DEVID}&signature=${TRANSPORT_SIGNATURE}`;
 
     const getRouteType = () => {
         fetch(typeUrl)
@@ -28,8 +28,7 @@ const TransportScreen = () => {
         fetch(dataUrl)
             .then((res) => res.json())
             .then((data) => {
-                if (data.exists)
-                    setRawData(data["stops"]);
+                setRawData(data["stops"]);
             });
     };
 
@@ -37,8 +36,7 @@ const TransportScreen = () => {
         let routeName = "";
         routeType.map((route) => {
             if (route["route_type"] === type) {
-                if (data.exists)
-                    routeName = route["route_type_name"];
+                routeName = route["route_type_name"];
             }
         });
         return routeName;
