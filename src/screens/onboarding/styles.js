@@ -4,7 +4,6 @@ import { BACKGROUND, PURPLE_BLUE, WHITE } from "../../styles/colors";
 
 export const COLORS = {
   primary: PURPLE_BLUE,
-
   white: WHITE,
   background: BACKGROUND,
 };

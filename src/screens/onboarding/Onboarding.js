@@ -76,6 +76,15 @@ const Onboarding = ({ navigation }) => {
     });
   };
 
+  const [loaded, error] = useFonts({
+    PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
+    PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
   const renderTopSection = () => {
     return (
       <SafeAreaView>
@@ -99,7 +108,7 @@ const Onboarding = ({ navigation }) => {
             <AntDesign
               name="left"
               style={{
-                fontSize: 25,
+                fontFamily: "PoppinsExtraBold",
                 color: COLORS.white,
                 opacity: currentPage === 0 ? 0 : 1,
               }}
@@ -267,7 +276,7 @@ const Onboarding = ({ navigation }) => {
           <Text
             style={{
               color: COLORS.white,
-              fontSize: 18,
+              fontFamily: "PoppinsRegular",
               textAlign: "center",
               marginTop: 15,
               lineHeight: 28,
