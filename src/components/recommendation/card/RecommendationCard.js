@@ -59,7 +59,7 @@ const RecommendationCard = ({data, housing, transport}) => {
     useEffect(() => {
         if (data.address !== undefined) {
             setAddress(Capitalize(data.address));
-            const query = address
+            const query = Capitalize(data.address)
             const url = Platform.select({
                 ios: `maps:0,0?q=${query}`,
                 android: `geo:0,0?q=${query}`,

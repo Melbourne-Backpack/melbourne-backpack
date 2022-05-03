@@ -214,11 +214,11 @@ const HousingFilter = ({
                         data={housingData.slice(0, filterMaxCards)}
                         horizontal={false}
                         numColumns={1}
+                        keyExtractor={item => item.id}
                         renderItem={(info) => {
                             if (isHousing) {
                                 return (
                                     <RecommendationCard
-                                        key={info.index}
                                         data={info.item}
                                         housing={true}
                                         transport={transport}

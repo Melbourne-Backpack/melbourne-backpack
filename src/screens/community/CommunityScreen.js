@@ -17,6 +17,7 @@ const CommunityScreen = ({navigation}) => {
     }
     useEffect(() => {
         fetchData()
+        setCommunity([])
     }, [])
     const mostLikeYouMaxCards = 4;
     const self = auth.currentUser.uid;
@@ -130,6 +131,10 @@ const CommunityScreen = ({navigation}) => {
             id: 10,
             name: "Digital Marketing",
         },
+        {
+            id: 11,
+            name: "Engineer",
+        }
     ];
 
     let mostLikeYouDataForDisplay
@@ -154,6 +159,7 @@ const CommunityScreen = ({navigation}) => {
                                 extraData={community}
                                 data={mostLikeYouDataForDisplay}
                                 horizontal={true}
+                                keyExtractor={user => user.id}
                                 showsHorizontalScrollIndicator={false}
                                 renderItem={(user) => {
                                     return (
@@ -170,18 +176,15 @@ const CommunityScreen = ({navigation}) => {
                             />
                         </SafeAreaView>
                     </View>
-                    <View style={styles.communityListContainer}>
-                        <Text style={styles.communityListText}>Community</Text>
-                        <View>
-                            {community.length > 0 ?
-                                <CommunityFilter
-                                    headingList={["campus", "subjects"]}
-                                    optionList={[campus, topic]}
-                                    navigation={navigation}
-                                    userList={community}
-                                /> : null}
-                        </View>
-                    </View>
+
+                    {community.length > 0 ?
+                        <CommunityFilter
+                            headingList={["campus", "subjects"]}
+                            optionList={[campus, topic]}
+                            navigation={navigation}
+                            userList={community}
+                        /> : null}
+
                 </View>
             )
         }}/>
