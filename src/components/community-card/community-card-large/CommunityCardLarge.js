@@ -53,11 +53,6 @@ const CommunityCardLarge = ({
                         <Text style={styles.userCampus}>{campus}</Text>
                     </View>
                 </View>
-                <View style={styles.userContentColumn}>
-                    <TouchableOpacity style={styles.detailBtn}>
-                        <AntDesign name="message1" size={24} color="white"/>
-                    </TouchableOpacity>
-                </View>
             </View>
         </TouchableOpacity>
     );
