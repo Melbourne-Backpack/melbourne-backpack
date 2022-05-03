@@ -183,8 +183,6 @@ const Chat = ({ navigation, route }) => {
           renderActions={renderActions}
           renderComposer={renderComposer}
           renderSend={renderSend}
-          loadEarlier={true}
-          infiniteScroll={true}
           onSend={(newMessage) => onSend(newMessage)}
           user={{
             _id: myData.uid,
