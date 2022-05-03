@@ -44,6 +44,7 @@ const CommunityScreenSeeMore = ({navigation, route}) => {
                                     {heading[0].toUpperCase() + heading.slice(1, heading.length) + " - " + option}
                                 </Text>
                             </View>
+                            <View></View>
                         </View>
 
                         <FlatList

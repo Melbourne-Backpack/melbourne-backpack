@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         flexDirection: "row",
         flexWrap: "wrap",
-        justifyContent: "center"
+        justifyContent: "space-between"
     },
 
     container: {
