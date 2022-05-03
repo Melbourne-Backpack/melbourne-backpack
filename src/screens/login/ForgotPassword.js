@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   SafeAreaView,
+  KeyboardAvoidingView,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
@@ -93,7 +94,11 @@ const ForgotPassword = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={20}
+        behavior="padding"
+        style={styles.container}
+      >
         <View style={styles.wrapper}>
           <Image
             source={require("../../../assets/adaptive-icon.png")}
@@ -150,7 +155,7 @@ const ForgotPassword = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaView>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
