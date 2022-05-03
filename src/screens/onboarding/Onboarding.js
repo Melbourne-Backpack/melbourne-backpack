@@ -283,7 +283,7 @@ const Onboarding = ({ navigation }) => {
             style={{
               color: COLORS.white,
               fontFamily: "PoppinsExtraBold",
-              fontSize: 40,
+              fontSize: 30,
               textAlign: "center",
             }}
           >
