@@ -131,6 +131,10 @@ const CommunityScreen = ({navigation}) => {
             id: 10,
             name: "Digital Marketing",
         },
+        {
+            id: 11,
+            name: "Engineer",
+        }
     ];
 
     let mostLikeYouDataForDisplay

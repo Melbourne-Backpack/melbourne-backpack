@@ -1,5 +1,5 @@
 import {StyleSheet} from "react-native";
-import {BACKGROUND, BLACK, DARK_BLUE, GREY, LIGHT_BLUE, PURPLE_BLUE, WHITE} from "../../styles/colors";
+import {BACKGROUND, BLACK, DARK_BLUE, GREY, LIGHT_BLUE, PURPLE_BLUE, WHITE, YELLOW} from "../../styles/colors";
 import {heightPercentageToDP, heightPercentageToDP as hp, widthPercentageToDP} from "react-native-responsive-screen";
 
 const styles = StyleSheet.create({
@@ -17,17 +17,19 @@ const styles = StyleSheet.create({
     },
 
     optionText: {
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: "PoppinsRegular",
         color: WHITE,
-        marginLeft: 12,
+        marginLeft: 5,
+        marginRight: 15,
     },
 
     optionTextSelected: {
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: "PoppinsRegular",
-        color: LIGHT_BLUE,
-        marginLeft: 12,
+        color: YELLOW,
+        marginLeft: 5,
+        marginRight: 15,
     },
 
     optionWrapper: {
