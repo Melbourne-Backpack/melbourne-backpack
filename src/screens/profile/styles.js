@@ -8,6 +8,7 @@ import {
   LIGHT_PURPLE,
   PURPLE_BLUE,
   RED,
+  TEXT_INPUT,
   WHITE,
 } from "../../styles/colors";
 
@@ -150,6 +151,13 @@ const styles = StyleSheet.create({
   logoutBtnText: {
     color: WHITE,
     textAlign: "center",
+  },
+  toast: {
+    backgroundColor: TEXT_INPUT,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    width: wp("60%"),
   },
 });
 export default styles;

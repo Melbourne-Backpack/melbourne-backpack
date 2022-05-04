@@ -7,6 +7,7 @@ import {
   Linking,
   Pressable,
   RefreshControl,
+  Dimensions,
 } from "react-native";
 import styles from "./styles";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -17,6 +18,8 @@ import { useCallback, useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
 import AlertModal from "../../components/alert-modal/AlertModal";
+import Modal from "react-native-modal";
+import * as Clipboard from "expo-clipboard";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
@@ -24,12 +27,15 @@ const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
+const windowHeight = Dimensions.get("window").height;
+
 const Profile = ({ navigation, route }) => {
   const [data, setData] = useState({});
   const [myData, setMyData] = useState({});
   const [currentDocId, setCurrentDocId] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
+  const [toast, setToast] = useState(false);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -38,6 +44,13 @@ const Profile = ({ navigation, route }) => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
+  const showModal = () => {
+    setToast(true);
+
+    setTimeout(() => {
+      setToast(false);
+    }, 1200);
+  };
   const getCurrentUserData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
       if (docSnap.exists()) {
@@ -189,7 +202,7 @@ const Profile = ({ navigation, route }) => {
                 });
               }}
             >
-              <Text style={styles.editProfileText}>Send Message</Text>
+              <Text style={styles.editProfileText}>Add to chat list</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -205,6 +218,56 @@ const Profile = ({ navigation, route }) => {
             toPage={"SignIn"}
             signOut={signOut}
           />
+          <View style={styles.userContentRow}>
+            <View style={styles.userContentHeadingWrapper}>
+              <Text style={styles.userContentHeading}>User ID</Text>
+            </View>
+            <View style={styles.userContentWrapper}>
+              <Text
+                style={styles.userContent}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {currentDocId}
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={() => {
+                Clipboard.setString(currentDocId);
+                showModal();
+              }}
+            >
+              <AntDesign name={"copy1"} size={18} color={WHITE} />
+            </TouchableOpacity>
+          </View>
+          <Modal
+            isVisible={toast}
+            onBackdropPress={() => setToast(false)}
+            animationIn={"fadeIn"}
+            animationOut={"fadeOut"}
+          >
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: windowHeight - 200,
+              }}
+            >
+              <View style={styles.toast}>
+                <Text
+                  style={{
+                    color: WHITE,
+                    fontFamily: "PoppinsMedium",
+                    paddingHorizontal: 20,
+                    paddingVertical: 15,
+                  }}
+                >
+                  Copied UID to clipboard
+                </Text>
+              </View>
+            </View>
+          </Modal>
           <View style={styles.userContentRow}>
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Display Name</Text>
