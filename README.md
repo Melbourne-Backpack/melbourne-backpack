@@ -25,7 +25,7 @@
 
 
 ## 📌Features
-This React Native Firebase app contains a few key features that all apps backed by Fireabase support:
+This React Native + Firebase + Expo app contains a few key features that all apps backed by Fireabase support:
 
 + Splash Screen
 + Registration with E-mail & Password
