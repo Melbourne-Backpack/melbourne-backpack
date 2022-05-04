@@ -222,7 +222,7 @@ const Profile = ({ navigation, route }) => {
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>User ID</Text>
             </View>
-            <View style={styles.userContentWrapper}>
+            <View style={styles.userIDContentWrapper}>
               <Text
                 style={styles.userContent}
                 numberOfLines={1}
@@ -230,16 +230,16 @@ const Profile = ({ navigation, route }) => {
               >
                 {currentDocId}
               </Text>
+              <TouchableOpacity
+                style={styles.menuItem}
+                onPress={() => {
+                  Clipboard.setString(currentDocId);
+                  showModal();
+                }}
+              >
+                <AntDesign name={"copy1"} size={18} color={WHITE} />
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                Clipboard.setString(currentDocId);
-                showModal();
-              }}
-            >
-              <AntDesign name={"copy1"} size={18} color={WHITE} />
-            </TouchableOpacity>
           </View>
           <Modal
             isVisible={toast}
