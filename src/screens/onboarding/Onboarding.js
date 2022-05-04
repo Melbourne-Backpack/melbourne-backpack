@@ -109,7 +109,7 @@ const Onboarding = ({ navigation }) => {
               name="left"
               style={{
                 fontFamily: "PoppinsExtraBold",
-                fontSize: 40,
+                fontSize: 30,
                 color: COLORS.white,
                 opacity: currentPage === 0 ? 0 : 1,
               }}
@@ -196,9 +196,9 @@ const Onboarding = ({ navigation }) => {
                 name="right"
                 style={{
                   fontFamily: "PoppinsExtraBold",
-                  fontSize: 40,
+                  fontSize: 30,
                   color: COLORS.white,
-                  marginLeft: -15,
+                  marginLeft: -10,
                 }}
               />
             </TouchableOpacity>
@@ -230,7 +230,7 @@ const Onboarding = ({ navigation }) => {
                 name="right"
                 style={{
                   fontFamily: "PoppinsExtraBold",
-                  fontSize: 40,
+                  fontSize: 30,
                   color: COLORS.white,
                   opacity: 0.3,
                   marginLeft: SIZES.base,
@@ -240,9 +240,9 @@ const Onboarding = ({ navigation }) => {
                 name="right"
                 style={{
                   fontFamily: "PoppinsExtraBold",
-                  fontSize: 40,
+                  fontSize: 30,
                   color: COLORS.white,
-                  marginLeft: -15,
+                  marginLeft: -10,
                 }}
               />
             </TouchableOpacity>

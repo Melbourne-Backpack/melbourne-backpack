@@ -22,12 +22,10 @@ import { useIsFocused } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import Modal from "react-native-modal";
 import { Dimensions } from "react-native";
-import AlertModal from "../../components/alert-modal/AlertModal";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
-const windowHeight = Dimensions.get("window").height;
 
 const Messages = ({ navigation, route }) => {
   const [search, setSearch] = useState("");
@@ -265,50 +263,7 @@ const Messages = ({ navigation, route }) => {
                   style={{ width: 22, height: 22 }}
                 />
               </TouchableOpacity>
-              {openMenu && (
-                <View style={styles.menuContainer}>
-                  <TouchableOpacity
-                    style={styles.menuItem}
-                    onPress={() => {
-                      Clipboard.setString(auth.currentUser.uid);
-                      showModal();
-                    }}
-                  >
-                    <View style={{ flexDirection: "row" }}>
-                      <AntDesign name={"copy1"} size={15} color={WHITE} />
-                      <Text style={styles.menuItemText}>Copy user ID</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              )}
             </View>
-            <Modal
-              isVisible={toast}
-              onBackdropPress={() => setToast(false)}
-              animationIn={"fadeIn"}
-              animationOut={"fadeOut"}
-            >
-              <View
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginTop: windowHeight - 200,
-                }}
-              >
-                <View style={styles.toast}>
-                  <Text
-                    style={{
-                      color: WHITE,
-                      fontFamily: "PoppinsMedium",
-                      paddingHorizontal: 20,
-                      paddingVertical: 15,
-                    }}
-                  >
-                    Copied your UID to clipboard
-                  </Text>
-                </View>
-              </View>
-            </Modal>
           </View>
 
           <View style={styles.secondTopBar}>

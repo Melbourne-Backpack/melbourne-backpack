@@ -86,9 +86,9 @@ const Form = ({ navigation }) => {
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [4, 3],
-        maxWidth: 500,
-        maxHeight: 500,
-        quality: 0.5,
+        maxWidth: 300,
+        maxHeight: 300,
+        quality: 0.3,
       });
 
       // console.log(result);
