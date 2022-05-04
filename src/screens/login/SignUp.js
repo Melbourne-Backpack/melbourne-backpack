@@ -13,7 +13,7 @@ import {
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
-import { WHITE } from "../../styles/colors";
+import { PLACEHOLDER } from "../../styles/colors";
 import { auth } from "../../config/firebase";
 import AlertModal from "../../components/alert-modal/AlertModal";
 
@@ -141,7 +141,7 @@ const SignUp = ({ navigation }) => {
                   style={styles.text}
                   placeholder={"Email"}
                   keyboardType={"email-address"}
-                  placeholderTextColor={WHITE}
+                  placeholderTextColor={PLACEHOLDER}
                   onChangeText={(text) => setEmail(text)}
                   defaultValue={email}
                 />
@@ -154,7 +154,7 @@ const SignUp = ({ navigation }) => {
                 <TextInput
                   style={styles.text}
                   placeholder={"Password"}
-                  placeholderTextColor={WHITE}
+                  placeholderTextColor={PLACEHOLDER}
                   onChangeText={(text) => setPassword(text)}
                   defaultValue={password}
                   secureTextEntry={true}
@@ -168,7 +168,7 @@ const SignUp = ({ navigation }) => {
                 <TextInput
                   style={styles.text}
                   placeholder={"Confirm Password"}
-                  placeholderTextColor={WHITE}
+                  placeholderTextColor={PLACEHOLDER}
                   onChangeText={(text) => setCfPassword(text)}
                   defaultValue={cfPassword}
                   secureTextEntry={true}
