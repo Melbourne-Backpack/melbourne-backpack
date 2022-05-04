@@ -56,6 +56,96 @@ const HousingFilter = ({
         return temp.join("")
     }
 
+    const applyFilter = () => {
+        setSubmitted((prev) => !prev);
+        setHousingData([]);
+        let filterListLength = 0;
+        headings.map((heading) => {
+            if (filter[heading].length > 0) {
+                filterListLength++;
+            }
+        });
+        housingList.map((housing) => {
+            let added = 0;
+            let checked = 0;
+            let fromText = "";
+            headings.map((heading) => {
+                filter[heading].map((option) => {
+                    if (
+                        heading !== "distance from RMIT (km)" &&
+                        added === 0
+                    ) {
+                        if (
+                            heading === "price" &&
+                            housing[heading].toString() &&
+                            housing[heading]
+                                .toString()
+                                .split(" ")[0]
+                                .toLowerCase() === "from"
+                        ) {
+                            fromText = "from";
+                            housing[heading] = housing[heading]
+                                .toString()
+                                .split(" ")[1];
+                        }
+                        if (
+                            option.includes("-") &&
+                            option.slice(0, option.indexOf("-")) <=
+                            housing[heading] &&
+                            option.slice(
+                                option.indexOf("-") + 1,
+                                option.length
+                            ) >= housing[heading]
+                        ) {
+                            checked++;
+                        } else if (
+                            option[option.length - 1] === "+" &&
+                            option.slice(0, option.length - 1) <=
+                            housing[heading]
+                        ) {
+                            checked++;
+                        } else if (housing[heading] === option) {
+                            checked++;
+                        }
+                        if (heading === "price" && fromText === "from") {
+                            housing[heading] =
+                                fromText + " " + housing[heading].toString();
+                        }
+                    }
+
+                    if (
+                        heading === "distance from RMIT (km)" &&
+                        added === 0
+                    ) {
+                        let distance =
+                            distanceList[housingList.indexOf(housing)];
+                        if (
+                            option.includes("-") &&
+                            option.slice(0, option.indexOf("-")) <= distance &&
+                            option.slice(
+                                option.indexOf("-") + 1,
+                                option.length
+                            ) >= distance
+                        ) {
+                            checked++;
+                        } else if (
+                            option[option.length - 1] === "+" &&
+                            option.slice(0, option.length - 1) <= distance
+                        ) {
+                            checked++;
+                        }
+                    }
+                    if (filterListLength === checked) {
+                        setHousingData((housingData) => [
+                            ...housingData,
+                            housing,
+                        ]);
+                    }
+                });
+            });
+        });
+    }
+
 
     if (!loaded) {
         return null;
@@ -110,101 +200,25 @@ const HousingFilter = ({
                                 </View>
                             );
                         })}
-                        <View style={styles.submitBtnWrapper}>
-                            <TouchableOpacity
-                                style={styles.submitBtn}
-                                onPress={() => {
-                                    setSubmitted((prev) => !prev);
-                                    setHousingData([]);
-                                    let filterListLength = 0;
-                                    headings.map((heading) => {
-                                        if (filter[heading].length > 0) {
-                                            filterListLength++;
-                                        }
-                                    });
-                                    housingList.map((housing) => {
-                                        let added = 0;
-                                        let checked = 0;
-                                        let fromText = "";
-                                        headings.map((heading) => {
-                                            filter[heading].map((option) => {
-                                                if (
-                                                    heading !== "distance from RMIT (km)" &&
-                                                    added === 0
-                                                ) {
-                                                    if (
-                                                        heading === "price" &&
-                                                        housing[heading].toString() &&
-                                                        housing[heading]
-                                                            .toString()
-                                                            .split(" ")[0]
-                                                            .toLowerCase() === "from"
-                                                    ) {
-                                                        fromText = "from";
-                                                        housing[heading] = housing[heading]
-                                                            .toString()
-                                                            .split(" ")[1];
-                                                    }
-                                                    if (
-                                                        option.includes("-") &&
-                                                        option.slice(0, option.indexOf("-")) <=
-                                                        housing[heading] &&
-                                                        option.slice(
-                                                            option.indexOf("-") + 1,
-                                                            option.length
-                                                        ) >= housing[heading]
-                                                    ) {
-                                                        checked++;
-                                                    } else if (
-                                                        option[option.length - 1] === "+" &&
-                                                        option.slice(0, option.length - 1) <=
-                                                        housing[heading]
-                                                    ) {
-                                                        checked++;
-                                                    } else if (housing[heading] === option) {
-                                                        checked++;
-                                                    }
-                                                    if (heading === "price" && fromText === "from") {
-                                                        housing[heading] =
-                                                            fromText + " " + housing[heading].toString();
-                                                    }
-                                                }
-
-                                                if (
-                                                    heading === "distance from RMIT (km)" &&
-                                                    added === 0
-                                                ) {
-                                                    let distance =
-                                                        distanceList[housingList.indexOf(housing)];
-                                                    if (
-                                                        option.includes("-") &&
-                                                        option.slice(0, option.indexOf("-")) <= distance &&
-                                                        option.slice(
-                                                            option.indexOf("-") + 1,
-                                                            option.length
-                                                        ) >= distance
-                                                    ) {
-                                                        checked++;
-                                                    } else if (
-                                                        option[option.length - 1] === "+" &&
-                                                        option.slice(0, option.length - 1) <= distance
-                                                    ) {
-                                                        checked++;
-                                                    }
-                                                }
-                                                if (filterListLength === checked) {
-                                                    setHousingData((housingData) => [
-                                                        ...housingData,
-                                                        housing,
-                                                    ]);
-                                                }
-                                            });
-                                        });
-                                    });
-                                }}
-                            >
-                                <Text style={styles.submitBtnText}>Apply</Text>
-                            </TouchableOpacity>
+                        <View style={styles.submitBtnRow}>
+                            <View style={styles.submitBtnWrapper}>
+                                <TouchableOpacity
+                                    style={styles.submitBtn}
+                                    onPress={() => applyFilter()}
+                                >
+                                    <Text style={styles.submitBtnText}>Apply</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.submitBtnWrapper}>
+                                <TouchableOpacity
+                                    style={styles.submitBtn}
+                                    onPress={() => {
+                                        setHousingData(housingList)
+                                    }}
+                                >
+                                    <Text style={styles.submitBtnText}>Clear</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                 ) : null}

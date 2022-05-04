@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
     headingRow: {
         marginTop: 20,
-        marginBottom: 20,
+        marginBottom: 30,
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-between"
@@ -36,6 +36,9 @@ const styles = StyleSheet.create({
 
     container: {
         backgroundColor: BACKGROUND,
+        paddingTop: hp(3),
+        paddingRight: wp(2),
+        paddingLeft: wp(2),
     },
 
     seeMoreBtn: {
