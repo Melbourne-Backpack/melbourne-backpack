@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
+import { WHITE } from "../../styles/colors";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
@@ -20,15 +21,15 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   textTitle: {
-    color: "#ffffff",
+    color: WHITE,
     fontSize: 50,
-    fontWeight: "800",
+    fontFamily: "PoppinsExtraBold",
     marginTop: -100,
   },
   versionText: {
-    color: "#ffffff",
+    color: WHITE,
     fontSize: 20,
-    fontWeight: "400",
+    fontFamily: "PoppinsRegular",
   },
 });
 

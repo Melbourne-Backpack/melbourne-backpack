@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../config/firebase";
 
 const postReview = async (categoryId, comment, rating) => {
@@ -15,4 +15,15 @@ const postReview = async (categoryId, comment, rating) => {
   }
 };
 
-export { postReview };
+const updateRating = async (documentId, rating) => {
+  try {
+    await updateDoc(doc(db, "housing", documentId), {
+      rating: rating,
+    });
+    console.log("rating updated successfully!");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export { postReview, updateRating };

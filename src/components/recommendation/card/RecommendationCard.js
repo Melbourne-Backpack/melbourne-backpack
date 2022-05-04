@@ -1,4 +1,11 @@
-import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
+import {
+  ImageBackground,
+  Linking,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import {
   AntDesign,
   MaterialCommunityIcons,
@@ -12,12 +19,13 @@ import { useNavigation } from "@react-navigation/native";
 import { GREY, WHITE, YELLOW } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
-import Capitalize from "../../../utils/Capitalize";
+import { Capitalize } from "../../../utils/Formatting";
 import { DISTANCE_CALCULATOR_KEY } from "@env";
 
 const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
   const [address, setAddress] = useState("");
+  const [addressLink, setAddressLink] = useState("");
   const [distance, setDistance] = useState("");
   const [routeVisible, setRouteVisible] = useState(false);
   const lat = "-37.8080770201347";
@@ -30,33 +38,50 @@ const RecommendationCard = ({ data, housing, transport }) => {
     PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
   });
 
-  const calculateDistanceFromCoordinates = (lat2, long2) => {
-    const distanceUrl = `http://dev.virtualearth.net/REST/v1/Routes/Walking?wayPoint.1=${lat},${long}&wayPoint.2=${lat2},${long2}&key=${DISTANCE_CALCULATOR_KEY}`;
-    try {
-      fetch(distanceUrl, {
-        method: "GET",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setDistance(
-            data["resourceSets"][0]["resources"][0]["travelDistance"]
-          );
-        });
-    } catch (e) {
-      console.log(e.message());
-    }
-  };
+    const calculateDistanceFromCoordinates = (lat2, long2) => {
+        const distanceUrl = `http://dev.virtualearth.net/REST/v1/Routes/Walking?wayPoint.1=${lat},${long}&wayPoint.2=${lat2},${long2}&key=${DISTANCE_CALCULATOR_KEY}`;
+        try {
+            fetch(distanceUrl, {
+                method: "GET",
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    setDistance(
+                        data["resourceSets"][0]["resources"][0]["travelDistance"]
+                    );
+                });
+        } catch (e) {
+            console.log(e.message());
+        }
+    };
 
-  useEffect(() => {
-    if (data.address !== undefined) {
-      setAddress(Capitalize(data.address));
-    }
-    if (transport) {
-      if (data) {
-        calculateDistanceFromCoordinates(data["stopLat"], data["stopLong"]);
-      }
-    }
-  }, [data]);
+    useEffect(() => {
+        if (data.address !== undefined) {
+            setAddress(Capitalize(data.address));
+            const query = Capitalize(data.address)
+            const url = Platform.select({
+                ios: `maps:0,0?q=${query}`,
+                android: `geo:0,0?q=${query}`,
+            })
+            setAddressLink(url)
+        }
+        if (transport) {
+            if (data) {
+                calculateDistanceFromCoordinates(data["stopLat"], data["stopLong"]);
+            }
+            if (data.stopName !== undefined && data.stopName.length > 0) {
+                const type = data.transportType
+                const name = data.stopName
+                const query = (type + " stop " + name)
+                const url = Platform.select({
+                    ios: `maps:0,0?q=${query}`,
+                    android: `geo:0,0?q=${query}`,
+                })
+                setAddressLink(url)
+                console.log(url)
+            }
+        }
+    }, [data]);
 
   if (!loaded) {
     return null;
@@ -79,9 +104,15 @@ const RecommendationCard = ({ data, housing, transport }) => {
               />
 
               <View style={styles.info}>
-                <Text style={[styles.name, styles.text]}>
-                  Stop: {data["stopName"]}
-                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    Linking.openURL(addressLink);
+                  }}
+                >
+                  <Text style={[styles.name, styles.text]}>
+                    Stop: {data["stopName"]}
+                  </Text>
+                </TouchableOpacity>
                 <View style={styles.modeContainer}>
                   <Text style={[styles.distance]}>{data["transportType"]}</Text>
                 </View>
@@ -130,10 +161,16 @@ const RecommendationCard = ({ data, housing, transport }) => {
 
             <View style={styles.info}>
               <Text style={[styles.name, styles.text]}>{data.title}</Text>
-              <Text style={[styles.text, styles.location]}>
-                <Ionicons name="location-sharp" size={16} color="white" />{" "}
-                {data.address}
-              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(addressLink);
+                }}
+              >
+                <Text style={[styles.text, styles.location]}>
+                  <Ionicons name="location-sharp" size={16} color="white" />{" "}
+                  {data.address}
+                </Text>
+              </TouchableOpacity>
             </View>
           </>
         )
@@ -141,7 +178,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
         <>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate("Details", { id: data.id })}
+            onPress={() => navigation.navigate("Details", { data: data })}
           >
             <ImageBackground
               source={{ uri: data.image }}
@@ -151,7 +188,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
             >
               <View style={styles.overlay}>
                 <Text style={styles.rating}>
-                  {data.rating}{" "}
+                  {parseFloat(data.rating).toFixed(2)}{" "}
                   <AntDesign name="star" size={30} color={YELLOW} />
                 </Text>
               </View>
@@ -160,7 +197,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
 
           <View style={styles.info}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Details", { id: data.id })}
+              onPress={() => navigation.navigate("Details", { data: data })}
             >
               <Text style={[styles.name, styles.text]}>
                 {data.title
@@ -176,11 +213,16 @@ const RecommendationCard = ({ data, housing, transport }) => {
                   : "$" + data.price
                 : null}
             </Text>
-            <Text style={[styles.text, styles.location]}>
-              <Ionicons name="location-sharp" size={16} color="white" />{" "}
-              {address}
-            </Text>
-
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(addressLink);
+              }}
+            >
+              <Text style={[styles.text, styles.location]}>
+                <Ionicons name="location-sharp" size={16} color="white" />{" "}
+                {address}
+              </Text>
+            </TouchableOpacity>
             <View style={styles.extraOuterContainer}>
               <View style={styles.extraContainer}>
                 <Text style={styles.extra}>{data.bed}</Text>

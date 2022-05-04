@@ -8,6 +8,7 @@ import {
   Pressable,
   TextInput,
   Keyboard,
+  AsyncStorage,
 } from "react-native";
 import styles from "./styles";
 
@@ -127,7 +128,9 @@ const EditProfile = ({ navigation }) => {
     setShowAlert(showAlert);
   };
 
-  const signOut = ({ navigation }) => {
+  const signOut = async ({ navigation }) => {
+    await AsyncStorage.removeItem("@token");
+    setIsLoggedIn(false);
     auth
       .signOut()
       .then(() => {

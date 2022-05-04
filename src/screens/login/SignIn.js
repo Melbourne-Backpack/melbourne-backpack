@@ -6,17 +6,15 @@ import {
   Image,
   TouchableWithoutFeedback,
   Keyboard,
-  SafeAreaView,
   KeyboardAvoidingView,
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  GREY,
   LIGHT_PURPLE,
+  PLACEHOLDER,
   SELECTED_BUTTON,
-  WHITE,
 } from "../../styles/colors";
 import CheckBox from "react-native-check-box";
 import { auth, db } from "../../config/firebase";
@@ -90,7 +88,7 @@ const SignIn = ({ navigation }) => {
     setTimeout(() => {
       setShowAlert(false);
       getData();
-    }, 4000);
+    }, 1000);
   };
 
   const checkValidate = (email, password) => {
@@ -157,7 +155,7 @@ const SignIn = ({ navigation }) => {
               style={styles.text}
               placeholder={"Email"}
               keyboardType={"email-address"}
-              placeholderTextColor={WHITE}
+              placeholderTextColor={PLACEHOLDER}
               onChangeText={(text) => setEmail(text)}
               defaultValue={email}
             />
@@ -170,7 +168,7 @@ const SignIn = ({ navigation }) => {
             <TextInput
               style={styles.text}
               placeholder={"Password"}
-              placeholderTextColor={WHITE}
+              placeholderTextColor={PLACEHOLDER}
               onChangeText={(text) => setPassword(text)}
               defaultValue={password}
               secureTextEntry={true}

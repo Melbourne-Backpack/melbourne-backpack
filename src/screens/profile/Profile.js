@@ -7,6 +7,7 @@ import {
   Linking,
   Pressable,
   RefreshControl,
+  Dimensions,
 } from "react-native";
 import styles from "./styles";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -17,7 +18,8 @@ import { useCallback, useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from "expo-font";
 import AlertModal from "../../components/alert-modal/AlertModal";
-import { SafeAreaView } from "react-native-web";
+import Modal from "react-native-modal";
+import * as Clipboard from "expo-clipboard";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
@@ -25,11 +27,15 @@ const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
+const windowHeight = Dimensions.get("window").height;
+
 const Profile = ({ navigation, route }) => {
   const [data, setData] = useState({});
+  const [myData, setMyData] = useState({});
   const [currentDocId, setCurrentDocId] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
+  const [toast, setToast] = useState(false);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -38,11 +44,28 @@ const Profile = ({ navigation, route }) => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
+  const showModal = () => {
+    setToast(true);
+
+    setTimeout(() => {
+      setToast(false);
+    }, 1200);
+  };
   const getCurrentUserData = () => {
     getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
       if (docSnap.exists()) {
         setData(docSnap.data());
         setCurrentDocId(docSnap.id);
+      } else {
+        console.log("No such document!");
+      }
+    });
+  };
+
+  const getMyData = () => {
+    getDoc(doc(db, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists()) {
+        setMyData(docSnap.data());
       } else {
         console.log("No such document!");
       }
@@ -78,6 +101,7 @@ const Profile = ({ navigation, route }) => {
     });
   };
   useEffect(() => {
+    getMyData();
     if (navigation.getParent()) getCurrentUserData();
     else getOtherUserData();
   }, []);
@@ -119,14 +143,25 @@ const Profile = ({ navigation, route }) => {
         </TouchableOpacity>
         <Text style={styles.title}>Profile</Text>
 
-        <TouchableOpacity
-          style={styles.messenger}
-          onPress={() => {
-            navigation.navigate("Chat");
-          }}
-        >
-          <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
-        </TouchableOpacity>
+        {navigation.getParent() ? (
+          <TouchableOpacity
+            style={styles.messenger}
+            onPress={() => {
+              navigation.navigate("Messages", {
+                user: myData,
+              });
+            }}
+          >
+            <Ionicons name="chatbubble-ellipses" size={27} color={WHITE} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.messenger}>
+            <Image
+              source={require("../../../assets/three-dots.png")}
+              style={{ width: 22, height: 22 }}
+            />
+          </TouchableOpacity>
+        )}
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -147,7 +182,7 @@ const Profile = ({ navigation, route }) => {
             }}
             style={styles.profileImage}
           />
-          {navigation.getParent() && (
+          {navigation.getParent() ? (
             <TouchableOpacity
               style={styles.editProfile}
               onPress={() => {
@@ -155,6 +190,19 @@ const Profile = ({ navigation, route }) => {
               }}
             >
               <Text style={styles.editProfileText}>Edit Profile</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.editProfile}
+              onPress={() => {
+                navigation.navigate("Messages", {
+                  user: myData,
+                  selectedUser: data,
+                  currentDocId: currentDocId,
+                });
+              }}
+            >
+              <Text style={styles.editProfileText}>Add to chat list</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -170,6 +218,56 @@ const Profile = ({ navigation, route }) => {
             toPage={"SignIn"}
             signOut={signOut}
           />
+          <View style={styles.userContentRow}>
+            <View style={styles.userContentHeadingWrapper}>
+              <Text style={styles.userContentHeading}>User ID</Text>
+            </View>
+            <View style={styles.userContentWrapper}>
+              <Text
+                style={styles.userContent}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {currentDocId}
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={() => {
+                Clipboard.setString(currentDocId);
+                showModal();
+              }}
+            >
+              <AntDesign name={"copy1"} size={18} color={WHITE} />
+            </TouchableOpacity>
+          </View>
+          <Modal
+            isVisible={toast}
+            onBackdropPress={() => setToast(false)}
+            animationIn={"fadeIn"}
+            animationOut={"fadeOut"}
+          >
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: windowHeight - 200,
+              }}
+            >
+              <View style={styles.toast}>
+                <Text
+                  style={{
+                    color: WHITE,
+                    fontFamily: "PoppinsMedium",
+                    paddingHorizontal: 20,
+                    paddingVertical: 15,
+                  }}
+                >
+                  Copied UID to clipboard
+                </Text>
+              </View>
+            </View>
+          </Modal>
           <View style={styles.userContentRow}>
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>Display Name</Text>
@@ -245,9 +343,7 @@ const Profile = ({ navigation, route }) => {
               <Text style={styles.logoutBtnText}>Logout</Text>
             </TouchableOpacity>
           </View>
-        ) : (
-          console.log("id: " + auth.currentUser.uid)
-        )}
+        ) : null}
       </ScrollView>
     </View>
   );
