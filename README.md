@@ -41,26 +41,29 @@ This React Native + Firebase + Expo app contains a few key features that all app
 + Real time data Victoria transportation
 
 
-#### 📱 Screen shots
+#### 📱 Basic Screen shots
 |<a href="#"><img src="https://i.ibb.co/WsMx0y4/splash.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/SB9PkqL/onboarding.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/FVH7hHw/signin.png" alt="Illustration" width="400px"/></a>|
 |:--:|:--:|:--:|
-|demo|demo|demo|
+|Splash Screen|Onboarding Screen|SignIn Screen|
 
 |<a href="#"><img src="https://i.ibb.co/WKr7JM9/campus.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/6yXyYQv/subjects.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/8D7KkX7/more-info.png" alt="Illustration" width="400px"/></a>|
 |:--:|:--:|:--:|
-|demo|demo|demo|
+|Personalization Screen: campus|Personalization Screen: subjects|Personalization Screen: further info|
 
 |<a href="#"><img src="https://i.ibb.co/SVkM4RV/housing2.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/2jZFQpf/housing3.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/RTKyK7P/housing4.png" alt="Illustration" width="400px"/></a>|
 |:--:|:--:|:--:|
-|demo|demo|demo|
+|Housing Screen: house details|Housing Screen: all review's options|Housing Screen: app reviews example|
 
 |<a href="#"><img src="https://i.ibb.co/zS8wXjz/transport.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/JvJqNp2/shopping.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/kGLmpfL/community.png" alt="Illustration" width="400px"/></a>|
 |:--:|:--:|:--:|
-|demo|demo|demo|
+|Transportation Screen|Shopping Screen|Community Screen|
 
 |<a href="#"><img src="https://i.ibb.co/L6Z66R6/profile.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/txjML6S/copy-othe-uid.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/bLyX2FZ/logout.png" alt="Illustration" width="400px"/></a>|
 |:--:|:--:|:--:|
-|demo|demo|demo|
+|Profile Screen|Copy other's member uid Screen|Logout Screen|
+
+-------------------
+
 
 #### 📖 Documentation
 |<a href="#"><img src="https://i.ibb.co/St3T7Yh/proposal.jpg" alt="Illustration" width="700px"/></a>|<a href="#"><img src="https://i.ibb.co/St3T7Yh/proposal.jpg" alt="Illustration" width="700px"/></a>|
