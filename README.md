@@ -46,7 +46,7 @@ This React Native + Firebase + Expo app contains a few key features that all app
 |:--:|:--:|:--:|
 |demo|demo|demo|
 
-|<a href="#"><img src="https://i.ibb.co/NZHZ1rz/more.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/2cVnTfS/success.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/LrK1D3b/alert.png" alt="Illustration" width="400px"/></a>|
+|<a href="#"><img src="https://i.ibb.co/6yXyYQv/subjects.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/8D7KkX7/more-info.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/WKr7JM9/campus.png" alt="Illustration" width="400px"/></a>|
 |:--:|:--:|:--:|
 |demo|demo|demo|
 
