@@ -22,14 +22,13 @@ import {
 const firebaseConfig = {
     apiKey: String(API_KEY),
     authDomain: String(AUTH_DOMAIN),
-    databaseURL: DATABASE_URL,
+    databaseURL: String(DATABASE_URL),
     projectId: String(PROJECT_ID),
     storageBucket: String(STORAGE_BUCKET),
     messagingSenderId: String(MESSAGING_SENDER_ID),
     appId: String(APPID),
 };
 
-console.log(firebaseConfig)
 
 // Initialize Firebase
 let app;
