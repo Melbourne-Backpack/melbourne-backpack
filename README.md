@@ -28,9 +28,11 @@
 This React Native + Firebase + Expo app contains a few key features that all apps backed by Fireabase support:
 
 + Splash Screen
++ Onboarding Screens
 + Registration with E-mail & Password
 + Login with E-mail and Password
 + Handling persisted login credentials
++ Terms and Privacy Policy
 + Navigation (react-native-navigation)
 + Writing to Firestore Database
 + Reading from Firestore Database
