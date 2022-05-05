@@ -170,7 +170,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 25,
+    paddingRight: 25,
+    paddingLeft: 30,
   },
 });
 export default styles;
