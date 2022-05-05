@@ -173,7 +173,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
                 postReview(housingData["category_id"], myComment, myRating);
                 updateRating(housingData.id, housingRating);
                 setMyComment("");
-                setMyRating(0);
+                setMyRating(2);
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
