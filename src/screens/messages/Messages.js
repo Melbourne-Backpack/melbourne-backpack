@@ -419,14 +419,7 @@ const Messages = ({ navigation, route }) => {
                     }}
                   >
                     {openEdit && (
-                      <TouchableOpacity
-                        onPress={() => {
-                          let newArr = itemSelected;
-                          newArr[index] = !newArr[index];
-                          setItemSelected(newArr);
-                          console.log(itemSelected);
-                        }}
-                      >
+                      <TouchableOpacity>
                         {itemSelected[index] ? (
                           <Ionicons
                             name="radio-button-on"
@@ -470,10 +463,6 @@ const Messages = ({ navigation, route }) => {
                     </View>
 
                     <View style={styles.dotTimeWrapper}>
-                      <Image
-                        source={require("../../../assets/available-dot.png")}
-                        style={styles.dot}
-                      />
                       <Text style={styles.messageTime}>
                         {myTimeData[index]
                           ? myTimeData[index]
