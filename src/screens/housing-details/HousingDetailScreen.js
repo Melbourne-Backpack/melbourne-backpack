@@ -44,13 +44,6 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
     filterMaxCardsPerPageInitial
   );
 
-  const showModal = () => {
-    setShowAlert(true);
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 1000);
-  };
-
   const getOnlineReview = (categoryId) => {
     const q = query(
       collection(db, "external_reviews"),
@@ -119,7 +112,8 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <SubmitAlert />
+      <SubmitAlert isVisible={showAlert} setIsVisibleFunction={setShowAlert} />
+
       <View style={styles.header}>
         <TouchableOpacity onPress={() => goBack()}>
           <Ionicons name="chevron-back" size={30} color={WHITE} />
@@ -180,10 +174,17 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                postReview(housingData["category_id"], myComment, myRating);
-                updateRating(housingData.id, housingRating);
-                setMyComment("");
-                setMyRating(2);
+                postReview(
+                  housingData["category_id"],
+                  myComment,
+                  myRating
+                ).then(() =>
+                  updateRating(housingData.id, housingRating).then(() => {
+                    setShowAlert(true);
+                    setMyComment("");
+                    setMyRating(2);
+                  })
+                );
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
