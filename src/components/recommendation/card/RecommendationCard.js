@@ -21,15 +21,15 @@ import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
 import { Capitalize } from "../../../utils/Formatting";
 import { DISTANCE_CALCULATOR_KEY } from "@env";
-import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 
 const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
+  const [routeVisible, setRouteVisible] = useState(false);
   const [address, setAddress] = useState("");
   const [addressLink, setAddressLink] = useState("");
   const [distance, setDistance] = useState("");
-  const [routeVisible, setRouteVisible] = useState(false);
   const [rating, setRating] = useState();
   const lat = "-37.8080770201347";
   const long = "144.96268921184907";
