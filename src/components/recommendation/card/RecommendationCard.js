@@ -208,7 +208,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
             >
               <View style={styles.overlay}>
                 <Text style={styles.rating}>
-                  {!rating ? null : parseFloat(rating).toFixed(2)}{" "}
+                  {!rating ? null : rating.toFixed(2)}{" "}
                   <AntDesign name="star" size={30} color={YELLOW} />
                 </Text>
               </View>

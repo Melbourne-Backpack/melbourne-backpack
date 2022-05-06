@@ -25,7 +25,6 @@ import SubmitAlert from "../../components/housing-details/alert/SubmitAlert";
 
 const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const housingData = route.params.data;
-  console.log(housingData.rating);
   const [showAlert, setShowAlert] = useState(false);
 
   const [myComment, setMyComment] = useState("");
@@ -83,6 +82,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         });
         setUserReviews(reviews);
         setHousingRating(sum / (ratingStat.length + reviews.length));
+        console.log(housingRating);
       });
     } catch (e) {
       console.log(e);
@@ -174,17 +174,18 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                postReview(
-                  housingData["category_id"],
-                  myComment,
-                  myRating
-                ).then(() =>
-                  updateRating(housingData.id, housingRating).then(() => {
-                    setShowAlert(true);
-                    setMyComment("");
-                    setMyRating(2);
-                  })
-                );
+                postReview(housingData["category_id"], myComment, myRating)
+                  .then(() => getReview(housingData["category_id"]))
+                  .then(() =>
+                    updateRating(
+                      housingData["category_id"],
+                      housingRating
+                    ).then(() => {
+                      setShowAlert(true);
+                      setMyComment("");
+                      setMyRating(2);
+                    })
+                  );
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>

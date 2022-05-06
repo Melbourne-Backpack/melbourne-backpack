@@ -16,7 +16,7 @@ const postReview = async (categoryId, comment, rating) => {
 
 const updateRating = async (documentId, rating) => {
   try {
-    await updateDoc(doc(db, "housing", documentId), {
+    await updateDoc(doc(db, "ratings", documentId), {
       rating: rating,
     });
     console.log("rating updated successfully!");
