@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: wp(100),
     flex: 1,
+    marginTop: 10,
   },
   flatlist: {
     width: wp(100),
