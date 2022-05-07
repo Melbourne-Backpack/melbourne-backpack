@@ -10,7 +10,7 @@ import {
   Dimensions,
 } from "react-native";
 import styles from "./styles";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
 import { LIGHT_PURPLE, PURPLE_BLUE, WHITE } from "../../styles/colors";
 
 import { auth, db } from "../../config/firebase";
@@ -129,18 +129,33 @@ const Profile = ({ navigation, route }) => {
   return (
     <View style={styles.background}>
       <View style={styles.topBar}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Community");
-          }}
-        >
-          <AntDesign
-            name={"left"}
-            size={24}
-            color={WHITE}
-            style={styles.backBtn}
-          />
-        </TouchableOpacity>
+        {navigation.getParent() ? (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Home");
+            }}
+          >
+            <Entypo
+              style={styles.backBtn}
+              name="home"
+              size={26}
+              color={WHITE}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Community");
+            }}
+          >
+            <AntDesign
+              name={"left"}
+              size={24}
+              color={WHITE}
+              style={styles.backBtn}
+            />
+          </TouchableOpacity>
+        )}
         <Text style={styles.title}>Profile</Text>
 
         {navigation.getParent() ? (
