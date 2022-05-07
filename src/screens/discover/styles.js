@@ -71,6 +71,16 @@ const styles = StyleSheet.create({
   channelHolder: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+  },
+  itemContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  youtubeVideo: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
   },
 });
 
