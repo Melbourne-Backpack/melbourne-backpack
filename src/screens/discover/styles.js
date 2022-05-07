@@ -82,6 +82,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
   },
+  channelAva: {
+    width: 22,
+    height: 22,
+    borderRadius: 50,
+    marginRight: 5,
+  },
 });
 
 export default styles;

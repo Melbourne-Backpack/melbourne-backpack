@@ -16,9 +16,12 @@ import { MY_YOUTUBE_API_KEY } from "@env";
 
 const my_API_key = MY_YOUTUBE_API_KEY;
 const youtubeAPI = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCFnWd6d9OggLixnow-3McjA&maxResults=50&q=campus%20exchange&type=video&key=${my_API_key}`;
+const channelAPI = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=UCFnWd6d9OggLixnow-3McjA&key=${my_API_key}`;
 
 const Discover = ({ navigation }) => {
   const [miniCard, setMiniCard] = useState([]);
+  const [channelData, setChannelData] = useState([]);
+  const [channelAva, setChannelAva] = useState("");
 
   const fetchData = () => {
     fetch(youtubeAPI)
@@ -26,6 +29,13 @@ const Discover = ({ navigation }) => {
       .then((data) => setMiniCard(data.items));
   };
 
+  const fetchChannelData = () => {
+    fetch(channelAPI)
+      .then((res) => res.json())
+      .then((data) => {
+        setChannelData(data.items);
+      });
+  };
   useEffect(() => {
     fetchData();
   }, []);

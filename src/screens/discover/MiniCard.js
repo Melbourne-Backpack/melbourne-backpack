@@ -36,6 +36,12 @@ const MiniCard = ({ videoId, title, channelTitle }) => {
             </Text>
             <View style={styles.channelHolder}>
               <View style={styles.channelHolder}>
+                <Image
+                  source={{
+                    uri: "https://yt3.ggpht.com/ytc/AKedOLRxZLozvzkAvdXibKotVMxdSB84u3gcsOPySwLCXg=s800-c-k-c0x00ffffff-no-rj",
+                  }}
+                  style={styles.channelAva}
+                />
                 <Text style={styles.channelTitle}>{channelTitle}</Text>
                 <MaterialIcons name="verified" size={14} color={WHITE} />
               </View>
