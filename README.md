@@ -88,17 +88,15 @@ This React Native + Firebase + Expo app contains a few key features that all app
 - Du Duc Manh [@rider3458](https://github.com/rider3458)
 - Nguyen Hoang Linh [@hlinh88](https://github.com/hlinh88)
 
-Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/tnathu-ai"><img src="https://avatars.githubusercontent.com/u/72063833?v=4" width="100px;" alt=""/><br /><sub><b>Tran Ngoc Anh Thu</b></sub><br /><sub><b>Project Manager, Designer, Full Stack Developer</b></sub></td>
-    <td align="center"><a href="https://github.com/jfmengels"><img src="https://avatars.githubusercontent.com/u/3869412?v=3?s=100" width="100px;" alt=""/><br /><sub><b>Jeroen Engels</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=jfmengels" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Ajfmengels" title="Reviewed Pull Requests">👀</a> <a href="#tool-jfmengels" title="Tools">🔧</a></td>
-    <td align="center"><a href="https://jakebolam.com"><img src="https://avatars2.githubusercontent.com/u/3534236?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jake Bolam</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=jakebolam" title="Documentation">📖</a> <a href="#tool-jakebolam" title="Tools">🔧</a> <a href="#infra-jakebolam" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-jakebolam" title="Maintenance">🚧</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Ajakebolam" title="Reviewed Pull Requests">👀</a> <a href="#question-jakebolam" title="Answering Questions">💬</a></td>
-    <td align="center"><a href="https://github.com/tbenning"><img src="https://avatars2.githubusercontent.com/u/7265547?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tyler Benning</b></sub></a><br /><a href="#maintenance-tbenning" title="Maintenance">🚧</a> <a href="https://github.com/all-contributors/all-contributors/commits?author=tbenning" title="Code">💻</a> <a href="#design-tbenning" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/tnathu-ai"><img src="https://i.ibb.co/zZKb9g9/Thu.jpg" width="100px;" alt=""/><br /><sub><b>Tran Ngoc Anh Thu</b></sub><br /><sub><b>Project Manager, Designer, Full Stack Developer</b></sub></td>
+    <td align="center"><a href="https://github.com/doanyennhi"><img src="https://i.ibb.co/r7nm18b/Nhi.jpg" width="100px;" alt=""/><br /><sub><b>Doan Yen Nhi</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
+    <td align="center"><a href="https://github.com/hlinh88"><img src="https://i.ibb.co/LhzjHQC/manh.jpg" width="100px;" alt=""/><br /><sub><b>Du Duc Manh</b></sub></a><br /><sub><b>Full Stack Developer, Meeting Minutes Taker</b></sub></td>
+    <td align="center"><a href="https://github.com/tbenning"><img src="https://i.ibb.co/qCmg569/Linh.jpg" width="100px;" alt=""/><br /><sub><b>Nguyen Hoang Linh</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
         </tr>
 </table>
 
