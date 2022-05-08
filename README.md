@@ -174,7 +174,7 @@ The `.csv` and `.json` database files that we gave you for `Firebase` reference 
 └── README.md                   // The first page the user will see when visiting the repo.
 ```
 
-**Modify the environment variables files in root folder (.env)**
+**Modify the environment variables files in root folder `.env` file**
 
 ## 📄 License
 
