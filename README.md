@@ -73,7 +73,7 @@ This React Native + Firebase + Expo app contains a few key features that all app
 |Project Proposal|Final Report|
 
 #### Figma
-|<a href="https://www.figma.com/file/7s7EjKIwZ8p3CBTlv3RWVn/SEPM---Team-18?node-id=0%3A1"><img src="https://i.ibb.co/N3NDMWN/Figma.jpg" alt="Illustration" width="700px"/></a>|
+|<a href="https://www.behance.net/gallery/142820633/Melbourne-Backpack-Cross-platform-mobile-application"><img src="https://i.ibb.co/N3NDMWN/Figma.jpg" alt="Illustration" width="700px"/></a>|
 |:--:|
 |Figma for design system and prototypes|
 
@@ -95,7 +95,7 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/tnathu-ai"><img src="https://avatars.githubusercontent.com/u/72063833?v=4" width="100px;" alt=""/><br /><sub><b>Tran Ngoc Anh Thu</b></sub></a><br /><a href="#question-kentcdodds" title="Answering Questions">💬</a> <a href="https://github.com/all-contributors/all-contributors/commits?author=kentcdodds" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#talk-kentcdodds" title="Talks">📢</a></td>
+    <td align="center"><a href="https://github.com/tnathu-ai"><img src="https://avatars.githubusercontent.com/u/72063833?v=4" width="100px;" alt=""/><br /><sub><b>Tran Ngoc Anh Thu</b></sub><br /><sub><b>Project Manager, Designer, Full Stack Developer</b></sub></td>
     <td align="center"><a href="https://github.com/jfmengels"><img src="https://avatars.githubusercontent.com/u/3869412?v=3?s=100" width="100px;" alt=""/><br /><sub><b>Jeroen Engels</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=jfmengels" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Ajfmengels" title="Reviewed Pull Requests">👀</a> <a href="#tool-jfmengels" title="Tools">🔧</a></td>
     <td align="center"><a href="https://jakebolam.com"><img src="https://avatars2.githubusercontent.com/u/3534236?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jake Bolam</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=jakebolam" title="Documentation">📖</a> <a href="#tool-jakebolam" title="Tools">🔧</a> <a href="#infra-jakebolam" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-jakebolam" title="Maintenance">🚧</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Ajakebolam" title="Reviewed Pull Requests">👀</a> <a href="#question-jakebolam" title="Answering Questions">💬</a></td>
     <td align="center"><a href="https://github.com/tbenning"><img src="https://avatars2.githubusercontent.com/u/7265547?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tyler Benning</b></sub></a><br /><a href="#maintenance-tbenning" title="Maintenance">🚧</a> <a href="https://github.com/all-contributors/all-contributors/commits?author=tbenning" title="Code">💻</a> <a href="#design-tbenning" title="Design">🎨</a></td>
@@ -120,7 +120,7 @@ Please make sure that you have **node** `v16.13.1`, **expo-cli** `5.3.0`  instal
 * Step 5: Download Expo app on your phone
 * Step 6: Scan the QR code in the terminal and open the app on Expo
 
-The `.csv` and `.json` database files that you gave us can be found in `https://github.com/Melbourne-Backpack/datasets.git` in our organization
+The `.csv` and `.json` database files that we gave you for `Firebase` reference can be found in `https://github.com/Melbourne-Backpack/datasets.git` in our organization
 
 ## Folder Structure & Architecture
 
