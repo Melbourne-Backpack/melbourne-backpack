@@ -111,8 +111,8 @@ The `.csv` and `.json` database files that we gave you for `Firebase` reference 
   <tr>
     <td align="center"><a href="https://github.com/tnathu-ai"><img src="https://i.ibb.co/zZKb9g9/Thu.jpg" width="100px;" alt=""/><br /><sub><b>Tran Ngoc Anh Thu</b></sub></a><br /><sub><b>Project Manager, Designer, Full Stack Developer</b></sub></td>
     <td align="center"><a href="https://github.com/doanyennhi"><img src="https://i.ibb.co/r7nm18b/Nhi.jpg" width="100px;" alt=""/><br /><sub><b>Doan Yen Nhi</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
-    <td align="center"><a href="https://github.com/hlinh88"><img src="https://i.ibb.co/LhzjHQC/manh.jpg" width="100px;" alt=""/><br /><sub><b>Du Duc Manh</b></sub></a><br /><sub><b>Full Stack Developer, Meeting Minutes Taker</b></sub></td>
-    <td align="center"><a href="https://github.com/tbenning"><img src="https://i.ibb.co/qCmg569/Linh.jpg" width="100px;" alt=""/><br /><sub><b>Nguyen Hoang Linh</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
+    <td align="center"><a href="https://github.com/rider3458"><img src="https://i.ibb.co/LhzjHQC/manh.jpg" width="100px;" alt=""/><br /><sub><b>Du Duc Manh</b></sub></a><br /><sub><b>Full Stack Developer, Meeting Minutes Taker</b></sub></td>
+    <td align="center"><a href="https://github.com/hlinh88"><img src="https://i.ibb.co/qCmg569/Linh.jpg" width="100px;" alt=""/><br /><sub><b>Nguyen Hoang Linh</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
         </tr>
 </table>
 
