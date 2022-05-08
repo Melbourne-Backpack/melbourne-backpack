@@ -83,10 +83,6 @@ This React Native + Firebase + Expo app contains a few key features that all app
 |collaboration tool that organizes our project into boards|
 
 ## 🧑‍🤝‍🧑Authors👭
-- Tran Ngoc Anh Thu [@tnathu-ai](https://github.com/tnathu-ai)
-- Doan Yen Nhi [@doanyennhi](https://github.com/doanyennhi)
-- Du Duc Manh [@rider3458](https://github.com/rider3458)
-- Nguyen Hoang Linh [@hlinh88](https://github.com/hlinh88)
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
