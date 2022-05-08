@@ -43,7 +43,9 @@ This React Native + Firebase + Expo app contains a few key features that all app
 + Viewing shopping malls near CBD Melbourne
 + Viewing yours and others' profile information
 + Viewing recommended videos for starting a semester in RMIT Melbourne
++ Filtering base on the content of interest
 + Logout the system
+
 
 
 #### 📱 Basic Screen shots
