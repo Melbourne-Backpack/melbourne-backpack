@@ -109,19 +109,6 @@ The `.csv` and `.json` database files that you gave us can be found in `https://
 
 ## Folder Structure & Architecture
 
-assets: Asset folder to store all images, vectors, fonts, etc.
-src: This folder is the main container of all the code inside your application.
-components: Folder to store any common component that you use through your app (such as a generic button)
-constants: Folder to store any kind of constant that you have.
-routes: Folder to store the navigators.
-redux: This folder should have all your reducers and store
-views: Folder that contains all your application screens/features.
-helper: Common api controller.
-utils: Folder to store any common function such as calcutate radius, different date formatting functions
-App.js: Main component that starts your whole app.
-index.js: Entry point of your application as per React-Native standards.
-Modify the environment variables files in root folder (.env)
-
 ```
 ├── __tests__                   // test for components, services etc. inside of related folder.
 │   ├── App-test.js
@@ -130,24 +117,27 @@ Modify the environment variables files in root folder (.env)
 |
 ├── .gitignore                  // Used by git to determine what files to ignore, when committing changes.
 |
-├── assets
+├── assets                      // store all images, vectors, fonts, etc.
 │  ├── images
 |
 ├── reports                     // contains project's documentations
 │  ├── Project Proposal.pdf
 |
-├── src
+├── src                         // main container of all the code inside your application.
 │   ├── api
 │   │  ├── getData
 │   │  ├── handleData.js
 │   │  ├── handleData.js
 |   |   
-│   ├── components
+│   ├── components              // store any common component that you use through the app (e.g: alert modal)
 │   │  ├── atoms
 │   │  ├── molecules
 │   │  ├── organisms
 |   |
-│   ├── navigations
+│   ├── config                  // Firebase configuration
+│   │  ├── firebase.js
+|   |
+│   ├── navigations                   // store the navigators
 │   │  ├── AppNavigator.js            // RootNavigator
 │   │  ├── content-navigator.js       // AppNavigator
 |   |
@@ -162,20 +152,20 @@ Modify the environment variables files in root folder (.env)
 │   ├── styles
 │   │  ├── index.js        // Export all
 │   │  ├── colors.js       // Colors pallet
-│   │  ├── mixins.js       // Mixins to use CSSinJS
 │   │  ├── spacing.js      // Paddings, margins and scale
 │   │  ├── typography.js   // Fonts types and sizes
 |   |
-│   ├── utils
+│   ├── utils              // store any common function such as calcutate distance, different date and string formatting functions
 │   ├── index.js
 |
-├── App.js
+├── App.js                 // Main component that starts the whole app.
 ├── app.json
 ├── babel.config.js
 ├── package.json
 └── README.md                   // The first page the user will see when visiting the repo.
 ```
 
+** Modify the environment variables files in root folder (.env) **
 
 ## 📄 License
 
