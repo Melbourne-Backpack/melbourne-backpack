@@ -70,7 +70,7 @@ const ContentNavigator = () => {
                                 icon = (
                                     <Image
                                         source={{
-                                            uri: data.avatar,
+                                            uri: data.avatar !== "" ? data.avatar : "https://i.ibb.co/89Pr4tx/on.png",
                                         }}
                                         style={
                                             focused
