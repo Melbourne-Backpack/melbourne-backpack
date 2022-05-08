@@ -82,20 +82,6 @@ This React Native + Firebase + Expo app contains a few key features that all app
 |:--:|
 |collaboration tool that organizes our project into boards|
 
-## 🧑‍🤝‍🧑Authors👭
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/tnathu-ai"><img src="https://i.ibb.co/zZKb9g9/Thu.jpg" width="100px;" alt=""/><br /><sub><b>Tran Ngoc Anh Thu</b></sub></a><br /><sub><b>Project Manager, Designer, Full Stack Developer</b></sub></td>
-    <td align="center"><a href="https://github.com/doanyennhi"><img src="https://i.ibb.co/r7nm18b/Nhi.jpg" width="100px;" alt=""/><br /><sub><b>Doan Yen Nhi</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
-    <td align="center"><a href="https://github.com/hlinh88"><img src="https://i.ibb.co/LhzjHQC/manh.jpg" width="100px;" alt=""/><br /><sub><b>Du Duc Manh</b></sub></a><br /><sub><b>Full Stack Developer, Meeting Minutes Taker</b></sub></td>
-    <td align="center"><a href="https://github.com/tbenning"><img src="https://i.ibb.co/qCmg569/Linh.jpg" width="100px;" alt=""/><br /><sub><b>Nguyen Hoang Linh</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
-        </tr>
-</table>
-
 
 ***
 
@@ -115,6 +101,20 @@ Please make sure that you have **node** `v16.13.1`, **expo-cli** `5.3.0`  instal
 * Step 6: Scan the QR code in the terminal and open the app on Expo
 
 The `.csv` and `.json` database files that we gave you for `Firebase` reference can be found in `https://github.com/Melbourne-Backpack/datasets.git` in our organization
+
+## 🧑‍🤝‍🧑Authors👭
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/tnathu-ai"><img src="https://i.ibb.co/zZKb9g9/Thu.jpg" width="100px;" alt=""/><br /><sub><b>Tran Ngoc Anh Thu</b></sub></a><br /><sub><b>Project Manager, Designer, Full Stack Developer</b></sub></td>
+    <td align="center"><a href="https://github.com/doanyennhi"><img src="https://i.ibb.co/r7nm18b/Nhi.jpg" width="100px;" alt=""/><br /><sub><b>Doan Yen Nhi</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
+    <td align="center"><a href="https://github.com/hlinh88"><img src="https://i.ibb.co/LhzjHQC/manh.jpg" width="100px;" alt=""/><br /><sub><b>Du Duc Manh</b></sub></a><br /><sub><b>Full Stack Developer, Meeting Minutes Taker</b></sub></td>
+    <td align="center"><a href="https://github.com/tbenning"><img src="https://i.ibb.co/qCmg569/Linh.jpg" width="100px;" alt=""/><br /><sub><b>Nguyen Hoang Linh</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
+        </tr>
+</table>
 
 ## Folder Structure & Architecture
 
