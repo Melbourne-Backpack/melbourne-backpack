@@ -27,20 +27,25 @@
 ## 📌Features
 This React Native + Firebase + Expo app contains a few key features that all apps backed by Fireabase support:
 
-+ Splash Screen
-+ Onboarding Screens
 + Registration with E-mail & Password
 + Login with E-mail and Password
 + Handling persisted login credentials
-+ Terms and Privacy Policy
-+ Navigation (react-native-navigation)
++ Navigating between screens (react-native-navigation)
 + Writing to Firestore Database
 + Reading from Firestore Database
 + Creating Firestore indices (for performance)
 + Uploading images to Storage
-+ Real-time chat forum
-+ Comment and rating on the app
-+ Real time data Victoria transportation
++ Viewing personlized data for each user
++ Messaging real-time with others in the Melbourne Backpack's chat forum
++ Commenting and rating on the available housing
++ Viewing online reviews from Google for the student living in Melbourne
++ Viewing real-time data Victoria transportation
++ Viewing shopping malls near CBD Melbourne
++ Viewing yours and others' profile information
++ Viewing recommended videos for starting a semester in RMIT Melbourne
++ Filtering base on the content of interest
++ Logout the system
+
 
 
 #### 📱 Basic Screen shots
@@ -75,12 +80,12 @@ This React Native + Firebase + Expo app contains a few key features that all app
 #### Figma
 |<a href="https://www.behance.net/gallery/142820633/Melbourne-Backpack-Cross-platform-mobile-application"><img src="https://i.ibb.co/N3NDMWN/Figma.jpg" alt="Illustration" width="700px"/></a>|
 |:--:|
-|Figma for design system and prototypes|
+|Figma for design system and prototypes on Behance|
 
 #### Trello
 |<a href="https://trello.com/b/c85KQUtQ/team-18-melbourne-backpack-sepm"><img src="https://i.ibb.co/28x7W2G/Trello.jpg" alt="Illustration" width="700px"/></a>|
 |:--:|
-|collaboration tool that organizes our project into boards|
+|Trello for collaboration tool that organizes our project into boards|
 
 
 ***
