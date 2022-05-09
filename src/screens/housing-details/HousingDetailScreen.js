@@ -81,7 +81,9 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
           sum += doc.data().rating;
         });
         setUserReviews(reviews);
-        setHousingRating(sum / (ratingStat.length + reviews.length));
+        const currentLength = ratingStat.length + reviews.length;
+        setHousingRating(sum / currentLength);
+        setRatingStat({ total: sum, length: currentLength });
         console.log(housingRating);
       });
     } catch (e) {
@@ -89,13 +91,20 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
     }
   };
 
+  const calculateNewRating = (submittedRating) => {
+    console.log("Total rating stat: " + ratingStat.total);
+    console.log("length: " + ratingStat.length);
+    const newRating =
+      (ratingStat.total + submittedRating) / (ratingStat.length + 1);
+    console.log("New rating" + newRating);
+    return newRating;
+  };
+
   useEffect(() => {
     getReview(housingData.category_id);
-    getOnlineReview(housingData.category_id);
 
     return () => {
       getReview(housingData.category_id);
-      getOnlineReview(housingData.category_id);
     };
   }, [housingRating]);
 
@@ -174,18 +183,20 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                postReview(housingData["category_id"], myComment, myRating)
-                  .then(() => getReview(housingData["category_id"]))
-                  .then(() =>
-                    updateRating(
-                      housingData["category_id"],
-                      housingRating
-                    ).then(() => {
-                      setShowAlert(true);
-                      setMyComment("");
-                      setMyRating(2);
-                    })
-                  );
+                postReview(
+                  housingData["category_id"],
+                  myComment,
+                  myRating
+                ).then(() =>
+                  updateRating(
+                    housingData["category_id"],
+                    calculateNewRating(myRating)
+                  ).then(() => {
+                    setShowAlert(true);
+                    setMyComment("");
+                    setMyRating(0);
+                  })
+                );
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>
