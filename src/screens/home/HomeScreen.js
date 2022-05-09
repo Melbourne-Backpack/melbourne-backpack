@@ -34,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
               imageStyle={{ borderRadius: 20 }}
             >
               <View style={styles.overlay}>
-                <Text style={styles.subtitle}>Discover</Text>
+                <Text style={styles.subtitle}>Discovery</Text>
               </View>
             </ImageBackground>
           </TouchableOpacity>
