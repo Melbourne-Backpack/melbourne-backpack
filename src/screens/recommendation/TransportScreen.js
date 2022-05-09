@@ -7,14 +7,18 @@ const busImg = require("../../../assets/images/bus.jpg");
 const tramImg = require("../../../assets/images/tram.jpg");
 const trainImg = require("../../../assets/images/train.jpg");
 
+const devID = String(DEVID)
+const routeTypeSignature = String(ROUTE_TYPE_SIGNATURE)
+const transportSignature = String(TRANSPORT_SIGNATURE)
+
 const TransportScreen = () => {
     const [rawData, setRawData] = useState([]);
     const [routeType, setRouteType] = useState([]);
-    const typeUrl = `http://timetableapi.ptv.vic.gov.au/v3/route_types?devid=${DEVID}&signature=${ROUTE_TYPE_SIGNATURE}`;
+    const typeUrl = `http://timetableapi.ptv.vic.gov.au/v3/route_types?devid=${devID}&signature=${routeTypeSignature}`;
 
     const lat = "-37.8080770201347";
     const long = "144.96268921184907";
-    const dataUrl = `http://timetableapi.ptv.vic.gov.au/v3/stops/location/${lat},${long}?devid=${DEVID}&signature=${TRANSPORT_SIGNATURE}`;
+    const dataUrl = `http://timetableapi.ptv.vic.gov.au/v3/stops/location/${lat},${long}?devid=${devID}&signature=${transportSignature}`;
 
     const getRouteType = () => {
         fetch(typeUrl)

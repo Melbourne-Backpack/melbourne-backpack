@@ -2,17 +2,17 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/storage";
-import { getFirestore } from "firebase/firestore";
-import { getDatabase } from "firebase/database";
+import {getFirestore} from "firebase/firestore";
+import {getDatabase} from "firebase/database";
 
 import {
-  API_KEY,
-  AUTH_DOMAIN,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGING_SENDER_ID,
-  APPID,
-  DATABASE_URL,
+    API_KEY,
+    AUTH_DOMAIN,
+    PROJECT_ID,
+    STORAGE_BUCKET,
+    MESSAGING_SENDER_ID,
+    APPID,
+    DATABASE_URL,
 } from "@env";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -20,14 +20,15 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  databaseURL: DATABASE_URL,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APPID,
+    apiKey: String(API_KEY),
+    authDomain: String(AUTH_DOMAIN),
+    databaseURL: String(DATABASE_URL),
+    projectId: String(PROJECT_ID),
+    storageBucket: String(STORAGE_BUCKET),
+    messagingSenderId: String(MESSAGING_SENDER_ID),
+    appId: String(APPID),
 };
+
 
 // Initialize Firebase
 let app;
@@ -38,4 +39,4 @@ const db = getFirestore(app);
 const storage = firebase.storage();
 const database = getDatabase();
 
-export { auth, db, storage, database };
+export {auth, db, storage, database};
