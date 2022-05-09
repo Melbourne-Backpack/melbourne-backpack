@@ -10,8 +10,8 @@ import {
     Dimensions,
 } from "react-native";
 import styles from "./styles";
-import {AntDesign, Ionicons} from "@expo/vector-icons";
-import {LIGHT_PURPLE, PURPLE_BLUE, WHITE} from "../../styles/colors";
+import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
+import { LIGHT_PURPLE, PURPLE_BLUE, WHITE } from "../../styles/colors";
 
 import {auth, db} from "../../config/firebase";
 import {useCallback, useEffect, useState} from "react";
@@ -117,6 +117,7 @@ const Profile = ({navigation, route}) => {
         setShowAlert(showAlert);
     };
 
+
     const signOut = ({navigation}) => {
         auth
             .signOut()
@@ -126,22 +127,37 @@ const Profile = ({navigation, route}) => {
             .catch((error) => window.alert(error.message));
     };
 
-    return (
-        <View style={styles.background}>
-            <View style={styles.topBar}>
-                <TouchableOpacity
-                    onPress={() => {
-                        navigation.navigate("Community");
-                    }}
-                >
-                    <AntDesign
-                        name={"left"}
-                        size={24}
-                        color={WHITE}
-                        style={styles.backBtn}
-                    />
-                </TouchableOpacity>
-                <Text style={styles.title}>Profile</Text>
+  return (
+    <View style={styles.background}>
+      <View style={styles.topBar}>
+        {navigation.getParent() ? (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Home");
+            }}
+          >
+            <Entypo
+              style={styles.backBtn}
+              name="home"
+              size={26}
+              color={WHITE}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Community");
+            }}
+          >
+            <AntDesign
+              name={"left"}
+              size={24}
+              color={WHITE}
+              style={styles.backBtn}
+            />
+          </TouchableOpacity>
+        )}
+        <Text style={styles.title}>Profile</Text>
 
                 {navigation.getParent() ? (
                     <TouchableOpacity
