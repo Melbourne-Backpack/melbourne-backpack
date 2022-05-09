@@ -18,15 +18,21 @@ const MiniCard = ({ videoId, title, channelTitle }) => {
   }
   return (
     <View style={styles.itemContainer}>
-      <TouchableOpacity onPress={() => setPlayVideo(!playVideo)}>
-        <View style={styles.videoCardHolder}>
+      <View style={styles.videoCardHolder}>
+        <TouchableOpacity
+          style={styles.videoImageHolder}
+          onPress={() => setPlayVideo(!playVideo)}
+        >
           <Image
             source={{
               uri: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
             }}
             style={styles.videoImage}
           />
-          <View style={styles.titleHolder}>
+        </TouchableOpacity>
+
+        <View style={styles.titleHolder}>
+          <TouchableOpacity onPress={() => setPlayVideo(!playVideo)}>
             <Text
               style={styles.videoTitle}
               ellipsizeMode="tail"
@@ -34,26 +40,31 @@ const MiniCard = ({ videoId, title, channelTitle }) => {
             >
               {title}
             </Text>
+          </TouchableOpacity>
+
+          <View style={styles.channelHolder}>
             <View style={styles.channelHolder}>
-              <View style={styles.channelHolder}>
-                <Image
-                  source={{
-                    uri: "https://yt3.ggpht.com/ytc/AKedOLRxZLozvzkAvdXibKotVMxdSB84u3gcsOPySwLCXg=s800-c-k-c0x00ffffff-no-rj",
-                  }}
-                  style={styles.channelAva}
-                />
-                <Text style={styles.channelTitle}>{channelTitle}</Text>
-                <MaterialIcons name="verified" size={14} color={WHITE} />
-              </View>
-              {playVideo ? (
-                <AntDesign name="caretup" size={13} color={WHITE} />
-              ) : (
-                <AntDesign name="caretdown" size={13} color={WHITE} />
-              )}
+              <Image
+                source={{
+                  uri: "https://yt3.ggpht.com/ytc/AKedOLRxZLozvzkAvdXibKotVMxdSB84u3gcsOPySwLCXg=s800-c-k-c0x00ffffff-no-rj",
+                }}
+                style={styles.channelAva}
+              />
+              <Text style={styles.channelTitle}>{channelTitle}</Text>
+              <MaterialIcons name="verified" size={14} color={WHITE} />
             </View>
+            {playVideo ? (
+              <TouchableOpacity onPress={() => setPlayVideo(!playVideo)}>
+                <AntDesign name="caretup" size={13} color={WHITE} />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={() => setPlayVideo(!playVideo)}>
+                <AntDesign name="caretdown" size={13} color={WHITE} />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
 
       {playVideo && (
         <View style={styles.youtubeVideo}>

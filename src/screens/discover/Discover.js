@@ -82,7 +82,7 @@ const Discover = ({ navigation }) => {
               />
             );
           }}
-          style={styles.flatlist}
+          style={styles.flatList}
         />
       </SafeAreaView>
     </View>
