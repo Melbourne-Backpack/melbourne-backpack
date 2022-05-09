@@ -9,7 +9,6 @@ const postReview = async (categoryId, comment, rating) => {
       comment: comment,
       rating: rating,
     });
-    window.alert("Your review has been submitted!");
   } catch (e) {
     console.error("Error adding document: ", e);
   }
@@ -17,7 +16,7 @@ const postReview = async (categoryId, comment, rating) => {
 
 const updateRating = async (documentId, rating) => {
   try {
-    await updateDoc(doc(db, "housing", documentId), {
+    await updateDoc(doc(db, "ratings", documentId), {
       rating: rating,
     });
     console.log("rating updated successfully!");

@@ -25,30 +25,52 @@
 
 
 ## 📌Features
-This React Native Firebase app contains a few key features that all apps backed by Fireabase support:
+This React Native + Firebase + Expo app contains a few key features that all apps backed by Fireabase support:
 
-+ Splash Screen
 + Registration with E-mail & Password
 + Login with E-mail and Password
 + Handling persisted login credentials
-+ Navigation (react-native-navigation)
++ Navigating between screens (react-native-navigation)
 + Writing to Firestore Database
 + Reading from Firestore Database
 + Creating Firestore indices (for performance)
 + Uploading images to Storage
-+ Real-time chat forum
-+ Comment and rating on the app
-+ Real time data Victoria transportation
++ Viewing personlized data for each user
++ Messaging real-time with others in the Melbourne Backpack's chat forum
++ Commenting and rating on the available housing
++ Viewing online reviews from Google for the student living in Melbourne
++ Viewing real-time data Victoria transportation
++ Viewing shopping malls near CBD Melbourne
++ Viewing yours and others' profile information
++ Viewing recommended videos for starting a semester in RMIT Melbourne
++ Filtering base on the content of interest
++ Logout the system
 
 
-#### 📱 Screen shots
-|<a href="#"><img src="https://i.ibb.co/NZHZ1rz/more.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/2cVnTfS/success.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/LrK1D3b/alert.png" alt="Illustration" width="400px"/></a>|
+
+#### 📱 Basic Screen shots
+|<a href="#"><img src="https://i.ibb.co/WsMx0y4/splash.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/SB9PkqL/onboarding.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/FVH7hHw/signin.png" alt="Illustration" width="400px"/></a>|
 |:--:|:--:|:--:|
-|demo|demo|demo|
+|Splash Screen|Onboarding Screen|SignIn Screen|
 
-|<a href="#"><img src="https://i.ibb.co/NZHZ1rz/more.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/2cVnTfS/success.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/LrK1D3b/alert.png" alt="Illustration" width="400px"/></a>|
+|<a href="#"><img src="https://i.ibb.co/WKr7JM9/campus.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/6yXyYQv/subjects.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/8D7KkX7/more-info.png" alt="Illustration" width="400px"/></a>|
 |:--:|:--:|:--:|
-|demo|demo|demo|
+|Personalization Screen: campus|Personalization Screen: subjects|Personalization Screen: further info|
+
+|<a href="#"><img src="https://i.ibb.co/SVkM4RV/housing2.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/2jZFQpf/housing3.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/RTKyK7P/housing4.png" alt="Illustration" width="400px"/></a>|
+|:--:|:--:|:--:|
+|Housing Screen: house details|Housing Screen: all review's options|Housing Screen: app reviews example|
+
+|<a href="#"><img src="https://i.ibb.co/zS8wXjz/transport.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/JvJqNp2/shopping.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/kGLmpfL/community.png" alt="Illustration" width="400px"/></a>|
+|:--:|:--:|:--:|
+|Transportation Screen|Shopping Screen|Community Screen|
+
+|<a href="#"><img src="https://i.ibb.co/L6Z66R6/profile.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/txjML6S/copy-othe-uid.png" alt="Illustration" width="400px"/></a>|<a href="#"><img src="https://i.ibb.co/bLyX2FZ/logout.png" alt="Illustration" width="400px"/></a>|
+|:--:|:--:|:--:|
+|Profile Screen|Copy other's member uid Screen|Logout Screen|
+
+-------------------
+
 
 #### 📖 Documentation
 |<a href="#"><img src="https://i.ibb.co/St3T7Yh/proposal.jpg" alt="Illustration" width="700px"/></a>|<a href="#"><img src="https://i.ibb.co/St3T7Yh/proposal.jpg" alt="Illustration" width="700px"/></a>|
@@ -56,20 +78,15 @@ This React Native Firebase app contains a few key features that all apps backed 
 |Project Proposal|Final Report|
 
 #### Figma
-|<a href="https://www.figma.com/file/7s7EjKIwZ8p3CBTlv3RWVn/SEPM---Team-18?node-id=0%3A1"><img src="https://i.ibb.co/N3NDMWN/Figma.jpg" alt="Illustration" width="700px"/></a>|
+|<a href="https://www.behance.net/gallery/142820633/Melbourne-Backpack-Cross-platform-mobile-application"><img src="https://i.ibb.co/N3NDMWN/Figma.jpg" alt="Illustration" width="700px"/></a>|
 |:--:|
-|Figma for design system and prototypes|
+|Figma for design system and prototypes on Behance|
 
 #### Trello
 |<a href="https://trello.com/b/c85KQUtQ/team-18-melbourne-backpack-sepm"><img src="https://i.ibb.co/28x7W2G/Trello.jpg" alt="Illustration" width="700px"/></a>|
 |:--:|
-|collaboration tool that organizes our project into boards|
+|Trello for collaboration tool that organizes our project into boards|
 
-## 🧑‍🤝‍🧑Authors👭
-- Tran Ngoc Anh Thu [@tnathu-ai](https://github.com/tnathu-ai)
-- Doan Yen Nhi [@doanyennhi](https://github.com/doanyennhi)
-- Du Duc Manh [@rider3458](https://github.com/rider3458)
-- Nguyen Hoang Linh [@hlinh88](https://github.com/hlinh88)
 
 ***
 
@@ -88,8 +105,81 @@ Please make sure that you have **node** `v16.13.1`, **expo-cli** `5.3.0`  instal
 * Step 5: Download Expo app on your phone
 * Step 6: Scan the QR code in the terminal and open the app on Expo
 
-The `.csv` and `.json` database files that you gave us can be found in `https://github.com/Melbourne-Backpack/datasets.git` in our organization
+The `.csv` and `.json` database files that we gave you for `Firebase` reference can be found in `https://github.com/Melbourne-Backpack/datasets.git` in our organization
 
+## 🧑‍🤝‍🧑Authors👭
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/tnathu-ai"><img src="https://i.ibb.co/zZKb9g9/Thu.jpg" width="100px;" alt=""/><br /><sub><b>Tran Ngoc Anh Thu</b></sub></a><br /><sub><b>Project Manager, Designer, Full Stack Developer</b></sub></td>
+    <td align="center"><a href="https://github.com/doanyennhi"><img src="https://i.ibb.co/r7nm18b/Nhi.jpg" width="100px;" alt=""/><br /><sub><b>Doan Yen Nhi</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
+    <td align="center"><a href="https://github.com/rider3458"><img src="https://i.ibb.co/LhzjHQC/manh.jpg" width="100px;" alt=""/><br /><sub><b>Du Duc Manh</b></sub></a><br /><sub><b>Full Stack Developer, Meeting Minutes Taker</b></sub></td>
+    <td align="center"><a href="https://github.com/hlinh88"><img src="https://i.ibb.co/qCmg569/Linh.jpg" width="100px;" alt=""/><br /><sub><b>Nguyen Hoang Linh</b></sub></a><br /><sub><b>Full Stack Developer, Github Administrator</b></sub></td>
+        </tr>
+</table>
+
+## Folder Structure & Architecture
+
+```
+├── __tests__                   // test for components, services etc. inside of related folder.
+│   ├── App-test.js
+|
+├── node_modules
+|
+├── .gitignore                  // Used by git to determine what files to ignore, when committing changes.
+|
+├── assets                      // store all images, vectors, fonts, etc.
+│  ├── images
+|
+├── reports                     // contains project's documentations
+│  ├── Project Proposal.pdf
+|
+├── src                         // main container of all the code inside your application.
+│   ├── api
+│   │  ├── getData
+│   │  ├── handleData.js
+│   │  ├── handleData.js
+|   |   
+│   ├── components              // store any common component that you use through the app (e.g: alert modal)
+│   │  ├── atoms
+│   │  ├── molecules
+│   │  ├── organisms
+|   |
+│   ├── config                  // Firebase configuration
+│   │  ├── firebase.js
+|   |
+│   ├── navigations                   // store the navigators
+│   │  ├── AppNavigator.js            // RootNavigator
+│   │  ├── content-navigator.js       // AppNavigator
+|   |
+│   ├── screens
+│   │  ├── login
+│   │  │	 ├── index.js // LoginScreen
+│   │  ├── home
+│   │  │	 ├── index.js // HomeScreen
+│   │  ├── about
+│   │  │	 ├── index.js // AboutScreen
+|   |
+│   ├── styles
+│   │  ├── index.js        // Export all
+│   │  ├── colors.js       // Colors pallet
+│   │  ├── spacing.js      // Paddings, margins and scale
+│   │  ├── typography.js   // Fonts types and sizes
+|   |
+│   ├── utils              // store any common function such as calcutate distance, different date and string formatting functions
+│   ├── index.js
+|
+├── App.js                 // Main component that starts the whole app.
+├── app.json
+├── babel.config.js
+├── package.json
+└── README.md                   // The first page the user will see when visiting the repo.
+```
+
+**Modify the environment variables files in root folder `.env` file**
 
 ## 📄 License
 
@@ -99,3 +189,7 @@ React Native documentation is Creative Commons licensed, as found in the [LICENS
 
 [l]: https://github.com/facebook/react-native/blob/HEAD/LICENSE
 [ld]: https://github.com/facebook/react-native/blob/HEAD/LICENSE-docs
+
+
+
+

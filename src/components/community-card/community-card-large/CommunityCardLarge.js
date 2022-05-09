@@ -41,7 +41,7 @@ const CommunityCardLarge = ({
             }}
         >
             <Image
-                source={{uri: picture}}
+                source={{uri: picture !== "" ? picture : "https://i.ibb.co/89Pr4tx/on.png"}}
                 style={styles.userImg}
             />
             <View style={styles.userContent}>

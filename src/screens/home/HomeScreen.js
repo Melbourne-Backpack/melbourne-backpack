@@ -1,4 +1,4 @@
-import { Text, View, ImageBackground } from "react-native";
+import { Text, View, ImageBackground, ScrollView } from "react-native";
 import styles from "./styles";
 import { TouchableOpacity } from "react-native";
 import { useFonts } from "expo-font";
@@ -19,96 +19,123 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.melbourneBackpackText}>Melbourne Backpack</Text>
-      <View style={styles.furtherButton}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() =>
-            navigation.navigate("Content", { screen: "Community" })
-          }
-        >
-          <ImageBackground
-            resizeMode={"cover"}
-            source={require("../../../assets/images/community.jpg")}
-            style={styles.backgroundImage}
-            imageStyle={{ borderRadius: 20 }}
+      <ScrollView>
+        <View style={styles.furtherButton}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate("Discover")}
           >
-            <View style={styles.overlay}>
-              <Text style={styles.subtitle}>Community</Text>
-            </View>
-          </ImageBackground>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.furtherButton}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Content", { screen: "Housing" })}
-        >
-          <ImageBackground
-            resizeMode={"cover"}
-            source={require("../../../assets/images/housing.jpg")}
-            style={styles.backgroundImage}
-            imageStyle={{ borderRadius: 20 }}
+            <ImageBackground
+              resizeMode={"cover"}
+              source={{
+                uri: "https://www.amec.com.vn/wp-content/uploads/2020/09/CS-RMIT.jpg",
+              }}
+              style={styles.backgroundImage}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <View style={styles.overlay}>
+                <Text style={styles.subtitle}>Discovery</Text>
+              </View>
+            </ImageBackground>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.furtherButton}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() =>
+              navigation.navigate("Content", { screen: "Community" })
+            }
           >
-            <View style={styles.overlay}>
-              <Text style={styles.subtitle}>Housing</Text>
-            </View>
-          </ImageBackground>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.furtherButton}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Content", { screen: "Shopping" })}
-        >
-          <ImageBackground
-            resizeMode={"cover"}
-            source={require("../../../assets/images/shopping.jpg")}
-            style={styles.backgroundImage}
-            imageStyle={{ borderRadius: 20 }}
+            <ImageBackground
+              resizeMode={"cover"}
+              source={require("../../../assets/images/community.jpg")}
+              style={styles.backgroundImage}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <View style={styles.overlay}>
+                <Text style={styles.subtitle}>Community</Text>
+              </View>
+            </ImageBackground>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.furtherButton}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() =>
+              navigation.navigate("Content", { screen: "Housing" })
+            }
           >
-            <View style={styles.overlay}>
-              <Text style={styles.subtitle}>Shopping</Text>
-            </View>
-          </ImageBackground>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.furtherButton}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() =>
-            navigation.navigate("Content", { screen: "Transport" })
-          }
-        >
-          <ImageBackground
-            resizeMode={"cover"}
-            source={require("../../../assets/images/transport.jpg")}
-            style={styles.backgroundImage}
-            imageStyle={{ borderRadius: 20 }}
+            <ImageBackground
+              resizeMode={"cover"}
+              source={require("../../../assets/images/housing.jpg")}
+              style={styles.backgroundImage}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <View style={styles.overlay}>
+                <Text style={styles.subtitle}>Housing</Text>
+              </View>
+            </ImageBackground>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.furtherButton}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() =>
+              navigation.navigate("Content", { screen: "Shopping" })
+            }
           >
-            <View style={styles.overlay}>
-              <Text style={styles.subtitle}>Transport</Text>
-            </View>
-          </ImageBackground>
-        </TouchableOpacity>
-      </View>
+            <ImageBackground
+              resizeMode={"cover"}
+              source={require("../../../assets/images/shopping.jpg")}
+              style={styles.backgroundImage}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <View style={styles.overlay}>
+                <Text style={styles.subtitle}>Shopping</Text>
+              </View>
+            </ImageBackground>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.furtherButton}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() =>
+              navigation.navigate("Content", { screen: "Transport" })
+            }
+          >
+            <ImageBackground
+              resizeMode={"cover"}
+              source={require("../../../assets/images/transport.jpg")}
+              style={styles.backgroundImage}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <View style={styles.overlay}>
+                <Text style={styles.subtitle}>Transport</Text>
+              </View>
+            </ImageBackground>
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.furtherButton}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Content", { screen: "Profile" })}
-        >
-          <ImageBackground
-            resizeMode={"cover"}
-            source={require("../../../assets/images/profile.jpg")}
-            style={styles.backgroundImage}
-            imageStyle={{ borderRadius: 20 }}
+        <View style={styles.furtherButton}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() =>
+              navigation.navigate("Content", { screen: "Profile" })
+            }
           >
-            <View style={styles.overlay}>
-              <Text style={styles.subtitle}>Profile</Text>
-            </View>
-          </ImageBackground>
-        </TouchableOpacity>
-      </View>
+            <ImageBackground
+              resizeMode={"cover"}
+              source={require("../../../assets/images/profile.jpg")}
+              style={styles.backgroundImage}
+              imageStyle={{ borderRadius: 20 }}
+            >
+              <View style={styles.overlay}>
+                <Text style={styles.subtitle}>Profile</Text>
+              </View>
+            </ImageBackground>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 };

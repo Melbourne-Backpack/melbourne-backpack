@@ -12,16 +12,14 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE } from "../../styles/colors";
 import { auth, database, db } from "../../config/firebase";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { get, set, ref, onValue, push, update } from "firebase/database";
 import { useIsFocused } from "@react-navigation/native";
-import * as Clipboard from "expo-clipboard";
 import Modal from "react-native-modal";
-import { Dimensions } from "react-native";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -46,6 +44,8 @@ const Messages = ({ navigation, route }) => {
   const [addNew, setAddNew] = useState(false);
   const [uidToAdd, setUidToAdd] = useState("");
   const [error, setError] = useState(null);
+  const [itemSelected, setItemSelected] = useState([]);
+  const [openEdit, setOpenEdit] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -85,6 +85,7 @@ const Messages = ({ navigation, route }) => {
             ref(database, `chatrooms/${user.friends[i].chatRoomId}`)
           );
           let holdData = snapshot.val().messages;
+          setItemSelected((newArr) => [...newArr, false]);
           if (holdData) {
             for (let k = 0; k < holdData.length; k++) {
               let holdText = holdData[k].text;
@@ -267,7 +268,7 @@ const Messages = ({ navigation, route }) => {
           </View>
 
           <View style={styles.secondTopBar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setOpenEdit(!openEdit)}>
               <Text style={styles.editText}>Edit</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -408,13 +409,32 @@ const Messages = ({ navigation, route }) => {
                     key={item.uid}
                     style={styles.userWrapper}
                     onPress={() => {
-                      navigation.navigate("Chat", {
-                        user: item,
-                        myData: myData,
-                        selectedUser: item,
-                      });
+                      openEdit
+                        ? console.log("")
+                        : navigation.navigate("Chat", {
+                            user: item,
+                            myData: myData,
+                            selectedUser: item,
+                          });
                     }}
                   >
+                    {openEdit && (
+                      <TouchableOpacity>
+                        {itemSelected[index] ? (
+                          <Ionicons
+                            name="radio-button-on"
+                            size={24}
+                            color={WHITE}
+                          />
+                        ) : (
+                          <Ionicons
+                            name="radio-button-off"
+                            size={24}
+                            color={WHITE}
+                          />
+                        )}
+                      </TouchableOpacity>
+                    )}
                     <View style={styles.imageNameMessWrapper}>
                       <Image
                         source={{
@@ -443,12 +463,10 @@ const Messages = ({ navigation, route }) => {
                     </View>
 
                     <View style={styles.dotTimeWrapper}>
-                      <Image
-                        source={require("../../../assets/available-dot.png")}
-                        style={styles.dot}
-                      />
                       <Text style={styles.messageTime}>
-                        {myTimeData[index]}
+                        {myTimeData[index]
+                          ? myTimeData[index]
+                          : "                "}
                       </Text>
                     </View>
                   </TouchableOpacity>

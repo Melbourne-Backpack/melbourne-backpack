@@ -21,10 +21,11 @@ import { updateRating, postReview } from "../../api/handleReview";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { formatPara } from "../../utils/Formatting";
+import SubmitAlert from "../../components/housing-details/alert/SubmitAlert";
 
 const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const housingData = route.params.data;
-  console.log(housingData.rating);
+  const [showAlert, setShowAlert] = useState(false);
 
   const [myComment, setMyComment] = useState("");
   const [myRating, setMyRating] = useState(null);
@@ -81,6 +82,7 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
         });
         setUserReviews(reviews);
         setHousingRating(sum / (ratingStat.length + reviews.length));
+        console.log(housingRating);
       });
     } catch (e) {
       console.log(e);
@@ -110,6 +112,8 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <SubmitAlert isVisible={showAlert} setIsVisibleFunction={setShowAlert} />
+
       <View style={styles.header}>
         <TouchableOpacity onPress={() => goBack()}>
           <Ionicons name="chevron-back" size={30} color={WHITE} />
@@ -170,10 +174,18 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                postReview(housingData["category_id"], myComment, myRating);
-                updateRating(housingData.id, housingRating);
-                setMyComment("");
-                setMyRating(0);
+                postReview(housingData["category_id"], myComment, myRating)
+                  .then(() => getReview(housingData["category_id"]))
+                  .then(() =>
+                    updateRating(
+                      housingData["category_id"],
+                      housingRating
+                    ).then(() => {
+                      setShowAlert(true);
+                      setMyComment("");
+                      setMyRating(2);
+                    })
+                  );
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>

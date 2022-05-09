@@ -159,5 +159,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: wp("60%"),
   },
+  menuItem: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    paddingRight: 10,
+  },
+  userIDContentWrapper: {
+    flex: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingRight: 25,
+    paddingLeft: 30,
+  },
 });
 export default styles;

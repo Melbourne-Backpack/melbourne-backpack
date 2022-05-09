@@ -137,6 +137,21 @@ const CommunityScreen = ({navigation}) => {
         }
     ];
 
+    const purpose = [
+        {
+            id: 1,
+            name: "Exchange"
+        },
+        {
+            id: 2,
+            name: "Transfer",
+        },
+        {
+            id: 3,
+            name: "Get Information"
+        }
+    ]
+
     let mostLikeYouDataForDisplay
     if (community.length > 0) {
         mostLikeYouDataForDisplay = mostLikeYouData().slice(
@@ -179,8 +194,8 @@ const CommunityScreen = ({navigation}) => {
 
                     {community.length > 0 ?
                         <CommunityFilter
-                            headingList={["campus", "subjects"]}
-                            optionList={[campus, topic]}
+                            headingList={["campus", "subjects", "purpose"]}
+                            optionList={[campus, topic, purpose]}
                             navigation={navigation}
                             userList={community}
                         /> : null}

@@ -118,7 +118,7 @@ const Onboarding = ({ navigation }) => {
 
           {/* Skip button */}
           {/* Hide Skip button on last screen */}
-          <TouchableOpacity onPress={handleSkipToEnd}>
+          <TouchableOpacity onPress={() => navigation.replace("SignIn")}>
             <Text
               style={{
                 fontFamily: "PoppinsRegular",

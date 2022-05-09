@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
   comment: {
     backgroundColor: TEXT_INPUT,
     borderRadius: 20,
-    paddingVertical: 30,
+    paddingTop: 15,
+    paddingBottom: 30,
     paddingHorizontal: 20,
     fontFamily: "PoppinsRegular",
     marginBottom: 30,

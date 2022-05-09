@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import {
   DARK_BLUE,
+  GREY,
   LIGHT_PURPLE,
   SELECTED_BUTTON,
   WHITE,
@@ -73,6 +74,15 @@ const styles = StyleSheet.create({
     width: 100,
   },
 
+  clearBtn: {
+    backgroundColor: GREY,
+    borderColor: GREY,
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 40,
+    width: 100,
+  },
+
   submitBtnText: {
     color: WHITE,
     paddingTop: 4,
@@ -82,10 +92,14 @@ const styles = StyleSheet.create({
   },
 
   submitBtnWrapper: {
-    alignItems: "center",
-    justifyContent: "center",
     marginTop: 20,
     marginBottom: 20,
+  },
+
+  submitBtnRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
 });
 
