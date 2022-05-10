@@ -237,7 +237,7 @@ const Profile = ({ navigation, route }) => {
             <View style={styles.userContentHeadingWrapper}>
               <Text style={styles.userContentHeading}>User ID</Text>
             </View>
-            <View style={styles.userContentWrapper}>
+            <View style={styles.userIDContentWrapper}>
               <Text
                 style={styles.userContent}
                 numberOfLines={1}

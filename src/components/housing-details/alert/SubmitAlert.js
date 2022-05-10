@@ -2,7 +2,6 @@ import Modal from "react-native-modal";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
-import React from "@types/react";
 
 const SubmitAlert = ({ isVisible = false, setIsVisibleFunction }) => {
   const toggleModal = () => {
