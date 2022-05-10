@@ -1,6 +1,8 @@
 import Modal from "react-native-modal";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
+import { AntDesign } from "@expo/vector-icons";
+import React from "@types/react";
 
 const SubmitAlert = ({ isVisible = false, setIsVisibleFunction }) => {
   const toggleModal = () => {
@@ -21,13 +23,7 @@ const SubmitAlert = ({ isVisible = false, setIsVisibleFunction }) => {
             }}
           >
             <View style={styles.headerContainer}>
-              <Image
-                source={require("../../../../assets/success-icon.png")}
-                style={{
-                  width: 20,
-                  height: 20,
-                }}
-              />
+              <AntDesign name="checkcircle" size={24} color="#25AE88" />
               <Text style={styles.headerText}>SUCCESS</Text>
             </View>
 

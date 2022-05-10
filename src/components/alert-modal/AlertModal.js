@@ -1,8 +1,13 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import React, { useState } from "react";
-import { PLACEHOLDER, WHITE } from "../../styles/colors";
+import { PLACEHOLDER, RED, WHITE, YELLOW } from "../../styles/colors";
 import Modal from "react-native-modal";
+import {
+  AntDesign,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 const AlertModal = ({
   navigation,
@@ -47,31 +52,13 @@ const AlertModal = ({
               }}
             >
               {icon === "alert" && (
-                <Image
-                  source={require("../../../assets/alert-icon.png")}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
+                <Ionicons name="alert-circle" size={24} color="#FAC800" />
               )}
               {icon === "success" && (
-                <Image
-                  source={require("../../../assets/success-icon.png")}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
+                <AntDesign name="checkcircle" size={24} color="#25AE88" />
               )}
               {icon === "logout" && (
-                <Image
-                  source={require("../../../assets/logout-icon.png")}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
+                <MaterialCommunityIcons name="logout" size={24} color={RED} />
               )}
               {icon === "alert" && (
                 <Text

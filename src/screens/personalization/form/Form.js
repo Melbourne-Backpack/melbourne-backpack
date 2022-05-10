@@ -20,6 +20,7 @@ import { pushData } from "../../../api/handleData";
 import { auth, storage } from "../../../config/firebase";
 import Dropdown from "../../../components/dropdown/Dropdown";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 
 let data = ["Exchange", "Transfer", "Get Information"];
 
@@ -234,10 +235,7 @@ const Form = ({ navigation }) => {
                 defaultValue={fullName}
                 multiline
               />
-              <Image
-                style={{ width: 25, height: 25 }}
-                source={require("../../../../assets/full-name-icon.png")}
-              />
+              <AntDesign name="idcard" size={20} color={PLACEHOLDER} />
             </View>
 
             <View style={styles.errorHolder}>
@@ -257,10 +255,7 @@ const Form = ({ navigation }) => {
                 >
                   {dob ? dob : "Date of birth*"}
                 </Text>
-                <Image
-                  style={{ width: 20, height: 20 }}
-                  source={require("../../../../assets/date-of-birth.png")}
-                />
+                <Entypo name="calendar" size={20} color={PLACEHOLDER} />
               </TouchableOpacity>
               {open && (
                 <DateTimePicker
@@ -315,10 +310,7 @@ const Form = ({ navigation }) => {
                 defaultValue={facebook}
                 multiline
               />
-              <Image
-                style={{ width: 25, height: 25 }}
-                source={require("../../../../assets/facebook.png")}
-              />
+              <AntDesign name="facebook-square" size={24} color={PLACEHOLDER} />
             </View>
 
             <View style={styles.errorHolder}>

@@ -20,6 +20,8 @@ import AlertModal from "../../components/alert-modal/AlertModal";
 import Modal from "react-native-modal";
 import _ from "lodash";
 import { pushData } from "../../api/handleData";
+import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
+import { WHITE } from "../../styles/colors";
 
 // const data = require("../../../assets/mockJSON/MOCK_DATA.json");
 
@@ -206,9 +208,11 @@ const EditProfile = ({ navigation }) => {
             <View style={styles.userContentWrapper}>
               <Text style={styles.userContent}>{displayNameTI}</Text>
             </View>
-            <Image
-              source={require("../../../assets/edit-icon.png")}
-              style={styles.icon}
+            <FontAwesome5
+              name="edit"
+              size={15}
+              color={WHITE}
+              style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
           <Modal
@@ -238,10 +242,7 @@ const EditProfile = ({ navigation }) => {
                   }}
                   style={styles.clearBtn}
                 >
-                  <Image
-                    source={require("../../../assets/clear-text-input.png")}
-                    style={styles.clearIcon}
-                  />
+                  <AntDesign name="closecircle" size={18} color={WHITE} />
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
@@ -267,9 +268,11 @@ const EditProfile = ({ navigation }) => {
             <View style={styles.userContentWrapper}>
               <Text style={styles.userContent}>{dobTI}</Text>
             </View>
-            <Image
-              source={require("../../../assets/edit-icon.png")}
-              style={styles.icon}
+            <FontAwesome5
+              name="edit"
+              size={15}
+              color={WHITE}
+              style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
           <Modal
@@ -299,10 +302,7 @@ const EditProfile = ({ navigation }) => {
                   }}
                   style={styles.clearBtn}
                 >
-                  <Image
-                    source={require("../../../assets/clear-text-input.png")}
-                    style={styles.clearIcon}
-                  />
+                  <AntDesign name="closecircle" size={18} color={WHITE} />
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
@@ -328,9 +328,11 @@ const EditProfile = ({ navigation }) => {
             <View style={styles.userContentWrapper}>
               <Text style={styles.userContent}>{campusTI}</Text>
             </View>
-            <Image
-              source={require("../../../assets/edit-icon.png")}
-              style={styles.icon}
+            <FontAwesome5
+              name="edit"
+              size={15}
+              color={WHITE}
+              style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
 
@@ -352,10 +354,21 @@ const EditProfile = ({ navigation }) => {
                   }}
                 >
                   <Text style={styles.text}>{campusTI}</Text>
-                  <Image
-                    source={require("../../../assets/dropdown.png")}
-                    style={styles.dropdown}
-                  />
+                  {openDropDown ? (
+                    <AntDesign
+                      name="caretup"
+                      size={20}
+                      color={WHITE}
+                      style={{ marginRight: 10 }}
+                    />
+                  ) : (
+                    <AntDesign
+                      name="caretdown"
+                      size={20}
+                      color={WHITE}
+                      style={{ marginRight: 10 }}
+                    />
+                  )}
                 </TouchableOpacity>
                 {openDropDown && (
                   <View>
@@ -403,9 +416,11 @@ const EditProfile = ({ navigation }) => {
                 {selectedSubjects.join(" | ")}
               </Text>
             </View>
-            <Image
-              source={require("../../../assets/edit-icon.png")}
-              style={styles.icon}
+            <FontAwesome5
+              name="edit"
+              size={15}
+              color={WHITE}
+              style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
 
@@ -481,9 +496,11 @@ const EditProfile = ({ navigation }) => {
             <View style={styles.userContentWrapper}>
               <Text style={styles.userContent}>{facebookTI}</Text>
             </View>
-            <Image
-              source={require("../../../assets/edit-icon.png")}
-              style={styles.icon}
+            <FontAwesome5
+              name="edit"
+              size={15}
+              color={WHITE}
+              style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
 
@@ -514,10 +531,7 @@ const EditProfile = ({ navigation }) => {
                   }}
                   style={styles.clearBtn}
                 >
-                  <Image
-                    source={require("../../../assets/clear-text-input.png")}
-                    style={styles.clearIcon}
-                  />
+                  <AntDesign name="closecircle" size={18} color={WHITE} />
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
@@ -543,9 +557,11 @@ const EditProfile = ({ navigation }) => {
             <View style={styles.userContentWrapper}>
               <Text style={styles.userContent}>{bioTI}</Text>
             </View>
-            <Image
-              source={require("../../../assets/edit-icon.png")}
-              style={styles.icon}
+            <FontAwesome5
+              name="edit"
+              size={15}
+              color={WHITE}
+              style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
 
@@ -576,10 +592,7 @@ const EditProfile = ({ navigation }) => {
                   }}
                   style={styles.clearBtn}
                 >
-                  <Image
-                    source={require("../../../assets/clear-text-input.png")}
-                    style={styles.clearIcon}
-                  />
+                  <AntDesign name="closecircle" size={18} color={WHITE} />
                 </TouchableOpacity>
               </View>
               <TouchableOpacity

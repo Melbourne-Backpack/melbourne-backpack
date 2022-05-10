@@ -12,7 +12,13 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { useFonts } from "expo-font";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Entypo,
+  FontAwesome,
+  Ionicons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE } from "../../styles/colors";
 import { auth, database, db } from "../../config/firebase";
 import { useEffect, useRef, useState, useCallback } from "react";
@@ -259,10 +265,7 @@ const Messages = ({ navigation, route }) => {
                 style={styles.threeDots}
                 onPress={() => setOpenMenu(!openMenu)}
               >
-                <Image
-                  source={require("../../../assets/three-dots.png")}
-                  style={{ width: 22, height: 22 }}
-                />
+                <Entypo name="dots-three-horizontal" size={24} color={WHITE} />
               </TouchableOpacity>
             </View>
           </View>
@@ -275,9 +278,11 @@ const Messages = ({ navigation, route }) => {
               style={styles.newWrapper}
               onPress={() => setAddNew(true)}
             >
-              <Image
-                source={require("../../../assets/plus-icon.png")}
-                style={{ width: 16, height: 16, marginLeft: 5 }}
+              <AntDesign
+                name="pluscircle"
+                size={15}
+                color={WHITE}
+                style={{ marginLeft: 5 }}
               />
               <Text style={styles.newText}>New user</Text>
             </TouchableOpacity>
@@ -325,10 +330,7 @@ const Messages = ({ navigation, route }) => {
                       }}
                       style={styles.clearBtn}
                     >
-                      <Image
-                        source={require("../../../assets/clear-text-input.png")}
-                        style={styles.clearIcon}
-                      />
+                      <AntDesign name="closecircle" size={18} color={WHITE} />
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -369,9 +371,11 @@ const Messages = ({ navigation, route }) => {
 
           <View style={styles.textInput}>
             <View style={styles.searchHolder}>
-              <Image
-                source={require("../../../assets/search-icon.png")}
-                style={{ width: 16, height: 16, marginRight: 10 }}
+              <FontAwesome
+                name="search"
+                size={18}
+                color={PLACEHOLDER}
+                style={{ marginRight: 10 }}
               />
               <TextInput
                 style={styles.searchText}
@@ -383,9 +387,10 @@ const Messages = ({ navigation, route }) => {
               </TextInput>
             </View>
             <TouchableOpacity>
-              <Image
-                source={require("../../../assets/voice-icon.png")}
-                style={{ width: 16, height: 16 }}
+              <MaterialIcons
+                name="keyboard-voice"
+                size={20}
+                color={PLACEHOLDER}
               />
             </TouchableOpacity>
           </View>
