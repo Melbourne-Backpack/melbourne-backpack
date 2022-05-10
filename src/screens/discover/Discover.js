@@ -8,7 +8,7 @@ import {
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
 import MiniCard from "./MiniCard";
 import { MY_YOUTUBE_API_KEY } from "@env";
@@ -24,7 +24,10 @@ const Discover = ({ navigation }) => {
   const fetchData = () => {
     fetch(youtubeAPI)
       .then((res) => res.json())
-      .then((data) => setMiniCard(data.items));
+      .then((data) => setMiniCard(data.items))
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const fetchChannelData = () => {
@@ -71,7 +74,7 @@ const Discover = ({ navigation }) => {
             fetchData();
           }}
         >
-          <AntDesign name="clouddownload" size={30} color={WHITE} />
+          <Entypo name="dots-three-horizontal" size={25} color={WHITE} />
         </TouchableOpacity>
       </View>
       <SafeAreaView style={styles.wrapper}>
