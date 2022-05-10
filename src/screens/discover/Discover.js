@@ -19,8 +19,7 @@ const channelAPI = `https://youtube.googleapis.com/youtube/v3/channels?part=snip
 
 const Discover = ({ navigation }) => {
   const [miniCard, setMiniCard] = useState([]);
-  const [channelData, setChannelData] = useState([]);
-  const [channelAva, setChannelAva] = useState("");
+  const [channelData, setChannelData] = useState({});
 
   const fetchData = () => {
     fetch(youtubeAPI)
@@ -35,8 +34,10 @@ const Discover = ({ navigation }) => {
         setChannelData(data.items);
       });
   };
+
   useEffect(() => {
     fetchData();
+    fetchChannelData();
   }, []);
 
   const [loaded, error] = useFonts({
@@ -64,7 +65,12 @@ const Discover = ({ navigation }) => {
 
         <Text style={styles.title}>Discovery</Text>
 
-        <TouchableOpacity style={styles.messenger} onPress={() => fetchData()}>
+        <TouchableOpacity
+          style={styles.messenger}
+          onPress={() => {
+            fetchData();
+          }}
+        >
           <AntDesign name="clouddownload" size={30} color={WHITE} />
         </TouchableOpacity>
       </View>
@@ -79,6 +85,8 @@ const Discover = ({ navigation }) => {
                 videoId={item.id.videoId}
                 title={item.snippet.title}
                 channelTitle={item.snippet.channelTitle}
+                description={channelData[0].snippet.description}
+                avatar={channelData[0].snippet.thumbnails.high.url}
               />
             );
           }}
