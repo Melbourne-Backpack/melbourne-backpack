@@ -50,6 +50,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: hp("6%"),
   },
+  furtherButtonLast: {
+    borderRadius: 20,
+    height: hp("8%"),
+    width: wp("80%"),
+    alignSelf: "center",
+    justifyContent: "center",
+    marginTop: hp("6%"),
+    marginBottom: hp("10%"),
+  },
   backgroundImage: {
     height: hp("10%"),
     width: wp("80%"),
