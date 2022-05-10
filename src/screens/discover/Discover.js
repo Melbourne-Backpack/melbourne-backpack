@@ -13,8 +13,8 @@ import { WHITE } from "../../styles/colors";
 import MiniCard from "./MiniCard";
 import { MY_YOUTUBE_API_KEY } from "@env";
 
-const my_API_key = "AIzaSyCLZhG8wXVb8_B0qX4non3ZgP4-VVqGvGw";
-const youtubeAPI = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCFnWd6d9OggLixnow-3McjA&maxResults=50&q=campus%20exchange&type=video&key=${my_API_key}`;
+const my_API_key = MY_YOUTUBE_API_KEY;
+const youtubeAPI = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCFnWd6d9OggLixnow-3McjA&maxResults=50&q=campus%20exchange&key=${my_API_key}`;
 const channelAPI = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=UCFnWd6d9OggLixnow-3McjA&key=${my_API_key}`;
 
 const Discover = ({ navigation }) => {
