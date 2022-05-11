@@ -14,7 +14,10 @@ import MiniCard from "./MiniCard";
 import { MY_YOUTUBE_API_KEY } from "@env";
 
 const my_API_key = MY_YOUTUBE_API_KEY;
-const youtubeAPI = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCFnWd6d9OggLixnow-3McjA&maxResults=50&q=campus%20exchange&key=${my_API_key}`;
+const keyword = ["campus", "exchange", "experience"];
+const youtubeAPI = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCFnWd6d9OggLixnow-3McjA&maxResults=50&q=${keyword.join(
+  "%20"
+)}&key=${my_API_key}`;
 const channelAPI = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=UCFnWd6d9OggLixnow-3McjA&key=${my_API_key}`;
 
 const Discover = ({ navigation }) => {

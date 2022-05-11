@@ -235,11 +235,11 @@ const MiniCard = ({ videoId, title, channelTitle, description, avatar }) => {
             </Modal>
             {playVideo ? (
               <TouchableOpacity onPress={() => setPlayVideo(!playVideo)}>
-                <AntDesign name="caretup" size={13} color={WHITE} />
+                <AntDesign name="caretup" size={16} color={WHITE} />
               </TouchableOpacity>
             ) : (
               <TouchableOpacity onPress={() => setPlayVideo(!playVideo)}>
-                <AntDesign name="caretdown" size={13} color={WHITE} />
+                <AntDesign name="caretdown" size={16} color={WHITE} />
               </TouchableOpacity>
             )}
           </View>
