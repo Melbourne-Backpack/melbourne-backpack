@@ -15,9 +15,9 @@ const SplashScreen = ({ navigation }) => {
     return null;
   }
 
-  // setTimeout(() => {
-  //   navigation.replace("Onboarding");
-  // }, 3000);
+  setTimeout(() => {
+    navigation.replace("Onboarding");
+  }, 4000);
   return (
     <ImageBackground
       source={require("../../../assets/images/melbourne-bg.jpg")}
@@ -25,9 +25,7 @@ const SplashScreen = ({ navigation }) => {
     >
       <View style={styles.content}>
         <Image
-          source={{
-            uri: "https://media4.giphy.com/media/h8gfzy5zmIEULnetC1/giphy.gif?cid=ecf05e47p7vm16248f5jql6e1q638ag2x6l1ufv7fd8lu14d&rid=giphy.gif&ct=s",
-          }}
+          source={require("../../../assets/aus-flag.gif")}
           style={styles.icon}
         />
         {/*<Image*/}
