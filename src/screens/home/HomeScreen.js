@@ -49,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
             <ImageBackground
               resizeMode={"cover"}
               source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Fcommunity.jpg?alt=media&token=88f9eae7-faf6-4b47-b149-875ba1b9baf8",
+                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Fcommunity.jpg?alt=media&token=ea9c7526-65c0-4fa2-8c5f-a58269c774a8",
               }}
               style={styles.backgroundImage}
               imageStyle={{ borderRadius: 20 }}
@@ -70,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
             <ImageBackground
               resizeMode={"cover"}
               source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Fhousing.jpg?alt=media&token=54e5cee1-af9d-4990-b79f-3ebe315111a6",
+                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Fhousing.jpg?alt=media&token=15262b1d-316d-4620-8ebc-c03f088e48f0",
               }}
               style={styles.backgroundImage}
               imageStyle={{ borderRadius: 20 }}
@@ -91,7 +91,7 @@ const HomeScreen = ({ navigation }) => {
             <ImageBackground
               resizeMode={"cover"}
               source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Fshopping.jpg?alt=media&token=a2d0efdd-202c-4b08-bf6f-df9c6b423736",
+                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Fshopping.jpg?alt=media&token=33ed2e47-b9f8-42f5-b50d-abab85867f82",
               }}
               style={styles.backgroundImage}
               imageStyle={{ borderRadius: 20 }}
@@ -112,7 +112,7 @@ const HomeScreen = ({ navigation }) => {
             <ImageBackground
               resizeMode={"cover"}
               source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Ftransport.jpg?alt=media&token=79dad028-f372-4bba-b331-a86e85a9ffe2",
+                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Ftransport.jpg?alt=media&token=30a1afb6-9f09-475b-817e-62ed086677e1",
               }}
               style={styles.backgroundImage}
               imageStyle={{ borderRadius: 20 }}
@@ -134,7 +134,7 @@ const HomeScreen = ({ navigation }) => {
             <ImageBackground
               resizeMode={"cover"}
               source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Fprofile.jpg?alt=media&token=062b66b7-c655-48d4-99d1-2d6105e7a230",
+                uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/home-images%2Fprofile.jpg?alt=media&token=182e68fd-0397-44f0-8400-60e144768978",
               }}
               style={styles.backgroundImage}
               imageStyle={{ borderRadius: 20 }}
