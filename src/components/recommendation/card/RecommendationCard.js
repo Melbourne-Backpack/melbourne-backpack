@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
 import {
   AntDesign,
@@ -39,6 +40,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
+    PoppinsItalic: require("../../../../assets/fonts/Poppins-Italic.ttf"),
   });
 
   const getRating = () => {
@@ -172,15 +174,26 @@ const RecommendationCard = ({ data, housing, transport }) => {
           ) : null
         ) : (
           <>
-            <ImageBackground
-              source={{ uri: data.image }}
-              style={styles.backgroundImg}
-              imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-              resizeMode="cover"
-            />
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(data.website);
+              }}
+            >
+              <Image
+                source={{ uri: data.image }}
+                style={styles.backgroundImgShopping}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
 
             <View style={styles.info}>
-              <Text style={[styles.name, styles.text]}>{data.title}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(data.website);
+                }}
+              >
+                <Text style={[styles.name, styles.text]}> {data.title}</Text>
+              </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
                   Linking.openURL(addressLink);
@@ -191,6 +204,9 @@ const RecommendationCard = ({ data, housing, transport }) => {
                   {data.address}
                 </Text>
               </TouchableOpacity>
+              <Text style={{ color: WHITE, fontFamily: "PoppinsItalic" }}>
+                {data.description}
+              </Text>
             </View>
           </>
         )
