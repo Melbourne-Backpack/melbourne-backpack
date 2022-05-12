@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
   profileImageWrapper: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 5,
   },
 
   title: {
