@@ -160,6 +160,17 @@ const Messages = ({ navigation, route }) => {
     return mySnapshot.val();
   };
 
+  const formatAMPM = (date) => {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    let strTime = hours + ":" + minutes + " " + ampm;
+    return strTime;
+  };
+
   const onAddFriend = async (uid) => {
     const user = await findUser(uid);
 
@@ -183,7 +194,14 @@ const Messages = ({ navigation, route }) => {
       const newChatRoomRef = push(ref(database, `chatrooms`), {
         firstUser: myData.uid,
         secondUser: user.uid,
-        messages: [],
+        messages: [
+          {
+            createdAt: new Date(),
+            sender: myData.uid,
+            text: " ",
+            time: formatAMPM(new Date()),
+          },
+        ],
       });
 
       const newChatRoomId = newChatRoomRef.key;

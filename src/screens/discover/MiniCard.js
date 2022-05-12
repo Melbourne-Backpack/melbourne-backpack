@@ -23,7 +23,6 @@ import { BLACK, GREY, LIGHT_BLUE, WHITE } from "../../styles/colors";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import Modal from "react-native-modal";
-import { Touchable } from "react-native-web";
 
 const MiniCard = ({ videoId, title, channelTitle, description, avatar }) => {
   const [playVideo, setPlayVideo] = useState(false);

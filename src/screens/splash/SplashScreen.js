@@ -17,7 +17,7 @@ const SplashScreen = ({ navigation }) => {
 
   setTimeout(() => {
     navigation.replace("Onboarding");
-  }, 4000);
+  }, 3600);
   return (
     <ImageBackground
       source={require("../../../assets/images/melbourne-bg.jpg")}
