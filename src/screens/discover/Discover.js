@@ -8,16 +8,16 @@ import {
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useEffect, useState } from "react";
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo, Feather, FontAwesome } from "@expo/vector-icons";
 import { WHITE } from "../../styles/colors";
 import MiniCard from "./MiniCard";
 import { MY_YOUTUBE_API_KEY } from "@env";
 
 const my_API_key = MY_YOUTUBE_API_KEY;
-const keyword = ["campus", "exchange", "experience"];
+const keyword = ["campus", "exchange", "international", "global", "experience"];
 const youtubeAPI = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCFnWd6d9OggLixnow-3McjA&maxResults=50&q=${keyword.join(
   "%20"
-)}&key=${my_API_key}`;
+)}&type=video&key=${my_API_key}`;
 const channelAPI = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=UCFnWd6d9OggLixnow-3McjA&key=${my_API_key}`;
 
 const Discover = ({ navigation }) => {
@@ -77,7 +77,7 @@ const Discover = ({ navigation }) => {
             fetchData();
           }}
         >
-          <Entypo name="dots-three-horizontal" size={25} color={WHITE} />
+          <Feather name="refresh-ccw" size={24} color={WHITE} />
         </TouchableOpacity>
       </View>
       <SafeAreaView style={styles.wrapper}>
