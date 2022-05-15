@@ -69,7 +69,7 @@ const Discover = ({ navigation }) => {
           />
         </TouchableOpacity>
 
-        <Text style={styles.title}>Discovery</Text>
+        <Text style={styles.title}>Explore</Text>
 
         <TouchableOpacity
           style={styles.messenger}
