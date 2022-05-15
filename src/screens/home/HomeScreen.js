@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.melbourneBackpackText}>Melbourne Backpack</Text>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.furtherButton}>
           <TouchableOpacity
             activeOpacity={0.5}
