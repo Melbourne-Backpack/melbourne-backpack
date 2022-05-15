@@ -28,6 +28,7 @@ import { db } from "../../../config/firebase";
 const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
   const [routeVisible, setRouteVisible] = useState(false);
+  const [infoVisible, setInfoVisible] = useState(false);
   const [address, setAddress] = useState("");
   const [addressLink, setAddressLink] = useState("");
   const [distance, setDistance] = useState("");
@@ -204,9 +205,21 @@ const RecommendationCard = ({ data, housing, transport }) => {
                   {data.address}
                 </Text>
               </TouchableOpacity>
-              <Text style={{ color: WHITE, fontFamily: "PoppinsItalic" }}>
-                {data.description}
-              </Text>
+              <TouchableOpacity onPress={() => setInfoVisible(!infoVisible)}>
+                <Text style={styles.clickMore}>
+                  Read more{" "}
+                  {infoVisible ? (
+                    <Feather name="chevron-up" size={16} color={YELLOW} />
+                  ) : (
+                    <Feather name="chevron-down" size={16} color={YELLOW} />
+                  )}
+                </Text>
+              </TouchableOpacity>
+              {infoVisible ? (
+                <Text style={{ color: WHITE, fontFamily: "PoppinsItalic" }}>
+                  {data.description}
+                </Text>
+              ) : null}
             </View>
           </>
         )
