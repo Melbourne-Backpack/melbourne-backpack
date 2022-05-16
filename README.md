@@ -96,14 +96,15 @@ This React Native app may target iOS 11.0 and Android 5.0 (API 21) or newer. You
 
 ## 🎉Local Environment Setup
 We used WebStorm as our IDE, but an IDE is not needed if you only want to run the project. 
-Please make sure that you have **node** `v16.13.1`, **expo-cli** `5.3.0`  installed on your system. No other software or libraries required.
+Please ensure that you have **node** `v16.13.1`, **expo-cli** `5.3.0`  installed on your system. No other software or libraries are required.
 
 * Step 1: `git clone https://github.com/Melbourne-Backpack/melbourne-backpack.git` OR Download ZIP & Unzip .zip file to a location of your choice.
-* Step 2: Use the command line to navigate to the aforementioned folder E.g. `cd melbourne-backpack/`
+* Step 2: Use the command line to navigate to the folder mentioned above, E.g. `cd melbourne-backpack/`
 * Step 3: Run `npm install`: Install NPM packages with your package manager of choice
-* Step 4: Start the app, run `npm start`  from the root of the project.
-* Step 5: Download Expo app on your phone
+* Step 4: Start the app, and run `npm start`  from the project's root.
+* Step 5: Download the Expo app on your phone
 * Step 6: Scan the QR code in the terminal and open the app on Expo
+
 
 The `.csv` and `.json` database files that we gave you for `Firebase` reference can be found in `https://github.com/Melbourne-Backpack/datasets.git` in our organization
 
