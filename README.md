@@ -95,7 +95,7 @@ This React Native app may target iOS 11.0 and Android 5.0 (API 21) or newer. You
 
 
 ## 🎉Local Environment Setup
-
+We used WebStorm as our IDE, but an IDE is not needed if you only want to run the project. 
 Please make sure that you have **node** `v16.13.1`, **expo-cli** `5.3.0`  installed on your system. No other software or libraries required.
 
 * Step 1: `git clone https://github.com/Melbourne-Backpack/melbourne-backpack.git` OR Download ZIP & Unzip .zip file to a location of your choice.
