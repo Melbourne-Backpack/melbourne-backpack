@@ -19,7 +19,7 @@
   <a href="#" target="_blank">Demo Web 💻</a>
 </p>
 <p align="center">
-  <a href=# target="_blank">Snack playground</a>
+  <a href="https://snack.expo.dev/@tnathu-ai/github.com-melbourne-backpack-melbourne-backpack" target="_blank">Snack playground</a>
   <img height="15" src="https://snack.expo.io/favicon.ico" />
 </p>
 
