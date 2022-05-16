@@ -37,8 +37,8 @@ This React Native + Firebase + Expo app contains a few key features that all app
 + Uploading images to Storage
 + Viewing personlized data for each user
 + Messaging real-time with others in the Melbourne Backpack's chat forum
-+ Commenting and rating on the available housing
-+ Viewing online reviews from Google for the student living in Melbourne
++ Commenting and rating on the available student living
++ Viewing online Sentiment Analysis internal rating system using reviews scraped from Google and the app user
 + Viewing real-time data Victoria transportation
 + Viewing shopping malls near CBD Melbourne
 + Viewing yours and others' profile information
