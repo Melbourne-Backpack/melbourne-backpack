@@ -70,10 +70,10 @@ const RecommendationCard = ({ data, housing, transport }) => {
   };
 
   useEffect(() => {
-    if (housing) {
+    if (housing && data !== {}) {
       getRating();
-    }
-  }, []);
+    } else console.log(data);
+  }, [data]);
 
   useEffect(() => {
     if (data.address !== undefined) {
