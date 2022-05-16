@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
 
   userContentDisplay: {
     marginTop: 40,
+    marginBottom: 70,
   },
 
   userContentRow: {
@@ -135,8 +136,7 @@ const styles = StyleSheet.create({
 
   logoutBtnWrapper: {
     alignItems: "center",
-    marginTop: 40,
-    marginBottom: 40,
+    marginBottom: 60,
   },
 
   logoutBtn: {
