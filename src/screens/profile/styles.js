@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
   profileImageWrapper: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 5,
   },
 
   title: {
@@ -170,8 +170,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingRight: 25,
-    paddingLeft: 30,
+    paddingLeft: 10,
   },
 });
 export default styles;

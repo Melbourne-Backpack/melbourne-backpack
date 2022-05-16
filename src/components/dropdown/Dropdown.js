@@ -2,6 +2,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import React, { useState } from "react";
 import { PLACEHOLDER, WHITE } from "../../styles/colors";
+import { AntDesign } from "@expo/vector-icons";
 
 const Dropdown = ({ data = [], value = {}, onSelected = () => {} }) => {
   const [showOption, setShowOption] = useState(false);
@@ -24,10 +25,11 @@ const Dropdown = ({ data = [], value = {}, onSelected = () => {} }) => {
         >
           {!!value ? value : "Why are you using this app*"}
         </Text>
-        <Image
-          source={require("../../../assets/Chevron-down.png")}
-          style={{ transform: [{ rotate: showOption ? "180deg" : "0deg" }] }}
-        />
+        {showOption ? (
+          <AntDesign name="caretup" size={18} color={PLACEHOLDER} />
+        ) : (
+          <AntDesign name="caretdown" size={18} color={PLACEHOLDER} />
+        )}
       </TouchableOpacity>
       {showOption && (
         <View style={styles["optionWrapper"]}>

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   ImageBackground,
+  Image,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -26,21 +27,27 @@ const Onboarding = ({ navigation }) => {
       title: "Step 1",
       description:
         "Register by filling all the fields for us to offer better experiences.",
-      img: require("../../../assets/adaptive-icon.png"),
+      img: {
+        uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/onboarding%2FOnboarding-4.png?alt=media&token=c3f52526-ec4b-41eb-a166-74eed15bbfd8",
+      },
     },
     {
       _id: "2",
       title: "Step 2",
       description:
         "Pick a topic:\n" + "Community, Housing, Shopping, Transportation",
-      img: require("../../../assets/adaptive-icon.png"),
+      img: {
+        uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/onboarding%2FOnboarding-2.png?alt=media&token=663b2a3f-277a-4610-b308-601c135b07ae",
+      },
     },
     {
       _id: "3",
       title: "Voilà!",
       description:
         "Connect to your desired option using the provided information.",
-      img: require("../../../assets/adaptive-icon.png"),
+      img: {
+        uri: "https://firebasestorage.googleapis.com/v0/b/melbourne-backpack.appspot.com/o/onboarding%2FOnboarding-3.png?alt=media&token=23eb96e4-cf1f-4da9-8445-4ce6af38528d",
+      },
     },
   ];
 
@@ -79,6 +86,7 @@ const Onboarding = ({ navigation }) => {
   const [loaded, error] = useFonts({
     PoppinsExtraBold: require("../../../assets/fonts/Poppins-ExtraBold.ttf"),
     PoppinsRegular: require("../../../assets/fonts/Poppins-Regular.ttf"),
+    PoppinsMedium: require("../../../assets/fonts/Poppins-Medium.ttf"),
   });
 
   if (!loaded) {
@@ -121,7 +129,7 @@ const Onboarding = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.replace("SignIn")}>
             <Text
               style={{
-                fontFamily: "PoppinsRegular",
+                fontFamily: "PoppinsMedium",
                 color: COLORS.white,
                 opacity: currentPage === data.length - 1 ? 0 : 1,
               }}
@@ -187,18 +195,11 @@ const Onboarding = ({ navigation }) => {
               <AntDesign
                 name="right"
                 style={{
-                  fontFamily: "PoppinsRegular",
-                  color: COLORS.white,
-                  opacity: 0.3,
-                }}
-              />
-              <AntDesign
-                name="right"
-                style={{
                   fontFamily: "PoppinsExtraBold",
                   fontSize: 30,
                   color: COLORS.white,
-                  marginLeft: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               />
             </TouchableOpacity>
@@ -226,24 +227,11 @@ const Onboarding = ({ navigation }) => {
               >
                 Get Started
               </Text>
-              <AntDesign
-                name="right"
-                style={{
-                  fontFamily: "PoppinsExtraBold",
-                  fontSize: 30,
-                  color: COLORS.white,
-                  opacity: 0.3,
-                  marginLeft: SIZES.base,
+              <Image
+                source={{
+                  uri: "https://media0.giphy.com/media/WV3dGPzJsvcB9yp5iS/giphy.gif?cid=ecf05e47hrul9vr17f0aympnkz7ltniicibusshsiwwp5wgw&rid=giphy.gif&ct=s",
                 }}
-              />
-              <AntDesign
-                name="right"
-                style={{
-                  fontFamily: "PoppinsExtraBold",
-                  fontSize: 30,
-                  color: COLORS.white,
-                  marginLeft: -10,
-                }}
+                style={{ width: 50, height: "25%", marginLeft: SIZES.base }}
               />
             </TouchableOpacity>
           )}
@@ -270,7 +258,7 @@ const Onboarding = ({ navigation }) => {
         >
           <ImageBackground
             source={item.img}
-            style={{ width: 300, height: 300, resizeMode: "contains" }}
+            style={{ width: 350, height: 350, resizeMode: "contains" }}
           />
         </View>
         <View

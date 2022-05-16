@@ -12,9 +12,10 @@ import {
 import styles from "./styles";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
-import { WHITE } from "../../styles/colors";
+import { PLACEHOLDER, WHITE } from "../../styles/colors";
 import AlertModal from "../../components/alert-modal/AlertModal";
 import { auth } from "../../config/firebase";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -128,10 +129,7 @@ const ForgotPassword = ({ navigation }) => {
                 onChangeText={(text) => setEmail(text)}
                 defaultValue={email}
               />
-              <Image
-                style={{ width: 20, height: 20 }}
-                source={require("../../../assets/email-icon.png")}
-              />
+              <MaterialIcons name="email" size={20} color={PLACEHOLDER} />
             </View>
             <TouchableOpacity
               onPress={() => {

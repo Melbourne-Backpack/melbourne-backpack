@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Entypo, Ionicons } from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE } from "../../styles/colors";
 import styles from "./styles";
 import { useFonts } from "expo-font";
@@ -22,6 +22,7 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { formatPara } from "../../utils/Formatting";
 import SubmitAlert from "../../components/housing-details/alert/SubmitAlert";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const housingData = route.params.data;
@@ -124,12 +125,18 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
       <SubmitAlert isVisible={showAlert} setIsVisibleFunction={setShowAlert} />
 
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => goBack()}>
+        <TouchableOpacity
+          onPress={() => goBack()}
+          style={{ marginLeft: wp(5) }}
+        >
           <Ionicons name="chevron-back" size={30} color={WHITE} />
         </TouchableOpacity>
         <Text style={[styles.building, styles.text]}>
           {housingData.name.toUpperCase()}
         </Text>
+        <TouchableOpacity style={{ marginRight: wp(5) }}>
+          <Entypo name="dots-three-horizontal" size={24} color={WHITE} />
+        </TouchableOpacity>
       </View>
 
       <ScrollView style={styles.wrapper}>

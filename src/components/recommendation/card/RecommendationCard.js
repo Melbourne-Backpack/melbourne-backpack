@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
 import {
   AntDesign,
@@ -27,6 +28,7 @@ import { db } from "../../../config/firebase";
 const RecommendationCard = ({ data, housing, transport }) => {
   const navigation = useNavigation();
   const [routeVisible, setRouteVisible] = useState(false);
+  const [infoVisible, setInfoVisible] = useState(false);
   const [address, setAddress] = useState("");
   const [addressLink, setAddressLink] = useState("");
   const [distance, setDistance] = useState("");
@@ -39,6 +41,7 @@ const RecommendationCard = ({ data, housing, transport }) => {
     PoppinsRegular: require("../../../../assets/fonts/Poppins-Regular.ttf"),
     PoppinsSemiBold: require("../../../../assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsMedium: require("../../../../assets/fonts/Poppins-Medium.ttf"),
+    PoppinsItalic: require("../../../../assets/fonts/Poppins-Italic.ttf"),
   });
 
   const getRating = () => {
@@ -172,15 +175,26 @@ const RecommendationCard = ({ data, housing, transport }) => {
           ) : null
         ) : (
           <>
-            <ImageBackground
-              source={{ uri: data.image }}
-              style={styles.backgroundImg}
-              imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-              resizeMode="cover"
-            />
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(data.website);
+              }}
+            >
+              <Image
+                source={{ uri: data.image }}
+                style={styles.backgroundImgShopping}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
 
             <View style={styles.info}>
-              <Text style={[styles.name, styles.text]}>{data.title}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(data.website);
+                }}
+              >
+                <Text style={[styles.name, styles.text]}> {data.title}</Text>
+              </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
                   Linking.openURL(addressLink);
@@ -191,6 +205,21 @@ const RecommendationCard = ({ data, housing, transport }) => {
                   {data.address}
                 </Text>
               </TouchableOpacity>
+              <TouchableOpacity onPress={() => setInfoVisible(!infoVisible)}>
+                <Text style={styles.clickMore}>
+                  Read more{" "}
+                  {infoVisible ? (
+                    <Feather name="chevron-up" size={16} color={YELLOW} />
+                  ) : (
+                    <Feather name="chevron-down" size={16} color={YELLOW} />
+                  )}
+                </Text>
+              </TouchableOpacity>
+              {infoVisible ? (
+                <Text style={{ color: WHITE, fontFamily: "PoppinsItalic" }}>
+                  {data.description}
+                </Text>
+              ) : null}
             </View>
           </>
         )

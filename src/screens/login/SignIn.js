@@ -20,6 +20,7 @@ import CheckBox from "react-native-check-box";
 import { auth, db } from "../../config/firebase";
 import AlertModal from "../../components/alert-modal/AlertModal";
 import { doc, getDoc } from "firebase/firestore";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -159,10 +160,7 @@ const SignIn = ({ navigation }) => {
               onChangeText={(text) => setEmail(text)}
               defaultValue={email}
             />
-            <Image
-              style={{ width: 20, height: 20 }}
-              source={require("../../../assets/email-icon.png")}
-            />
+            <MaterialIcons name="email" size={20} color={PLACEHOLDER} />
           </View>
           <View style={styles.textInput}>
             <TextInput
@@ -173,10 +171,7 @@ const SignIn = ({ navigation }) => {
               defaultValue={password}
               secureTextEntry={true}
             />
-            <Image
-              style={{ width: 20, height: 20 }}
-              source={require("../../../assets/password-icon.png")}
-            />
+            <Entypo name="lock" size={20} color={PLACEHOLDER} />
           </View>
         </View>
         <View style={styles.midFlex}>

@@ -12,6 +12,7 @@ import styles from "./styles";
 import { PLACEHOLDER } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
@@ -77,10 +78,7 @@ const Campus = ({ navigation }) => {
             >
               {selectedCity}
             </TextInput>
-            <Image
-              style={{ width: 20, height: 20 }}
-              source={require("../../../../assets/campus-icon.png")}
-            />
+            <FontAwesome5 name="city" size={20} color={PLACEHOLDER} />
           </View>
 
           <View style={styles.buttonWrapper}>

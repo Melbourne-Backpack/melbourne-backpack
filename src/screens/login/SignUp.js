@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import { PLACEHOLDER } from "../../styles/colors";
 import { auth } from "../../config/firebase";
 import AlertModal from "../../components/alert-modal/AlertModal";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -145,10 +146,7 @@ const SignUp = ({ navigation }) => {
                   onChangeText={(text) => setEmail(text)}
                   defaultValue={email}
                 />
-                <Image
-                  style={{ width: 20, height: 20 }}
-                  source={require("../../../assets/email-icon.png")}
-                />
+                <MaterialIcons name="email" size={20} color={PLACEHOLDER} />
               </View>
               <View style={styles.textInput}>
                 <TextInput
@@ -159,10 +157,7 @@ const SignUp = ({ navigation }) => {
                   defaultValue={password}
                   secureTextEntry={true}
                 />
-                <Image
-                  style={{ width: 20, height: 20 }}
-                  source={require("../../../assets/password-icon.png")}
-                />
+                <Entypo name="lock" size={20} color={PLACEHOLDER} />
               </View>
               <View style={styles.textInput}>
                 <TextInput
@@ -173,10 +168,7 @@ const SignUp = ({ navigation }) => {
                   defaultValue={cfPassword}
                   secureTextEntry={true}
                 />
-                <Image
-                  style={{ width: 20, height: 20 }}
-                  source={require("../../../assets/password-icon.png")}
-                />
+                <Entypo name="lock" size={20} color={PLACEHOLDER} />
               </View>
               <TouchableOpacity
                 onPress={() => {
