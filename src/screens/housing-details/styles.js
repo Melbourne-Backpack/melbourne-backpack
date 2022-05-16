@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: wp(5),
-    justifyContent: "center",
+    justifyContent: "space-between",
+    width: wp(100),
   },
   text: {
     color: WHITE,

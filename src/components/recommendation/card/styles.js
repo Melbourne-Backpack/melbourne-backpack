@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: scaleSize(300),
   },
+  backgroundImgShopping: {
+    width: "100%",
+    height: scaleSize(300),
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
   overlay: {
     height: "100%",
     justifyContent: "flex-end",

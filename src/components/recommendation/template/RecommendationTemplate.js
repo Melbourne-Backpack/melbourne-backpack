@@ -147,10 +147,14 @@ const RecommendationTemplate = ({
         return null;
     }
 
+
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
                 data={[1]}
+                keyExtractor={(item) => {
+                    return item
+                }}
                 renderItem={() => {
                     return (
                         <View style={styles.wrapper}>

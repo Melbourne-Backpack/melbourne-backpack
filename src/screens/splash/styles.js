@@ -1,19 +1,21 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
-import { WHITE } from "../../styles/colors";
+import { BACKGROUND, WHITE } from "../../styles/colors";
+import { heightPercentageToDP } from "react-native-responsive-screen";
 
 let width = Dimensions.get("window").width; //full width
 let height = Dimensions.get("window").height; //full height
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   backgroundImage: {
-    width: width,
-    height: height,
+    flex: 1,
+    backgroundColor: BACKGROUND,
+  },
+  content: {
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
+
+    height: heightPercentageToDP(65),
   },
   icon: {
     width: 180,
@@ -22,13 +24,25 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     color: WHITE,
-    fontSize: 50,
+    fontSize: 45,
     fontFamily: "PoppinsExtraBold",
-    marginTop: -100,
+  },
+  description: {
+    color: WHITE,
+    fontSize: 15,
+    fontFamily: "PoppinsMedium",
+    marginTop: 15,
+  },
+  holdText: {
+    flex: 1,
+    justifyContent: "flex-end",
+    marginBottom: 60,
+    alignItems: "center",
+    height: heightPercentageToDP(40),
   },
   versionText: {
     color: WHITE,
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: "PoppinsRegular",
   },
 });

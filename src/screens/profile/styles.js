@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
   profileImageWrapper: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 5,
   },
 
   title: {
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
 
   userContentDisplay: {
     marginTop: 40,
+    marginBottom: 70,
   },
 
   userContentRow: {
@@ -135,8 +136,7 @@ const styles = StyleSheet.create({
 
   logoutBtnWrapper: {
     alignItems: "center",
-    marginTop: 40,
-    marginBottom: 40,
+    marginBottom: 60,
   },
 
   logoutBtn: {
@@ -170,8 +170,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingRight: 25,
-    paddingLeft: 30,
+    paddingLeft: 10,
   },
 });
 export default styles;

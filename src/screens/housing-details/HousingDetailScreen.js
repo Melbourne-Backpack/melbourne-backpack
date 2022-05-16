@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Entypo, Ionicons } from "@expo/vector-icons";
 import { PLACEHOLDER, WHITE } from "../../styles/colors";
 import styles from "./styles";
 import { useFonts } from "expo-font";
@@ -22,6 +22,7 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { formatPara } from "../../utils/Formatting";
 import SubmitAlert from "../../components/housing-details/alert/SubmitAlert";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
   const housingData = route.params.data;
@@ -81,7 +82,9 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
           sum += doc.data().rating;
         });
         setUserReviews(reviews);
-        setHousingRating(sum / (ratingStat.length + reviews.length));
+        const currentLength = ratingStat.length + reviews.length;
+        setHousingRating(sum / currentLength);
+        setRatingStat({ total: sum, length: currentLength });
         console.log(housingRating);
       });
     } catch (e) {
@@ -89,13 +92,20 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
     }
   };
 
+  const calculateNewRating = (submittedRating) => {
+    console.log("Total rating stat: " + ratingStat.total);
+    console.log("length: " + ratingStat.length);
+    const newRating =
+      (ratingStat.total + submittedRating) / (ratingStat.length + 1);
+    console.log("New rating" + newRating);
+    return newRating;
+  };
+
   useEffect(() => {
     getReview(housingData.category_id);
-    getOnlineReview(housingData.category_id);
 
     return () => {
       getReview(housingData.category_id);
-      getOnlineReview(housingData.category_id);
     };
   }, [housingRating]);
 
@@ -115,12 +125,18 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
       <SubmitAlert isVisible={showAlert} setIsVisibleFunction={setShowAlert} />
 
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => goBack()}>
+        <TouchableOpacity
+          onPress={() => goBack()}
+          style={{ marginLeft: wp(5) }}
+        >
           <Ionicons name="chevron-back" size={30} color={WHITE} />
         </TouchableOpacity>
         <Text style={[styles.building, styles.text]}>
           {housingData.name.toUpperCase()}
         </Text>
+        <TouchableOpacity style={{ marginRight: wp(5) }}>
+          <Entypo name="dots-three-horizontal" size={24} color={WHITE} />
+        </TouchableOpacity>
       </View>
 
       <ScrollView style={styles.wrapper}>
@@ -174,18 +190,20 @@ const HousingDetailScreen = ({ navigation: { goBack }, route }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                postReview(housingData["category_id"], myComment, myRating)
-                  .then(() => getReview(housingData["category_id"]))
-                  .then(() =>
-                    updateRating(
-                      housingData["category_id"],
-                      housingRating
-                    ).then(() => {
-                      setShowAlert(true);
-                      setMyComment("");
-                      setMyRating(2);
-                    })
-                  );
+                postReview(
+                  housingData["category_id"],
+                  myComment,
+                  myRating
+                ).then(() =>
+                  updateRating(
+                    housingData["category_id"],
+                    calculateNewRating(myRating)
+                  ).then(() => {
+                    setShowAlert(true);
+                    setMyComment("");
+                    setMyRating(0);
+                  })
+                );
               }}
             >
               <Text style={[styles.text, styles.btnText]}>SUBMIT</Text>

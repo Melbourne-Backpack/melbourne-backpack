@@ -15,6 +15,7 @@ import { PLACEHOLDER } from "../../../styles/colors";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import _ from "lodash";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
@@ -102,10 +103,7 @@ const Subject = ({ navigation }) => {
               >
                 {_.join(selectedSubjects, " | ")}
               </TextInput>
-              <Image
-                style={{ width: 20, height: 20 }}
-                source={require("../../../../assets/subject-icon.png")}
-              />
+              <FontAwesome5 name="university" size={24} color={PLACEHOLDER} />
             </View>
 
             <View style={styles.buttonWrapper}>

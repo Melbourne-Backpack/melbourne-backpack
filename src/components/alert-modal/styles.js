@@ -50,8 +50,6 @@ const styles = StyleSheet.create({
     backgroundColor: ALERT_PURPLE_BUTTON,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    borderWidth: 0.5,
-    borderColor: WHITE,
   },
   cancelButtonText: {
     color: WHITE,
@@ -66,8 +64,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    borderWidth: 0.5,
-    borderColor: WHITE,
+    borderBottomWidth: 0.5,
+    borderBottomColor: GREY,
   },
   logoutButtonText: {
     color: WHITE,
