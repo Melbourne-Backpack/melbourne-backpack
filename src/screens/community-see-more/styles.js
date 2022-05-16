@@ -14,7 +14,7 @@ import {BACKGROUND} from "../../styles/colors";
 const styles = StyleSheet.create({
 
     cardContainer: {
-        alignItems: "center"
+        alignItems: "center",
     },
 
     heading: {
@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: BACKGROUND,
         paddingTop: hp(3),
-        paddingRight: wp(2),
-        paddingLeft: wp(2),
+        paddingRight: wp(5),
+        paddingLeft: wp(5),
     },
 
     seeMoreBtn: {
