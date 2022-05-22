@@ -83,6 +83,10 @@ This React Native + Firebase + Expo app contains a few key features that all app
 |:--:|
 |Trello for collaboration tool that organizes our project into boards|
 
+#### Academic Poster
+|<a href="#"><img src="[https://i.ibb.co/28x7W2G/Trello.jpg](https://i.ibb.co/dts5NTy/Melbourne-Backpack-Academic-Poster.png)" alt="Illustration" width="700px"/></a>|
+|:--:|
+|Trello for collaboration tool that organizes our project into boards|
 
 ***
 
