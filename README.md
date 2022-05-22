@@ -16,11 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="#" target="_blank">Demo Web 💻</a>
-</p>
-<p align="center">
-  <a href="https://snack.expo.dev/@tnathu-ai/github.com-melbourne-backpack-melbourne-backpack" target="_blank">Snack playground</a>
-  <img height="15" src="https://snack.expo.io/favicon.ico" />
+  <a href="https://youtu.be/XtpU9N3Mslo" target="_blank">Demo on YouTube <i class="fa-brands fa-youtube"></i></a>
 </p>
 
 
