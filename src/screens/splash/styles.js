@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   holdText: {
     flex: 1,
     justifyContent: "flex-end",
-    marginBottom: 60,
+    marginBottom: 50,
     alignItems: "center",
     height: heightPercentageToDP(40),
   },
