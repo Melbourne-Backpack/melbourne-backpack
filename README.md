@@ -16,11 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="#" target="_blank">Demo Web 💻</a>
-</p>
-<p align="center">
-  <a href=# target="_blank">Snack playground</a>
-  <img height="15" src="https://snack.expo.io/favicon.ico" />
+  <a href="https://youtu.be/XtpU9N3Mslo" target="_blank">Demo on YouTube <i class="fa-brands fa-youtube"></i></a>
 </p>
 
 
@@ -37,8 +33,8 @@ This React Native + Firebase + Expo app contains a few key features that all app
 + Uploading images to Storage
 + Viewing personlized data for each user
 + Messaging real-time with others in the Melbourne Backpack's chat forum
-+ Commenting and rating on the available housing
-+ Viewing online reviews from Google for the student living in Melbourne
++ Commenting and rating on the available student living
++ Viewing online Sentiment Analysis internal rating system using reviews scraped from Google and the app user
 + Viewing real-time data Victoria transportation
 + Viewing shopping malls near CBD Melbourne
 + Viewing yours and others' profile information
@@ -73,7 +69,7 @@ This React Native + Firebase + Expo app contains a few key features that all app
 
 
 #### 📖 Documentation
-|<a href="#"><img src="https://i.ibb.co/St3T7Yh/proposal.jpg" alt="Illustration" width="700px"/></a>|<a href="#"><img src="https://i.ibb.co/St3T7Yh/proposal.jpg" alt="Illustration" width="700px"/></a>|
+|<a href="reports/Project Proposal.pdf"><img src="https://i.ibb.co/St3T7Yh/proposal.jpg" alt="Illustration" width="700px"/></a>|<a href="reports/ISYS2101_Team18_FinalReport.pdf"><img src="https://i.ibb.co/J7gkvJS/final-report.jpg" alt="Illustration" width="700px"/></a>|
 |:--:|:--:|
 |Project Proposal|Final Report|
 
@@ -87,6 +83,10 @@ This React Native + Firebase + Expo app contains a few key features that all app
 |:--:|
 |Trello for collaboration tool that organizes our project into boards|
 
+#### Academic Poster
+|<a href="https://ibb.co/bFjK40n"><img src="https://i.ibb.co/dts5NTy/Melbourne-Backpack-Academic-Poster.png" alt="Academic Poster" width="700px"/></a>|
+|:--:|
+|Academic Poster|
 
 ***
 
@@ -190,7 +190,3 @@ React Native documentation is Creative Commons licensed, as found in the [LICENS
 
 [l]: https://github.com/facebook/react-native/blob/HEAD/LICENSE
 [ld]: https://github.com/facebook/react-native/blob/HEAD/LICENSE-docs
-
-
-
-
