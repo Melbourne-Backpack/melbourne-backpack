@@ -24,26 +24,26 @@ const SplashScreen = ({ navigation }) => {
       style={styles.backgroundImage}
     >
       <View style={styles.content}>
-        <Image
-          source={require("../../../assets/aus-flag.gif")}
-          style={styles.icon}
-        />
         {/*<Image*/}
-        {/*  source={require("../../../assets/adaptive-icon.png")}*/}
+        {/*  source={require("../../../assets/aus-flag.gif")}*/}
         {/*  style={styles.icon}*/}
         {/*/>*/}
+        <Image
+          source={require("../../../assets/adaptive-icon.png")}
+          style={styles.icon}
+        />
         <Text style={styles.textTitle}>Melbourne {"\n"} Backpack</Text>
         <Text style={styles.description}>A mini-Melbourne in your pocket!</Text>
       </View>
       <View style={styles.holdText}>
-        <Image
-          source={require("../../../assets/Splash-1.png")}
-          style={{
-            width: widthPercentageToDP(85),
-            height: 200,
-            marginBottom: 30,
-          }}
-        />
+        {/*<Image*/}
+        {/*  source={require("../../../assets/Splash-1.png")}*/}
+        {/*  style={{*/}
+        {/*    width: widthPercentageToDP(85),*/}
+        {/*    height: 200,*/}
+        {/*    marginBottom: 30,*/}
+        {/*  }}*/}
+        {/*/>*/}
         <Text style={styles.versionText}>Version 1.0</Text>
       </View>
     </ImageBackground>
