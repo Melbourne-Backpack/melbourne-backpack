@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="https://youtu.be/XtpU9N3Mslo" target="_blank">Demo on YouTube <i class="fa-brands fa-youtube"></i></a>
+<a href="https://youtu.be/XtpU9N3Mslo" target="blank">Demo on YouTube <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="tnathu-ai" height="30" width="40" /></a> 
 </p>
 
 
