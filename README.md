@@ -19,6 +19,8 @@
 <a href="https://youtu.be/XtpU9N3Mslo" target="blank">Demo on YouTube <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="tnathu-ai" height="30" width="40" /></a> 
 </p>
 
+## Overview
+The name suggests a free platform that packs all necessary information about studying and living in Melbourne into a package (thus the name "Melbourne backpack") and makes it available across all mobile devices. The app, designed by RMIT students who will be transferring to RMIT Melbourne, would be ideal for anybody looking for practical tips to help them research about this information.
 
 ## 📌Features
 This React Native + Firebase + Expo app contains a few key features that all apps backed by Fireabase support:
